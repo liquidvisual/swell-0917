@@ -1,0 +1,21 @@
+{% assign data_file = include.data %}
+
+<div id="accordion" class="accordion" role="tablist" aria-multiselectable="true">
+    {% for item in data_file %}
+        <div class="card">
+            <div class="card-header" role="tab" id="heading-{{forloop.index}}">
+                <a data-toggle="collapse" data-parent="#accordion" href="#{{ item.title | slugify }}" aria-expanded="true" aria-controls="{{ item.title | slugify }}">
+                    <h3 class="h6 mb-0">
+                        <span class="text">{{ item.title }}</span>
+                        <i class="fa fa-angle-up"></i>
+                    </h3>
+                </a>
+            </div>
+            <div id="{{ item.title | slugify }}" class="collapse {% if forloop.first %} show {% endif %}" role="tabpanel" aria-labelledby="headingOne">
+                <div class="card-block">
+                    {{ item.body }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

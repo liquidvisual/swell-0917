@@ -1,0 +1,20 @@
+---
+layout: base
+---
+
+{% include hero_secondary.html %}
+
+{% include snippets/breadcrumb.html %}
+
+<!-- CONTENT -->
+<main class="content">
+
+	<!-- BODY -->
+    <section class="section">
+        <div class="container">
+            {{ content }}
+        </div>
+    </section>
+
+    {% contentblock content_additional no-convert %}
+</main>

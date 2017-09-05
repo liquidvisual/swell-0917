@@ -1,0 +1,120 @@
+/*
+    SEARCH.CSS
+
+    - Last updated: 18.11.16
+    - liquidvisual.com
+*/
+//-----------------------------------------------------------------
+// VARIABLES
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
+// SEARCH
+//-----------------------------------------------------------------
+
+.global-search {
+    background: rgba(black, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: rem-calc(6);
+    z-index: 9999;
+    transition: opacity ease 300ms;
+    opacity: 1;
+
+    ::-webkit-input-placeholder { color: #999 !important; }
+    ::-moz-placeholder { color: #999 !important; }
+    :-ms-input-placeholder { color: #999 !important; }
+    input:-moz-placeholder { color: #999 !important; }
+
+    &.is-hidden {
+        left: -100%;
+        opacity: 0;
+    }
+
+    .close {
+        font-size: rem-calc(44);
+        color: white;
+        opacity: 1;
+        margin-bottom: rem-calc(10);
+    }
+
+    .global-search-form-wrapper {
+        width: 100%;
+        display: inline-block;
+
+        @include media-breakpoint-up(md) {
+            width: rem-calc(380);
+        }
+    }
+
+    input {
+        height: 44px;
+        border: 0 !important;
+        font-size: 16px;
+        color: grey;
+    }
+
+    .btn {
+        position: relative;
+        background: #222;
+        height: 44px;
+        padding: rem-calc(0 15);
+        border: 0;
+        color: white;
+        z-index: 1 !important;
+
+        i {
+            font-size: rem-calc(20);
+        }
+    }
+}
+
+//-----------------------------------------------------------------
+// GLOBAL SEARCH (CONTEXT)
+//-----------------------------------------------------------------
+
+.lv-off-canvas .global-search.is-hidden {
+    position: static;
+    opacity: 1;
+    background: none;
+
+    .container {
+        padding: 0;
+        text-align: left !important;
+        padding-right: 15px;
+        width: 100%;
+    }
+
+    .global-search-form-wrapper {
+        width: 100%;
+    }
+
+    input {
+        background: #4a4a4a;
+        color: white;
+        font-size: 15px;
+    }
+
+    ::-webkit-input-placeholder { color: white !important; }
+    ::-moz-placeholder { color: white !important; }
+    :-ms-input-placeholder { color: white !important; }
+    input:-moz-placeholder { color: white !important; }
+
+    .btn {
+        background: #313030;
+
+        &:hover {
+            background: darken(#313030, 5%);
+        }
+    }
+
+    .close {
+        display: none;
+    }
+}
+
+//=========================================
+//
+//=========================================

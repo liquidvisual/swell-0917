@@ -1,0 +1,9 @@
+- title: "Heading One"
+  url: /
+  body: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo."
+  image: "/assets/img/content/hero-1.png"
+
+- title: "Heading Two"
+  url: /
+  body: "Lorem ipsum dolor sit amet, consectetuer lorem ipsum."
+  image: "/assets/img/content/hero-2.png"

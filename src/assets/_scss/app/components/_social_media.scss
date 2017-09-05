@@ -1,0 +1,79 @@
+/*
+    SOCIAL-MEDIA.CSS
+
+    - Last updated: 28.06.17
+    - liquidvisual.com
+*/
+//-----------------------------------------------------------------
+// VARIABLES
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
+// SOCIAL MEDIA
+//-----------------------------------------------------------------
+
+.social-media {
+	display: inline-flex;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+	li {
+		margin-right: rem-calc(10);
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+
+	a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		line-height: 0;
+		background: #222;
+		padding: 0; // override off-canvas
+		font-size: 22px;
+		text-align: center;
+		border-radius: 100%;
+		color: white !important;
+		transition: transform 200ms ease;
+
+		&:hover {
+			transform: scale(0.9);
+		}
+	}
+
+	//=========================================
+	// https://brandcolors.net
+	//=========================================
+
+	// .dribbble   { color: #ea4c89; }
+	// .facebook   { color: #3b5998; }
+	// .github     { color: #9f7be1; }
+	// .google-pus { color: dd4b39; }
+	// .instagram  { color: #405de6; }
+	// .linked-in  { color: #405de6; }
+	// .pinterest  { color: #bd081c; }
+	// .twitter    { color: #1da1f2; }
+	// .youtube    { color: #cd201f; }
+
+	.dribbble    { background: #ea4c89; }
+	.facebook    { background: #3b5998; }
+	.github      { background: #9f7be1; }
+	.google-plus { background: #dd4b39; }
+	.instagram   { background: #0077b5; }
+	.linked-in   { background: #405de6; }
+	.pinterest   { background: #bd081c; }
+	.twitter     { background: #1da1f2; }
+	.youtube     { background: #cd201f; }
+}
+
+//-----------------------------------------------------------------
+//
+//-----------------------------------------------------------------
+//=========================================
+//
+//=========================================
+

@@ -1,0 +1,18 @@
+<!-- PAGE LOADER -->
+<div id="lv-page-loader" class="lv-page-loader">
+    <div class="lv-page-loader-spinner">
+        <div class="double-bounce-1"></div>
+        <div class="double-bounce-2"></div>
+    </div>
+</div>
+
+<!-- WON'T SHOW IF JAVASCRIPT IS DISABLED -->
+<script>
+    var loader = document.getElementById('lv-page-loader');
+    loader.style.display = 'flex';
+
+    // Limit to 3+ seconds of waiting time
+    setTimeout(function(){
+        loader.className += ' force-finish';
+    }, 2000);
+</script>

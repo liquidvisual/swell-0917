@@ -1,0 +1,15 @@
+- title: Home
+  url: /
+
+- title: Scroll Down
+  url: '#home'
+
+- title: Case Studies
+  url: /404/
+  include_children_in_nav: true
+  children:
+    - title: Item
+      url: /404/
+
+- title: 404
+  url: /404/

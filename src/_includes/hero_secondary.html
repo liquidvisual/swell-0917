@@ -1,0 +1,44 @@
+{% comment %}
+<!--
+    LIQUIDVISUAL-HERO
+
+    - Updated: 06.07.17
+    - Notes:
+        * .has-height-preset-1 - used for internal pages to set a height
+-->
+{% endcomment %}
+
+{% assign hero = page.hero | default: "/assets/img/content/hero/hero-1-placeholder.png" %}
+{% assign hero_classes = page.hero_classes %}
+
+<!-- HERO WRAPPER -->
+<div class="lv-hero-wrapper">
+
+    <!-- HERO -->
+    <div class="lv-hero {{ hero_classes | default: 'has-height-preset-1' }}">
+        <div class="lv-hero-item" style="background-image: url('{{ hero }}')">
+
+            <!-- HERO CAPTION -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-lg-8">
+                        {% contentblock hero_caption no-convert %}
+                        {% ifnothascontent hero_caption %}
+                            <div class="lv-hero-item-caption">
+                                {% if page.title_override %}
+                                    <h2 class="h1">{{ page.title_override }}</h2>
+                                {% else %}
+                                    <h1>{{ page.title }}</h1>
+                                {% endif %}
+                            </div>
+                        {% endifnothascontent %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div> <!-- /.lv-hero -->
+
+    {% contentblock hero_addition no-convert %}
+
+</div> <!-- /.lv-hero-wrapper -->
