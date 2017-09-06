@@ -1,0 +1,165 @@
+---
+layout: base__page_sidebar
+---
+
+<!-- PANEL PANE -->
+<div class="panel-pane pane-entity-view pane-node view-mode-full">
+    <div class="pane-content">
+        <div class="ds-1col node node-surfcam node-surfcam-full view-mode-full clearfix">
+
+            <!-- PAGE HEADER -->
+            <h2>Knights</h2>
+            <div id='video'><a href='rtsp://streamer.swellnet.com.au/surfcams/knights.stream'>Watch this stream over your native player</a></div>
+            Remove video ads with <a href='http://swellnet.com/pro/subscribe/index.html'>Swellnet Pro</a> for $8.95/month (first month $1.00)
+
+            <!-- SCRIPT -->
+            <script type='text/javascript'>
+                var player_conf = {
+                    height: 421,
+                    width: '100%',
+                    androidhls: true,
+                    sources: [
+                        {file: 'rtmp://streamer.swellnet.com.au/surfcams/knights.stream'},
+                        {file: 'https://streamer.swellnet.com.au/surfcams/knights.stream/playlist.m3u8'},
+                    ],
+                    autostart: true,
+                    stagevideo: false
+                };
+                var android = {
+                    fallback: false,
+                    primary: 'html5'
+                };
+                var non_android = {
+                    fallback: true,
+                    primary: 'flash',
+                    image: 'http://static.swellnet.com.au/images/surfcams/knights.jpg',
+                    logo: {
+                        file: 'profiles/swellnet/modules/features/swellnet_surfcam/assets/logo_transparent_overlay.png'
+                    },
+                    events:{
+                        onReady: function(e) {
+                            window.swellnetElapsedTime = 0;
+                        },
+                        onTime: function(e) {
+                            if ((window.swellnetElapsedTime + e.position) >= '300') {
+                                this.stop();
+                            }
+                        },
+                        onPause: function(e) {
+                            window.swellnetElapsedTime += this.getPosition();
+                        },
+                    },
+                };
+
+                if (navigator.userAgent.toLowerCase().indexOf('android') < 0) {
+                    jQuery.extend(player_conf, non_android);
+                } else {
+                    jQuery.extend(player_conf, android);
+                }
+                jwplayer('video').setup(player_conf);
+            </script>
+
+            <div class="field field-name-body field-type-text-with-summary field-label-hidden">
+                <p><em>Surfers etiquette: if you're travelling here to surf, please respect the locals.</em></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel-separator"></div>
+
+<!-- BOXES BOX AD BLOCK -->
+<div id='boxes-box-mcn_surfcam_ad_block' class='boxes-box'><div class="boxes-box-content">
+
+    <!-- SCRIPT -->
+    <script type='text/javascript' src='http://www.googletagservices.com/tag/js/gpt.js'>
+        googletag.pubads().definePassback('/8349402/Surfcam-companion', [[630, 354]]). display();
+    </script>
+
+    </div>
+</div>
+
+<div class="panel-separator"></div>
+
+<!-- PANEL PANE -->
+<div class="panel-pane pane-views-panes pane-related-surfcams-related-surfcams">
+    <div class="pane-content">
+        <div class="view view-related-surfcams view-id-related_surfcams view-display-id-related_surfcams view-dom-id-3eddc6ef47245343cedb581aea1c4f44">
+            <div class="view-header">
+                Nearest Surfcams:
+            </div>
+
+            <!-- VIEW CONTENT -->
+            <div class="view-content">
+                <div class="views-row views-row-1 views-row-odd views-row-first">
+
+                    <div class="views-field views-field-static-image">
+                        <span class="field-content">
+                            <a href="../middleton/index.html">
+                                <img class="img-responsive" src="http://static.swellnet.com.au/images/surfcams/middleton-thumb.jpg" alt="Middleton" title="Middleton" />
+                            </a>
+                        </span>
+                    </div>
+
+                    <div class="views-field views-field-title">
+                        <span class="field-content">
+                            <a href="../middleton/index.html">Middleton</a>
+                        </span>
+                    </div>
+
+                    <div class="views-field views-field-field-geofield-distance">
+                        <span class="views-label views-label-field-geofield-distance">Proximity: </span>
+                        <span class="field-content">4.94916541447135</span>
+                    </div>
+
+                </div>
+                <div class="views-row views-row-2 views-row-even views-row-last">
+                    <div class="views-field views-field-static-image">
+                        <span class="field-content">
+                            <a href="../southport/index.html">
+                                <img class="img-responsive" src="http://static.swellnet.com.au/images/surfcams/southport-thumb.jpg" alt="Southport" title="Southport" />
+                            </a>
+                        </span>
+                    </div>
+
+                    <div class="views-field views-field-title">
+                        <span class="field-content">
+                            <a href="../southport/index.html">Southport</a>
+                        </span>
+                    </div>
+
+                    <div class="views-field views-field-field-geofield-distance">
+                        <span class="views-label views-label-field-geofield-distance">Proximity: </span>
+                        <span class="field-content">52.96729402674914</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SIDEBAR -->
+{% contentfor sidebar %}
+	<div class="panel-pane pane-block pane-boxes-swellnet-adblock-mrec block-boxes-simple">
+	    <div class="pane-content">
+	        <div id='boxes-box-swellnet_adblock_mrec' class='boxes-box'>
+	            <div class="boxes-box-content">
+	                <span class="mcnamf" title="300x250"></span>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="panel-separator"></div>
+
+	<div class="panel-pane pane-block pane-boxes-swellnet-adblock-halfisland block-boxes-simple">
+	    <div class="pane-content">
+	        <div id='boxes-box-swellnet_adblock_halfisland' class='boxes-box'>
+	            <div class="boxes-box-content">
+	                <span class="mcnamf" title="300x125"></span>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+{% endcontentfor %}

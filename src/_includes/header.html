@@ -1,53 +1,45 @@
 {% assign settings = site.data.settings %}
-{% assign logo = page.logo | default: "http://placehold.it/250x150?text=Logo" %}
+{% assign logo = page.logo | default: "http://swellnet.com/profiles/swellnet/themes/gold/logo.png" %}
 
-<!-- HEADER TOP -->
-<div class="global-header-top hidden-sm-down">
-    <div class="container">
-        <div class="row">
-            <div class="col-6">
-                <a href="tel:{{ settings.offices[0].phone }}">
-                    <i class="fa fa-phone"></i>&nbsp;
-                    <span class="text hidden-sm-down">{{ settings.offices[0].phone }}</span>
-                </a>
-                <span class="spacer mr-3 hidden-sm-down"></span>
-                <a class="hidden-sm-down" href="mailto:{{ settings.offices[0].email }}">
-                    <i class="fa fa-envelope"></i>&nbsp;  {{ settings.offices[0].email }}
-                </a>
-            </div>
-            <div class="col-6 text-right">
-                <a href="#search" data-search-trigger>
-                    <i class="fa fa-search"></i>&nbsp;
-                    <span class="text hidden-sm-down">&nbsp;Search</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- GLOBAL HEADER -->
+<header id="header" class='header' role="banner">
+    <div class="header-container container-smooth container-fluid">
 
-<!-- HEADER BODY -->
-<div class="global-header-body">
-    <div class="container">
+        <!-- NAVBAR TOGGLE -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#site-main-menu">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
 
-        <!-- LOGO -->
-        <a class="logo" href="/" title="{{ settings.title_homepage }}" itemprop="url">
-            <img src="{{ logo }}" alt="{{ settings.company }}" itemprop="logo">
-        </a>
+        <!-- SITE LOGO -->
+        <span class="site-logo">
+            <a href="/" id="logo" rel="home" title="Return to the Swellnet home page">
+                <img class="img-responsive" src="{{ logo }}" alt="Swellnet logo" />
+            </a>
+        </span>
 
-        <!-- HAMBURGER -->
-        <div class="global-header-hamburger hidden-lg-up">
-            <div class="lv-hamburger" data-menu-toggle>
-                <span class="lv-hamburger-top"></span>
-                <span class="lv-hamburger-middle"></span>
-                <span class="lv-hamburger-bottom"></span>
-                <span class="lv-hamburger-hit"></span>
-            </div>
+        <!-- SITE MAIN MENU -->
+        <div id="site-main-menu" class="yamm site-main-menu navbar navbar-default navbar-collapse collapse">
+            <ul class="menu navbar-nav nav">
+                <li class="first leaf nav-home" id="nav-home-3"><a href="http://swellnet.com/welcome/index.html" title="Home" class="leaf-link">Home</a></li>
+                <li class="leaf nav-surf-reports-and-forecasts" id="nav-surf-reports-and-forecasts-4"><a href="http://swellnet.com/reports/index.html" class="leaf-link">Surf Reports &amp; Forecasts</a></li>
+                <li class="leaf nav-surfcams active active-trail" id="nav-surfcams-5"><a href="../index.html" class="leaf-link active-trail">Surfcams</a></li>
+                <li class="leaf nav-news" id="nav-news-6"><a href="http://swellnet.com/news/index.html" class="leaf-link">News</a></li>
+                <li class="leaf nav-photos" id="nav-photos-7"><a href="http://swellnet.com/photos/index.html" class="leaf-link">Photos</a></li>
+                <li class="last leaf nav-forum" id="nav-forum-8"><a href="http://swellnet.com/forum/index.html" title="" class="leaf-link">Forum</a></li>
+            </ul>
         </div>
 
-        <!-- NAVIGATION -->
-        <nav class="lv-topbar hidden-md-down">
-            {% include snippets/navigation.html %}
-        </nav>
+        <!-- ADBLOCK LEADERBOARD -->
+        <div id='boxes-box-swellnet_adblock_leaderboard' class='boxes-box'>
+            <div class="boxes-box-content">
+                <span class="mcnamf" title="728x90"></span>
+            </div>
+        </div>
+    </div> <!-- /.header-container -->
 
-    </div>
-</div>
+    <!-- SCREEN READER ONLY -->
+    <div class="sr-only lead">Australian Surf Cams, Surf Reports and Surf Forecasts</div>
+</header>

@@ -1,9 +1,9 @@
 # GLOBAL SITE SETTINGS
 
-cname: ________.yourwebvisual.com
+cname: swellnet.yourwebvisual.com
 
 # META
-title: New Website
+title: Swellnet
 title_homepage:
 company:
 description:
@@ -14,7 +14,7 @@ site_tagline:
 # DEVELOPER
 allow_robots: false
 github_repo_owner: liquidvisual
-github_repo_path: https://github.com/liquidvisual/________
+github_repo_path: https://github.com/liquidvisual/swell-0917
 github_repo_name:
 jekyll_version: 3.5.0
 

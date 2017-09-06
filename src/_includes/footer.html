@@ -1,42 +1,49 @@
 {% assign settings = site.data.settings %}
 
-<!-- FOOTER BOTTOM -->
-<section class="global-footer-bottom">
-    <div class="container">
-		<div class="row">
-			<div class="col-6">
-				<small>
-					&copy; {{ site.time | date: '%Y' }}&nbsp;&nbsp;&nbsp;
-					<a data-toggle="collapse" href="#sitemap">Site Map&nbsp;<i class="fa fa-angle-down"></i></a>
-				</small>
-			</div>
-			<div class="col-6 text-right">
-				<small>
-					<a class="author-logo" target="_blank" href="{{ settings.author.url }}">
-				    	<span class="text">{{ settings.author.description }}</span>&nbsp;&nbsp;
-				    	<img width="20" height="20" src="{{ settings.author.logo }}" alt="Site by {{ settings.author.title }}">
-					</a>
-					<a href="/docs/">Docs</a>
-				</small>
-			</div>
-		</div>
-    </div>
-</section>
+<!-- GLOBAL FOOTER -->
+<footer id="footer" class="footer" role="contentinfo">
+    <div class="container-smooth container-fluid footer-content">
+        <div class="row">
 
-<!-- FOOTER SITEMAP -->
-<section id="sitemap" class="global-footer-sitemap collapse">
-	<div class="container">
-		<ul class="block-grid-xs-2 block-grid-lg-7">
-			{% for item in site.data.sitemap offset: 1 %}
-				<li>
-					<h5>{{ item.title }}</h5>
-					<ul class="list-unstyled">
-						{% for item in item.children %}
-							<li><a href="{{ item.url }}">{{ item.title }}</a></li>
-						{% endfor %}
-					</ul>
-				</li>
-			{% endfor %}
-		</ul>
-	</div>
-</section>
+            <section id="block-menu-block-1" class="block block-menu-block block-main-menu block-menu-block-1 clearfix">
+                <h2 class="block-title block-title element-invisible">Main menu</h2>
+                 <div class="menu-block-wrapper menu-block-1 menu-name-main-menu parent-mlid-0 menu-level-1">
+                    <ul class="menu navbar-nav nav"><li class="first leaf menu-mlid-3561 nav-home" id="nav-home-9"><a href="http://swellnet.com/welcome/index.html" title="Home" class="leaf-link">Home</a></li>
+                        <li class="leaf menu-mlid-420 nav-surf-reports-and-forecasts" id="nav-surf-reports-and-forecasts-10"><a href="http://swellnet.com/reports/index.html" class="leaf-link">Surf Reports &amp; Forecasts</a></li>
+                        <li class="leaf menu-mlid-421 nav-surfcams active active-trail" id="nav-surfcams-11"><a href="../index.html" class="leaf-link active-trail">Surfcams</a></li>
+                        <li class="leaf menu-mlid-417 nav-news" id="nav-news-12"><a href="http://swellnet.com/news/index.html" class="leaf-link">News</a></li>
+                        <li class="leaf menu-mlid-418 nav-photos" id="nav-photos-13"><a href="http://swellnet.com/photos/index.html" class="leaf-link">Photos</a></li>
+                        <li class="last leaf menu-mlid-411 nav-forum" id="nav-forum-14"><a href="http://swellnet.com/forum/index.html" title="" class="leaf-link">Forum</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="block-menu-menu-miscellaneous-pages" class="block block-menu block-miscellaneous-pages block-menu-menu-miscellaneous-pages clearfix">
+                <h2 class="block-title block-title element-invisible">Miscellaneous pages</h2>
+                <ul class="menu nav"><li class="first leaf nav-privacy-policy" id="nav-privacy-policy-15"><a href="http://swellnet.com/privacy/index.html" class="leaf-link">Privacy policy</a></li>
+                    <li class="leaf nav-terms-and-conditions" id="nav-terms-and-conditions-16"><a href="http://swellnet.com/terms/index.html" class="leaf-link">Terms and Conditions</a></li>
+                    <li class="leaf nav-contact-us" id="nav-contact-us-17"><a href="http://swellnet.com/contact/index.html" title="" class="leaf-link">Contact us</a></li>
+                    <li class="last leaf nav-about-swellnet" id="nav-about-swellnet-18"><a href="http://swellnet.com/about/index.html" class="leaf-link">About Swellnet</a></li>
+                </ul>
+            </section>
+
+            <section id="block-menu-menu-user-menu-secondary" class="block block-menu block-user-menu-secondary block-menu-menu-user-menu-secondary clearfix">
+                <h2 class="block-title block-title element-invisible">User menu secondary</h2>
+                <ul class="menu nav"><li class="first leaf nav-my-account" id="nav-my-account-19"><a href="http://swellnet.com/user/index.html" title="" class="leaf-link">My account</a></li>
+                    <li class="leaf nav-register" id="nav-register-20"><a href="http://swellnet.com/user/register/index.html" title="" class="leaf-link">Register</a></li>
+                    <li class="last leaf nav-forgot-password" id="nav-forgot-password-21"><a href="http://swellnet.com/user/password/index.html" title="" class="leaf-link">Forgot password</a></li>
+                </ul>
+            </section>
+
+            <section id="block-boxes-swellnet-footer-colophon" class="block block-boxes block-boxes-simple block- block-boxes-swellnet-footer-colophon clearfix">
+                <div id='boxes-box-swellnet_footer_colophon' class='boxes-box'>
+                    <div class="boxes-box-content">
+                        <img src="http://swellnet.com/profiles/swellnet/themes/swellzen/images/swellnet-logo-white.png" title="Swellnet"/>
+                        <p>&copy; Swellnet 2017. All rights reserved.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</footer>

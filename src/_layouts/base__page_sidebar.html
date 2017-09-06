@@ -1,0 +1,28 @@
+---
+layout: base
+---
+
+<!-- BLOCK SYSTEM MAIN -->
+<section id="block-system-main" class="block block-system block- block-system-main clearfix">
+    <div class="layout-sixthree section panel-left col-sm-3 col-smmd-3andhalf col-md-4">
+        <div class="panel-pane pane-page-breadcrumb">
+            <div class="pane-content">
+
+                {% include snippets/breadcrumb.html %}
+
+            </div> <!-- /.pane-content -->
+        </div>
+
+        <div class="panel-separator"></div>
+
+		{{ content }}
+
+    </div> <!-- /.layout-sixthree -->
+
+    <!-- PANEL RIGHT -->
+    <div class="layout-sixthree section panel-right col-sm-3 col-smmd-2andhalf col-md-2">
+
+        {% contentblock sidebar no-convert %}
+
+    </div>
+</section>

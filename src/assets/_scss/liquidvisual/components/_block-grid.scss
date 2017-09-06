@@ -22,6 +22,15 @@ $grid-gutter-width: 30px !default;
 // TIP: If top margin issue, make sure block-grid-xs-1 is always applied
 //-----------------------------------------------------------------
 
+@mixin clearfix() {
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}
+
+
 [class*="block-grid-"] {
   @include clearfix();
   display: block;
