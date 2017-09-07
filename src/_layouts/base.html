@@ -91,7 +91,7 @@
                 <!-- PRO LINK -->
                 <section id="block-swellnet-subscription-pro-link" class="block block-swellnet-subscription block-pro-link block-swellnet-subscription-pro-link clearfix">
                     <!-- <h2 class="block-title block-title element-invisible">Pro Link</h2> -->
-                    <a href="http://swellnet.com/pro/subscribe/chooseplan/index.html">Remove ads, view long range surf forecasts... Get Swellnet PRO for $8.95 per month <i class="fa fa-angle-right"></i></a>
+                    <a href="http://swellnet.com/pro/subscribe/chooseplan/index.html">Remove ads, view long range surf forecasts... Get Swellnet PRO for $8.95 per month &nbsp;&nbsp;<i class="fa fa-angle-right"></i></a>
                 </section>
 
                 <!-- SITE USER MENU -->
@@ -302,18 +302,6 @@
                 length: 200,
                 show_media: true,
                 template: "/social-feed-instagram/",
-
-                // When all the posts are collected and displayed - this function is evoked
-                callback: function () {
-                    console.log('all posts are collected');
-                    setTimeout(function(){
-                      $('.social-feed-instagram-container').masonry();
-
-                        setTimeout(function(){
-                            $('.social-feed-instagram-container').masonry();
-                        }, 800);
-                    }, 800);
-                }
             });
         });
     </script>
