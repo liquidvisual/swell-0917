@@ -8,8 +8,15 @@ layout: base__page_sidebar
         <div class="ds-1col node node-surfcam node-surfcam-full view-mode-full clearfix">
 
             <!-- PAGE HEADER -->
-            <h2>Knights</h2>
-            <div id='video'><a href='rtsp://streamer.swellnet.com.au/surfcams/knights.stream'>Watch this stream over your native player</a></div>
+            <h2>{{ page.title }}</h2>
+
+			<!-- VIDEO -->
+            <div id='video'>
+            	<a href='rtsp://streamer.swellnet.com.au/surfcams/knights.stream'>
+            		Watch this stream over your native player
+            	</a>
+            </div>
+
             Remove video ads with <a href='http://swellnet.com/pro/subscribe/index.html'>Swellnet Pro</a> for $8.95/month (first month $1.00)
 
             <!-- SCRIPT -->
@@ -81,66 +88,19 @@ layout: base__page_sidebar
 
 <div class="panel-separator"></div>
 
-<!-- PANEL PANE -->
-<div class="panel-pane pane-views-panes pane-related-surfcams-related-surfcams">
-    <div class="pane-content">
-        <div class="view view-related-surfcams view-id-related_surfcams view-display-id-related_surfcams view-dom-id-3eddc6ef47245343cedb581aea1c4f44">
-            <div class="view-header">
-                Nearest Surfcams:
-            </div>
-
-            <!-- VIEW CONTENT -->
-            <div class="view-content">
-                <div class="views-row views-row-1 views-row-odd views-row-first">
-
-                    <div class="views-field views-field-static-image">
-                        <span class="field-content">
-                            <a href="../middleton/index.html">
-                                <img class="img-responsive" src="http://static.swellnet.com.au/images/surfcams/middleton-thumb.jpg" alt="Middleton" title="Middleton" />
-                            </a>
-                        </span>
-                    </div>
-
-                    <div class="views-field views-field-title">
-                        <span class="field-content">
-                            <a href="../middleton/index.html">Middleton</a>
-                        </span>
-                    </div>
-
-                    <div class="views-field views-field-field-geofield-distance">
-                        <span class="views-label views-label-field-geofield-distance">Proximity: </span>
-                        <span class="field-content">4.94916541447135</span>
-                    </div>
-
-                </div>
-                <div class="views-row views-row-2 views-row-even views-row-last">
-                    <div class="views-field views-field-static-image">
-                        <span class="field-content">
-                            <a href="../southport/index.html">
-                                <img class="img-responsive" src="http://static.swellnet.com.au/images/surfcams/southport-thumb.jpg" alt="Southport" title="Southport" />
-                            </a>
-                        </span>
-                    </div>
-
-                    <div class="views-field views-field-title">
-                        <span class="field-content">
-                            <a href="../southport/index.html">Southport</a>
-                        </span>
-                    </div>
-
-                    <div class="views-field views-field-field-geofield-distance">
-                        <span class="views-label views-label-field-geofield-distance">Proximity: </span>
-                        <span class="field-content">52.96729402674914</span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- SIDEBAR -->
 {% contentfor sidebar %}
+
+	{% include nearest_surfcams.html %}
+
+	{% include latest_comments.html %}
+
+	<div class="panel-separator"></div>
+
+	{% include in_the_forums.html %}
+
+	<div class="panel-separator"></div>
+
 	<div class="panel-pane pane-block pane-boxes-swellnet-adblock-mrec block-boxes-simple">
 	    <div class="pane-content">
 	        <div id='boxes-box-swellnet_adblock_mrec' class='boxes-box'>
@@ -162,4 +122,8 @@ layout: base__page_sidebar
 	        </div>
 	    </div>
 	</div>
+{% endcontentfor %}
+
+{% contentfor content_additional %}
+    {% include social_feed.html %}
 {% endcontentfor %}

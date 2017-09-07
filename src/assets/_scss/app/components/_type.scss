@@ -11,18 +11,18 @@
 // TYPE
 //--------------------------------------------------------------------
 
-html {
-  @include media-breakpoint-up(xs) { font-size: rem-calc(14); }
-  @include media-breakpoint-up(md) { font-size: rem-calc(16); }
-}
+// html {
+//   @include media-breakpoint-up(xs) { font-size: rem-calc(14); }
+//   @include media-breakpoint-up(md) { font-size: rem-calc(16); }
+// }
 
 //-----------------------------------------------------------------
 // ANCHORS
 //-----------------------------------------------------------------
 
-a {
-	// transition: color 300ms ease, background 300ms ease;
-}
+// a {
+// 	// transition: color 300ms ease, background 300ms ease;
+// }
 
 //-----------------------------------------------------------------
 // PARAGRAPHS
@@ -38,13 +38,13 @@ a {
 // HEADINGS
 //-----------------------------------------------------------------
 
-.subheader {
-	// font-weight: 400;
-}
+// .subheader {
+// 	// font-weight: 400;
+// }
 
-.lead {
+// .lead {
 
-}
+// }
 
 //-----------------------------------------------------------------
 // HEADINGS MOBILE

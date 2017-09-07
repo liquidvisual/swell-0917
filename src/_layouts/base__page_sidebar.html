@@ -8,7 +8,9 @@ layout: base
         <div class="panel-pane pane-page-breadcrumb">
             <div class="pane-content">
 
-                {% include snippets/breadcrumb.html %}
+                {% if page.breadcrumbs %}
+                    {% include snippets/breadcrumb.html %}
+                {% endif %}
 
             </div> <!-- /.pane-content -->
         </div>
@@ -17,12 +19,14 @@ layout: base
 
 		{{ content }}
 
+        {% include latest_news.html %}
+
     </div> <!-- /.layout-sixthree -->
 
     <!-- PANEL RIGHT -->
     <div class="layout-sixthree section panel-right col-sm-3 col-smmd-2andhalf col-md-2">
-
         {% contentblock sidebar no-convert %}
-
     </div>
+
+    {% contentblock content_additional no-convert %}
 </section>
