@@ -857,7 +857,7 @@
                                                 <i class="fa fa-angle-right"></i>
                                             </a>
                                         </div>
-                                        <div class="social-feed-instagram-container block-grid-xs-1 block-grid-md-2 block-grid-lg-4"></div>
+                                        <div class="social-feed-instagram-container block-grid-xs-2 block-grid-lg-4"></div>
                                     </div>
                                 </section>
                             </div>
@@ -1103,16 +1103,6 @@
             length: 200,
             show_media: true,
             template: "/social-feed-instagram/",
-            // When all the posts are collected and displayed - this function is evoked
-            callback: function() {
-                console.log('all posts are collected');
-                setTimeout(function() {
-                    $('.social-feed-instagram-container').masonry();
-                    setTimeout(function() {
-                        $('.social-feed-instagram-container').masonry();
-                    }, 800);
-                }, 800);
-            }
         });
     });
     </script>
