@@ -30,18 +30,34 @@
                 <li class="leaf nav-photos" id="nav-photos-7"><a href="http://swellnet.com/photos/index.html" class="leaf-link">Photos</a></li>
                 <li class="last leaf nav-forum" id="nav-forum-8"><a href="http://swellnet.com/forum/index.html" title="" class="leaf-link">Forum</a></li>
 
+                <!-- PUBLIC USERS -->
                 <li class="nav-login"><a href="#login">Login</a></li>
                 <li class="nav-register"><a href="#register">Register</a></li>
+
+                <!-- PAID MEMBERS -->
+                <li class="nav-paid-member">
+                    <ul>
+                        <li class=""><a href="#">My Report</a></li>
+                        <li class=""><a href="#">My Surfcam</a></li>
+                        <li class=""><a href="#">My Account</a></li>
+                        <li class=""><a href="#">Logout</a></li>
+                    </ul>
+                </li>
+
             </ul>
         </div>
 
+        {% comment %}
         <!-- ADBLOCK LEADERBOARD -->
         <div id='boxes-box-swellnet_adblock_leaderboard' class='boxes-box'>
             <div class="boxes-box-content">
                 <span class="mcnamf" title="728x90"></span>
             </div>
         </div>
+        {% endcomment %}
+
     </div> <!-- /.header-container -->
+
 
     <!-- SCREEN READER ONLY -->
     <div class="sr-only lead">Australian Surf Cams, Surf Reports and Surf Forecasts</div>

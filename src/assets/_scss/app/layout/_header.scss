@@ -1,176 +1,102 @@
 /*
     HEADER.CSS
 
-    - Last updated: 25.02.17
+    - Last updated: 08.09.17
     - liquidvisual.com
 */
 //-----------------------------------------------------------------
 // VARIABLES
 //-----------------------------------------------------------------
-
-$header-top-sm-height: 40px !default;
-$header-top-md-height: 40px !default;
-$header-top-lg-height: 40px !default;
-
-$header-body-sm-height: 60px !default;
-$header-body-md-height: 90px !default;
-$header-body-lg-height: 100px !default;
-
-$header-bottom-sm-height: 50px !default;
-$header-bottom-md-height: 50px !default;
-$header-bottom-lg-height: 50px !default;
-
 //-----------------------------------------------------------------
-// HEADROOM
+// PAID MEMBERS NAV ITEMS
 //-----------------------------------------------------------------
 
-.headroom {
-    will-change: transform;
-    transition: transform 200ms linear, background-color 200ms ease;
-}
-
-.headroom--pinned {
-    @include media-breakpoint-down(sm) {
-        transform: translateY(0%);
-    }
-}
-.headroom--unpinned {
-	@include media-breakpoint-down(sm) {
-    	transform: translateY(-100%);
+ul li.nav-paid-member {
+	@include media-breakpoint-up(lg) {
+	    position: absolute;
+	    top: -52px;
+	    right: 0;
+	    background: none;
 	}
-}
 
-//**********************************************
-// STYLING SCROLL HEADER
-//**********************************************
+	&:hover {
+		@include media-breakpoint-up(lg) {
+		    background: none !important;
+		}
+	}
 
-.headroom--top {
-	background: none; // Need for animation
-}
+	ul {
+		list-style: none;
+		font-size: rem-calc(22);
+		text-transform: uppercase;
+		padding: 0;
 
-.headroom--not-top {
-	&.global-header {
-
-		.global-header-top {
-			height: 0;
-			padding: 0;
-			overflow: hidden;
+		@include media-breakpoint-up(lg) {
+			display: flex;
+			padding: 10px 0;
 		}
 
-		.global-header-body {
-			@include media-breakpoint-up(md) {
-			    height: $header-body-md-height;
+		li {
+			position: relative;
+			border-bottom: 1px solid #03646a;
+
+			@include media-breakpoint-up(lg) {
+			    border-bottom: 0;
+			}
+
+			&:after {
+				@include media-breakpoint-up(lg) {
+				    content: "|";
+				    position: absolute;
+				    top: 0;
+				    right: 0;
+				    color: #e7ebea;
+				}
+			}
+
+			&:last-child {
+				&:after {
+					display: none;
+				}
+
+				a {
+					@include media-breakpoint-up(lg) {
+					    padding-right: 0;
+					}
+				}
+			}
+
+			&.active a {
+				background: #005a60;
+			}
+
+			&:hover a {
+				@include media-breakpoint-down(sm) {
+				    background: #444444;
+				}
+			}
+
+			a {
+				display: block;
+				padding: rem-calc(15 30);
+				text-decoration: none !important;
+
+				@include media-breakpoint-down(md) {
+				    background: $brand-primary;
+				    color: white;
+				}
+
+				@include media-breakpoint-up(lg) {
+				    padding: rem-calc(0 20);
+				}
 			}
 		}
 	}
 }
 
 //-----------------------------------------------------------------
-// HEADER GENERAL
+//
 //-----------------------------------------------------------------
-
-.global-header {
-	position: fixed;
-	top: 0;
-	width: 100%;
-	background: white;
-	box-shadow: 0 0 3px 1px rgba(black, 0.2);
-	z-index: 999;
-}
-
-//-----------------------------------------------------------------
-// HEADER TOP
-//-----------------------------------------------------------------
-
-.global-header-top {
-	display: flex;
-	align-items: center;
-	position: relative;
-	height: $header-top-lg-height;
-	background: $gray-light;
-	font-size: rem-calc(14);
-	color: white;
-	transition: all ease 100ms;
-
-	a {
-		display: inline-flex;
-		align-items: center;
-		color: white;
-		transition: color 200ms ease;
-
-		&:hover {
-			opacity: 0.8;
-		}
-	}
-}
-
-//-----------------------------------------------------------------
-// HEADER BODY
-//-----------------------------------------------------------------
-
-.global-header-body {
-	display: flex;
-	align-items: center;
-	height: $header-body-sm-height;
-	// transition: height 100ms ease;
-
-	@include media-breakpoint-up(md) {
-	    height: $header-body-md-height;
-	}
-
-	@include media-breakpoint-up(lg) {
-		height: $header-body-lg-height;
-	}
-
-	//=========================================
-	// HEADER HEIGHT [LOCKED]
-	//=========================================
-
-	> .container {
-		display: flex;
-		align-items: center;
-
-		@include media-breakpoint-down(xs) {
-		    width: 100%; // fixes mobile glitch?
-		}
-	}
-}
-
-//-----------------------------------------------------------------
-// LOGO
-//-----------------------------------------------------------------
-
-.global-header .logo {
-	@include media-breakpoint-up(md) {
-	    // margin: 30px 0 0 0; // adjust the logo here
-	}
-
-	img {
-		width: 80px;
-		// transition: all 150ms ease;
-
-		@include media-breakpoint-up(md) {
-			width: 140px;
-		}
-
-		@include media-breakpoint-up(lg) {
-		    width: 140px;
-		}
-	}
-}
-
-//-----------------------------------------------------------------
-// HAMBURGER
-//-----------------------------------------------------------------
-
-.global-header-hamburger {
-	margin: auto 0 auto auto;
-
-	@include media-breakpoint-up(md) {
-	    margin: 30px 0 auto auto;
-	}
-}
-
 //=========================================
 //
 //=========================================

@@ -75,6 +75,7 @@ layout: base__page_sidebar
 
 <div class="panel-separator"></div>
 
+{% comment %}
 <!-- BOXES BOX AD BLOCK -->
 <div id='boxes-box-mcn_surfcam_ad_block' class='boxes-box'><div class="boxes-box-content">
 
@@ -85,8 +86,8 @@ layout: base__page_sidebar
 
     </div>
 </div>
-
 <div class="panel-separator"></div>
+{% endcomment %}
 
 <!-- SIDEBAR -->
 {% contentfor sidebar %}
@@ -101,6 +102,7 @@ layout: base__page_sidebar
 
 	<div class="panel-separator"></div>
 
+    {% comment %}
 	<div class="panel-pane pane-block pane-boxes-swellnet-adblock-mrec block-boxes-simple">
 	    <div class="pane-content">
 	        <div id='boxes-box-swellnet_adblock_mrec' class='boxes-box'>
@@ -111,9 +113,9 @@ layout: base__page_sidebar
 	    </div>
 	</div>
 
-	<!-- <div class="panel-separator"></div> -->
+	<div class="panel-separator"></div>
 
-	<!-- <div class="panel-pane pane-block pane-boxes-swellnet-adblock-halfisland block-boxes-simple">
+	<div class="panel-pane pane-block pane-boxes-swellnet-adblock-halfisland block-boxes-simple">
 	    <div class="pane-content">
 	        <div id='boxes-box-swellnet_adblock_halfisland' class='boxes-box'>
 	            <div class="boxes-box-content">
@@ -121,7 +123,8 @@ layout: base__page_sidebar
 	            </div>
 	        </div>
 	    </div>
-	</div> -->
+	</div>
+    {% endcomment %}
 {% endcontentfor %}
 
 {% contentfor content_additional %}

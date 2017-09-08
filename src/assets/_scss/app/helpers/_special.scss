@@ -7,31 +7,48 @@
 //-----------------------------------------------------------------
 // VARIABLES
 //-----------------------------------------------------------------
+
+h3 .fa {
+	color: #777777;
+	font-size: rem-calc(42);
+}
+
+.pane-latest-article-comments .pane-title:before,
+.pane-latest-comments-concise .pane-title:before,
+.pane-latest-forum-posts .pane-title:before {
+	// color: #484848;
+}
+
 //-----------------------------------------------------------------
 // USERBAR
 //-----------------------------------------------------------------
 
 .prologue {
 	background: $brand-secondary;
-
-	@include media-breakpoint-down(sm) {
-	    padding-right: rem-calc(40);
-	}
+	transition: background 300ms ease;
 
 	.block-swellnet-subscription-pro-link {
 		float: none;
 		border: 0;
 		text-align: left;
 		padding: rem-calc(0 15);
-
-		@include media-breakpoint-up(md) {
-		    padding: rem-calc(0 5);
-		}
 	}
 
 	a {
+		display: flex;
+		align-items: center;
+		padding-left: 0;
 		color: white;
 		font-size: rem-calc(24);
+
+		&:hover {
+			text-decoration: none;
+		}
+
+		.text {
+			display: inline-block;
+			margin-right: 10px;
+		}
 	}
 
 	.fa-angle-right {
@@ -39,10 +56,8 @@
 		line-height: 0;
 
 		@include media-breakpoint-down(sm) {
-		    position: absolute;
-		    // top: 0;
-		    right: rem-calc(20);
 		    font-size: rem-calc(50);
+		    margin-left: auto;
 		}
 	}
 }
@@ -59,6 +74,13 @@
 .navbar-nav .nav-login {
 	@include media-breakpoint-up(lg) {
 	    float: right;
+	}
+}
+
+.navbar-nav > .nav-login {
+	@include media-breakpoint-up(lg) {
+	    border-radius: 0 6px 6px 0;
+	    overflow: hidden;
 	}
 }
 

@@ -8,6 +8,31 @@
 // VARIABLES
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
+// BTN CTA (with arrow)
+//-----------------------------------------------------------------
+
+.btn-cta {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 0;
+    background: $brand-primary;
+    font-size: rem-calc(32);
+    text-align: left;
+    color: white;
+
+    .fa-angle-right {
+        margin-left: auto;
+        font-size: rem-calc(44);
+    }
+
+    &:hover {
+        color: white;
+        background: darken($brand-primary, 5%);
+    }
+}
+
+//-----------------------------------------------------------------
 // BUTTONS
 //-----------------------------------------------------------------
 
@@ -51,21 +76,24 @@
     }
 
     .btn-tile-overlay {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        // display: flex;
+        // align-items: flex-end;
+        // justify-content: center;
         text-align: center;
         position: absolute;
-        top: 0;
+        bottom: 0;
+        // top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
-        padding: rem-calc(30);
-        background: rgba(black, 0.5);
+        // height: 100%;
+        padding: rem-calc(15);
+        background: #2f2f2f; //rgba(black, 0.5);
         transition: opacity 300ms ease, background-color 300ms ease;
 
         .btn-tile-header {
+            font-size: rem-calc(26);
             color: white;
+            margin: 0;
         }
     }
 

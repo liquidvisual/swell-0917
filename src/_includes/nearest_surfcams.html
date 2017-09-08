@@ -1,3 +1,29 @@
+<!-- NEAREST REPORT / FORECAST -->
+<h3 class="mb-4"><i class="fa fa-bar-chart"></i>&nbsp; Nearest Report / Forecast</h3>
+<a href="#" class="btn btn-cta">Middleton <i class="fa fa-angle-right"></i></a>
+<hr class="my-5">
+
+<!-- NEAREST SURFCAMS -->
+<h3 class="d-flex align-items-center mb-4"><i class="fa fa-video-camera"></i>&nbsp; Nearest Surfcams <img width="34" class="ml-auto d-md-none" src="/assets/img/ui/swipe-left.svg" alt="Swipe Right"></h3>
+<div class="list-scroller-wrapper">
+    <ul class="list-scroller">
+    <!-- block-grid-scroller block-grid-md-2 block-grid-condensed -->
+        {% for i in (1..5) %}
+            <li>
+                <a class="btn-tile" href="#">
+                    <img width="100%" src="http://placehold.it/160x120">
+                    <span class="btn-tile-bg" style="background-image: url(http://static.swellnet.com.au/images/surfcams/southport-thumb.jpg)"></span>
+                    <div class="btn-tile-overlay">
+                        <h2 class="h3 btn-tile-header mb-0">Cronulla Beaches</h2>
+                    </div>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<hr class="my-5">
+
+{% comment %}
 <!-- NEAREST SURFCAMS -->
 <div class="panel-pane pane-views-panes pane-related-surfcams-related-surfcams">
     <div class="pane-content">
@@ -55,3 +81,4 @@
         </div>
     </div>
 </div>
+{% endcomment %}
