@@ -33,6 +33,59 @@
 }
 
 //-----------------------------------------------------------------
+// BTN TABS
+//-----------------------------------------------------------------
+
+.btn-tabs {
+    overflow: hidden;
+    border-bottom: 10px solid #e4e2e3;
+    margin-top: -20px;
+
+    .btn-tiny {
+        position: relative;
+        top: 12px;
+    }
+
+    .btn-tab {
+        display: block;
+        padding: rem-calc(15 30);
+        float: right;
+        background: #f5f3f4;
+        font-size: rem-calc(30);
+        font-weight: 600;
+        color: #666;
+        text-transform: uppercase;
+
+        &.active {
+            background: #e4e2e3;
+        }
+    }
+}
+
+//-----------------------------------------------------------------
+// BTN TINY (FAVORITE)
+//-----------------------------------------------------------------
+
+.btn.btn-tiny {
+    background: $brand-secondary;
+    border-radius: 0;
+    text-transform: uppercase;
+    font-size: rem-calc(20);
+    font-weight: 700;
+    line-height: 1.2;
+    padding: 5px 10px;
+    border: 0;
+    // float: left;
+    // margin-bottom: rem-calc(15);
+
+    &:hover {
+        @include media-breakpoint-up(lg) {
+            background: lighten($brand-secondary, 5%);
+        }
+    }
+}
+
+//-----------------------------------------------------------------
 // BUTTONS
 //-----------------------------------------------------------------
 

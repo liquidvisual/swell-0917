@@ -46,11 +46,11 @@ function launchSlider() {
 			mobileFirst: true,
 			nextArrow: $nextArrow,
 			prevArrow: $prevArrow,
-			pause: 5000,
+			// pause: 5000,
 			// slide: 'div',
 			slidesToShow: 3,
-			slidesToScroll: 3,
-			speed: 800,
+			slidesToScroll: 2,
+			speed: 300,
 			variableWidth: true,
 			// variableHeight: true,
 			responsive: [
@@ -59,6 +59,7 @@ function launchSlider() {
 				settings: isStackedForDesktop ? 'unslick' : {
 					slidesToShow: 5,
 					slidesToScroll: 5,
+					speed: 800,
 				}
 			}
 			]

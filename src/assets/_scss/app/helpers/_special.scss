@@ -25,9 +25,18 @@ h3 .fa {
 	}
 }
 
-.special-h2 {
-	font-size: 1.714em !important;
-	font-weight: bolder;
+.special-page-header {
+	@include media-breakpoint-up(md) {
+	    font-size: rem-calc(57) !important;
+	}
+}
+
+//-----------------------------------------------------------------
+// VIDEO
+//-----------------------------------------------------------------
+
+.jwplayer {
+	margin-bottom: 0 !important;
 }
 
 //-----------------------------------------------------------------
