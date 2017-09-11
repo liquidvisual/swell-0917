@@ -19,6 +19,28 @@ h3 .fa {
 	// color: #484848;
 }
 
+.layout-sixthree.section.panel-right {
+	@include media-breakpoint-up(md) {
+	    padding-left: rem-calc(40);
+	}
+}
+
+.special-h2 {
+	font-size: 1.714em !important;
+	font-weight: bolder;
+}
+
+//-----------------------------------------------------------------
+// ADVERT
+//-----------------------------------------------------------------
+
+.iframe-advert {
+	border: 1px solid black;
+	padding: 0;
+	margin: 0;
+	width: 760px;
+}
+
 //-----------------------------------------------------------------
 // USERBAR
 //-----------------------------------------------------------------

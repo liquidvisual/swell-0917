@@ -17,8 +17,6 @@ layout: base__page_sidebar
             	</a>
             </div>
 
-            Remove video ads with <a href='http://swellnet.com/pro/subscribe/index.html'>Swellnet Pro</a> for $8.95/month (first month $1.00)
-
             <!-- SCRIPT -->
             <script type='text/javascript'>
                 var player_conf = {
@@ -66,14 +64,19 @@ layout: base__page_sidebar
                 jwplayer('video').setup(player_conf);
             </script>
 
-            <div class="field field-name-body field-type-text-with-summary field-label-hidden">
-                <p><em>Surfers etiquette: if you're travelling here to surf, please respect the locals.</em></p>
-            </div>
         </div>
     </div>
 </div>
 
-<div class="panel-separator"></div>
+{% include surfcam_replays.html %}
+
+Remove video ads with <a href='http://swellnet.com/pro/subscribe/index.html'>Swellnet Pro</a> for $8.95/month (first month $1.00)
+
+<div class="field field-name-body field-type-text-with-summary field-label-hidden">
+    <p><em>Surfers etiquette: if you're travelling here to surf, please respect the locals.</em></p>
+</div>
+
+<div class="spacer mt-4"></div>
 
 {% comment %}
 <!-- BOXES BOX AD BLOCK -->

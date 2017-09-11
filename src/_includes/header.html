@@ -2,7 +2,7 @@
 {% assign logo = page.logo | default: "http://swellnet.com/profiles/swellnet/themes/gold/logo.png" %}
 
 <!-- GLOBAL HEADER -->
-<header id="header" class='header' role="banner">
+<header id="header" class="has-advert header mb-4" role="banner">
     <div class="header-container container-smooth container-fluid">
 
         <!-- NAVBAR TOGGLE -->
@@ -19,6 +19,9 @@
                 <img class="img-responsive" src="{{ logo }}" alt="Swellnet logo" />
             </a>
         </span>
+
+        <!-- IFRAME ADVERT -->
+        <!-- <iframe class="iframe-advert" src="/advert-01/"></iframe> -->
 
         <!-- SITE MAIN MENU -->
         <div id="site-main-menu" class="yamm site-main-menu navbar navbar-default navbar-collapse collapse">
@@ -40,21 +43,21 @@
                         <li class=""><a href="#">My Report</a></li>
                         <li class=""><a href="#">My Surfcam</a></li>
                         <li class=""><a href="#">My Account</a></li>
-                        <li class=""><a href="#">Logout</a></li>
+                        <li class=""><a href="#">Log Out</a></li>
                     </ul>
                 </li>
 
             </ul>
         </div>
 
-        {% comment %}
+        {% comment %}{% endcomment %}
         <!-- ADBLOCK LEADERBOARD -->
-        <div id='boxes-box-swellnet_adblock_leaderboard' class='boxes-box'>
+        <div id='boxes-box-swellnet_adblock_leaderboard' class='boxes-box header-ad'>
             <div class="boxes-box-content">
                 <span class="mcnamf" title="728x90"></span>
             </div>
         </div>
-        {% endcomment %}
+
 
     </div> <!-- /.header-container -->
 

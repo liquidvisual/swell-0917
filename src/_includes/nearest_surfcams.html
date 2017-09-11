@@ -4,11 +4,34 @@
 <hr class="my-5">
 
 <!-- NEAREST SURFCAMS -->
-<h3 class="d-flex align-items-center mb-4"><i class="fa fa-video-camera"></i>&nbsp; Nearest Surfcams <img width="34" class="ml-auto d-md-none" src="/assets/img/ui/swipe-left.svg" alt="Swipe Right"></h3>
+<h3 class="d-flex align-items-center mb-4 mt-0"><i class="fa fa-video-camera"></i>&nbsp; Nearest Surfcams</h3>
+
+<!-- THUMB SLIDER -->
+<div class="thumb-slider-wrapper mb-5">
+    <div class="thumb-slider is-stacked-for-desktop" data-thumb-slider>
+        {% for i in (1..6) %}
+            <a class="thumb-slider-item btn-tile" href="#">
+                <img width="" src="http://placehold.it/160x120">
+                <span class="btn-tile-bg" style="background-image: url(http://static.swellnet.com.au/images/surfcams/southport-thumb.jpg)"></span>
+                <div class="btn-tile-overlay">
+                    <time class="h3 btn-tile-header">6:10AM</time>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+    <!-- SLIDER CONTROLS -->
+    <button class="thumb-slider-prev-btn"><i class="fa fa-angle-left"></i></button>
+    <button class="thumb-slider-next-btn"><i class="fa fa-angle-right"></i></button>
+</div>
+
+{% comment %}
+<!-- NEAREST SURFCAMS -->
+<h3 class="d-flex align-items-center mb-4 mt-0"><i class="fa fa-video-camera"></i>&nbsp; Nearest Surfcams</h3>
 <div class="list-scroller-wrapper">
-    <ul class="list-scroller">
+    <ul class="list-scroller has-wrap-md">
     <!-- block-grid-scroller block-grid-md-2 block-grid-condensed -->
-        {% for i in (1..5) %}
+        {% for i in (1..6) %}
             <li>
                 <a class="btn-tile" href="#">
                     <img width="100%" src="http://placehold.it/160x120">
@@ -21,9 +44,10 @@
         {% endfor %}
     </ul>
 </div>
+
 <hr class="my-5">
 
-{% comment %}
+
 <!-- NEAREST SURFCAMS -->
 <div class="panel-pane pane-views-panes pane-related-surfcams-related-surfcams">
     <div class="pane-content">

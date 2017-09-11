@@ -8,6 +8,27 @@
 // VARIABLES
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
+// HEADER AD
+//-----------------------------------------------------------------
+
+#boxes-box-swellnet_adblock_leaderboard.header-ad {
+	overflow: hidden;
+
+	@include media-breakpoint-up(lg) {
+		position: absolute;
+		top: -29px;
+		right: rem-calc(20);
+	}
+}
+
+.has-advert {
+	@include media-breakpoint-up(lg) {
+	    position: relative;
+	    padding-top: rem-calc(78);
+	}
+}
+
+//-----------------------------------------------------------------
 // PAID MEMBERS NAV ITEMS
 //-----------------------------------------------------------------
 
@@ -71,7 +92,7 @@ ul li.nav-paid-member {
 			}
 
 			&:hover a {
-				@include media-breakpoint-down(sm) {
+				@include media-breakpoint-down(md) {
 				    background: #444444;
 				}
 			}
