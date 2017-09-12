@@ -1,3 +1,16 @@
+/*
+    MAIN.JS - Last updated: 12.09.17
+
+    NOTES:
+    - Facebook:
+    - Added type, full_picture to url
+    - Switched picture to full_picture to include shared posts
+    - https://graph.facebook.com/v2.4/202936059928/posts?fields=id,from,name,message,type,created_time,story,description,link,full_picture,object_id&metadata=1&limit=3&access_token=1142564202455221%7C3a2db052ca1e71a576329b99b7d55a5b
+*/
+//-----------------------------------------------------------------
+// EDITED VERSION
+//-----------------------------------------------------------------
+
 if (typeof Object.create !== 'function') {
     Object.create = function(obj) {
         function F() {}
@@ -289,18 +302,35 @@ if (typeof Object.create !== 'function') {
                     }
                 }
             },
+
+            //---------------------------------------------------------------------
+            // FACEBOOK
+            //---------------------------------------------------------------------
+
             facebook: {
                 posts: [],
                 graph: 'https://graph.facebook.com/',
                 loaded: false,
                 getData: function(account) {
+
+                    //===================================================
+                    // HERE IS THE URL
+                    //===================================================
+
                     var proceed = function(request_url){
                         Utility.request(request_url, Feed.facebook.utility.getPosts);
                     };
-                    var fields = '?fields=id,from,name,message,created_time,story,description,link';
-                       fields += (options.show_media === true)?',picture,object_id':'';
+
+                    var fields = '?fields=id,from,name,message,type,created_time,story,description,link'; // added full_picture and type
+                       fields += (options.show_media === true)?',full_picture,picture,object_id':'';
+
                     var request_url, limit = '&limit=' + options.facebook.limit,
                         query_extention = '&access_token=' + options.facebook.access_token + '&callback=?';
+
+                    //===================================================
+                    // PROCEED IF...
+                    //===================================================
+
                     switch (account[0]) {
                         case '@':
                             var username = account.substr(1);
@@ -313,13 +343,20 @@ if (typeof Object.create !== 'function') {
                             break;
                         case '!':
                             var page = account.substr(1);
+                            //
                             request_url = Feed.facebook.graph + 'v2.4/' + page + '/feed'+ fields + limit + query_extention;
+                            //
                             proceed(request_url);
                             break;
                         default:
                             proceed(request_url);
                     }
                 },
+
+                //===================================================
+                // UTILITY
+                //===================================================
+
                 utility: {
                     getUserId: function(username, callback) {
                         var query_extention = '&access_token=' + options.facebook.access_token + '&callback=?';
@@ -327,8 +364,9 @@ if (typeof Object.create !== 'function') {
                         var result = '';
                         $.get(url, callback, 'json');
                     },
+
                     prepareAttachment: function(element) {
-                        var image_url = element.picture;
+                        var image_url = element.full_picture; // LV: switched this out from "picture"
                         if (image_url.indexOf('_b.') !== -1) {
                             //do nothing it is already big
                         } else if (image_url.indexOf('safe_image.php') !== -1) {
@@ -340,8 +378,14 @@ if (typeof Object.create !== 'function') {
                         } else if (element.object_id) {
                             image_url = Feed.facebook.graph + element.object_id + '/picture/?type=normal';
                         }
-                        return '<img class="attachment" src="' + image_url + '" />';
+
+                        //===================================================
+                        //
+                        //===================================================
+
+                        return '<div class="btn-tile"><span class="btn-tile-bg" style="background-image: url('+image_url+')"></span><img width="100%" class="attachment" src="' + image_url + '" /></div>';
                     },
+
                     getExternalImageURL: function(image_url, parameter) {
                         image_url = decodeURIComponent(image_url).split(parameter + '=')[1];
                         if (image_url.indexOf('fbcdn-sphotos') === -1) {
@@ -351,6 +395,7 @@ if (typeof Object.create !== 'function') {
                         }
 
                     },
+
                     getPosts: function(json) {
                         if (json['data']) {
                             json['data'].forEach(function(element) {
@@ -359,6 +404,7 @@ if (typeof Object.create !== 'function') {
                             });
                         }
                     },
+
                     unifyPostData: function(element) {
                         var post = {},
                             text = (element.message) ? element.message : element.story;
@@ -372,12 +418,17 @@ if (typeof Object.create !== 'function') {
                         post.message = (text) ? text : '';
                         post.description = (element.description) ? element.description : '';
                         post.link = (element.link) ? element.link : 'http://facebook.com/' + element.from.id;
+                        // LV: added 12.09.17
+                        post.type = element.type;
+                        // LV: post.full_picture = element.full_picture;
+                        console.log(element);
 
                         if (options.show_media === true) {
-                            if (element.picture) {
+                            if (element.picture || element.full_picture) {
                                 var attachment = Feed.facebook.utility.prepareAttachment(element);
                                 if (attachment) {
                                     post.attachment = attachment;
+                                    post.full_picture = element.full_picture;
                                 }
                             }
                         }
@@ -385,6 +436,11 @@ if (typeof Object.create !== 'function') {
                     }
                 }
             },
+
+            //---------------------------------------------------------------------
+            //
+            //---------------------------------------------------------------------
+
             google: {
                 posts: [],
                 loaded: false,

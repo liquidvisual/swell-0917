@@ -94,7 +94,7 @@
     position: relative;
     // height: rem-calc(150);
     overflow: hidden;
-    box-shadow: none !important;
+    // box-shadow: none !important;
 
     @include media-breakpoint-up(md) {
         height: auto;
@@ -125,7 +125,7 @@
         background-position: center center;
         background-size: cover;
         background-repeat: none;
-        transition: transform 300ms ease;
+        transition: transform 300ms ease, opacity 300ms ease;
     }
 
     .btn-tile-overlay {
@@ -155,7 +155,8 @@
     &:hover {
         @include media-breakpoint-up(xl) {
             .btn-tile-bg {
-                transform: scale(1.05);
+                opacity: 0.85;
+                // transform: scale(1.05);
             }
         }
     }

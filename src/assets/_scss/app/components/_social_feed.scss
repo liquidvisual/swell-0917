@@ -1,0 +1,28 @@
+/*
+    SOCIAL-FEED.CSS
+
+    - Last updated: 12.09.17
+    - liquidvisual.com
+*/
+//-----------------------------------------------------------------
+// VARIABLES
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
+// SOCIAL FEED
+//-----------------------------------------------------------------
+
+.social-feed-element {
+    box-shadow: 0 0 10px 0 rgba(10, 10, 10, 0.19) !important;
+}
+
+.social-feed-element:hover {
+    // box-shadow: 0 0 14px 0 rgba(10, 10, 10, 0.24) !important;
+    box-shadow: 0 0 10px 0 rgba(10, 10, 10, 0.19) !important;
+}
+
+// body .social-feed-instagram-container .btn-tile
+// body .social-feed-instagram-container .btn-tile:hover
+
+.btn-tile .attachment {
+	opacity: 0;
+}
