@@ -1,5 +1,5 @@
 <!-- SURFCAM REPLAYS -->
-<h2 class="d-flex align-items-center mb-4 mt-0"><i class="fa fa-rotate-left"></i>&nbsp; Surfcam Replays</h2>
+<h2 class="fade-in-left animated d-flex align-items-center mb-4 mt-0"><i class="fa fa-rotate-left"></i>&nbsp; Surfcam Replays</h2>
 
 <!-- SECTION REPLAYS -->
 <section class="section-replays mb-4">
@@ -21,13 +21,13 @@
 
     <!-- THUMB SLIDER -->
     <div class="thumb-slider-wrapper">
-        <div class="thumb-slider" data-thumb-slider>
+        <div class="thumb-slider is-stacked-for-desktopX" data-thumb-slider>
             {% for i in (1..20) %}
                 <a class="thumb-slider-item btn-tile" href="#">
-                    <img width="" src="http://placehold.it/160x120">
+                    <img src="/assets/img/layout/thumbnail-placeholder.png">
                     <span class="btn-tile-bg" style="background-image: url(http://static.swellnet.com.au/images/surfcams/southport-thumb.jpg)"></span>
                     <div class="btn-tile-overlay">
-                        <time class="h3 btn-tile-header">6:10AM</time>
+                        <h3 class="btn-tile-header">{{ i }}</h3>
                     </div>
                 </a>
             {% endfor %}

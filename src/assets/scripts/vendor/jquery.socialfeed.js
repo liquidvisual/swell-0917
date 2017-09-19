@@ -421,7 +421,7 @@ if (typeof Object.create !== 'function') {
                         // LV: added 12.09.17
                         post.type = element.type;
                         // LV: post.full_picture = element.full_picture;
-                        console.log(element);
+                        // console.log(element);
 
                         if (options.show_media === true) {
                             if (element.picture || element.full_picture) {

@@ -22,6 +22,19 @@
 .thumb-slider {
 	margin-left: 19px;
 
+	//=========================================
+	// FLICKITY ON BY DEFAULT
+	//=========================================
+
+	&:after {
+	  content: 'flickity';
+	  display: none;
+	}
+
+	//=========================================
+	//
+	//=========================================
+
 	@include media-breakpoint-up(md) {
 	    margin-left: 31px;
 	}
@@ -31,11 +44,17 @@
 	//=========================================
 
 	&.is-stacked-for-desktop {
-		@include media-breakpoint-up(md) {
-		    margin-left: 0;
+		// @include media-breakpoint-up(md) {
+		    // margin-left: 0; // ????
+		// }
+
+		&:after {
+			@include media-breakpoint-up(md) {
+			    content: '';
+			}
 		}
 
-		@include media-breakpoint-up(lg) {
+		@include media-breakpoint-up(md) {
 		    display: flex;
 		    flex-wrap: wrap;
 		    justify-content: space-between;
@@ -43,7 +62,7 @@
 		}
 
 		.thumb-slider-item {
-			@include media-breakpoint-up(lg) {
+			@include media-breakpoint-up(md) {
 			    margin: 0;
 			    padding: 0;
 			    flex: 0 0 calc(50% - 12px);
@@ -116,7 +135,9 @@
 
 .thumb-slider.is-stacked-for-desktop ~ .thumb-slider-prev-btn,
 .thumb-slider.is-stacked-for-desktop ~ .thumb-slider-next-btn {
-	display: none;
+	@include media-breakpoint-up(md) {
+	    display: none;
+	}
 }
 
 //-----------------------------------------------------------------

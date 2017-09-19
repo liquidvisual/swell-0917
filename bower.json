@@ -12,6 +12,7 @@
     "magnific-popup": "https://github.com/dimsemenov/Magnific-Popup.git#master",
     "slick-carousel": "^1.6.0",
     "social-feed": "^0.1.2",
-    "isotope": "^3.0.1"
+    "isotope": "^3.0.1",
+    "flickity": "^2.0.10"
   }
 }
