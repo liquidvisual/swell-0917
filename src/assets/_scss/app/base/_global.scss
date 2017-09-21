@@ -42,10 +42,12 @@
 // SUPER HACKY
 //=========================================
 
-.node-surfcam.view-mode-full #video,
-.node-surfcam.view-mode-full .jwplayer,
-.node-surfcam.view-mode-widescreen #video,
-.node-surfcam.view-mode-widescreen .jwplayer {
+// .node-surfcam.view-mode-full #video,
+// .node-surfcam.view-mode-full .jwplayer,
+// .node-surfcam.view-mode-widescreen #video,
+// .node-surfcam.view-mode-widescreen .jwplayer
+
+#video {
 	@include media-breakpoint-down(sm) {
 	    margin-left: -15px;
 	    width: calc(100% + 30px);

@@ -225,14 +225,9 @@
     <script src="/_bower_components/isotope/dist/isotope.pkgd.js"></script>
     <script src="/_bower_components/flickity/dist/flickity.pkgd.js"></script>
     <script src="/assets/scripts/flickity.js"></script>
+    <script src="/assets/scripts/video-loader.js"></script>
     <script src="/assets/scripts/main.js"></script>
     <!-- endbuild -->
-
-    {% comment %}
-        <!-- NO LONGER USED: KEEP FOR REFERENCE -->
-        <!-- <script src="/assets/scripts/slick-slider.js"></script> -->
-        <!-- <script src="/_bower_components/slick-carousel/slick/slick.js"></script> -->
-    {% endcomment %}
 
     <script>
         $(window).on('load', function (){
@@ -253,7 +248,6 @@
 
                     // When all the posts are collected and displayed - this function is evoked
                     callback: function () {
-                        console.log('all posts are collected');
                         setTimeout(function(){
                           $('.social-feed-facebook-container').masonry();
 
