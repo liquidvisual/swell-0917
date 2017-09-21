@@ -1,0 +1,26 @@
+{% assign settings = site.data.settings %}
+
+<!-- SOCIAL FEED -->
+<section class="mb-5">
+	<!-- FACEBOOK -->
+	<div class="d-flex align-items-end mb-4">
+		<h2 class="d-flex align-items-center m-0"><i class="fa fa-facebook"></i>&nbsp; Facebook</h2>
+		<a target="_blank" href="{{ settings.facebook }}" class="anchor-link ml-auto hidden-sm-down">facebook.com/swellnet <i class="fa fa-angle-right"></i></a>
+		<a target="_blank" href="{{ settings.facebook }}" class="anchor-link ml-auto hidden-md-up">View more <i class="fa fa-angle-right"></i></a>
+	</div>
+
+	<!-- FACEBOOK FEED -->
+	<div class="social-feed-facebook-container block-grid-xs-1 block-grid-md-3"></div>
+
+	<hr class="my-5">
+
+	<!-- INSTAGRAM -->
+	<div class="d-flex align-items-center mb-5">
+		<h2 class="d-flex align-items-center m-0"><i class="fa fa-instagram"></i>&nbsp; Instagram</h2>
+		<a target="_blank" href="{{ settings.instagram }}" class="anchor-link ml-auto hidden-sm-down">instagram.com/swellnet <i class="fa fa-angle-right"></i></a>
+		<a target="_blank" href="{{ settings.instagram }}" class="anchor-link ml-auto hidden-md-up">View more <i class="fa fa-angle-right"></i></a>
+	</div>
+
+	<!-- INSTAGRAM FEED -->
+	<div class="social-feed-instagram-container block-grid-xs-2 block-grid-md-4 block-grid-condensed-sm-down mb-4"></div>
+</section>

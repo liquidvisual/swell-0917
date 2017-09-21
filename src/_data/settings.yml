@@ -5,7 +5,7 @@ cname: swellnet.yourwebvisual.com
 # META
 title: Swellnet
 title_homepage:
-company:
+company: Swellnet
 description:
 
 # SITE DEFAULTS
@@ -26,10 +26,10 @@ offices:
     email: hello@new-website.com
 
 # SOCIAL MEDIA
-facebook:
+facebook: https://facebook.com/swellnet/
 linked_in:
 google_plus:
-instagram:
+instagram: https://instagram.com/swellnet/
 
 # GOOGLE
 google_analytics: "UA-XXXXXXXX-X"

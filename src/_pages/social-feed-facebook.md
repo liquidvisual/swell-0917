@@ -7,7 +7,7 @@ permalink: /social-feed-facebook/
     <div class="social-feed-element {{? !it.moderation_passed}} hidden{{?}}" dt-create="{{=it.dt_create}}" social-feed-id="{{=it.id}}">
         <div class="content">
             <a class="pull-left" href="{{=it.author_link}}" target="_blank">
-                <img class="media-object" src="{{=it.author_picture}}">
+                <img class="media-object hidden-md-down" src="{{=it.author_picture}}">
             </a>
             <div class="media-body">
                 <div class="header">

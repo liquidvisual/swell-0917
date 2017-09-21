@@ -43,7 +43,13 @@
 
     .btn-tiny {
         position: relative;
-        top: 12px;
+        left: 15px;
+        font-size: rem-calc(30);
+
+        @include media-breakpoint-up(md) {
+            top: 12px;
+            left: 0;
+        }
     }
 
     .btn-tab {
@@ -51,10 +57,14 @@
         padding: rem-calc(15 30);
         float: right;
         background: #f5f3f4;
-        font-size: rem-calc(30);
+
         font-weight: 600;
         color: #666;
         text-transform: uppercase;
+
+        @include media-breakpoint-up(md) {
+            font-size: rem-calc(30);
+        }
 
         &.active {
             background: #e4e2e3;
@@ -165,6 +175,10 @@
             .btn-tile-bg {
                 opacity: 0.85;
                 // transform: scale(1.05);
+            }
+
+            .btn-title-header {
+                color: white !important;
             }
         }
     }

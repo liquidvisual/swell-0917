@@ -19,8 +19,6 @@ layout: base
 
 		{{ content }}
 
-        {% include latest_news.html %}
-
     </div> <!-- /.layout-sixthree -->
 
     <!-- PANEL RIGHT -->
@@ -28,5 +26,9 @@ layout: base
         {% contentblock sidebar no-convert %}
     </div>
 
-    {% contentblock content_additional no-convert %}
+    <!-- ADDITIONAL CONTENT -->
+    <div class="col-sm-6">
+        {% contentblock content_additional no-convert %}
+    </div>
+
 </section>

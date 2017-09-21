@@ -36,7 +36,7 @@
 //-----------------------------------------------------------------
 
 @import "app/base/variables";
-// @import "app/base/global";
+@import "app/base/global";
 
 //=========================================
 // COMPONENTS (GLOBBED)
@@ -48,7 +48,7 @@
 // LAYOUT
 //=========================================
 
-// @import "app/layout/footer";
+@import "app/layout/footer";
 @import "app/layout/header";
 // @import "app/layout/topbar";
 

@@ -11,27 +11,45 @@
 // PAGE
 //-----------------------------------------------------------------
 
-.lv-page {
-	@include media-breakpoint-down(sm) {
-	    padding-top: $header-body-sm-height;
-	}
-
-	// @include media-breakpoint-up(md) {
-	//     padding-top: $header-body-md-height + $header-top-md-height;
-	// }
-
-	// @include media-breakpoint-up(lg) {
-	//     padding-top: $header-body-lg-height + $header-top-lg-height + $header-bottom-lg-height;
-	// }
-}
+// .lv-page {
+// 	@include media-breakpoint-down(sm) {
+// 	    padding-top: $header-body-sm-height;
+// 	}
+// }
 
 //-----------------------------------------------------------------
 // GRID CONTAINER
 //-----------------------------------------------------------------
 
-.container {
-	@include media-breakpoint-up(md) {
-	    padding: 0 $container-gutter;
+// .container {
+// 	@include media-breakpoint-up(md) {
+// 	    padding: 0 $container-gutter;
+// 	}
+// }
+
+//-----------------------------------------------------------------
+// COLLAPSE
+//-----------------------------------------------------------------
+
+.collapse-row-sm-only {
+	@include media-breakpoint-down(sm) {
+	    margin-left: -15px;
+	    width: calc(100% + 30px);
+	}
+}
+
+//=========================================
+// SUPER HACKY
+//=========================================
+
+.node-surfcam.view-mode-full #video,
+.node-surfcam.view-mode-full .jwplayer,
+.node-surfcam.view-mode-widescreen #video,
+.node-surfcam.view-mode-widescreen .jwplayer {
+	@include media-breakpoint-down(sm) {
+	    margin-left: -15px;
+	    width: calc(100% + 30px);
+	    min-width: calc(100% + 30px);
 	}
 }
 

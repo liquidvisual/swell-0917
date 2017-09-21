@@ -1,0 +1,31 @@
+<!-- NEAREST REPORTS / SURFCAMS -->
+<section class="mb-5">
+    <h2 class="sidebar-header h3 d-flex mb-4"><i class="fa fa-bar-chart pr-2"></i> Nearest Report / Forecast</h2>
+    <a href="#" class="btn btn-cta">Middleton <i class="fa fa-angle-right"></i></a>
+    <hr class="my-5">
+
+    <!-- NEAREST SURFCAMS -->
+    <h2 class="sidebar-header h3 d-flex mb-4"><i class="fa fa-video-camera pr-2"></i> Nearest Surfcams</h2>
+
+    <div class="collapse-row-sm-only">
+        <!-- THUMB SLIDER -->
+        <div class="thumb-slider-wrapper mb-5">
+            <div class="thumb-slider is-stacked-for-desktop" data-thumb-slider>
+                {% for i in (1..6) %}
+                    <a class="thumb-slider-item btn-tile" href="#">
+                        <img src="/assets/img/layout/thumbnail-placeholder.png">
+                        <span class="btn-tile-bg" style="background-image: url(http://static.swellnet.com.au/images/surfcams/southport-thumb.jpg)"></span>
+                        <div class="btn-tile-overlay">
+                            <!-- <time class="h3 btn-tile-header">{ { i }}</time> -->
+                            <h3 class="btn-tile-header">Cronulla Beaches</h3>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+
+            <!-- SLIDER CONTROLS -->
+            <button class="thumb-slider-prev-btn"><i class="fa fa-angle-left"></i></button>
+            <button class="thumb-slider-next-btn"><i class="fa fa-angle-right"></i></button>
+        </div>
+    </div>
+</section>

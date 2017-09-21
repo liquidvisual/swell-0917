@@ -32,7 +32,7 @@
 	}
 
 	//=========================================
-	//
+	// MAKE WAY FOR ARROWS
 	//=========================================
 
 	@include media-breakpoint-up(md) {
@@ -44,9 +44,6 @@
 	//=========================================
 
 	&.is-stacked-for-desktop {
-		// @include media-breakpoint-up(md) {
-		    // margin-left: 0; // ????
-		// }
 
 		&:after {
 			@include media-breakpoint-up(md) {
@@ -63,9 +60,8 @@
 
 		.thumb-slider-item {
 			@include media-breakpoint-up(md) {
-			    margin: 0;
+				flex: 0 0 calc(50% - 12px);
 			    padding: 0;
-			    flex: 0 0 calc(50% - 12px);
 			    margin: 0 0 24px 0;
 			}
 		}
@@ -78,7 +74,10 @@
 	.thumb-slider-item {
 		outline: none;
 		margin: 5px 2px;
-		min-width: 140px;
+
+		@include media-breakpoint-up(lg) {
+		    min-width: 140px; // hacky
+		}
 	}
 }
 

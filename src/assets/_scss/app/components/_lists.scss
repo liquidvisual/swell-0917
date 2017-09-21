@@ -33,9 +33,25 @@
 .block-grid-condensed {
     margin: rem-calc(-20);
 
-    li {
+    li,
+    .block-grid-item {
         padding: rem-calc(20);
     }
+}
+
+//-----------------------------------------------------------------
+// SMALL ONLY
+//-----------------------------------------------------------------
+
+.block-grid-condensed-sm-down {
+	@include media-breakpoint-down(sm) {
+	    margin: rem-calc(-15);
+
+	    li,
+	    .block-grid-item {
+	        padding: rem-calc(15);
+	    }
+	}
 }
 
 //-----------------------------------------------------------------
