@@ -1,5 +1,5 @@
 /*
-    MAIN.JS - Last updated: 12.09.17
+    JQUERY.SOCIALFEED.JS - Last updated: 12.09.17
 
     NOTES:
     - Facebook:

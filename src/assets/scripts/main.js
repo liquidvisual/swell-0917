@@ -10,7 +10,7 @@
 
 $(window).on('load', function() {
     $('html').addClass('has-loaded');
-    $('[data-masonry]').masonry();
+    // $('[data-masonry]').masonry();
 });
 
 //==================================================
