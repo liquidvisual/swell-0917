@@ -1,0 +1,139 @@
+<!-- DATE DROPDOWN -->
+<div class="custom-select-wrapper collapse-row-sm-only">
+    <div class="custom-select pt-0 is-full-width">
+        <select>
+            <option selected>Tuesday, 22nd August 2017</option>
+            <option>Option 1</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+            <option>Option 4</option>
+        </select>
+        <i class="fa fa-caret-down"></i>
+        <i class="fa fa-calendar-o"></i>
+    </div>
+</div>
+
+<!-- VIDEO -->
+<div id='video'>
+    <a href='rtsp://streamer.swellnet.com.au/surfcams/knights.stream'>
+        Watch this stream over your native player
+    </a>
+</div>
+
+<div class="spacer mb-5"></div>
+
+<!-- SCRIPT -->
+<script type='text/javascript'>
+    var player_conf = {
+        height: 421,
+        width: '100%',
+        androidhls: true,
+        sources: [
+            {file: 'rtmp://streamer.swellnet.com.au/surfcams/knights.stream'},
+            {file: 'https://streamer.swellnet.com.au/surfcams/knights.stream/playlist.m3u8'},
+        ],
+        autostart: true,
+        stagevideo: false
+    };
+    var android = {
+        fallback: false,
+        primary: 'html5'
+    };
+    var non_android = {
+        fallback: true,
+        primary: 'flash',
+        image: 'http://static.swellnet.com.au/images/surfcams/knights.jpg',
+        logo: {
+            file: 'profiles/swellnet/modules/features/swellnet_surfcam/assets/logo_transparent_overlay.png'
+        },
+        events:{
+            onReady: function(e) {
+                window.swellnetElapsedTime = 0;
+            },
+            onTime: function(e) {
+                if ((window.swellnetElapsedTime + e.position) >= '300') {
+                    this.stop();
+                }
+            },
+            onPause: function(e) {
+                window.swellnetElapsedTime += this.getPosition();
+            },
+        },
+    };
+
+    if (navigator.userAgent.toLowerCase().indexOf('android') < 0) {
+        jQuery.extend(player_conf, non_android);
+    } else {
+        jQuery.extend(player_conf, android);
+    }
+    jwplayer('video').setup(player_conf);
+</script>
+
+<!-- SURFCAM REPLAYS -->
+<section class="mb-4">
+    <h2 class=" d-flex mb-4"><i class="fa fa-rotate-left pr-3"></i> Surfcam Replays</h2>
+
+    <!-- SECTION REPLAYS -->
+    <div class="section-replays mb-4 collapse-row-sm-only">
+
+        <!-- DATE DROPDOWN -->
+        <div class="custom-select-wrapper mb-3">
+            <div class="custom-select">
+                <select>
+                    <option selected>Tuesday, 22nd August 2017</option>
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                    <option>Option 4</option>
+                </select>
+                <i class="fa fa-caret-down"></i>
+                <i class="fa fa-calendar-o"></i>
+            </div>
+        </div>
+
+        <!-- THUMB SLIDER -->
+        <div class="thumb-slider-wrapper">
+            <div class="thumb-slider is-stacked-for-desktopX" data-thumb-slider>
+                {% for i in (1..100) %}
+                    <a class="thumb-slider-item btn-tile" href="#">
+                        <img src="/assets/img/layout/thumbnail-placeholder.png">
+                        <span class="btn-tile-bg" style="background-image: url(http://static.swellnet.com.au/images/surfcams/southport-thumb.jpg)"></span>
+                        <div class="btn-tile-overlay">
+                            <h3 class="btn-tile-header">{{ i }}</h3>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+
+            <!-- SLIDER CONTROLS -->
+            <button class="thumb-slider-prev-btn"><i class="fa fa-angle-left"></i></button>
+            <button class="thumb-slider-next-btn"><i class="fa fa-angle-right"></i></button>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- SECTION REPLAYS -->
+<section class="section-replays pb-0 mb-4 collapse-row-sm-only">
+
+    <!-- THUMB SLIDER -->
+    <div class="thumb-slider-wrapper">
+        <div class="thumb-slider" data-thumb-slider>
+            {% for i in (1..20) %}
+                <a class="thumb-slider-item btn-tile" href="#">
+                    <img src="/assets/img/layout/thumbnail-placeholder.png">
+                    <span class="btn-tile-bg" style="background-image: url(http://static.swellnet.com.au/images/surfcams/southport-thumb.jpg)"></span>
+                    <div class="btn-tile-overlay">
+                        <h3 class="btn-tile-header">6:10AM</h3>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+        <!-- SLIDER CONTROLS -->
+        <button class="thumb-slider-prev-btn"><i class="fa fa-angle-left"></i></button>
+        <button class="thumb-slider-next-btn"><i class="fa fa-angle-right"></i></button>
+    </div>
+
+</section>

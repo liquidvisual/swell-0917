@@ -2,7 +2,7 @@
 {% assign logo = page.logo | default: "http://swellnet.com/profiles/swellnet/themes/gold/logo.png" %}
 
 <!-- GLOBAL HEADER -->
-<header id="header" class="has-advert header mb-4" role="banner">
+<header id="header" class="{% unless page.user_type == 'paid' %} has-advert {% endunless %} header mb-4" role="banner">
     <div class="header-container container-smooth container-fluid">
 
         <!-- NAVBAR TOGGLE -->
@@ -35,19 +35,23 @@
                 <li class="leaf nav-photos" id="nav-photos-7"><a href="http://swellnet.com/photos/index.html" class="leaf-link">Photos</a></li>
                 <li class="last leaf nav-forum" id="nav-forum-8"><a href="http://swellnet.com/forum/index.html" title="" class="leaf-link">Forum</a></li>
 
-                <!-- PUBLIC USERS -->
-                <li class="nav-login"><a href="#login">Login</a></li>
-                <li class="nav-register"><a href="#register">Register</a></li>
+                {% if page.user_type == 'public' %}
+                    <!-- PUBLIC USERS -->
+                    <li class="nav-login"><a href="#">Login</a></li>
+                    <li class="nav-register"><a href="#">Register</a></li>
+                {% endif %}
 
-                <!-- PAID MEMBERS -->
-                <li class="nav-paid-member">
-                    <ul>
-                        <li class=""><a href="#">My Report</a></li>
-                        <li class=""><a href="#">My Surfcam</a></li>
-                        <li class=""><a href="#">My Account</a></li>
-                        <li class=""><a href="#">Log Out</a></li>
-                    </ul>
-                </li>
+                {% unless page.user_type == 'public' %}
+                    <!-- PAID MEMBERS -->
+                    <li class="nav-paid-member">
+                        <ul>
+                            <li><a href="#">My Report</a></li>
+                            <li><a href="#">My Surfcam</a></li>
+                            <li><a href="#">My Account</a></li>
+                            <li><a href="#">Log Out</a></li>
+                        </ul>
+                    </li>
+                {% endunless %}
 
             </ul>
         </div>

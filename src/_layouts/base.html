@@ -84,32 +84,22 @@
     <!-- WRAPPER -->
     <div id="wrapper" class='wrapper'>
 
-        <!-- PROLOGUE USER BAR -->
-        <div class="prologue" id="prologue">
-            <div class="user-bar container-smooth container-fluid" id="user-bar">
-
-                <!-- PRO LINK -->
-                <section id="block-swellnet-subscription-pro-link" class="block block-swellnet-subscription block-pro-link block-swellnet-subscription-pro-link clearfix">
-                    <!-- <h2 class="block-title block-title element-invisible">Pro Link</h2> -->
-                    <a href="http://swellnet.com/pro/subscribe/chooseplan/index.html">
-                        <span class="text">Remove ads, view long range surf forecasts... Get Swellnet PRO for $8.95 per month</span>
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                </section>
-
-                <!-- SITE USER MENU -->
-                <!-- <nav class='site-user-menu' id="site-user-menu">
-                    <ul class="menu">
-                        <li class="first leaf nav-log-in" id="nav-log-in-1"><a href="http://swellnet.com/user/login/index.html" class="leaf-link">Log in</a></li>
-                        <li class="last leaf nav-register" id="nav-register-2"><a href="http://swellnet.com/user/register/index.html" class="leaf-link">Register</a></li>
-                    </ul>
-                </nav> -->
-
-            </div>
-        </div> <!-- /#prologue -->
+        {% unless page.user_type == 'paid' %}
+            <!-- PROLOGUE USER BAR -->
+            <div id="prologue" class="prologue">
+                <div id="user-bar" class="user-bar container-smooth container-fluid">
+                    <div id="block-swellnet-subscription-pro-link" class="block block-swellnet-subscription block-pro-link block-swellnet-subscription-pro-link clearfix">
+                        <a href="http://swellnet.com/pro/subscribe/chooseplan/index.html">
+                            <span class="text">Remove ads, view long range surf forecasts... Get Swellnet PRO for $8.95 per month</span>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div> <!-- /#prologue -->
+        {% endunless %}
 
         <!-- PAGE BEGINS -->
-        <div id="page">
+        <div id="page" class="lv-page">
 
             {% include header.html %}
 
