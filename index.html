@@ -210,32 +210,20 @@
     <div id="wrapper" class="wrapper">
 
         <!-- PROLOGUE USER BAR -->
-        <div class="prologue" id="prologue">
-            <div class="user-bar container-smooth container-fluid" id="user-bar">
-
-                <!-- PRO LINK -->
-                <section id="block-swellnet-subscription-pro-link" class="block block-swellnet-subscription block-pro-link block-swellnet-subscription-pro-link clearfix">
-
-                    <!-- <h2 class="block-title block-title element-invisible">Pro Link</h2> -->
+        <div id="prologue" class="prologue">
+            <div id="user-bar" class="user-bar container-smooth container-fluid">
+                <div id="block-swellnet-subscription-pro-link" class="block block-swellnet-subscription block-pro-link block-swellnet-subscription-pro-link clearfix">
                     <a href="http://swellnet.com/pro/subscribe/chooseplan/index.html">
                         <span class="text">Remove ads, view long range surf forecasts... Get Swellnet PRO for $8.95 per month</span>
                         <i class="fa fa-angle-right"></i>
                     </a>
-                </section>
-
-                <!-- SITE USER MENU -->
-                
-<!-- <nav class='site-user-menu' id="site-user-menu"><ul class="menu">
-                        <li class="first leaf nav-log-in" id="nav-log-in-1"><a href="http://swellnet.com/user/login/index.html" class="leaf-link">Log in</a></li>
-                        <li class="last leaf nav-register" id="nav-register-2"><a href="http://swellnet.com/user/register/index.html" class="leaf-link">Register</a></li>
-                    </ul>
-                </nav> -->
+                </div>
             </div>
         </div>
 
         <!-- /#prologue -->
         
-<!-- PAGE BEGINS --><div id="page">
+<!-- PAGE BEGINS --><div id="page" class="lv-page">
 
             <!-- GLOBAL HEADER -->
             <header id="header" class="has-advert header mb-4" role="banner">
@@ -278,27 +266,19 @@
                                 <a href="http://swellnet.com/forum/index.html" title="" class="leaf-link">Forum</a>
                             </li>
 
-                            <!-- PUBLIC USERS -->
-                            <li class="nav-login">
-                                <a href="#login">Login</a>
-                            </li>
-                            <li class="nav-register">
-                                <a href="#register">Register</a>
-                            </li>
-
                             <!-- PAID MEMBERS -->
                             <li class="nav-paid-member">
                                 <ul>
-                                    <li class="">
+                                    <li>
                                         <a href="#">My Report</a>
                                     </li>
-                                    <li class="">
+                                    <li>
                                         <a href="#">My Surfcam</a>
                                     </li>
-                                    <li class="">
+                                    <li>
                                         <a href="#">My Account</a>
                                     </li>
-                                    <li class="">
+                                    <li>
                                         <a href="#">Log Out</a>
                                     </li>
                                 </ul>
@@ -325,14 +305,34 @@
                     <div class="row">
                         <div id="main-section" class="main-section">
                             <div id="main" role="main" class="main">
-                                <br>
-                                <br>
-                                <br>
-                                <p class="text-center">
-                                    <a href="/surfcams/knights/">
-                                        <i class="fa fa-home"></i> Go to Knights</a>
-                                </p>
                                 <div class="col-sm-6">
+                                    <h2 class="mb-5">Preview a Template</h2>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-4">
+                                            <a href="/surfcams/knights-live/paid/">Knights Surfcam</a>&nbsp;
+                                            <span class="badge badge-secondary">paid</span>
+                                        </li>
+                                        <li class="mb-4">
+                                            <a href="/surfcams/knights-live/public/">Knights Surfcam</a>&nbsp;
+                                            <span class="badge badge-secondary">public</span>
+                                        </li>
+                                        <li class="mb-4">
+                                            <a href="/surfcams/knights-live/unpaid/">Knights Surfcam</a>&nbsp;
+                                            <span class="badge badge-secondary">unpaid</span>
+                                        </li>
+                                        <li class="mb-4">
+                                            <a href="/surfcams/knights-replays/paid/">Knights Surfcam Replays</a>&nbsp;
+                                            <span class="badge badge-secondary">paid</span>
+                                        </li>
+                                        <li class="mb-4">
+                                            <a href="/surfcams/knights-replays/public/">Knights Surfcam Replays</a>&nbsp;
+                                            <span class="badge badge-secondary">public</span>
+                                        </li>
+                                        <li class="mb-4">
+                                            <a href="/surfcams/knights-replays/unpaid/">Knights Surfcam Replays</a>&nbsp;
+                                            <span class="badge badge-secondary">unpaid</span>
+                                        </li>
+                                    </ul>
 
                                     <!-- { % include sections/surfcam_replays.html %} -->
                                     
@@ -432,35 +432,35 @@
         </div>
     </footer>
 
-    <!-- SUPER HACKY OVERRIDING FOOTER (FOR MOBILE) -->
+    <!-- OVERRIDING FOOTER (FOR MOBILE) -->
     <footer class="footer footer-mobile" role="contentinfo">
         <div class="row">
             <div class="col-hack-6">
                 <ul>
-                    <li class="leaf nav-contact-us" id="nav-contact-us-17">
-                        <a href="http://swellnet.com/contact/index.html" title="" class="leaf-link">Contact us</a>
+                    <li>
+                        <a href="http://swellnet.com/contact/">Contact us</a>
                     </li>
-                    <li class="last leaf nav-about-swellnet" id="nav-about-swellnet-18">
-                        <a href="http://swellnet.com/about/index.html" class="leaf-link">About Swellnet</a>
+                    <li>
+                        <a href="http://swellnet.com/about/">About Swellnet</a>
                     </li>
-                    <li class="first leaf nav-privacy-policy" id="nav-privacy-policy-15">
-                        <a href="http://swellnet.com/privacy/index.html" class="leaf-link">Privacy policy</a>
+                    <li>
+                        <a href="http://swellnet.com/privacy/">Privacy policy</a>
                     </li>
-                    <li class="leaf nav-terms-and-conditions" id="nav-terms-and-conditions-16">
-                        <a href="http://swellnet.com/terms/index.html" class="leaf-link">Terms and Conditions</a>
+                    <li>
+                        <a href="http://swellnet.com/terms/">Terms and Conditions</a>
                     </li>
                 </ul>
             </div>
             <div class="col-hack-6">
                 <ul class="text-right">
-                    <li class="first leaf nav-my-account" id="nav-my-account-19">
-                        <a href="http://swellnet.com/user/index.html" title="" class="leaf-link">My account</a>
+                    <li>
+                        <a href="http://swellnet.com/user/">My account</a>
                     </li>
-                    <li class="leaf nav-register" id="nav-register-20">
-                        <a href="http://swellnet.com/user/register/index.html" title="" class="leaf-link">Register</a>
+                    <li>
+                        <a href="http://swellnet.com/user/register/">Register</a>
                     </li>
-                    <li class="last leaf nav-forgot-password" id="nav-forgot-password-21">
-                        <a href="http://swellnet.com/user/password/index.html" title="" class="leaf-link">Forgot password</a>
+                    <li>
+                        <a href="http://swellnet.com/user/password/">Forgot password</a>
                     </li>
                 </ul>
             </div>
@@ -596,7 +596,6 @@
                 template: "/social-feed-facebook/",
                 // When all the posts are collected and displayed - this function is evoked
                 callback: function() {
-                    console.log('all posts are collected');
                     setTimeout(function() {
                         $('.social-feed-facebook-container').masonry();
                         setTimeout(function() {

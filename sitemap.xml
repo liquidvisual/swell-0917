@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>/404/</loc>
-</url>
-<url>
 <loc>/advert-01/</loc>
 </url>
 <url>
 <loc>/</loc>
 </url>
 <url>
-<loc>/surfcams/knights/replays/</loc>
+<loc>/surfcams/knights-live/paid/</loc>
 </url>
 <url>
-<loc>/surfcams/knights/</loc>
+<loc>/surfcams/knights-live/public/</loc>
+</url>
+<url>
+<loc>/surfcams/knights-live/unpaid/</loc>
+</url>
+<url>
+<loc>/surfcams/knights-replays/paid/</loc>
+</url>
+<url>
+<loc>/surfcams/knights-replays/public/</loc>
+</url>
+<url>
+<loc>/surfcams/knights-replays/unpaid/</loc>
 </url>
 <url>
 <loc>/social-feed-facebook/</loc>
