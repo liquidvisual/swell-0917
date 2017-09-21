@@ -196,6 +196,30 @@
     </head>
 <body class="page-knights html not-front not-logged-in no-sidebars page-node page-node- page-node-816 node-type-surfcam panels-driven-layout main-colspan-9 main-nested-container role-anonymous-user">
 
+    <!-- PAGE LOADER -->
+    <div id="lv-page-loader" class="lv-page-loader">
+        <div class="lv-page-loader-spinner">
+            <div class="loader-spinner">
+                <div class="loader-component">
+                    <div class="half-circle"></div>
+                </div>
+                <div class="loader-component">
+                    <div class="half-circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WON'T SHOW IF JAVASCRIPT IS DISABLED -->
+    <script>
+    var loader = document.getElementById('lv-page-loader');
+    loader.style.display = 'flex';
+    // Limit to 2+ seconds of waiting time
+    setTimeout(function() {
+        loader.className += ' force-finish';
+    }, 1500);
+    </script>
+
     <!-- Google Tag Manager (noscript) -->
     <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJFRTK4" height="0" width="0" style="display:none;visibility:hidden"></iframe>
@@ -1187,7 +1211,7 @@
 <!-- PANEL RIGHT --><div class="layout-sixthree section panel-right col-sm-3 col-smmd-2andhalf col-md-2">
 
                                         <!-- NEAREST REPORTS / SURFCAMS -->
-                                        <section class="mb-4">
+                                        <section class="mb-5 mb-md-4">
                                             <h2 class="sidebar-header h3 d-flex mb-4">
                                                 <i class="fa fa-bar-chart pr-3"></i> Nearest Report / Forecast</h2>
                                             <a href="#" class="btn btn-cta">Middleton
@@ -1372,6 +1396,7 @@
                                                     </div>
                                                 </div>
                                             </section>
+                                            <hr class="mb-5">
 
                                             <!-- SOCIAL FEED -->
                                             <section class="mb-5">
@@ -1407,10 +1432,11 @@
                                                 <!-- INSTAGRAM FEED -->
                                                 <div class="social-feed-instagram-container block-grid-xs-2 block-grid-md-4 block-grid-condensed-sm-down mb-4"></div>
                                             </section>
+                                            <hr>
                                         </div>
 
                                         <!-- LATEST COMMENTS -->
-                                        <section class="panel-pane pane-views pane-latest-comments-concise mb-4">
+                                        <section class="panel-pane pane-views pane-latest-comments-concise">
 
                                             <!-- <h2 class="pane-title mt-0">Latest Comments</h2> -->
                                             <h2 class="sidebar-header h2 d-flex mb-4">
@@ -1555,7 +1581,7 @@
                                         <hr>
 
                                         <!-- IN THE FORUMS -->
-                                        <section class="panel-pane pane-views pane-latest-forum-posts mb-4">
+                                        <section class="panel-pane pane-views pane-latest-forum-posts">
 
                                             <!-- <h2 class="pane-title">In the Forums</h2> -->
                                             <h2 class="sidebar-header h2 d-flex mb-4">

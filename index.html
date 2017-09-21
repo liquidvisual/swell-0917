@@ -196,6 +196,30 @@
     </head>
 <body class="page-knights html not-front not-logged-in no-sidebars page-node page-node- page-node-816 node-type-surfcam panels-driven-layout main-colspan-9 main-nested-container role-anonymous-user">
 
+    <!-- PAGE LOADER -->
+    <div id="lv-page-loader" class="lv-page-loader">
+        <div class="lv-page-loader-spinner">
+            <div class="loader-spinner">
+                <div class="loader-component">
+                    <div class="half-circle"></div>
+                </div>
+                <div class="loader-component">
+                    <div class="half-circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WON'T SHOW IF JAVASCRIPT IS DISABLED -->
+    <script>
+    var loader = document.getElementById('lv-page-loader');
+    loader.style.display = 'flex';
+    // Limit to 2+ seconds of waiting time
+    setTimeout(function() {
+        loader.className += ' force-finish';
+    }, 1500);
+    </script>
+
     <!-- Google Tag Manager (noscript) -->
     <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJFRTK4" height="0" width="0" style="display:none;visibility:hidden"></iframe>
