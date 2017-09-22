@@ -22,7 +22,7 @@
 // }
 
 //-----------------------------------------------------------------
-// HEADER AD
+// HEADER SPONSOR
 // * Switch to .global-header after back-end implementation
 //-----------------------------------------------------------------
 
@@ -40,7 +40,7 @@
 		}
 	}
 
-	.header-ad {
+	.header-sponsor {
 		@include media-breakpoint-up(lg) {
 		    top: -29px;
 		}
@@ -48,10 +48,10 @@
 }
 
 //=========================================
-// HEADER AD
+// HEADER SPONSOR
 //=========================================
 
-.header-ad {
+.header-sponsor {
 	position: relative;
 	top: 10px;
 
