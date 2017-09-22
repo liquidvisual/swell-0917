@@ -1,7 +1,7 @@
 /*
     TYPE.CSS
 
-    - Last updated: 27.06.17
+    - Last updated: 22.09.17
     - liquidvisual.com
 */
 //-----------------------------------------------------------------
@@ -63,6 +63,47 @@ hr {
 //-----------------------------------------------------------------
 // HEADINGS MOBILE
 //-----------------------------------------------------------------\
+//=========================================
+// (H1) (PAGE-HEADER WAS TAKEN)
+//=========================================
+
+.special-page-header {
+    font-size: rem-calc(50) !important;
+
+    @include media-breakpoint-up(md) {
+        font-size: rem-calc(57) !important;
+    }
+}
+
+//=========================================
+// SIDEBAR HEADER
+//=========================================
+
+.sidebar-header {
+    font-size: 23px;
+
+    @include media-breakpoint-up(md) {
+        font-size: 20px;
+    }
+
+    @include media-breakpoint-up(lg) {
+        font-size: 24px;
+    }
+}
+
+//=========================================
+//
+//=========================================
+
+h2 .fa,
+h3 .fa {
+    color: #777777;
+    font-size: rem-calc(42);
+}
+
+//=========================================
+//
+//=========================================
 
 // @include media-breakpoint-down(sm) {
     // h1, .h1 { font-size: calc(#{$font-size-h1} - 60%); }

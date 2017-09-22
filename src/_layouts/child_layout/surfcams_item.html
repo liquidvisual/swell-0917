@@ -23,27 +23,27 @@ layout: base__page_sidebar
     <p><em>Surfers etiquette: if you're travelling here to surf, please respect the locals.</em></p>
 </div>
 
-{% unless page.user_type == 'paid' %}
-    {% include adblock.html type=2 %}
-{% endunless %}
-
 <!-- LATEST NEWS (DESKTOP) -->
 <div class="hidden-sm-down">
     {% include sections/latest_news.html %}
 </div>
 
 {% unless page.user_type == 'paid' %}
-    {% include adblock.html type=3 %}
+    {% include ads.html type=3 %}
 {% endunless %}
 
 <!-- SIDEBAR CONTENT BLOCK -->
 {% contentfor sidebar %}
 
     {% unless page.user_type == 'paid' %}
-        {% include adblock.html type=4 %}
+        {% include ads.html type=4 %}
     {% endunless %}
 
 	{% include sections/nearest_surfcams.html %}
+
+    {% unless page.user_type == 'paid' %}
+        {% include ads.html type=4 %}
+    {% endunless %}
 
     <hr class="hidden-sm-down">
 
@@ -60,7 +60,7 @@ layout: base__page_sidebar
 	{% include sections/in_the_forums.html %}
 
     {% unless page.user_type == 'paid' %}
-        {% include adblock.html type=5 %}
+        {% include ads.html type=5 %}
     {% endunless %}
 
 {% endcontentfor %}

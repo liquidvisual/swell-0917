@@ -26,6 +26,10 @@
         </a>
     </div>
 
+    {% unless page.user_type == 'paid' %}
+        {% include ads.html type=2 %}
+    {% endunless %}
+
     {% if page.url contains 'live' %}
         <!-- SURFCAM REPLAYS -->
         <h2 class="d-flex mb-4 mt-5"><i class="fa fa-rotate-left pr-3"></i> Surfcam Replays</h2>
