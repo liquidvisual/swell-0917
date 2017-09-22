@@ -8,23 +8,63 @@
 // VARIABLES
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
-// HEADER AD
+// HEADER AD REFERENCE
 //-----------------------------------------------------------------
 
-#boxes-box-swellnet_adblock_leaderboard.header-ad {
-	overflow: hidden;
+// #boxes-box-swellnet_adblock_leaderboard.header-ad {
+// 	overflow: hidden;
 
-	@include media-breakpoint-up(lg) {
-		position: absolute;
-		top: -29px;
-		right: rem-calc(20);
+// 	@include media-breakpoint-up(lg) {
+// 		position: absolute;
+// 		top: -29px;
+// 		right: rem-calc(20);
+// 	}
+// }
+
+//-----------------------------------------------------------------
+// HEADER AD
+// * Switch to .global-header after back-end implementation
+//-----------------------------------------------------------------
+
+.theme-unpaid #header,
+.theme-public #header {
+	@include media-breakpoint-down(md) {
+	    padding-bottom: 35px;
 	}
 }
 
-.has-advert {
+.theme-unpaid {
+	#header {
+		@include media-breakpoint-up(lg) {
+		    padding-top: rem-calc(78);
+		}
+	}
+
+	.header-ad {
+		@include media-breakpoint-up(lg) {
+		    top: -29px;
+		}
+	}
+}
+
+//=========================================
+// HEADER AD
+//=========================================
+
+.header-ad {
+	position: relative;
+	top: 10px;
+
 	@include media-breakpoint-up(lg) {
-	    position: relative;
-	    padding-top: rem-calc(78);
+	    position: absolute;
+	    top: 16px;
+	    right: 13px;
+	}
+
+	img {
+		@include media-breakpoint-down(sm) {
+		    width: 100%;
+		}
 	}
 }
 

@@ -37,7 +37,7 @@ html.has-loaded .lv-page-loader {
 //-----------------------------------------------------------------
 
 html[data-dev-mode] .lv-page-loader {
-    // visibility: hidden;
+    visibility: hidden;
 }
 
 //-----------------------------------------------------------------

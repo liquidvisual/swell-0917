@@ -5,7 +5,7 @@ cname: swellnet.yourwebvisual.com
 # META
 title: Swellnet
 title_homepage:
-company: Swellnet
+company: Swellnet Pty Ltd
 description:
 
 # SITE DEFAULTS
@@ -20,15 +20,13 @@ jekyll_version: 3.5.0
 
 # OFFICES
 offices:
-  - title:
-    address:
-    phone: (02) 9455 123
-    email: hello@new-website.com
+  - title: Sydney
+    address: Level 5, 8 West Street<br> North Sydney, NSW, 2060
+    phone: 1800 793 556
+    email: privacy@swellnet.com
 
 # SOCIAL MEDIA
 facebook: https://facebook.com/swellnet/
-linked_in:
-google_plus:
 instagram: https://instagram.com/swellnet/
 
 # GOOGLE

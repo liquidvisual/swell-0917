@@ -24,4 +24,18 @@ layout: base
 	<!-- { % include sections/surfcam_replays.html %} -->
 	<!-- { % include sections/nearest_surfcams.html %} -->
 	<!-- { % include sections/social_feed.html %} -->
+	{% comment %}
+	* style order is important
+	* javascript order is important
+
+	* body has theme
+	* theme is just for adverts right now, absolute spacing
+
+	* comments and forums have new headers - all other code is the same
+	* latest news is the same
+	* have changed @include CSS to links - performance boost
+
+	* navigation doesn't include the dropdown - so copy existing code
+
+	{% endcomment %}
 </div>

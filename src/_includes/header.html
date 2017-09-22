@@ -2,7 +2,7 @@
 {% assign logo = page.logo | default: "http://swellnet.com/profiles/swellnet/themes/gold/logo.png" %}
 
 <!-- GLOBAL HEADER -->
-<header id="header" class="{% unless page.user_type == 'paid' %} has-advert {% endunless %} header mb-4" role="banner">
+<header id="header" class="global-header header mb-4" role="banner">
     <div class="header-container container-smooth container-fluid">
 
         <!-- NAVBAR TOGGLE -->
@@ -16,14 +16,9 @@
         <!-- SITE LOGO -->
         <span class="site-logo">
             <a href="/" id="logo" rel="home" title="Return to the Swellnet home page">
-                <img class="img-responsive" src="{{ logo }}" alt="Swellnet logo" />
+                <img class="img-responsive" src="{{ logo }}" alt="Swellnet logo">
             </a>
         </span>
-
-        {% comment %}
-        <!-- IFRAME ADVERT TEST -->
-        <!-- <iframe class="iframe-advert" src="/advert-01/"></iframe> -->
-        {% endcomment %}
 
         <!-- SITE MAIN MENU -->
         <div id="site-main-menu" class="yamm site-main-menu navbar navbar-default navbar-collapse collapse">
@@ -56,12 +51,9 @@
             </ul>
         </div>
 
-        <!-- ADBLOCK LEADERBOARD -->
-        <div id='boxes-box-swellnet_adblock_leaderboard' class='boxes-box header-ad'>
-            <div class="boxes-box-content">
-                <span class="mcnamf" title="728x90"></span>
-            </div>
-        </div>
+        {% unless page.user_type == 'paid' %}
+            {% include adblock.html type=1 %}
+        {% endunless %}
 
     </div> <!-- /.header-container -->
 
