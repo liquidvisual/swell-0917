@@ -40,7 +40,7 @@
 		}
 	}
 
-	.header-sponsor {
+	.sponsor-header {
 		@include media-breakpoint-up(lg) {
 		    top: -29px;
 		}
@@ -48,10 +48,10 @@
 }
 
 //=========================================
-// HEADER SPONSOR
+// SPONSOR HEADER
 //=========================================
 
-.header-sponsor {
+.sponsor-header {
 	position: relative;
 	top: 10px;
 

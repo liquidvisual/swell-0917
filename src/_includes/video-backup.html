@@ -1,50 +1,5 @@
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
-
-<script>
-    var getURL = 'http://www.liquidvisual.net/hotlinking/get_lorem_ipsum.php';
-
-    Vue.component('posts', {
-       props: ['my-posts', 'heading'],
-       template: `
-          <div>
-             <h2>{{ heading }}</h2>
-             <div v-for="item in myPosts">
-                <img :src="item.image">
-                <h6>{{ item.title }}</h6>
-                <div v-html="item.body"></div>
-             </div>
-          </div>
-       `,
-    });
-
-    Vue.component
-
-    var vm = new Vue({
-       el: '#video-widget',
-       data: {
-          posts: getURL,
-          heading: 'WOOOOO',
-        },
-       created: function(){
-          this.fetchDataXHR();
-          // this.fetchDataAXIOS();
-       },
-       methods: {
-          fetchDataXHR: function(){
-             var xhr = new XMLHttpRequest();
-             var vm = this;
-             xhr.open('GET', getURL);
-             xhr.onload = function(){
-                vm.posts = JSON.parse(xhr.responseText);
-             }
-             xhr.send();
-          },
-       }
-    })
-</script>
-
 <!-- VIDEO SECTION -->
-<section id="video-widget" class="mb-4">
+<section class="mb-4">
 
     {% if page.url contains 'replays' %}
         <!-- DATE DROPDOWN -->
