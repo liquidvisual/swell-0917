@@ -7,7 +7,9 @@
 
     {% if page.url contains 'replays' %}
         <!-- DATE DROPDOWN -->
-        <date-select v-model="date" :full-width="true"></date-select>
+        <div class="custom-select-wrapper collapse-row-sm-only">
+            <date-select v-model="date" :full-width="true"></date-select>
+        </div>
     {% endif %}
 
     <!-- VIDEO PLAYER -->
@@ -22,7 +24,12 @@
         <h2 class="d-flex mb-4 mt-5"><i class="fa fa-rotate-left pr-3"></i> Surfcam Replays</h2>
 
         <!-- DATE DROPDOWN -->
-        <date-select v-model="date"></date-select>
+        <div class="custom-select-wrapper collapse-row-sm-only">
+
+            <date-select v-model="date"></date-select>
+            <time-select v-model="date"></time-select>
+
+        </div>
     {% endif %}
 
     <!-- THUMB SLIDER -->

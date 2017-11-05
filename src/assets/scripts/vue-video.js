@@ -1,5 +1,5 @@
 /*
-    VUE-VIDEO.JS - Last updated: 02.11.17
+    VUE-VIDEO.JS - Last updated: 04.11.17
 */
 //-----------------------------------------------------------------
 // VUE TARGETS 'video.html'
@@ -16,15 +16,12 @@ Vue.component('date-select', {
         }
     },
     template: `
-        <!-- DATE DROPDOWN -->
-        <div class="custom-select-wrapper collapse-row-sm-only">
-            <div class="custom-select" :class="{ 'is-full-width': fullWidth }">
-                <select v-model="date" @change="broadcast">
-                    <option v-for="(item, index) in lastSevenDays" :key="index" :value="item" v-text="item.title"></option>
-                </select>
-                <i class="fa fa-caret-down"></i>
-                <i class="fa fa-calendar-o"></i>
-            </div>
+        <div class="custom-select" :class="{ 'is-full-width': fullWidth }">
+            <select v-model="date" @change="broadcast">
+                <option v-for="(item, index) in lastSevenDays" :key="index" :value="item" v-text="item.title"></option>
+            </select>
+            <i class="fa fa-caret-down"></i>
+            <i class="fa fa-calendar-o"></i>
         </div>
     `,
     data: function() {
@@ -96,6 +93,52 @@ Vue.component('date-select', {
     }
 });
 //-----------------------------------------------------------------
+// TIME SELECT COMPONENT
+//-----------------------------------------------------------------
+
+Vue.component('time-select', {
+    props: {
+        feed: {
+            // type: Array,
+            required: true,
+            default: []
+        }
+    },
+    template: `
+        <div class="custom-select">
+            <select v-model="time" @change="broadcast">
+                <option v-for="(item, index) in feed" :key="index" :value="item" v-text="formatTime(item.start_local)"></option>
+            </select>
+            <i class="fa fa-caret-down"></i>
+            <i class="fa fa-clock-o"></i>
+        </div>
+    `,
+    data: function() {
+        return {
+            time: null
+        }
+    },
+    created: function() {
+        // this.broadcast();
+    },
+    methods: {
+        //==================================
+        // broadcast selected date
+        //==================================
+
+        broadcast: function(){
+            this.$emit('input', this.time);
+        },
+
+        //==================================
+        // Format time - duplication
+        //==================================
+        formatTime: function(time){
+            return moment(time).format('hh:mma'); // uses moment.js in global scope
+        },
+    }
+});
+//-----------------------------------------------------------------
 // THUMB SLIDER COMPONENT
 //-----------------------------------------------------------------
 
@@ -114,7 +157,10 @@ Vue.component('thumb-slider', {
                 <vue-flickity class="thumb-slider" ref="flickity" :options="flickityOptions">
                     <a v-for="(item, index) in feed" :key="index" class="thumb-slider-item btn-tile" @click.prevent="loadVideo(item.video_url)">
                         <img src="/assets/img/layout/placeholder-thumbnail.png">
+
                         <span class="btn-tile-bg" :style="{ 'background-image': 'url('+item.image_url+')'}"></span>
+                        <!-- data-flickity-bg-lazyload="tulip.jpg" -->
+
                         <div class="btn-tile-overlay">
                             <h3 class="btn-tile-header" v-text="formatTime(item.start_local)"></h3>
                         </div>
@@ -135,6 +181,8 @@ Vue.component('thumb-slider', {
                 // autoPlay: 1500,
                 cellAlign: 'left',
                 contain: true,
+                // lazyload: true, 10 // <img src="placeholder.jpg" data-flickity-lazyload="full.jpg" />
+                // bgLazyLoad: 5,
                 dragThreshold: 3,
                 freeScroll: true,
                 freeScrollFriction: 0.075, // lower friction, slides easier
@@ -175,6 +223,10 @@ Vue.component('thumb-slider', {
 
         previous: function() {
             this.$refs.flickity.previous();
+        }
+
+        goToAndStop: function(index){
+            this.$refs.flickity('select', index);
         }
     }
 });
