@@ -1,7 +1,3 @@
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-
 <!-- VIDEO WIDGET -->
 <section id="video-widget" class="mb-4">
 
@@ -14,7 +10,6 @@
     {% endif %}
 
     <!-- VIDEO PLAYER -->
-    <!-- this could be refactored to have video player accept object instead of string -->
     <video-player :selected-video="selectedVideo"></video-player>
 
     {% if page.url contains 'live' %}
@@ -41,8 +36,7 @@
 
 </section>
 
-<style scoped>
-
+<style>
     .slide-enter-active,
     .slide-leave-active {
         transition: all ease 300ms;
@@ -57,5 +51,4 @@
     .transition-wrapper {
         overflow: hidden;
     }
-
 </style>

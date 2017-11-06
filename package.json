@@ -20,9 +20,8 @@
     "grunt-contrib-htmlmin": "~0.3.0",
     "grunt-contrib-imagemin": "~0.8.1",
     "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-uglify": "~0.5.1",
+    "grunt-contrib-uglify": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
     "grunt-contrib-watch": "0.6.1",
-    "grunt-es6-transpiler": "^1.0.2",
     "grunt-filerev": "~0.2.1",
     "grunt-jekyll": "~0.4.2",
     "grunt-postcss": "^0.8.0",
@@ -39,5 +38,8 @@
   },
   "engines": {
     "node": ">=0.8.0"
+  },
+  "dependencies": {
+    "uglify-js": "^3.1.7"
   }
 }

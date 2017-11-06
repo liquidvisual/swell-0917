@@ -1,9 +1,10 @@
 /*
     VUE-VIDEO.JS - Last updated: 04.11.17
+
+    <!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <!-- <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script> -->
 */
-//-----------------------------------------------------------------
-// VUE TARGETS 'video.html'
-//-----------------------------------------------------------------
 //-----------------------------------------------------------------
 // DATE SELECT COMPONENT
 //-----------------------------------------------------------------

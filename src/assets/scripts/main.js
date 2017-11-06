@@ -8,10 +8,10 @@
 // WINDOW LOAD
 //-----------------------------------------------------------------
 
-$(window).on('load', function() {
-    $('html').addClass('has-loaded');
-    // $('[data-masonry]').masonry();
-});
+// $(window).on('load', function() {
+//     $('html').addClass('has-loaded');
+//     // $('[data-masonry]').masonry();
+// });
 
 //==================================================
 //

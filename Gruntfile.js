@@ -23,13 +23,14 @@ module.exports = function (grunt) {
   require('jit-grunt')(grunt, {
 
     // Uncomment if plugins can't be resolved in automatic mapping
+    babel: 'grunt-babel',
     buildcontrol: 'grunt-build-control',
     sass_globbing: 'grunt-sass-globbing', // does this speed this up?
     sass: 'grunt-sass',
     browsersync: 'grunt-browser-sync',
     useminPrepare: 'grunt-usemin',
     shell: 'grunt-shell',
-    prettify: 'grunt-prettify'
+    prettify: 'grunt-prettify',
   });
 
   grunt.initConfig({
@@ -285,19 +286,42 @@ module.exports = function (grunt) {
     // USEMIN
     //-----------------------------------------------------
     useminPrepare: {
+      html: [
+        '<%= yeoman.dist %>/index.html',
+        '<%= yeoman.dist %>/manage/index.html'
+      ],
       options: {
         dest: '<%= yeoman.dist %>'
       },
-      html: ['<%= yeoman.dist %>/index.html',
-           '<%= yeoman.dist %>/manage/index.html']
+      // flow: {
+        // steps: {
+          // js: ['concat']
+        // }
+      // }
     },
+
     usemin: {
+      html: ['<%= yeoman.dist %>/**/*.html'],
+      css: ['<%= yeoman.assets %>/css/**/*.css'], // img paths revved inside CSS
       options: {
         assetsDirs: ['<%= yeoman.assets %>', '<%= yeoman.dist %>'],
+      }
+    },
+    //-----------------------------------------------------
+    // BABEL
+    //-----------------------------------------------------
+    babel: {
+      options: {
+        sourceMap: false,
+        minified: false,
+        comments: true,
+        presets: ['env']
       },
-      html: ['<%= yeoman.dist %>/**/*.html'],
-      // Ensures image paths are revved inside CSS files
-      css: ['<%= yeoman.assets %>/css/**/*.css']
+      dist: {
+        files: {
+          '<%= yeoman.assets %>/scripts/minified.js': '<%= yeoman.app %>/assets/scripts/main.js'
+        }
+      }
     },
     //-----------------------------------------------------
     // HTML MINIFY (Disabled)
@@ -587,9 +611,10 @@ module.exports = function (grunt) {
     //'imagemin',
     //'svgmin',
     //'filerev',
+    // 'babel',
     'usemin',
     'postcss',
-    'htmlmin', // best not to use this?
+    //'htmlmin', // best not to use this?
     'prettify',
     ]);
 

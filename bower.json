@@ -14,5 +14,10 @@
     "social-feed": "^0.1.2",
     "isotope": "^3.0.1",
     "flickity": "^2.0.10"
+  },
+  "devDependencies": {
+    "vue": "^2.5.3",
+    "axios": "^0.17.0",
+    "flickity": "^2.0.10"
   }
 }
