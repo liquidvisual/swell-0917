@@ -29,8 +29,7 @@ module.exports = function (grunt) {
     browsersync: 'grunt-browser-sync',
     useminPrepare: 'grunt-usemin',
     shell: 'grunt-shell',
-    prettify: 'grunt-prettify',
-    //babel: 'grunt-babel',
+    prettify: 'grunt-prettify'
   });
 
   grunt.initConfig({
@@ -287,11 +286,10 @@ module.exports = function (grunt) {
     //-----------------------------------------------------
     useminPrepare: {
       options: {
-        dest: '<%= yeoman.dist %>',
-        flow: { steps: { js: ['concat'], css: ['concat', 'cssmin'] }, post: {} } // fixes issue of removing uglify
+        dest: '<%= yeoman.dist %>'
       },
       html: ['<%= yeoman.dist %>/index.html',
-      		 '<%= yeoman.dist %>/manage/index.html']
+           '<%= yeoman.dist %>/manage/index.html']
     },
     usemin: {
       options: {
@@ -351,7 +349,7 @@ module.exports = function (grunt) {
     // Usemin adds files to concat
     concat: {},
     // Usemin adds files to uglify
-    //uglify: {},
+    uglify: {},
     // Usemin adds files to cssmin
     cssmin: {
       dist: {
@@ -531,34 +529,7 @@ module.exports = function (grunt) {
                   'cd -'
         ].join('&&')
        }
-    },
-  //-----------------------------------------------------
-  // BABEL
-  //-----------------------------------------------------
-
-  babel: {
-    options: {
-      minified: true,
-      sourceMap: true,
-      presets: ["es2015"],
-      //plugins: ["transform-remove-strict-mode"]
-    },
-    dist: {
-      //files: [{
-        //expand: true,
-        //cwd: '<%= yeoman.dist %>',
-       // src: '**/*.js',
-        //dest: '<%= yeoman.dist %>',
-       // ext: ".js"
-      //}]
-
-      files: [{
-          src: ["src/assets/scripts/minified.js"],
-          dest: 'minified.js'
-
-      }],
     }
-  }
 
   //--
   });
@@ -612,15 +583,14 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concat',
     'cssmin',
-    //'uglify',
+    'uglify',
     //'imagemin',
     //'svgmin',
     //'filerev',
     'usemin',
     'postcss',
-    // 'babel',
-    //'htmlmin', // best not to use this?
-    //'prettify',
+    'htmlmin', // best not to use this?
+    'prettify',
     ]);
 
   grunt.registerTask('host', [

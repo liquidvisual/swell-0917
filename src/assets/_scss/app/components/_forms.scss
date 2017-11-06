@@ -17,6 +17,7 @@
 
 .custom-select-wrapper {
 	background: #e4e2e3;
+	margin-top: -10px;
 
 	@include media-breakpoint-up(lg) {
 	    display: flex;
@@ -32,14 +33,14 @@
 	    width: 50%;
 	}
 
-	&.is-full-width {
-		display: block;
-		margin-top: -10px;
+	// &.is-full-width {
+	// 	// display: block;
+	// 	// margin-top: -10px;
 
-		select {
-			// width: 100%;
-		}
-	}
+	// 	select {
+	// 		// width: 100%;
+	// 	}
+	// }
 
 	select {
 		width: 100%;

@@ -5,39 +5,39 @@
 <!-- VIDEO WIDGET -->
 <section id="video-widget" class="mb-4">
 
-    {% if page.url contains 'replays' %}
+    {% if page.url contains 'replays' or page.url == '/' %}
         <!-- DATE DROPDOWN -->
         <div class="custom-select-wrapper collapse-row-sm-only">
-            <date-select v-model="date" :full-width="true"></date-select>
+            <date-select v-model="date"></date-select>
+            <time-select v-model="selectedDateIndex" :feed="feed"></time-select>
         </div>
     {% endif %}
 
     <!-- VIDEO PLAYER -->
+    <!-- this could be refactored to have video player accept object instead of string -->
     <video-player :selected-video="selectedVideo"></video-player>
-
-    {% unless page.user_type == 'paid' %}
-        {% include ads.html type=2 %}
-    {% endunless %}
 
     {% if page.url contains 'live' %}
         <!-- SURFCAM REPLAYS -->
         <h2 class="d-flex mb-4 mt-5"><i class="fa fa-rotate-left pr-3"></i> Surfcam Replays</h2>
 
         <!-- DATE DROPDOWN -->
-        <div class="custom-select-wrapper collapse-row-sm-only">
-
+        <div class="custom-select-wrapper collapse-row-sm-only mt-0">
             <date-select v-model="date"></date-select>
-            <time-select v-model="date"></time-select>
-
+            <time-select v-model="selectedDateIndex" :feed="feed"></time-select>
         </div>
     {% endif %}
 
     <!-- THUMB SLIDER -->
-    <div class="transition-wrapper">
-        <transition name="slide">
-            <thumb-slider :feed="feed" @select-video="selectVideo" v-if="feed"></thumb-slider>
-        </transition>
-    </div>
+    <!-- <div class="transition-wrapper"> -->
+        <!-- <transition name="slide"> -->
+            <thumb-slider :feed="feed" :current-index="selectedDateIndex" @select-video="selectVideo" v-if="feed"></thumb-slider>
+        <!-- </transition> -->
+    <!-- </div> -->
+
+    {% unless page.user_type == 'paid' %}
+        {% include ads.html type=2 %}
+    {% endunless %}
 
 </section>
 
