@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="Generator" content="Drupal 7 (http://drupal.org)">
     <title>Homepage</title>
@@ -194,7 +194,7 @@
 
     <!-- End Google Tag Manager -->
     </head>
-<body class="page-knights html not-front not-logged-in no-sidebars page-node page-node- page-node-816 node-type-surfcam panels-driven-layout main-colspan-9 main-nested-container role-anonymous-user">
+<body class="page-knights html not-front not-logged-in no-sidebars page-node page-node- page-node-816 node-type-surfcam panels-driven-layout main-colspan-9 main-nested-container role-anonymous-user ">
 
     <!-- Google Tag Manager (noscript) -->
     <noscript>
@@ -207,7 +207,7 @@
     </div>
 
     <!-- WRAPPER -->
-    <div id="wrapper" class="wrapper">
+    <div id="wrapper" class='wrapper'>
 
         <!-- PAGE BEGINS -->
         <div id="page" class="lv-page">
@@ -227,8 +227,7 @@
                     <!-- SITE LOGO -->
                     <span class="site-logo">
                         <a href="/" id="logo" rel="home" title="Return to the Swellnet home page">
-                            <img class="img-responsive" src="http://swellnet.com/profiles/swellnet/themes/gold/logo.png" alt="Swellnet logo">
-                        </a>
+                            <img class="img-responsive" src="http://swellnet.com/profiles/swellnet/themes/gold/logo.png" alt="Swellnet logo"> </a>
                     </span>
 
                     <!-- SITE MAIN MENU -->
@@ -287,7 +286,7 @@
                             <div id="main" role="main" class="main">
                                 <div class="col-sm-6">
                                     <p class="text-center">Last updated:
-                                        <b>Friday September 22 -- 02:59:55 PM</b>
+                                        <b>Monday November 06 -- 11:27:06 AM</b>
                                     </p>
                                     <h2 class="mb-5">Preview a Template</h2>
                                     <ul class="list-unstyled">
@@ -319,11 +318,52 @@
                                     <hr class="my-5">
                                     <h2>Developer Notes</h2>
                                     <p>Coming soon</p>
+                                    <br>
+                                    <br>
+                                    <div style="max-width: 750px;">
+                                        <script src="https://unpkg.com/vue/dist/vue.js"></script>
+                                        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+                                        <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
-                                    <!-- { % include sections/surfcam_replays.html %} -->
-                                    
-<!-- { % include sections/nearest_surfcams.html %} -->
-<!-- { % include sections/social_feed.html %} --></div>
+                                        <!-- VIDEO WIDGET -->
+                                        <section id="video-widget" class="mb-4">
+
+                                            <!-- DATE DROPDOWN -->
+                                            <div class="custom-select-wrapper collapse-row-sm-only">
+                                                <date-select v-model="date"></date-select>
+                                                <time-select v-model="selectedDateIndex" :feed="feed"></time-select>
+                                            </div>
+
+                                            <!-- VIDEO PLAYER -->
+                                            
+<!-- this could be refactored to have video player accept object instead of string --><video-player :selected-video="selectedVideo"></video-player>
+
+                                            <!-- THUMB SLIDER -->
+                                            
+<!-- <div class="transition-wrapper"> -->
+<!-- <transition name="slide"> --><thumb-slider :feed="feed" :current-index="selectedDateIndex" @select-video="selectVideo" v-if="feed"></thumb-slider>
+
+                                            <!-- </transition> -->
+                                            
+<!-- </div> --></section>
+                                        <style scoped>
+                                        .slide-enter-active,
+                                        .slide-leave-active {
+                                            transition: all ease 300ms;
+                                        }
+                                        
+                                        .slide-enter,
+                                        .slide-leave-to {
+                                            /*transform: translateY(-100%);*/
+                                            opacity: 0;
+                                        }
+                                        
+                                        .transition-wrapper {
+                                            overflow: hidden;
+                                        }
+                                        </style>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- /#main -->
@@ -340,7 +380,7 @@
             </div>
 
         <!-- /#page -->
-        <div class="page-footer" id="page-footer">&nbsp;</div>
+        <div class='page-footer' id="page-footer">&nbsp;</div>
 
         <!-- sticky-footer artefact -->
         </div>
@@ -407,9 +447,9 @@
                     </ul>
                 </section>
                 <section id="block-boxes-swellnet-footer-colophon" class="block block-boxes block-boxes-simple block- block-boxes-swellnet-footer-colophon clearfix">
-                    <div id="boxes-box-swellnet_footer_colophon" class="boxes-box">
+                    <div id='boxes-box-swellnet_footer_colophon' class='boxes-box'>
                         <div class="boxes-box-content">
-                            <img src="/assets/img/content/swellnet-logo-white.png" title="Swellnet">
+                            <img src="/assets/img/content/swellnet-logo-white.png" title="Swellnet" />
                             <p>&copy; Swellnet 2017. All rights reserved.</p>
                         </div>
                     </div>
@@ -520,8 +560,7 @@
 
     <!-- NO SCRIPT -->
     <noscript>
-        <img alt="" src="http://au.effectivemeasure.net/em_image" style="position:absolute; left:-5px;" />
-    </noscript>
+        <img alt="" src="http://au.effectivemeasure.net/em_image" style="position:absolute; left:-5px;" /> </noscript>
 
     <!-- END EFFECTIVE MEASURE CODE -->
     
@@ -565,7 +604,11 @@
 
     <!-- **** JAVASCRIPT **** -->
     <script src="/assets/scripts/minified.js"></script>
-    <script>
+
+    <!-- <script src="/assets/scripts/video-loader.js"></script> -->
+    
+<!-- <script src="/_bower_components/flickity/dist/flickity.pkgd.js"></script> -->
+<!-- <script src="/assets/scripts/flickity.js"></script> --><script>
     $(window).on('load', function() {
         // FACEBOOK
         $('.social-feed-facebook-container').each(function() {
