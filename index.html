@@ -286,7 +286,7 @@
                             <div id="main" role="main" class="main">
                                 <div class="col-sm-6">
                                     <p class="text-center">Last updated:
-                                        <b>Monday November 06 -- 11:27:06 AM</b>
+                                        <b>Tuesday November 07 -- 04:40:50 PM</b>
                                     </p>
                                     <h2 class="mb-5">Preview a Template</h2>
                                     <ul class="list-unstyled">
@@ -319,51 +319,7 @@
                                     <h2>Developer Notes</h2>
                                     <p>Coming soon</p>
                                     <br>
-                                    <br>
-                                    <div style="max-width: 750px;">
-                                        <script src="https://unpkg.com/vue/dist/vue.js"></script>
-                                        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-                                        <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-
-                                        <!-- VIDEO WIDGET -->
-                                        <section id="video-widget" class="mb-4">
-
-                                            <!-- DATE DROPDOWN -->
-                                            <div class="custom-select-wrapper collapse-row-sm-only">
-                                                <date-select v-model="date"></date-select>
-                                                <time-select v-model="selectedDateIndex" :feed="feed"></time-select>
-                                            </div>
-
-                                            <!-- VIDEO PLAYER -->
-                                            
-<!-- this could be refactored to have video player accept object instead of string --><video-player :selected-video="selectedVideo"></video-player>
-
-                                            <!-- THUMB SLIDER -->
-                                            
-<!-- <div class="transition-wrapper"> -->
-<!-- <transition name="slide"> --><thumb-slider :feed="feed" :current-index="selectedDateIndex" @select-video="selectVideo" v-if="feed"></thumb-slider>
-
-                                            <!-- </transition> -->
-                                            
-<!-- </div> --></section>
-                                        <style scoped>
-                                        .slide-enter-active,
-                                        .slide-leave-active {
-                                            transition: all ease 300ms;
-                                        }
-                                        
-                                        .slide-enter,
-                                        .slide-leave-to {
-                                            /*transform: translateY(-100%);*/
-                                            opacity: 0;
-                                        }
-                                        
-                                        .transition-wrapper {
-                                            overflow: hidden;
-                                        }
-                                        </style>
-                                    </div>
-                                </div>
+                                    <br> </div>
                             </div>
 
                             <!-- /#main -->
@@ -593,7 +549,7 @@
     <div id="desktopTest" class="hidden-xs hidden-sm"></div>
     <script src="http://swellnet.com/profiles/swellnet/themes/gold/js/dropdown-menu.min.js"></script>
 
-    <!-- *************************** LIQUIDVISUAL ADDED: 05.09.17 *************************** -->
+    <!-- *************************** LIQUIDVISUAL ADDED: 06.11.17 *************************** -->
     
 <!--[if lte IE 9]><div class="lv-alert-bar">
         <p>You're using an outdated browser. Please <a href="http://outdatedbrowser.com">upgrade your browser</a> to improve your experience.</p>
@@ -604,11 +560,7 @@
 
     <!-- **** JAVASCRIPT **** -->
     <script src="/assets/scripts/minified.js"></script>
-
-    <!-- <script src="/assets/scripts/video-loader.js"></script> -->
-    
-<!-- <script src="/_bower_components/flickity/dist/flickity.pkgd.js"></script> -->
-<!-- <script src="/assets/scripts/flickity.js"></script> --><script>
+    <script>
     $(window).on('load', function() {
         // FACEBOOK
         $('.social-feed-facebook-container').each(function() {
