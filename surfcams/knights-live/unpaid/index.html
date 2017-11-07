@@ -341,9 +341,10 @@
                                             </div>
 
                                             <!-- THUMB SLIDER -->
-                                            <transition name="slide">
-                                                <thumb-slider :feed="feed" :current-index="selectedDateIndex" @select-video="selectVideo" v-if="feed"></thumb-slider>
-                                            </transition>
+                                            
+<!-- <transition name="slide"> --><thumb-slider :feed="feed" :current-index="selectedDateIndex" @select-video="selectVideo" v-if="feed" :class="{'thumbs-loading': feedLoading}"></thumb-slider>
+
+                                            <!-- </transition> -->
                                             <p class="mt-5">
                                                 <a href="#">
                                                     <img width="100%" src="/assets/img/content/sponsor-perfect-wave.png" alt="">
@@ -360,6 +361,10 @@
                                         .slide-leave-to {
                                             /*transform: translateY(-100%);*/
                                             opacity: 0;
+                                        }
+                                        
+                                        .thumbs-loading {
+                                            opacity: 0.2;
                                         }
                                         </style> Remove video ads with
                                         <a href='http://swellnet.com/pro/subscribe/index.html'>Swellnet Pro</a> for $8.95/month (first month $1.00)

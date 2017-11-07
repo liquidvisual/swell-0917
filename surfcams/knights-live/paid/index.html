@@ -323,10 +323,11 @@
                                             </div>
 
                                             <!-- THUMB SLIDER -->
-                                            <transition name="slide">
-                                                <thumb-slider :feed="feed" :current-index="selectedDateIndex" @select-video="selectVideo" v-if="feed"></thumb-slider>
-                                            </transition>
-                                        </section>
+                                            
+<!-- <transition name="slide"> --><thumb-slider :feed="feed" :current-index="selectedDateIndex" @select-video="selectVideo" v-if="feed" :class="{'thumbs-loading': feedLoading}"></thumb-slider>
+
+                                            <!-- </transition> -->
+                                            </section>
                                         <style>
                                         .slide-enter-active,
                                         .slide-leave-active {
@@ -337,6 +338,10 @@
                                         .slide-leave-to {
                                             /*transform: translateY(-100%);*/
                                             opacity: 0;
+                                        }
+                                        
+                                        .thumbs-loading {
+                                            opacity: 0.2;
                                         }
                                         </style>
                                         <div class="field field-name-body field-type-text-with-summary field-label-hidden mb-5">

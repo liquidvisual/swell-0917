@@ -328,18 +328,19 @@
                                         <section id="video-widget" class="mb-4">
 
                                             <!-- DATE DROPDOWN -->
-                                            <div class="custom-select-wrapper collapse-row-sm-only">
-                                                <date-select v-model="date" v-if="feed"></date-select>
-                                                <time-select v-model="selectedDateIndex" :feed="feed" v-if="feed"></time-select>
+                                            <div class="custom-select-wrapper collapse-row-sm-only" v-if="feed">
+                                                <date-select v-model="date"></date-select>
+                                                <time-select v-model="selectedDateIndex" :index="selectedDateIndex" :feed="feed"></time-select>
                                             </div>
 
                                             <!-- VIDEO PLAYER -->
                                             <video-player :selected-video="selectedVideo"></video-player>
 
                                             <!-- THUMB SLIDER -->
-                                            <transition name="slide">
-                                                <thumb-slider :feed="feed" :current-index="selectedDateIndex" @select-video="selectVideo" v-if="feed"></thumb-slider>
-                                            </transition>
+                                            
+<!-- <transition name="slide"> --><thumb-slider :feed="feed" :current-index="selectedDateIndex" @select-video="selectVideo" v-if="feed" :class="{'thumbs-loading': feedLoading}"></thumb-slider>
+
+                                            <!-- </transition> -->
                                             <p class="mt-5">
                                                 <a href="#">
                                                     <img width="100%" src="/assets/img/content/sponsor-perfect-wave.png" alt="">
@@ -356,6 +357,10 @@
                                         .slide-leave-to {
                                             /*transform: translateY(-100%);*/
                                             opacity: 0;
+                                        }
+                                        
+                                        .thumbs-loading {
+                                            opacity: 0.2;
                                         }
                                         </style> Remove video ads with
                                         <a href='http://swellnet.com/pro/subscribe/index.html'>Swellnet Pro</a> for $8.95/month (first month $1.00)
