@@ -103,7 +103,8 @@ Vue.component('time-select', {
             // type: Array,
             required: true,
             default: []
-        }
+        },
+        index: 0,
     },
     template: `
         <div class="custom-select">
@@ -121,6 +122,11 @@ Vue.component('time-select', {
     },
     created() {
         // this.broadcast();
+    },
+    watch: {
+        index(){
+            this.selectedDateIndex = this.index;
+        }
     },
     methods: {
         //==================================================
@@ -239,14 +245,16 @@ Vue.component('thumb-slider', {
             required: true,
             default: []
         },
+        feedLoading: true,
         currentIndex: 0, // only the time select can change this
+        test: true
     },
     template: `
         <div class="thumb-slider-wrapper collapse-row-sm-only">
             <div class="thumb-slider-track">
 
                 <vue-flickity class="thumb-slider" ref="flickity" :options="flickityOptions">
-                    <a v-for="(item, index) in feed" :key="index" class="thumb-slider-item btn-tile" @click.prevent="selectFeedObj(item)">
+                    <a v-for="(item, index) in feed" :key="index" class="thumb-slider-item btn-tile" @click.prevent="selectFeedObj(item, index)">
                         <img src="/assets/img/layout/placeholder-thumbnail.png">
 
                         <span class="btn-tile-bg" :style="{ 'background-image': 'url('+item.image_url+')'}"></span>
@@ -308,9 +316,13 @@ Vue.component('thumb-slider', {
             return moment(time).format('hh:mma'); // uses moment.js in global scope
         },
 
-        selectFeedObj: function(obj) {
+        selectFeedObj: function(obj, index) {
             // console.log('Read to load: '+obj);
-            this.$emit('select-video', obj); //********************* EMIT ************************
+            var payload = {};
+                payload.obj = obj;
+                payload.index = index; // need to update the index for time-select
+
+            this.$emit('select-video', payload); //********************* EMIT ************************
         },
 
         next: function() {
@@ -474,8 +486,8 @@ new Vue({
 
             this.selectedVideo = this.feed[this.selectedDateIndex];
 
-            console.log('selected vid:');
-            console.log(this.selectedVideo);
+            // console.log('selected vid:');
+            // console.log(this.selectedVideo);
         }
     },
 
@@ -541,8 +553,9 @@ new Vue({
         // SELECT VIDEO
         //==================================================
 
-        selectVideo(obj){
-            this.selectedVideo = obj; // set variable for video component
+        selectVideo(payload){
+            this.selectedVideo = payload.obj; // set variable for video component
+            this.selectedDateIndex = payload.index;
         }
     }
 });
