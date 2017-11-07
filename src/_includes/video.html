@@ -4,8 +4,8 @@
     {% if page.url contains 'replays' or page.url == '/' %}
         <!-- DATE DROPDOWN -->
         <div class="custom-select-wrapper collapse-row-sm-only">
-            <date-select v-model="date"></date-select>
-            <time-select v-model="selectedDateIndex" :feed="feed"></time-select>
+            <date-select v-model="date" v-if="feed"></date-select>
+            <time-select v-model="selectedDateIndex" :feed="feed" v-if="feed"></time-select>
         </div>
     {% endif %}
 
@@ -24,11 +24,9 @@
     {% endif %}
 
     <!-- THUMB SLIDER -->
-    <!-- <div class="transition-wrapper"> -->
-        <!-- <transition name="slide"> -->
-            <thumb-slider :feed="feed" :current-index="selectedDateIndex" @select-video="selectVideo" v-if="feed"></thumb-slider>
-        <!-- </transition> -->
-    <!-- </div> -->
+    <transition name="slide">
+        <thumb-slider :feed="feed" :current-index="selectedDateIndex" @select-video="selectVideo" v-if="feed"></thumb-slider>
+    </transition>
 
     {% unless page.user_type == 'paid' %}
         {% include ads.html type=2 %}
@@ -46,9 +44,5 @@
     .slide-leave-to {
         /*transform: translateY(-100%);*/
         opacity: 0;
-    }
-
-    .transition-wrapper {
-        overflow: hidden;
     }
 </style>

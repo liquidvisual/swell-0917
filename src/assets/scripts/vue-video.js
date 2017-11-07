@@ -1,12 +1,12 @@
 /*
-    VUE-VIDEO.JS - Last updated: 04.11.17
+    VUE-VIDEO.JS - Last updated: 07.11.17
 
     <!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
     <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
     <!-- <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script> -->
 */
 //-----------------------------------------------------------------
-// DATE SELECT COMPONENT
+// DATE SELECT
 //-----------------------------------------------------------------
 
 Vue.component('date-select', {
@@ -25,32 +25,32 @@ Vue.component('date-select', {
             <i class="fa fa-calendar-o"></i>
         </div>
     `,
-    data: function() {
+    data() {
         return {
             date: {},
             lastSevenDays: [],
         }
     },
-    created: function() {
+    created() {
         var today = new Date();
         this.lastSevenDays = this.getDates(today, 6);
         this.date = this.lastSevenDays[0]; // set initial option as selected
         // this.broadcast();
     },
     methods: {
-        //==================================
+        //==================================================
         // broadcast selected date
-        //==================================
+        //==================================================
 
-        broadcast: function(){
+        broadcast(){
             this.$emit('input', this.date);
         },
 
-        //==================================
+        //==================================================
         // getDates
-        //==================================
+        //==================================================
 
-        getDates: function(startDate, totalDays){
+        getDates(startDate, totalDays){
 
             var dates_arr = [];
 
@@ -75,26 +75,26 @@ Vue.component('date-select', {
             }
             return dates_arr;
         },
-        //==================================
+        //==================================================
         // monthAsString
-        //==================================
+        //==================================================
 
-        monthAsString: function (monthIndex) {
+        monthAsString(monthIndex) {
             var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             return month[monthIndex];
         },
-        //==================================
+        //==================================================
         // dayAsString
-        //==================================
+        //==================================================
 
-        dayAsString: function(dayIndex) {
+        dayAsString(dayIndex) {
             var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             return weekdays[dayIndex];
         }
     }
 });
 //-----------------------------------------------------------------
-// TIME SELECT COMPONENT
+// TIME SELECT
 //-----------------------------------------------------------------
 
 Vue.component('time-select', {
@@ -114,33 +114,34 @@ Vue.component('time-select', {
             <i class="fa fa-clock-o"></i>
         </div>
     `,
-    data: function() {
+    data() {
         return {
-            selectedDateIndex: 0 // sends to flickity to update position
+            selectedDateIndex: 0, // sends to flickity to update position
         }
     },
-    created: function() {
+    created() {
         // this.broadcast();
     },
     methods: {
-        //==================================
+        //==================================================
         // broadcast selected date
-        //==================================
+        //==================================================
 
-        broadcast: function(){
+        broadcast(){
             this.$emit('input', this.selectedDateIndex);
         },
 
-        //==================================
+        //==================================================
         // Format time - duplication
-        //==================================
-        formatTime: function(time){
-            return moment(time).format('hh:mma'); // uses moment.js in global scope
+        //==================================================
+
+        formatTime(time){
+            return moment(time).format('hh:mma');
         },
     }
 });
 //-----------------------------------------------------------------
-// THUMB SLIDER COMPONENT
+// VIDEO PLAYER
 //-----------------------------------------------------------------
 
 Vue.component('video-player', {
@@ -151,13 +152,14 @@ Vue.component('video-player', {
     },
     template: `
         <div id="video" class="mb-5">
-            <a href="selectedVideo.video_url">
-                Watch this stream over your native player
-            </a>
+            <a href="selectedVideo.video_url">Watch this stream over your native player</a>
         </div>
     `,
-    data: function() {
+    data() {
         return {
+            playerInstance: null,
+            hasSetup: false,
+
             player_conf: {
                 autostart: true,
                 primary: 'html5',
@@ -165,62 +167,69 @@ Vue.component('video-player', {
                 androidhls: true,
                 width: '100%',
                 height: 421,
+                repeat: true,
                 logo: {
                     file: 'http://www.swellnet.com/profiles/swellnet/modules/features/swellnet_surfcam/assets/logo_transparent_overlay.png'
                 },
                 stagevideo: false,
                 events: {
-                    onReady: function(e) {
+                    onReady(e) {
                         window.swellnetElapsedTime = 0;
                     },
-                    onTime: function(e) {
+                    onTime(e) {
                         if ((window.swellnetElapsedTime + e.position) >= '300') {
                             this.stop();
                         }
                     },
-                    onPause: function(e) {
+                    onPause(e) {
                         window.swellnetElapsedTime += this.getPosition();
                     }
                 }
             }
         }
     },
-    mounted: function() {
-        // streamPath: 'rtmp://streamer.swellnet.com.au/surfcams/knights.stream',
-        // playlistPath: 'https://streamer.swellnet.com.au/surfcams/knights.stream/playlist.m3u8',
-        // imagePath: 'http://static.swellnet.com.au/images/surfcams/knights.jpg',
-
-        // jwplayer('video').destroy();
-        // this.playVideo(this.streamPath, this.playlistPath, this.imagePath);
-        this.playVideo(this.selectedVideo.video_url, null, this.selectedVideo.image_url);
+    mounted() {
+        this.playerInstance = jwplayer('video');
     },
-    beforeDestroy: function() {
-        // jwplayer('video').destroy();
+    beforeDestroy() {
+        // this.playerInstance.remove();
     },
     watch: {
-        selectedVideo: function(){
-            console.log('its changing');
-            // jwplayer('video').destroy();
-            this.playVideo(this.selectedVideo.video_url, null, this.selectedVideo.image_url);
+        selectedVideo(){
+            this.playVideo();
         },
     },
     methods: {
-        playVideo: function(stream, playlist, image) {
-            var newStream = {
-                sources: [
-                    {file: stream },
-                    {file: playlist },
-                ],
-                image: image,
-            };
+        // https://support.jwplayer.com/customer/portal/articles/1480872
+        // https://developer.jwplayer.com/jw-player/docs/javascript-api-reference/#jwplayernext
 
-            jQuery.extend(this.player_conf, newStream);
-            jwplayer('video').setup(this.player_conf);
+        playVideo() {
+            var stream = this.selectedVideo.video_url;
+            var playlist = null;
+            var image = this.selectedVideo.image_url;
+
+            // RUN ONCE
+            if (!this.hasSetup) {
+                this.playerInstance.setup({
+                    image: image,
+                    file: stream,
+                });
+                this.hasSetup = true;
+            }
+
+            // LOAD
+            this.playerInstance.load([{
+                file: stream,
+                image: image
+            }]);
+
+            // PLAY
+            this.playerInstance.play();
         }
     }
 });
 //-----------------------------------------------------------------
-// THUMB SLIDER COMPONENT
+// THUMB SLIDER
 //-----------------------------------------------------------------
 
 Vue.component('thumb-slider', {
@@ -318,7 +327,7 @@ Vue.component('thumb-slider', {
     }
 });
 //-----------------------------------------------------------------
-// VUE FLICKITY COMPONENT (WRAPPER FOR FLICKITY)
+// VUE FLICKITY (WRAPPER FOR FLICKITY)
 //-----------------------------------------------------------------
 
 Vue.component('vue-flickity', {
@@ -335,86 +344,86 @@ Vue.component('vue-flickity', {
             <slot></slot>
         </div>
     `,
-    mounted: function() {
+    mounted() {
       this.init();
     },
-    beforeDestroy: function() {
+    beforeDestroy() {
         this.flickity.destroy();
         this.flickity = null;
     },
     methods: {
-        init: function() {
+        init() {
             this.flickity = new Flickity(this.$el, this.options);
             this.$emit('init', this.flickity);
         },
-        next: function(isWrapped, isInstant) {
+        next(isWrapped, isInstant) {
             this.flickity.next(isWrapped, isInstant);
         },
-        previous: function(isWrapped, isInstant) {
+        previous(isWrapped, isInstant) {
             this.flickity.previous(isWrapped, isInstant);
         },
-        select: function(index, isWrapped, isInstant) {
+        select(index, isWrapped, isInstant) {
             this.flickity.select(index, isWrapped, isInstant);
         },
-        selectedIndex: function() {
+        selectedIndex() {
             return this.flickity.selectedIndex
         },
-        selectCell: function(value, isWrapped, isInstant) {
+        selectCell(value, isWrapped, isInstant) {
             this.flickity.selectCell( value, isWrapped, isInstant );
         },
-        resize: function() {
+        resize() {
             this.flickity.resize();
         },
-        reposition: function() {
+        reposition() {
             this.flickity.reposition();
         },
-        prepend: function(elements) {
+        prepend(elements) {
             this.flickity.prepend(elements);
         },
-        append: function(elements) {
+        append(elements) {
             this.flickity.append(elements);
         },
-        insert: function(elements, index) {
+        insert(elements, index) {
             this.flickity.insert(elements, index);
         },
-        remove: function(elements) {
+        remove(elements) {
             this.flickity.remove(elements);
         },
-        playPlayer: function() {
+        playPlayer() {
             this.flickity.playPlayer();
         },
-        stopPlayer: function() {
+        stopPlayer() {
             this.flickity.stopPlayer();
         },
-        pausePlayer: function() {
+        pausePlayer() {
             this.flickity.pausePlayer();
         },
-        unpausePlayer: function() {
+        unpausePlayer() {
             this.flickity.unpausePlayer();
         },
-        rerender: function() {
+        rerender() {
             this.flickity.destroy();
             this.init();
         },
-        destroy: function() {
+        destroy() {
             this.flickity.destroy();
         },
-        reloadCells: function() {
+        reloadCells() {
             this.flickity.reloadCells();
         },
-        getCellElements: function() {
+        getCellElements() {
             this.flickity.getCellElements();
         },
-        data: function() {
+        data() {
             return Flickity.data(this.$el);
         },
-        on: function(eventName, listener) {
+        on(eventName, listener) {
             this.flickity.on(eventName, listener);
         },
-        off: function(eventName, listener) {
+        off(eventName, listener) {
             this.flickity.off(eventName, listener);
         },
-        once: function(eventName, listener) {
+        once(eventName, listener) {
             this.flickity.once(eventName, listener);
         }
     },
@@ -425,87 +434,118 @@ Vue.component('vue-flickity', {
 
 new Vue({
     el: '#video-widget',
-    data: function() {
+    data() {
         return {
-            date: {
-                timeStamp: Date.now() // data always starts with current datetime
-            },
-            selectedDateIndex: 0, // index from feed - changed by time select
             feed: null,
-            feedLoading: false,
-            apiPath: 'https://api.swellnet.com/v1/999/swellnet/recordings/29?token=j7n77SbJwTk88EsxSuTqm6jPCEfApN0zMfxLXylljvkj0DGJ',
-            selectedVideo: {},
+            feedLoading: true,
+
+            date: { timeStamp: Date.now() }, // 'date-select' will change this - altering api request string
+            selectedDateIndex: null, // changed by 'time-select' - used to move through thumbs via Flickity
+            selectedVideo: null, // set by 'time-select' or clicking thumb
+
+            token: null,
+            tokenPath: 'https://api.swellnet.com/v1/999/nondrupal/login',
+            tokenParams: 'username=project_tv&password=Mngd8936%',
+            apiPath: 'https://api.swellnet.com/v1/999/swellnet/recordings/29?token=',
         }
     },
-    //==================================
+
+    //==================================================
     // COMPUTED
-    //==================================
+    //==================================================
 
     computed: {
-        dateFormatted: function(){
-            return moment(this.date.timeStamp).format('YYYY-MM-DD'); // uses moment.js in global scope
-        },
-
-        apiRequest: function(){
-            // return this.apiPath + '&local_date=' + '2017-11-05'; // TESTING ONLY
-            return this.apiPath + '&local_date=' + this.dateFormatted;
-        },
+        apiRequest(){
+            return this.apiPath + this.token + '&local_date=' + moment(this.date.timeStamp).format('YYYY-MM-DD');
+        }
     },
-    //==================================
-    // INIT
-    // use current datetime to hit API and return data
-    //==================================
 
-    created: function() {
-        this.loadData();
-    },
-    //==================================
-    // METHODS
-    //==================================
+    //==================================================
+    // WATCH
+    //==================================================
 
     watch: {
-        apiRequest: function() {
+        apiRequest() {
             this.loadData();
         },
 
-        // refactor this to computed property
-        // when time select changes the index, update the video object. Other components will draw from
-        selectedDateIndex: function(){
+        // when 'time-select' changes the index, update the video object. Other components will respond.
+        selectedDateIndex(){
+
             this.selectedVideo = this.feed[this.selectedDateIndex];
+
+            console.log('selected vid:');
+            console.log(this.selectedVideo);
         }
     },
-    //==================================
+
+    //==================================================
+    // INIT
+    // use current datetime to hit API and return data
+    //==================================================
+
+    created() {
+        this.loadData();
+    },
+
+    //==================================================
     // METHODS
-    //==================================
+    //==================================================
 
     methods: {
-        loadData: function() {
+        loadData() {
             var self = this;
-            this.feedLoading = true;
+            var tokenPath = this.tokenPath + '?' + this.tokenParams;
 
-            axios.post(this.apiRequest, '', {
+            this.feedLoading = true; // show load indicator
+
+            //==================================================
+            // GET TOKEN
+            //==================================================
+
+            axios.post(tokenPath, '', {
                 headers: {
                     'Accept': '*/*'
                 }
             })
-            .then(function(response) {
-                self.feed = response.data;
-                self.feedLoading = false;
-
-                console.log('feed:');
-                console.log(self.apiRequest);
+            .then((response) => {
+                this.token = response.data.token;
+                getFeed();
             })
-            .catch(function(error) {
-                console.log(error.response.data);
+            .catch((error) => {
+                console.log(error);
             });
+
+            //==================================================
+            // GET FEED AFTER TOKEN
+            //==================================================
+
+            function getFeed() {
+                axios.post(self.apiRequest, '', {
+                    headers: {
+                        'Accept': '*/*'
+                    }
+                })
+                .then((response) => {
+                    self.feed = response.data;
+                    self.feedLoading = false;
+                    self.selectedDateIndex = 0; // invoke watcher to load 0 vid
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            }
         },
 
-        selectVideo: function(obj){
+        //==================================================
+        // SELECT VIDEO
+        //==================================================
+
+        selectVideo(obj){
             this.selectedVideo = obj; // set variable for video component
         }
     }
 });
-
 //-----------------------------------------------------------------
 //
 //-----------------------------------------------------------------
