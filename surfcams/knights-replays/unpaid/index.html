@@ -223,7 +223,7 @@
 
         <!-- /#prologue -->
         
-<!-- PAGE BEGINS --><div id="page" class="lv-page">
+<!-- PAGE BEGINS --><div id="page">
 
             <!-- GLOBAL HEADER -->
             <header id="header" class="global-header header mb-4" role="banner">
@@ -334,35 +334,16 @@
                                             </div>
 
                                             <!-- VIDEO PLAYER -->
-                                            <video-player :selected-video="selectedVideo"></video-player>
+                                            <video-player :selected-video="selectedVideo" live-stream="rtmp://streamer.swellnet.com.au/surfcams/knights.stream" live-stream-image="http://static.swellnet.com.au/images/surfcams/knights.jpg" live-stream-playlist="https://streamer.swellnet.com.au/surfcams/knights.stream/playlist.m3u8"> </video-player>
 
                                             <!-- THUMB SLIDER -->
-                                            
-<!-- <transition name="slide"> --><thumb-slider :feed="feed" :current-index="selectedDateIndex" @select-video="selectVideo" v-if="feed" :class="{'thumbs-loading': feedLoading}"></thumb-slider>
-
-                                            <!-- </transition> -->
+                                            <thumb-slider :feed="feed" :current-index="selectedDateIndex" @select-video="selectVideo" v-if="feed" :class="{'thumbs-loading': feedLoading}"></thumb-slider>
                                             <p class="mt-5">
                                                 <a href="#">
                                                     <img width="100%" src="/assets/img/content/sponsor-perfect-wave.png" alt="">
                                                 </a>
                                             </p>
-                                        </section>
-                                        <style>
-                                        .slide-enter-active,
-                                        .slide-leave-active {
-                                            transition: all ease 300ms;
-                                        }
-                                        
-                                        .slide-enter,
-                                        .slide-leave-to {
-                                            /*transform: translateY(-100%);*/
-                                            opacity: 0;
-                                        }
-                                        
-                                        .thumbs-loading {
-                                            opacity: 0.2;
-                                        }
-                                        </style> Remove video ads with
+                                        </section> Remove video ads with
                                         <a href='http://swellnet.com/pro/subscribe/index.html'>Swellnet Pro</a> for $8.95/month (first month $1.00)
                                         <div class="field field-name-body field-type-text-with-summary field-label-hidden mb-5">
                                             <p>
@@ -1267,7 +1248,7 @@
     <div id="desktopTest" class="hidden-xs hidden-sm"></div>
     <script src="http://swellnet.com/profiles/swellnet/themes/gold/js/dropdown-menu.min.js"></script>
 
-    <!-- *************************** LIQUIDVISUAL ADDED: 06.11.17 *************************** -->
+    <!-- *************************** LIQUIDVISUAL ADDED: 08.11.17 *************************** -->
     
 <!--[if lte IE 9]><div class="lv-alert-bar">
         <p>You're using an outdated browser. Please <a href="http://outdatedbrowser.com">upgrade your browser</a> to improve your experience.</p>
