@@ -8100,7 +8100,7 @@ function launchSlider() {
   }, methods: {
     playVideo: function playVideo(e, t, n) {
       var i = this.selectedVideo.video_url,
-          r = this.selectedVideo.image_url;e && (i = n, r = t), this.hasSetup || (this.playerInstance.setup({ file: i, image: r }), this.hasSetup = !0), this.playerInstance.load([{ file: i, image: r }]), this.playerInstance.play();
+          r = this.selectedVideo.image_url;e && (i = n, r = t), this.hasSetup || (this.player_conf.file = i, this.player_conf.image = r, this.playerInstance.setup(this.player_conf), this.hasSetup = !0), this.playerInstance.load([{ file: i, image: r }]), this.playerInstance.play();
     }
   } }), Vue.component("thumb-slider", { props: { feed: { required: !0, default: [] }, feedLoading: !0, currentIndex: 0 }, template: '\n        <div class="thumb-slider-wrapper collapse-row-sm-only">\n            <div class="thumb-slider-track">\n\n                <vue-flickity class="thumb-slider" ref="flickity" :options="flickityOptions">\n                    <a v-for="(item, index) in feed" :key="index" :title="item.start_local" class="thumb-slider-item btn-tile" @click.prevent="selectFeedObj(item, index)">\n                        <img src="/assets/img/layout/placeholder-thumbnail.png">\n\n                        <span class="btn-tile-bg" :style="{ \'background-image\': \'url(\'+item.image_url+\')\'}"></span>\n                        \x3c!-- data-flickity-bg-lazyload="tulip.jpg" --\x3e\n\n                        <div class="btn-tile-overlay">\n                            <h3 class="btn-tile-header" v-text="formatTime(item.start_local)"></h3>\n                        </div>\n                    </a>\n                </vue-flickity>\n\n                \x3c!-- SLIDER CONTROLS --\x3e\n                <button class="thumb-slider-prev-btn" @click="previous()"><i class="fa fa-angle-left"></i></button>\n                <button class="thumb-slider-next-btn" @click="next()"><i class="fa fa-angle-right"></i></button>\n            </div>\n        </div>\n    ', data: function data() {
     return { flickityOptions: { adaptiveHeight: !0, autoPlay: !1, cellAlign: "left", contain: !0, draggable: window.innerWidth <= 1024, dragThreshold: 3, freeScroll: !0, freeScrollFriction: .075, friction: .28, imagesLoaded: !0, pageDots: !1, prevNextButtons: !1, pauseAutoPlayOnHover: !1, selectedAttraction: .025, watchCSS: !0, wrapAround: !1 } };
@@ -8218,7 +8218,7 @@ function launchSlider() {
       this.loadData();
     },
     selectedDateIndex: function selectedDateIndex() {
-      this.selectedVideo = this.feed[this.selectedDateIndex], console.log("computed: selectedDateIndex");
+      this.selectedVideo = this.feed[this.selectedDateIndex];
     }
   }, created: function created() {
     this.loadData();
@@ -8230,7 +8230,10 @@ function launchSlider() {
       var e = this,
           t = this.tokenPath + "?" + this.tokenParams;this.feedLoading = !0, axios.post(t, "", { headers: { Accept: "*/*" } }).then(function (t) {
         _this2.token = t.data.token, axios.post(e.apiRequest, "", { headers: { Accept: "*/*" } }).then(function (t) {
-          console.log("response is: " + t), e.feed = t.data, e.feedLoading = !1, e.selectedDateIndex = 0;
+          if (t.data.length) e.feed = t.data, e.feedLoading = !1, e.selectedDateIndex = 0;else {
+            var n = new Date(),
+                i = n.setDate(n.getDate() - 1);e.date = { timeStamp: i };
+          }
         }).catch(function (e) {
           console.log(e);
         });
