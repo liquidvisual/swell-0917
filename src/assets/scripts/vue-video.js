@@ -235,10 +235,9 @@ Vue.component('video-player', {
 
             // RUN ONCE
             if (!this.hasSetup) {
-                this.playerInstance.setup({
-                    file: stream,
-                    image: image,
-                });
+                this.player_conf.file = stream;
+                this.player_conf.image = image;
+                this.playerInstance.setup(this.player_conf);
                 this.hasSetup = true;
             }
 
@@ -497,13 +496,11 @@ new Vue({
     watch: {
         apiRequest() {
             this.loadData();
-            // console.log('computed: watch api request');
         },
 
         // when 'time-select' changes the index, update the video object. Other components will respond.
         selectedDateIndex(){
             this.selectedVideo = this.feed[this.selectedDateIndex];
-            console.log('computed: selectedDateIndex');
         }
     },
 
@@ -556,18 +553,15 @@ new Vue({
                 })
                 .then((response) => {
 
-                    console.log('response is: '+response);
-
-                    // if (response.data.length) {
+                    if (response.data.length){
                         self.feed = response.data;
                         self.feedLoading = false;
                         self.selectedDateIndex = 0; // invoke watcher to load 0 vid
-                    // } else {
-                        // var d = new Date();
-                        // var yesterday = d.setDate(d.getDate()-2);
-                        // self.date = { timeStamp: yesterday };
-                        // self.loadData(); // try again
-                    // }
+                    } else {
+                        var d = new Date();
+                        var yesterday = d.setDate(d.getDate()-1);
+                        self.date = { timeStamp: yesterday };
+                    }
                 })
                 .catch((error) => {
                     console.log(error);
