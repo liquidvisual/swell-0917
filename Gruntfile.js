@@ -309,18 +309,20 @@ module.exports = function (grunt) {
     },
     //-----------------------------------------------------
     // BABEL
+    // https://github.com/babel/babel/issues/5455
     //-----------------------------------------------------
     babel: {
       options: {
-        sourceMap: false,
-        minified: false,
-        comments: true,
-        presets: ['env']
+        // sourceMap: false,
+        // minified: false,
+        // comments: false,
+        // presets: ['env']
       },
       dist: {
         files: {
-          '<%= yeoman.assets %>/scripts/minified.js': '<%= yeoman.app %>/assets/scripts/main.js'
-        }
+          // dist : app
+          'dist/assets/scripts/minified.js': 'dist/assets/scripts/minified.js'
+        },
       }
     },
     //-----------------------------------------------------
@@ -611,9 +613,9 @@ module.exports = function (grunt) {
     //'imagemin',
     //'svgmin',
     //'filerev',
-    // 'babel',
     'usemin',
     'postcss',
+    'babel',
     //'htmlmin', // best not to use this?
     'prettify',
     ]);

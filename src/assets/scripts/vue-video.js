@@ -1,9 +1,10 @@
 /*
-    VUE-VIDEO.JS - Last updated: 07.11.17
+    VUE-VIDEO.JS - Last updated: 08.11.17
 
-    <!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
-    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
-    <!-- <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script> -->
+    <!-- DEPENDENCIES -->
+    <!-- https://unpkg.com/vue/dist/vue.js -->
+    <!-- https://unpkg.com/axios/dist/axios.min.js -->
+    <!-- https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js -->
 */
 //-----------------------------------------------------------------
 // DATE SELECT
@@ -154,7 +155,10 @@ Vue.component('video-player', {
     props: {
         selectedVideo: {
             default: null
-        }
+        },
+        liveStream: null,
+        liveStreamImage: null,
+        liveStreamPlaylist: null
     },
     template: `
         <div id="video" class="mb-5">
@@ -198,27 +202,42 @@ Vue.component('video-player', {
         this.playerInstance = jwplayer('video');
     },
     beforeDestroy() {
-        // this.playerInstance.remove();
+        this.playerInstance.remove();
     },
     watch: {
         selectedVideo(){
-            this.playVideo();
+
+            // if url path is 'live' -> intercept video with live feed on init
+            if (!this.hasSetup && !(window.location.href.indexOf('replays') > -1)) {
+                this.playVideo(this.liveStream, this.liveStreamImage, this.liveStreamPlaylist);
+            } else {
+                this.playVideo();
+            }
         },
     },
     methods: {
         // https://support.jwplayer.com/customer/portal/articles/1480872
         // https://developer.jwplayer.com/jw-player/docs/javascript-api-reference/#jwplayernext
 
-        playVideo() {
+        playVideo(streamOverride, streamImageOverride, streamPlaylistOverride) {
+
             var stream = this.selectedVideo.video_url;
             var playlist = null;
             var image = this.selectedVideo.image_url;
 
+            //refactor this hack - allows override on init based on 'live' in url
+            if (streamOverride) {
+                // stream = streamOverride; // .stream doesn't work?
+                // playlist = streamPlaylistOverride;
+                stream = streamPlaylistOverride; // this does?
+                image = streamImageOverride;
+            }
+
             // RUN ONCE
             if (!this.hasSetup) {
                 this.playerInstance.setup({
-                    image: image,
                     file: stream,
+                    image: image,
                 });
                 this.hasSetup = true;
             }
@@ -247,14 +266,13 @@ Vue.component('thumb-slider', {
         },
         feedLoading: true,
         currentIndex: 0, // only the time select can change this
-        test: true
     },
     template: `
         <div class="thumb-slider-wrapper collapse-row-sm-only">
             <div class="thumb-slider-track">
 
                 <vue-flickity class="thumb-slider" ref="flickity" :options="flickityOptions">
-                    <a v-for="(item, index) in feed" :key="index" class="thumb-slider-item btn-tile" @click.prevent="selectFeedObj(item, index)">
+                    <a v-for="(item, index) in feed" :key="index" :title="item.start_local" class="thumb-slider-item btn-tile" @click.prevent="selectFeedObj(item, index)">
                         <img src="/assets/img/layout/placeholder-thumbnail.png">
 
                         <span class="btn-tile-bg" :style="{ 'background-image': 'url('+item.image_url+')'}"></span>
@@ -272,7 +290,7 @@ Vue.component('thumb-slider', {
             </div>
         </div>
     `,
-    data: function() {
+    data() {
         return {
             flickityOptions: {
                 adaptiveHeight: true,
@@ -299,24 +317,24 @@ Vue.component('thumb-slider', {
         }
     },
     watch: {
-        feed: function(){
-            var self = this;
+        feed(){
+            this.$refs.flickity.destroy();
 
-            this.$nextTick(function(){
-                self.$refs.flickity.rerender();
+            this.$nextTick(() => {
+                this.$refs.flickity.rerender();
             });
         },
 
-        currentIndex: function(){
+        currentIndex(){
             this.$refs.flickity.select(this.currentIndex); // set by the time select - moves slides to index
         }
     },
     methods: {
-        formatTime: function(time){
+        formatTime(time){
             return moment(time).format('hh:mma'); // uses moment.js in global scope
         },
 
-        selectFeedObj: function(obj, index) {
+        selectFeedObj(obj, index) {
             // console.log('Read to load: '+obj);
             var payload = {};
                 payload.obj = obj;
@@ -325,11 +343,11 @@ Vue.component('thumb-slider', {
             this.$emit('select-video', payload); //********************* EMIT ************************
         },
 
-        next: function() {
+        next() {
             this.$refs.flickity.next();
         },
 
-        previous: function() {
+        previous() {
             this.$refs.flickity.previous();
         },
 
@@ -479,15 +497,13 @@ new Vue({
     watch: {
         apiRequest() {
             this.loadData();
+            // console.log('computed: watch api request');
         },
 
         // when 'time-select' changes the index, update the video object. Other components will respond.
         selectedDateIndex(){
-
             this.selectedVideo = this.feed[this.selectedDateIndex];
-
-            // console.log('selected vid:');
-            // console.log(this.selectedVideo);
+            console.log('computed: selectedDateIndex');
         }
     },
 
@@ -539,9 +555,19 @@ new Vue({
                     }
                 })
                 .then((response) => {
-                    self.feed = response.data;
-                    self.feedLoading = false;
-                    self.selectedDateIndex = 0; // invoke watcher to load 0 vid
+
+                    console.log('response is: '+response);
+
+                    // if (response.data.length) {
+                        self.feed = response.data;
+                        self.feedLoading = false;
+                        self.selectedDateIndex = 0; // invoke watcher to load 0 vid
+                    // } else {
+                        // var d = new Date();
+                        // var yesterday = d.setDate(d.getDate()-2);
+                        // self.date = { timeStamp: yesterday };
+                        // self.loadData(); // try again
+                    // }
                 })
                 .catch((error) => {
                     console.log(error);

@@ -146,6 +146,24 @@ http://flickity.metafizzy.co
 //-----------------------------------------------------------------
 //
 //-----------------------------------------------------------------
+
+// transitions: for reference
+
+    // .slide-enter-active,
+    // .slide-leave-active {
+    //     transition: all ease 300ms;
+    // }
+
+    // .slide-enter,
+    // .slide-leave-to {
+    //     /*transform: translateY(-100%);*/
+    //     opacity: 0;
+    // }
+
+    #video-widget .thumbs-loading {
+        opacity: 0.2;
+    }
+
 //=========================================
 //
 //=========================================
