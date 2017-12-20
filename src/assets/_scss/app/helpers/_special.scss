@@ -105,8 +105,60 @@
 }
 
 //-----------------------------------------------------------------
-//
+// SPECIAL NEAREST SURFCAMS
+// Jerry-rig Drupal markup
 //-----------------------------------------------------------------
+
+.special-nearest-surfcams {
+	.thumb-slider-item {
+
+		img {
+			visibility: visible;
+			max-width: none;
+			// transition: opacity 300ms ease;
+
+			@include media-breakpoint-up(md) {
+			    width: 100%;
+			}
+		}
+
+		// Text part
+		.field-content:nth-child(2) {
+
+			a {
+				display: block;
+				max-width: 150px;
+				padding: rem-calc(10);
+				background: #2f2f2f;
+				font-size: rem-calc(26);
+				line-height: 1;
+				text-align: center;
+				text-decoration: none;
+				color: white;
+
+				// ellipsis
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+
+				@include media-breakpoint-up(md) {
+				    max-width: none;
+				}
+			}
+		}
+
+		.field-content:nth-child(3) {
+			display: none;
+		}
+
+		&:hover img {
+			@include media-breakpoint-up(lg) {
+			    // opacity: 0.85;
+			}
+		}
+	}
+}
+
 //-----------------------------------------------------------------
 //
 //-----------------------------------------------------------------
