@@ -475,7 +475,7 @@ new Vue({
             token: null,
             tokenPath: 'https://api.swellnet.com/v1/999/nondrupal/login',
             tokenParams: 'username=project_tv&password=Mngd8936%',
-            apiPath: 'https://api.swellnet.com/v1/999/swellnet/recordings/29?token=',
+            apiPath: null, //'https://api.swellnet.com/v1/999/swellnet/recordings/29?token=',
         }
     },
 
@@ -485,6 +485,7 @@ new Vue({
 
     computed: {
         apiRequest(){
+            // console.log('Computed: '+this.token);
             return this.apiPath + this.token + '&local_date=' + moment(this.date.timeStamp).format('YYYY-MM-DD');
         }
     },
@@ -495,6 +496,8 @@ new Vue({
 
     watch: {
         apiRequest() {
+            // console.log('watch');
+
             this.loadData();
         },
 
@@ -505,13 +508,24 @@ new Vue({
     },
 
     //==================================================
+    // BEFORE MOUNT
+    //==================================================
+
+    beforeMount(){
+        let surfcamId = this.$el.attributes['surfcam-id'].value;
+        this.apiPath = 'https://api.swellnet.com/v1/999/swellnet/recordings/'+surfcamId+'?token=';
+        // console.log('beforeMount');
+    },
+
+    //==================================================
     // INIT
     // use current datetime to hit API and return data
     //==================================================
 
-    created() {
-        this.loadData();
-    },
+    // mounted() {
+    //     // this.loadData();
+    //     // console.log('mounted');
+    // },
 
     //==================================================
     // METHODS
@@ -521,6 +535,8 @@ new Vue({
         loadData() {
             var self = this;
             var tokenPath = this.tokenPath + '?' + this.tokenParams;
+
+            // console.log(':: loadData ::');
 
             this.feedLoading = true; // show load indicator
 
@@ -536,6 +552,7 @@ new Vue({
             .then((response) => {
                 this.token = response.data.token;
                 getFeed();
+
             })
             .catch((error) => {
                 console.log(error);
