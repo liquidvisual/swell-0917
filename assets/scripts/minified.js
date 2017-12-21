@@ -8208,7 +8208,7 @@ function launchSlider() {
       this.flickity.once(e, t);
     }
   } }), new Vue({ el: "#video-widget", data: function data() {
-    return { feed: null, feedLoading: !0, date: { timeStamp: Date.now() }, selectedDateIndex: null, selectedVideo: null, token: null, tokenPath: "https://api.swellnet.com/v1/999/nondrupal/login", tokenParams: "username=project_tv&password=Mngd8936%", apiPath: "https://api.swellnet.com/v1/999/swellnet/recordings/29?token=" };
+    return { feed: null, feedLoading: !0, date: { timeStamp: Date.now() }, selectedDateIndex: null, selectedVideo: null, token: null, tokenPath: "https://api.swellnet.com/v1/999/nondrupal/login", tokenParams: "username=project_tv&password=Mngd8936%", apiPath: null };
   }, computed: {
     apiRequest: function apiRequest() {
       return this.apiPath + this.token + "&local_date=" + moment(this.date.timeStamp).format("YYYY-MM-DD");
@@ -8220,8 +8220,8 @@ function launchSlider() {
     selectedDateIndex: function selectedDateIndex() {
       this.selectedVideo = this.feed[this.selectedDateIndex];
     }
-  }, created: function created() {
-    this.loadData();
+  }, beforeMount: function beforeMount() {
+    var e = this.$el.attributes["surfcam-id"].value;this.apiPath = "https://api.swellnet.com/v1/999/swellnet/recordings/" + e + "?token=";
   },
   methods: {
     loadData: function loadData() {
