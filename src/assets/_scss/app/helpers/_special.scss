@@ -192,6 +192,10 @@
 			background: lighten($brand-secondary, 5%);
 		}
 	}
+
+	.flag-throbber {
+		display: none;
+	}
 }
 
 //=========================================
