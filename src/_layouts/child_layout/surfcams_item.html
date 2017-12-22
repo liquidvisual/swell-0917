@@ -6,7 +6,11 @@ layout: base__page_sidebar
 <div class="btn-tabs collapse-row-sm-only">
 
     {% unless page.user_type == 'public' %}
-        <a class="btn btn-primary btn-tiny" href="#"><i class="fa fa-star"></i> Set as Favourite</a>
+        <!-- <a class="btn btn-primary btn-tiny" href="#"><i class="fa fa-star"></i> Set as Favourite</a> -->
+
+        <span class="flag-wrapper flag-favourite-surfcam">
+            <a href="#" class="flag flag-action flag-link-normal" rel="nofollow">Set as favourite</a><span class="flag-throbber">&nbsp;</span>
+        </span>
     {% endunless %}
 
     <a class="btn-tab {% if page.url contains 'knights-replays' %} active {% endif %}" href="/surfcams/knights-replays/public/">Replays</a>

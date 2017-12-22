@@ -160,8 +160,40 @@
 }
 
 //-----------------------------------------------------------------
-//
+// DRUPAL "SET AS FAV" BUTTON
 //-----------------------------------------------------------------
+
+.btn-tabs .flag-wrapper {
+	position: relative;
+	left: 18px;
+	top: 8px;
+
+	@include media-breakpoint-up(md) {
+	    top: 13px;
+	    left: 0;
+	}
+
+	a {
+		display: inline-block;
+		border-radius: 0;
+		font-size: rem-calc(20);
+		font-weight: bold;
+		line-height: 1.2;
+		text-transform: uppercase;
+		color: white;
+
+		&:before {
+			content: "\f005";
+			font-family: 'FontAwesome';
+			margin-right: rem-calc(5);
+		}
+
+		&:hover {
+			background: lighten($brand-secondary, 5%);
+		}
+	}
+}
+
 //=========================================
 //
 //=========================================
