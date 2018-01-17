@@ -218,7 +218,14 @@ Vue.component('video-player', {
         selectedVideo(){
 
             // if url path is 'live' -> intercept video with live feed on init
-            if (!this.hasSetup && !(window.location.href.indexOf('replays') > -1)) {
+            // if (!this.hasSetup && !(window.location.href.indexOf('replays') > -1)) {
+            //     this.playVideo(this.liveStream, this.liveStreamImage, this.liveStreamPlaylist);
+            // } else {
+            //     this.playVideo();
+            // }
+
+            // if page is 'livestream', use attributes rendered on the <video> element
+            if (!this.hasSetup && this.liveStream) {
                 this.playVideo(this.liveStream, this.liveStreamImage, this.liveStreamPlaylist);
             } else {
                 this.playVideo();

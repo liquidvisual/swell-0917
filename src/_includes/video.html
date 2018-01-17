@@ -9,8 +9,16 @@
         </div>
     {% endif %}
 
+    {% capture live_stream %}
+        {% if page.url contains 'live' %}
+            live-stream="rtmp://streamer.swellnet.com.au/surfcams/knights.stream"
+            live-stream-image="http://static.swellnet.com.au/images/surfcams/knights.jpg"
+            live-stream-playlist="https://streamer.swellnet.com.au/surfcams/knights.stream/playlist.m3u8"
+        {% endif %}
+    {% endcapture %}
+
     <!-- VIDEO PLAYER -->
-    <video-player :selected-video="selectedVideo"></video-player>
+    <video-player :selected-video="selectedVideo" {{ live_stream }}></video-player>
 
     {% if page.url contains 'live' %}
         <!-- SURFCAM REPLAYS -->
