@@ -475,18 +475,12 @@ new Vue({
     el: '#video-widget',
     data() {
         return {
+            apiPath: null,  // beforeMount sets this based on surfcam ID passed as attribute | EG. /surfcam-replays/data/29/2018/01/12
             feed: null,
             feedLoading: true,
-
             date: { timeStamp: Date.now() }, // 'date-select' will change this - altering api request string
             selectedDateIndex: null, // changed by 'time-select' - used to move through thumbs via Flickity
             selectedVideo: null, // set by 'time-select' or clicking thumb
-
-            token: null,
-            tokenPath: 'https://api.swellnet.com/v1/999/swellnet/anontoken',
-            apiPath: null,  // beforeMount sets this based on surfcam ID passed as attribute
-                            // EG. https://api.swellnet.com/v1/999/swellnet/recordings/29?token=
-                            // EG. http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/29/2018/01/12
         }
     },
 
@@ -497,8 +491,7 @@ new Vue({
     computed: {
         apiRequest(){
             // console.log('Computed: '+this.token);
-            // return this.apiPath + this.token + '&local_date=' + moment(this.date.timeStamp).format('YYYY/MM/DD');
-            return this.apiPath + moment(this.date.timeStamp).format('YYYY/MM/DD') + '?token=' + this.token;
+            return this.apiPath + moment(this.date.timeStamp).format('YYYY/MM/DD');
         }
     },
 
@@ -509,7 +502,6 @@ new Vue({
     watch: {
         apiRequest() {
             // console.log('watch');
-
             this.loadData();
         },
 
@@ -526,21 +518,13 @@ new Vue({
 
     beforeMount(){
         // console.log('beforeMount');
+        var surfcamId = this.$el.attributes['surfcam-id'].value; // EG. 29
+        var surfcamPath = this.$el.attributes['surfcam-path'].value // EG. http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/
 
-        let surfcamId = this.$el.attributes['surfcam-id'].value; // eg. 29
-        // OLD: this.apiPath = 'https://api.swellnet.com/v1/999/swellnet/recordings/'+surfcamId+'?token=';
-        this.apiPath = 'http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/'+surfcamId+'/';   //'29/2018/01/12';
+        if (!surfcamPath) surfcamPath = '/'; // passing blank will make relative to domain
+
+        this.apiPath = surfcamPath + surfcamId + '/'; // EG. http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/29/
     },
-
-    //==================================================
-    // INIT
-    // use current datetime to hit API and return data
-    //==================================================
-
-    // mounted() {
-    //     // this.loadData();
-    //     // console.log('mounted');
-    // },
 
     //==================================================
     // METHODS
@@ -548,59 +532,31 @@ new Vue({
 
     methods: {
         loadData() {
-            var self = this;
-            var tokenPath = this.tokenPath;
-
             // console.log(':: loadData ::');
+            var self = this;
 
             this.feedLoading = true; // show load indicator
 
-            //==================================================
-            // GET TOKEN
-            //==================================================
-
-            axios.post(tokenPath, '', {
+            axios.get(self.apiRequest, '', {
                 headers: {
                     'Accept': '*/*'
                 }
             })
             .then((response) => {
-                this.token = response.data.token;
-                getFeed();
 
+                if (response.data.length){
+                    self.feed = response.data;
+                    self.feedLoading = false;
+                    self.selectedDateIndex = 0; // invoke watcher to load 0 vid
+                } else {
+                    var d = new Date();
+                    var yesterday = d.setDate(d.getDate()-1);
+                    self.date = { timeStamp: yesterday };
+                }
             })
             .catch((error) => {
                 console.log(error);
             });
-
-            //==================================================
-            // GET FEED AFTER TOKEN
-            //==================================================
-
-            function getFeed() {
-                // console.log(":: getFeed ::");
-
-                axios.get(self.apiRequest, '', {
-                    headers: {
-                        'Accept': '*/*'
-                    }
-                })
-                .then((response) => {
-
-                    if (response.data.length){
-                        self.feed = response.data;
-                        self.feedLoading = false;
-                        self.selectedDateIndex = 0; // invoke watcher to load 0 vid
-                    } else {
-                        var d = new Date();
-                        var yesterday = d.setDate(d.getDate()-1);
-                        self.date = { timeStamp: yesterday };
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-            }
         },
 
         //==================================================
