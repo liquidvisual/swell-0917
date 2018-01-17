@@ -2,7 +2,7 @@
 <html class="no-js" lang="en" {{ site.environment }}>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="Generator" content="Drupal 7 (http://drupal.org)">
 
@@ -224,7 +224,13 @@
     <script src="/_bower_components/moment/locale/en-au.js"></script>
     <script src="/assets/scripts/vendor/jquery.socialfeed.js"></script>
     <script src="/_bower_components/isotope/dist/isotope.pkgd.js"></script>
-    <script src="/_bower_components/vue/dist/vue.js"></script>
+
+    {% if site.environment == 'data-dev-mode' %}
+        <script src="/_bower_components/vue/dist/vue.js"></script>
+    {% else %}
+        <script src="/_bower_components/vue/dist/vue.min.js"></script>
+    {% endif %}
+
     <script src="/_bower_components/axios/dist/axios.js"></script>
     <script src="/_bower_components/flickity/dist/flickity.pkgd.js"></script>
     <script src="/assets/scripts/flickity.js"></script>

@@ -1,10 +1,20 @@
 /*
-    VUE-VIDEO.JS - Last updated: 08.11.17
+    VUE-VIDEO.JS
+    updated: 08.11.17, 17.01.18
 
     <!-- DEPENDENCIES -->
     <!-- https://unpkg.com/vue/dist/vue.js -->
     <!-- https://unpkg.com/axios/dist/axios.min.js -->
     <!-- https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js -->
+
+    todo:
+        * allow drag without interfering click on desktop
+            - https://github.com/metafizzy/flickity/issues/409
+            - https://flickity.metafizzy.co/events.html#staticclick
+
+        * incorporate url paths to drive clicks (hash fragments)
+        * look into init and watch
+        * does widget need to be vue instance?
 */
 //-----------------------------------------------------------------
 // DATE SELECT
@@ -221,9 +231,9 @@ Vue.component('video-player', {
 
         playVideo(streamOverride, streamImageOverride, streamPlaylistOverride) {
 
-            var stream = this.selectedVideo.video_url;
-            var playlist = null;
-            var image = this.selectedVideo.image_url;
+            var stream = this.selectedVideo.video_url; // get stream path
+            var playlist = null; // 'playlist' doesn't come through the API, unecessary?
+            var image = this.selectedVideo.image_url; // get thumbnail
 
             //refactor this hack - allows override on init based on 'live' in url
             if (streamOverride) {
@@ -473,9 +483,10 @@ new Vue({
             selectedVideo: null, // set by 'time-select' or clicking thumb
 
             token: null,
-            tokenPath: 'https://api.swellnet.com/v1/999/nondrupal/login',
-            tokenParams: 'username=project_tv&password=Mngd8936%',
-            apiPath: null, //'https://api.swellnet.com/v1/999/swellnet/recordings/29?token=',
+            tokenPath: 'https://api.swellnet.com/v1/999/swellnet/anontoken',
+            apiPath: null,  // beforeMount sets this based on surfcam ID passed as attribute
+                            // EG. https://api.swellnet.com/v1/999/swellnet/recordings/29?token=
+                            // EG. http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/29/2018/01/12
         }
     },
 
@@ -486,7 +497,8 @@ new Vue({
     computed: {
         apiRequest(){
             // console.log('Computed: '+this.token);
-            return this.apiPath + this.token + '&local_date=' + moment(this.date.timeStamp).format('YYYY-MM-DD');
+            // return this.apiPath + this.token + '&local_date=' + moment(this.date.timeStamp).format('YYYY/MM/DD');
+            return this.apiPath + moment(this.date.timeStamp).format('YYYY/MM/DD') + '?token=' + this.token;
         }
     },
 
@@ -509,12 +521,15 @@ new Vue({
 
     //==================================================
     // BEFORE MOUNT
+    // needs to get attribute passed to module
     //==================================================
 
     beforeMount(){
-        let surfcamId = this.$el.attributes['surfcam-id'].value;
-        this.apiPath = 'https://api.swellnet.com/v1/999/swellnet/recordings/'+surfcamId+'?token=';
         // console.log('beforeMount');
+
+        let surfcamId = this.$el.attributes['surfcam-id'].value; // eg. 29
+        // OLD: this.apiPath = 'https://api.swellnet.com/v1/999/swellnet/recordings/'+surfcamId+'?token=';
+        this.apiPath = 'http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/'+surfcamId+'/';   //'29/2018/01/12';
     },
 
     //==================================================
@@ -534,7 +549,7 @@ new Vue({
     methods: {
         loadData() {
             var self = this;
-            var tokenPath = this.tokenPath + '?' + this.tokenParams;
+            var tokenPath = this.tokenPath;
 
             // console.log(':: loadData ::');
 
@@ -563,7 +578,9 @@ new Vue({
             //==================================================
 
             function getFeed() {
-                axios.post(self.apiRequest, '', {
+                // console.log(":: getFeed ::");
+
+                axios.get(self.apiRequest, '', {
                     headers: {
                         'Accept': '*/*'
                     }

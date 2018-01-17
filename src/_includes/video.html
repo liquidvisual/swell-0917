@@ -10,11 +10,7 @@
     {% endif %}
 
     <!-- VIDEO PLAYER -->
-    <video-player :selected-video="selectedVideo"
-                  live-stream="rtmp://streamer.swellnet.com.au/surfcams/knights.stream"
-                  live-stream-image="http://static.swellnet.com.au/images/surfcams/knights.jpg"
-                  live-stream-playlist="https://streamer.swellnet.com.au/surfcams/knights.stream/playlist.m3u8">
-    </video-player>
+    <video-player :selected-video="selectedVideo"></video-player>
 
     {% if page.url contains 'live' %}
         <!-- SURFCAM REPLAYS -->
