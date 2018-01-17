@@ -8024,10 +8024,10 @@ function launchSlider() {
       this.flickity.once(e, t);
     }
   } }), new Vue({ el: "#video-widget", data: function data() {
-    return { feed: null, feedLoading: !0, date: { timeStamp: Date.now() }, selectedDateIndex: null, selectedVideo: null, token: null, tokenPath: "https://api.swellnet.com/v1/999/swellnet/anontoken", apiPath: null };
+    return { apiPath: null, feed: null, feedLoading: !0, date: { timeStamp: Date.now() }, selectedDateIndex: null, selectedVideo: null };
   }, computed: {
     apiRequest: function apiRequest() {
-      return this.apiPath + moment(this.date.timeStamp).format("YYYY/MM/DD") + "?token=" + this.token;
+      return this.apiPath + moment(this.date.timeStamp).format("YYYY/MM/DD");
     }
   }, watch: {
     apiRequest: function apiRequest() {
@@ -8037,22 +8037,16 @@ function launchSlider() {
       this.selectedVideo = this.feed[this.selectedDateIndex];
     }
   }, beforeMount: function beforeMount() {
-    var e = this.$el.attributes["surfcam-id"].value;this.apiPath = "http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/" + e + "/";
+    var e = this.$el.attributes["surfcam-id"].value,
+        t = this.$el.attributes["surfcam-path"].value;t || (t = "/"), this.apiPath = t + e + "/";
   },
   methods: {
     loadData: function loadData() {
-      var _this2 = this;
-
-      var e = this,
-          t = this.tokenPath;this.feedLoading = !0, axios.post(t, "", { headers: { Accept: "*/*" } }).then(function (t) {
-        _this2.token = t.data.token, axios.get(e.apiRequest, "", { headers: { Accept: "*/*" } }).then(function (t) {
-          if (t.data.length) e.feed = t.data, e.feedLoading = !1, e.selectedDateIndex = 0;else {
-            var n = new Date(),
-                i = n.setDate(n.getDate() - 1);e.date = { timeStamp: i };
-          }
-        }).catch(function (e) {
-          console.log(e);
-        });
+      var e = this;this.feedLoading = !0, axios.get(e.apiRequest, "", { headers: { Accept: "*/*" } }).then(function (t) {
+        if (t.data.length) e.feed = t.data, e.feedLoading = !1, e.selectedDateIndex = 0;else {
+          var n = new Date(),
+              i = n.setDate(n.getDate() - 1);e.date = { timeStamp: i };
+        }
       }).catch(function (e) {
         console.log(e);
       });
