@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="Generator" content="Drupal 7 (http://drupal.org)">
     <title>Homepage</title>
@@ -286,7 +286,7 @@
                             <div id="main" role="main" class="main">
                                 <div class="col-sm-6">
                                     <p class="text-center">Last updated:
-                                        <b>Friday December 22 -- 11:59:43 AM</b>
+                                        <b>Wednesday January 17 -- 12:12:00 PM</b>
                                     </p>
                                     <h2 class="mb-5">Preview a Template</h2>
                                     <ul class="list-unstyled">
@@ -634,15 +634,19 @@
     &lt;!-- THUMB SLIDER --&gt;
     &lt;div class="thumb-slider-wrapper collapse-row-sm-only"&gt;
         &lt;div class="thumb-slider-track"&gt;
-            &lt;div class="thumb-slider is-stacked-for-desktop" data-thumb-slider&gt;
+            &lt;div class="thumb-slider special-nearest-surfcams is-stacked-for-desktop" data-thumb-slider&gt;
                 {% for i in (1..6) %}
-                    &lt;a class="thumb-slider-item btn-tile" href="#"&gt;
-                        &lt;img src="/assets/img/layout/placeholder-thumbnail.png"&gt;
-                        &lt;span class="btn-tile-bg" style="background-image: url(http://static.swellnet.com.au/images/surfcams/southport-thumb.jpg)"&gt;&lt;/span&gt;
-                        &lt;div class="btn-tile-overlay"&gt;
-                            &lt;h3 class="btn-tile-header"&gt;Cronulla Beaches&lt;/h3&gt;
-                        &lt;/div&gt;
-                    &lt;/a&gt;
+                    &lt;div class="thumb-slider-item btn-tile"&gt;
+                        &lt;span class="field-content"&gt;
+                            &lt;a href="/surfcams/middleton"&gt;
+                                &lt;img class="img-responsive" src="http://static.swellnet.com.au/images/surfcams/middleton-thumb.jpg" alt="Middleton" title="Middleton"&gt;
+                            &lt;/a&gt;
+                        &lt;/span&gt;
+                        &lt;span class="field-content"&gt;
+                            &lt;a href="/surfcams/middleton"&gt;Middleton&lt;/a&gt;
+                        &lt;/span&gt;
+                        &lt;span class="field-content"&gt;4.949165415382&lt;/span&gt;
+                    &lt;/div&gt;
                 {% endfor %}
             &lt;/div&gt;
             &lt;!-- SLIDER CONTROLS --&gt;
