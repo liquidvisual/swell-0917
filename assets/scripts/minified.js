@@ -8044,8 +8044,8 @@ function launchSlider() {
       var _this2 = this;
 
       var e = this,
-          t = this.tokenPath;console.log(":: loadData ::"), this.feedLoading = !0, axios.post(t, "", { headers: { Accept: "*/*" } }).then(function (t) {
-        _this2.token = t.data.token, console.log(":: getFeed ::"), axios.get(e.apiRequest, "", { headers: { Accept: "*/*" } }).then(function (t) {
+          t = this.tokenPath;this.feedLoading = !0, axios.post(t, "", { headers: { Accept: "*/*" } }).then(function (t) {
+        _this2.token = t.data.token, axios.get(e.apiRequest, "", { headers: { Accept: "*/*" } }).then(function (t) {
           if (t.data.length) e.feed = t.data, e.feedLoading = !1, e.selectedDateIndex = 0;else {
             var n = new Date(),
                 i = n.setDate(n.getDate() - 1);e.date = { timeStamp: i };
