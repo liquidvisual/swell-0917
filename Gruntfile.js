@@ -21,16 +21,16 @@ module.exports = function (grunt) {
   //-----------------------------------------------------
 
   require('jit-grunt')(grunt, {
-
     // Uncomment if plugins can't be resolved in automatic mapping
     babel: 'grunt-babel',
-    buildcontrol: 'grunt-build-control',
-    sass_globbing: 'grunt-sass-globbing', // does this speed this up?
-    sass: 'grunt-sass',
     browsersync: 'grunt-browser-sync',
-    useminPrepare: 'grunt-usemin',
-    shell: 'grunt-shell',
+    buildcontrol: 'grunt-build-control',
     prettify: 'grunt-prettify',
+    sass: 'grunt-sass',
+    sass_globbing: 'grunt-sass-globbing', // does this speed this up?
+    shell: 'grunt-shell',
+    uglify: 'grunt-contrib-uglify-es',
+    useminPrepare: 'grunt-usemin'
   });
 
   grunt.initConfig({
@@ -616,7 +616,7 @@ module.exports = function (grunt) {
     'usemin',
     'postcss',
     'babel',
-    //'htmlmin', // best not to use this?
+    'htmlmin', // best not to use this?
     'prettify',
     ]);
 
