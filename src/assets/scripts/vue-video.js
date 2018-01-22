@@ -1,6 +1,6 @@
 /*
     VUE-VIDEO.JS
-    updated: 08.11.17, 17.01.18
+    updated: 22.01.18
 
     <!-- DEPENDENCIES -->
     <!-- https://unpkg.com/vue/dist/vue.js -->
@@ -15,6 +15,7 @@
         * incorporate url paths to drive clicks (hash fragments)
         * look into init and watch
         * does widget need to be vue instance?
+        * uncomment line 557 and 332 for skipping to last item on init
 */
 //-----------------------------------------------------------------
 // DATE SELECT
@@ -159,6 +160,9 @@ Vue.component('time-select', {
 });
 //-----------------------------------------------------------------
 // VIDEO PLAYER
+//
+// 1. component will either load video stream via selectedVideo (API)
+// 2. OR component will load stream through props set on the template
 //-----------------------------------------------------------------
 
 Vue.component('video-player', {
@@ -171,14 +175,13 @@ Vue.component('video-player', {
         liveStreamPlaylist: null
     },
     template: `
-        <div id="video" class="mb-5">
-            <a href="selectedVideo.video_url">Watch this stream over your native player</a>
-        </div>
+        <div id="video" class="mb-5"></div>
     `,
     data() {
         return {
             playerInstance: null,
-            hasSetup: false,
+            hasSetup: false, // video inits once only
+            cooldown: false,
 
             player_conf: {
                 autostart: true,
@@ -210,24 +213,24 @@ Vue.component('video-player', {
     },
     mounted() {
         this.playerInstance = jwplayer('video');
+
+        // if live stream is set on the template (not API), load those paths instead
+        if (this.liveStream) {
+            this.playVideo(this.liveStream, this.liveStreamImage, this.liveStreamPlaylist);
+
+            // set a 4 sec cooldown so the 'watch' will not trigger an overriding playVideo when and IF
+            // the API returns after a delay.
+
+            this.cooldown = true;
+            setTimeout(() => { this.cooldown = false; }, 4000);
+        }
     },
     beforeDestroy() {
         this.playerInstance.remove();
     },
     watch: {
         selectedVideo(){
-
-            // if url path is 'live' -> intercept video with live feed on init
-            // if (!this.hasSetup && !(window.location.href.indexOf('replays') > -1)) {
-            //     this.playVideo(this.liveStream, this.liveStreamImage, this.liveStreamPlaylist);
-            // } else {
-            //     this.playVideo();
-            // }
-
-            // if page is 'livestream', use attributes rendered on the <video> element
-            if (!this.hasSetup && this.liveStream) {
-                this.playVideo(this.liveStream, this.liveStreamImage, this.liveStreamPlaylist);
-            } else {
+            if (!this.cooldown) {
                 this.playVideo();
             }
         },
@@ -238,19 +241,14 @@ Vue.component('video-player', {
 
         playVideo(streamOverride, streamImageOverride, streamPlaylistOverride) {
 
-            var stream = this.selectedVideo.video_url; // get stream path
-            var playlist = null; // 'playlist' doesn't come through the API, unecessary?
-            var image = this.selectedVideo.image_url; // get thumbnail
+            var stream   = streamPlaylistOverride ? streamPlaylistOverride : this.selectedVideo.video_url;
+            var image    = streamImageOverride    ? streamImageOverride    : this.selectedVideo.image_url;
+            var playlist = streamPlaylistOverride ? streamPlaylistOverride : null; // api doesn't need playlist, live stream does
 
-            //refactor this hack - allows override on init based on 'live' in url
-            if (streamOverride) {
-                // stream = streamOverride; // .stream doesn't work?
-                // playlist = streamPlaylistOverride;
-                stream = streamPlaylistOverride; // this does?
-                image = streamImageOverride;
-            }
+            //==================================================
+            // SETUP ONCE ONLY
+            //==================================================
 
-            // RUN ONCE
             if (!this.hasSetup) {
                 this.player_conf.file = stream;
                 this.player_conf.image = image;
@@ -258,14 +256,14 @@ Vue.component('video-player', {
                 this.hasSetup = true;
             }
 
-            // LOAD
+            //==================================================
+            // LOAD AND PLAY
+            //==================================================
+
             this.playerInstance.load([{
                 file: stream,
                 image: image
-            }]);
-
-            // PLAY
-            this.playerInstance.play();
+            }]).play();
         }
     }
 });
@@ -288,7 +286,7 @@ Vue.component('thumb-slider', {
             <div class="thumb-slider-track">
 
                 <vue-flickity class="thumb-slider" ref="flickity" :options="flickityOptions">
-                    <a v-for="(item, index) in feed" :key="index" :title="item.start_local" class="thumb-slider-item btn-tile" @click.prevent="selectFeedObj(item, index)">
+                    <a v-for="(item, index) in feed" :key="index" :title="'#'+index + ' '+item.start_local" class="thumb-slider-item btn-tile" @click.prevent="selectFeedObj(item, index)">
                         <img src="/assets/img/layout/placeholder-thumbnail.png">
 
                         <span class="btn-tile-bg" :style="{ 'background-image': 'url('+item.image_url+')'}"></span>
@@ -315,14 +313,14 @@ Vue.component('thumb-slider', {
                 cellAlign: 'left',
                 contain: true,
                 draggable: (window.innerWidth <= 1024 ? true : false),
-                // lazyload: true, 10 // <img src="placeholder.jpg" data-flickity-lazyload="full.jpg" />
+                // lazyload: true, //10 // <img src="placeholder.jpg" data-flickity-lazyload="full.jpg" />
                 // bgLazyLoad: 5,
                 dragThreshold: 3,
                 freeScroll: true,
                 freeScrollFriction: 0.075, // lower friction, slides easier
                 friction: 0.28, // Higher friction makes the slider feel stickier and less bouncy
                 imagesLoaded: true,
-                // initialIndex: 1, // disabled
+                // initialIndex: 35, //this.currentIndex, //1, // originally disabled- problems with rendering
                 pageDots: false,
                 prevNextButtons: false,
                 pauseAutoPlayOnHover: false,
@@ -332,6 +330,9 @@ Vue.component('thumb-slider', {
             }
         }
     },
+    // mounted(){
+    //     this.$refs.flickity.select(this.currentIndex); // bit hacky, ensure slides move to match time
+    // },
     watch: {
         feed(){
             this.$refs.flickity.destroy();
@@ -342,7 +343,7 @@ Vue.component('thumb-slider', {
         },
 
         currentIndex(){
-            this.$refs.flickity.select(this.currentIndex); // set by the time select - moves slides to index
+            this.$refs.flickity.select(this.currentIndex); // set by the time select ONLY - moves slides to index
         }
     },
     methods: {
@@ -554,8 +555,9 @@ new Vue({
                 if (response.data.length){
                     self.feed = response.data;
                     self.feedLoading = false;
-                    self.selectedDateIndex = 0; // invoke watcher to load 0 vid
+                    self.selectedDateIndex = 0; //self.feed.length-1; //0; // invoke watcher to init at start 0 vid
                 } else {
+                    // If feed returns empty, set time for yesterday and try again
                     var d = new Date();
                     var yesterday = d.setDate(d.getDate()-1);
                     self.date = { timeStamp: yesterday };
