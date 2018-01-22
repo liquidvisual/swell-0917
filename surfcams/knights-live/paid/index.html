@@ -321,7 +321,7 @@
                                                 <i class="fa fa-rotate-left pr-3"></i> Surfcam Replays</h2>
 
                                             <!-- DATE DROPDOWN -->
-                                            <div class="custom-select-wrapper collapse-row-sm-only mt-0">
+                                            <div class="custom-select-wrapper collapse-row-sm-only mt-0" v-if="feed">
                                                 <date-select v-model="date"></date-select>
                                                 <time-select v-model="selectedDateIndex" :index="selectedDateIndex" :feed="feed"></time-select>
                                             </div>

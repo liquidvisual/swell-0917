@@ -7791,8 +7791,8 @@ function launchSlider() {
     },
     formatTime: function formatTime(e) {
       return moment(e).format("hh:mma");
-    } } }), Vue.component("video-player", { props: { selectedVideo: { default: null }, liveStream: null, liveStreamImage: null, liveStreamPlaylist: null }, template: '\n        <div id="video" class="mb-5">\n            <a href="selectedVideo.video_url">Watch this stream over your native player</a>\n        </div>\n    ', data: function data() {
-    return { playerInstance: null, hasSetup: !1, player_conf: { autostart: !0, primary: "html5", fallback: !0, androidhls: !0, width: "100%", height: 421, repeat: !0, logo: { file: "http://www.swellnet.com/profiles/swellnet/modules/features/swellnet_surfcam/assets/logo_transparent_overlay.png" }, stagevideo: !1, events: {
+    } } }), Vue.component("video-player", { props: { selectedVideo: { default: null }, liveStream: null, liveStreamImage: null, liveStreamPlaylist: null }, template: '\n        <div id="video" class="mb-5"></div>\n    ', data: function data() {
+    return { playerInstance: null, hasSetup: !1, cooldown: !1, player_conf: { autostart: !0, primary: "html5", fallback: !0, androidhls: !0, width: "100%", height: 421, repeat: !0, logo: { file: "http://www.swellnet.com/profiles/swellnet/modules/features/swellnet_surfcam/assets/logo_transparent_overlay.png" }, stagevideo: !1, events: {
           onReady: function onReady(e) {
             window.swellnetElapsedTime = 0;
           },
@@ -7804,28 +7804,32 @@ function launchSlider() {
           }
         } } };
   }, mounted: function mounted() {
-    this.playerInstance = jwplayer("video");
+    var _this = this;
+
+    this.playerInstance = jwplayer("video"), this.liveStream && (this.playVideo(this.liveStream, this.liveStreamImage, this.liveStreamPlaylist), this.cooldown = !0, setTimeout(function () {
+      _this.cooldown = !1;
+    }, 4e3));
   },
   beforeDestroy: function beforeDestroy() {
     this.playerInstance.remove();
   },
   watch: {
     selectedVideo: function selectedVideo() {
-      !this.hasSetup && this.liveStream ? this.playVideo(this.liveStream, this.liveStreamImage, this.liveStreamPlaylist) : this.playVideo();
+      this.cooldown || this.playVideo();
     }
   }, methods: {
     playVideo: function playVideo(e, t, n) {
-      var i = this.selectedVideo.video_url,
-          r = this.selectedVideo.image_url;e && (i = n, r = t), this.hasSetup || (this.player_conf.file = i, this.player_conf.image = r, this.playerInstance.setup(this.player_conf), this.hasSetup = !0), this.playerInstance.load([{ file: i, image: r }]), this.playerInstance.play();
+      var i = n || this.selectedVideo.video_url,
+          r = t || this.selectedVideo.image_url;this.hasSetup || (this.player_conf.file = i, this.player_conf.image = r, this.playerInstance.setup(this.player_conf), this.hasSetup = !0), this.playerInstance.load([{ file: i, image: r }]).play();
     }
-  } }), Vue.component("thumb-slider", { props: { feed: { required: !0, default: [] }, feedLoading: !0, currentIndex: 0 }, template: '\n        <div class="thumb-slider-wrapper collapse-row-sm-only">\n            <div class="thumb-slider-track">\n\n                <vue-flickity class="thumb-slider" ref="flickity" :options="flickityOptions">\n                    <a v-for="(item, index) in feed" :key="index" :title="item.start_local" class="thumb-slider-item btn-tile" @click.prevent="selectFeedObj(item, index)">\n                        <img src="/assets/img/layout/placeholder-thumbnail.png">\n\n                        <span class="btn-tile-bg" :style="{ \'background-image\': \'url(\'+item.image_url+\')\'}"></span>\n                        \x3c!-- data-flickity-bg-lazyload="tulip.jpg" --\x3e\n\n                        <div class="btn-tile-overlay">\n                            <h3 class="btn-tile-header" v-text="formatTime(item.start_local)"></h3>\n                        </div>\n                    </a>\n                </vue-flickity>\n\n                \x3c!-- SLIDER CONTROLS --\x3e\n                <button class="thumb-slider-prev-btn" @click="previous()"><i class="fa fa-angle-left"></i></button>\n                <button class="thumb-slider-next-btn" @click="next()"><i class="fa fa-angle-right"></i></button>\n            </div>\n        </div>\n    ', data: function data() {
+  } }), Vue.component("thumb-slider", { props: { feed: { required: !0, default: [] }, feedLoading: !0, currentIndex: 0 }, template: '\n        <div class="thumb-slider-wrapper collapse-row-sm-only">\n            <div class="thumb-slider-track">\n\n                <vue-flickity class="thumb-slider" ref="flickity" :options="flickityOptions">\n                    <a v-for="(item, index) in feed" :key="index" :title="\'#\'+index + \' \'+item.start_local" class="thumb-slider-item btn-tile" @click.prevent="selectFeedObj(item, index)">\n                        <img src="/assets/img/layout/placeholder-thumbnail.png">\n\n                        <span class="btn-tile-bg" :style="{ \'background-image\': \'url(\'+item.image_url+\')\'}"></span>\n                        \x3c!-- data-flickity-bg-lazyload="tulip.jpg" --\x3e\n\n                        <div class="btn-tile-overlay">\n                            <h3 class="btn-tile-header" v-text="formatTime(item.start_local)"></h3>\n                        </div>\n                    </a>\n                </vue-flickity>\n\n                \x3c!-- SLIDER CONTROLS --\x3e\n                <button class="thumb-slider-prev-btn" @click="previous()"><i class="fa fa-angle-left"></i></button>\n                <button class="thumb-slider-next-btn" @click="next()"><i class="fa fa-angle-right"></i></button>\n            </div>\n        </div>\n    ', data: function data() {
     return { flickityOptions: { adaptiveHeight: !0, autoPlay: !1, cellAlign: "left", contain: !0, draggable: window.innerWidth <= 1024, dragThreshold: 3, freeScroll: !0, freeScrollFriction: .075, friction: .28, imagesLoaded: !0, pageDots: !1, prevNextButtons: !1, pauseAutoPlayOnHover: !1, selectedAttraction: .025, watchCSS: !0, wrapAround: !1 } };
   }, watch: {
     feed: function feed() {
-      var _this = this;
+      var _this2 = this;
 
       this.$refs.flickity.destroy(), this.$nextTick(function () {
-        _this.$refs.flickity.rerender();
+        _this2.$refs.flickity.rerender();
       });
     },
     currentIndex: function currentIndex() {
