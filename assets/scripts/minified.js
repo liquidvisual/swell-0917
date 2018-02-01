@@ -7816,12 +7816,12 @@ function launchSlider() {
               window.swellnetElapsedTime = 0;
             },
             onTime: function onTime(t) {
-              window.swellnetElapsedTime + t.position >= "300" && e && (console.log("streamOverride Triggered - video has livestream setup - will stop after 300 sec"), this.stop());
+              window.swellnetElapsedTime + t.position >= "300" && e && this.stop();
             },
             onPause: function onPause(e) {
               window.swellnetElapsedTime += this.getPosition();
             }
-          } };console.log("Initialising Video Config"), this.playerInstance.setup(o), this.hasSetup = !e;
+          } };this.playerInstance.setup(o), this.hasSetup = !e;
       }this.playerInstance.load([{ file: i, image: r }]).play();
     }
   } }), Vue.component("thumb-slider", { props: { feed: { required: !0, default: [] }, feedLoading: !0, currentIndex: 0 }, template: '\n        <div class="thumb-slider-wrapper collapse-row-sm-only">\n            <div class="thumb-slider-track">\n\n                <vue-flickity class="thumb-slider" ref="flickity" :options="flickityOptions">\n                    <a v-for="(item, index) in feed" :key="index" :title="\'#\'+index + \' \'+item.start_local" class="thumb-slider-item btn-tile" @click.prevent="selectFeedObj(item, index)">\n                        <img src="/assets/img/layout/placeholder-thumbnail.png">\n\n                        <span class="btn-tile-bg" :style="{ \'background-image\': \'url(\'+item.image_url+\')\'}"></span>\n                        \x3c!-- data-flickity-bg-lazyload="tulip.jpg" --\x3e\n\n                        <div class="btn-tile-overlay">\n                            <h3 class="btn-tile-header" v-text="formatTime(item.start_local)"></h3>\n                        </div>\n                    </a>\n                </vue-flickity>\n\n                \x3c!-- SLIDER CONTROLS --\x3e\n                <button class="thumb-slider-prev-btn" @click="previous()"><i class="fa fa-angle-left"></i></button>\n                <button class="thumb-slider-next-btn" @click="next()"><i class="fa fa-angle-right"></i></button>\n            </div>\n        </div>\n    ', data: function data() {
