@@ -182,33 +182,6 @@ Vue.component('video-player', {
             playerInstance: null,
             hasSetup: false, // video inits once only
             cooldown: false,
-
-            player_conf: {
-                autostart: true,
-                primary: 'html5',
-                fallback: true,
-                androidhls: true,
-                width: '100%',
-                height: 421,
-                repeat: true,
-                logo: {
-                    file: 'http://www.swellnet.com/profiles/swellnet/modules/features/swellnet_surfcam/assets/logo_transparent_overlay.png'
-                },
-                stagevideo: false,
-                events: {
-                    onReady(e) {
-                        window.swellnetElapsedTime = 0;
-                    },
-                    onTime(e) {
-                        if ((window.swellnetElapsedTime + e.position) >= '300') {
-                            this.stop();
-                        }
-                    },
-                    onPause(e) {
-                        window.swellnetElapsedTime += this.getPosition();
-                    }
-                }
-            }
         }
     },
     mounted() {
@@ -247,13 +220,48 @@ Vue.component('video-player', {
 
             //==================================================
             // SETUP ONCE ONLY
+            // 1. Only live stream should include onTime stop
+            // 2. Replays reinit only once for smoother performance
             //==================================================
 
             if (!this.hasSetup) {
-                this.player_conf.file = stream;
-                this.player_conf.image = image;
-                this.playerInstance.setup(this.player_conf);
-                this.hasSetup = true;
+                var player_conf = {
+                    autostart: true,
+                    primary: 'html5',
+                    fallback: true,
+                    file: stream,
+                    image: image,
+                    androidhls: true,
+                    width: '100%',
+                    height: 421,
+                    repeat: true,
+                    // logo: {
+                        // file: 'http://www.swellnet.com/profiles/swellnet/modules/features/swellnet_surfcam/assets/logo_transparent_overlay.png'
+                    // },
+                    stagevideo: false,
+                    events: {
+                        onReady(e) {
+                            window.swellnetElapsedTime = 0;
+                        },
+                        onTime(e) {
+                            if ((window.swellnetElapsedTime + e.position) >= '300') {
+                                if (streamOverride) {
+                                    // console.log('streamOverride Triggered - video has livestream setup - will stop after 300 sec');
+                                    this.stop();
+                                }
+                            }
+                        },
+                        onPause(e) {
+                            window.swellnetElapsedTime += this.getPosition();
+                        }
+                    }
+                }
+
+                // console.log('Initialising Video Config');
+                this.playerInstance.setup(player_conf);
+
+                // Only allow rebuilding INIT behavior for replays (first time) or livestream
+                this.hasSetup = streamOverride ? false : true;
             }
 
             //==================================================

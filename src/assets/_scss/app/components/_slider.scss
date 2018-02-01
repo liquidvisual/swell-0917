@@ -33,13 +33,14 @@
 // 2. Sidebar remove track on desktop
 //-----------------------------------------------------------------
 
-#video + .thumb-slider-wrapper {
-	.thumb-slider-track	{
-		@include media-breakpoint-up(md) {
-		    border: 0;
-		}
-	}
-}
+// DESIGN HAS CHANGED - 31.01.18
+// #video + .thumb-slider-wrapper {
+// 	.thumb-slider-track	{
+// 		@include media-breakpoint-up(md) {
+// 		    border: 0;
+// 		}
+// 	}
+// }
 
 .panel-right .thumb-slider-wrapper {
 	.thumb-slider-track	{
