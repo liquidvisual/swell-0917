@@ -5,6 +5,25 @@
     - liquidvisual.com
 */
 //-----------------------------------------------------------------
+// Hack to display video placeholder on a delay to be overridden
+// by slow feed
+//-----------------------------------------------------------------
+
+.no-video-placeholder {
+	opacity: 0;
+
+	animation: delay-visibility 0.8s ease 0.5s alternate 1 forwards;
+
+	@keyframes delay-visibility {
+	    from {
+	        opacity: 0;
+	    } to {
+	        opacity: 1;
+	    }
+	}
+}
+
+//-----------------------------------------------------------------
 //
 //-----------------------------------------------------------------
 

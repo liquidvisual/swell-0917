@@ -174,16 +174,20 @@ Vue.component('video-player', {
         liveStreamImage: null,
         liveStreamPlaylist: null
     },
-    template: `
-        <div id="video" class="mb-5"></div>
-    `,
     data() {
         return {
+            feedType: null,
             playerInstance: null,
             hasSetup: false, // video inits once only
             cooldown: false,
+            unableToLoad: null,
         }
     },
+    template: `
+        <div id="video" class="mb-5">
+            <img v-if="!selectedVideo && !liveStream" class="no-video-placeholder" width="100%" src="/assets/img/layout/placeholder-no-video.svg" alt="Sorry, there's no video.">
+        </div>
+    `,
     mounted() {
         this.playerInstance = jwplayer('video');
 
@@ -262,6 +266,10 @@ Vue.component('video-player', {
 
                 // Only allow rebuilding INIT behavior for replays (first time) or livestream
                 this.hasSetup = streamOverride ? false : true;
+
+                var feedType = streamOverride ? 'live' : 'replay';
+
+                this.$emit('set-feed-type', feedType); //********************* EMIT - getting too complex now ************************
             }
 
             //==================================================
@@ -493,6 +501,7 @@ new Vue({
         return {
             apiPath: null,  // beforeMount sets this based on surfcam ID passed as attribute | EG. /surfcam-replays/data/29/2018/01/12
             feed: null,
+            feedType: null,
             feedLoading: true,
             date: { timeStamp: Date.now() }, // 'date-select' will change this - altering api request string
             selectedDateIndex: null, // changed by 'time-select' - used to move through thumbs via Flickity
@@ -566,9 +575,9 @@ new Vue({
                     self.selectedDateIndex = 0; //self.feed.length-1; //0; // invoke watcher to init at start 0 vid
                 } else {
                     // If feed returns empty, set time for yesterday and try again
-                    var d = new Date();
-                    var yesterday = d.setDate(d.getDate()-1);
-                    self.date = { timeStamp: yesterday };
+                    // var d = new Date();
+                    // var yesterday = d.setDate(d.getDate()-1);
+                    // self.date = { timeStamp: yesterday };
                 }
             })
             .catch((error) => {
@@ -583,6 +592,34 @@ new Vue({
         selectVideo(payload){
             this.selectedVideo = payload.obj; // set variable for video component
             this.selectedDateIndex = payload.index;
+
+            // this can go on setFeedType if you want to track the dropdown choice too
+            var eventLabel = this.selectedVideo.video_url.split('/');
+                eventLabel = eventLabel[3] + ' - ' + eventLabel[4]; // EG. snapper-rocks - 2018-02-04
+
+            // console.log(eventLabel);
+
+            window.ga('send', 'event', 'Replays', 'Surfcam replay thumbnail clicked', eventLabel, {
+                nonInteraction: true
+            });
+        },
+
+        //==================================================
+        // SET FEED TYPE
+        //==================================================
+
+        setFeedType(payload){
+            this.feedType = payload; // set variable for video component
+
+            // if it's a live feed - wipe the current selectedVideo - this can only be set by replays
+            // also fixes problem of first thumb not triggering play init. mMssy, needs overhaul.
+            if (payload == 'live') {
+                setTimeout(() => {
+                    this.selectedVideo = null;
+                    // console.log('erasing');
+                }, 500); // hacky
+            }
+            // console.log('what is the feedtype?: '+payload);
         }
     }
 });

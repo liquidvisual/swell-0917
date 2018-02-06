@@ -8,37 +8,37 @@
 // Variables
 //-----------------------------------------------------------------
 
-$font-smoothing:           antialiased !default;
-$primary-color:            aqua; //$brand-primary !default;
-$include-developer-styles: true !default;
+// $font-smoothing:           antialiased !default;
+// $primary-color:            aqua; //$brand-primary !default;
+$include-developer-styles: true;
 
 //-----------------------------------------------------------------
 // Font Smoothing
 //-----------------------------------------------------------------
 
-@if $font-smoothing == "antialiased" {
-	body {
-		 -webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-		         font-smoothing: antialised;
-	}
-}
+// @if $font-smoothing == "antialiased" {
+// 	body {
+// 		 -webkit-font-smoothing: antialiased;
+// 		-moz-osx-font-smoothing: grayscale;
+// 		         font-smoothing: antialised;
+// 	}
+// }
 
 //-----------------------------------------------------------------
 // Text Selection (keep separate)
 //-----------------------------------------------------------------
 
-::-moz-selection {
-	background: lighten($primary-color, 10%);
-	color: white;
-	text-shadow: none;
-}
+// ::-moz-selection {
+// 	// background: lighten($primary-color, 10%);
+// 	// color: white;
+// 	// text-shadow: none;
+// }
 
-::selection {
-	background: lighten($primary-color, 10%);
-	color: white;
-	text-shadow: none;
-}
+// ::selection {
+// 	// background: lighten($primary-color, 10%);
+// 	// color: white;
+// 	// text-shadow: none;
+// }
 
 //-----------------------------------------------------------------
 // Helper Classes
@@ -89,15 +89,15 @@ $include-developer-styles: true !default;
 // First char in sentence is pronounced
 //=========================================
 
-.lv-dropcap:first-letter {
-	float: left;
-	padding-top: 4px;
-	padding-right: 10px;
-	padding-left: 3px;
-	line-height: 90px;
-	font-size: 100px;
-	color: $primary-color;
-}
+// .lv-dropcap:first-letter {
+// 	float: left;
+// 	padding-top: 4px;
+// 	padding-right: 10px;
+// 	padding-left: 3px;
+// 	line-height: 90px;
+// 	font-size: 100px;
+// 	color: $primary-color;
+// }
 
 //=========================================
 // Unselectable Elements
