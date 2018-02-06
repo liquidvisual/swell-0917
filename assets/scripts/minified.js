@@ -7791,9 +7791,9 @@ function launchSlider() {
     },
     formatTime: function formatTime(e) {
       return moment(e).format("hh:mma");
-    } } }), Vue.component("video-player", { props: { selectedVideo: { default: null }, liveStream: null, liveStreamImage: null, liveStreamPlaylist: null }, template: '\n        <div id="video" class="mb-5"></div>\n    ', data: function data() {
-    return { playerInstance: null, hasSetup: !1, cooldown: !1 };
-  }, mounted: function mounted() {
+    } } }), Vue.component("video-player", { props: { selectedVideo: { default: null }, liveStream: null, liveStreamImage: null, liveStreamPlaylist: null }, data: function data() {
+    return { feedType: null, playerInstance: null, hasSetup: !1, cooldown: !1, unableToLoad: null };
+  }, template: '\n        <div id="video" class="mb-5">\n            <img v-if="!selectedVideo && !liveStream" class="no-video-placeholder" width="100%" src="/assets/img/layout/placeholder-no-video.svg" alt="Sorry, there\'s no video.">\n        </div>\n    ', mounted: function mounted() {
     var _this = this;
 
     this.playerInstance = jwplayer("video"), this.liveStream && (this.playVideo(this.liveStream, this.liveStreamImage, this.liveStreamPlaylist), this.cooldown = !0, setTimeout(function () {
@@ -7821,7 +7821,7 @@ function launchSlider() {
             onPause: function onPause(e) {
               window.swellnetElapsedTime += this.getPosition();
             }
-          } };this.playerInstance.setup(o), this.hasSetup = !e;
+          } };this.playerInstance.setup(o), this.hasSetup = !e;var s = e ? "live" : "replay";this.$emit("set-feed-type", s);
       }this.playerInstance.load([{ file: i, image: r }]).play();
     }
   } }), Vue.component("thumb-slider", { props: { feed: { required: !0, default: [] }, feedLoading: !0, currentIndex: 0 }, template: '\n        <div class="thumb-slider-wrapper collapse-row-sm-only">\n            <div class="thumb-slider-track">\n\n                <vue-flickity class="thumb-slider" ref="flickity" :options="flickityOptions">\n                    <a v-for="(item, index) in feed" :key="index" :title="\'#\'+index + \' \'+item.start_local" class="thumb-slider-item btn-tile" @click.prevent="selectFeedObj(item, index)">\n                        <img src="/assets/img/layout/placeholder-thumbnail.png">\n\n                        <span class="btn-tile-bg" :style="{ \'background-image\': \'url(\'+item.image_url+\')\'}"></span>\n                        \x3c!-- data-flickity-bg-lazyload="tulip.jpg" --\x3e\n\n                        <div class="btn-tile-overlay">\n                            <h3 class="btn-tile-header" v-text="formatTime(item.start_local)"></h3>\n                        </div>\n                    </a>\n                </vue-flickity>\n\n                \x3c!-- SLIDER CONTROLS --\x3e\n                <button class="thumb-slider-prev-btn" @click="previous()"><i class="fa fa-angle-left"></i></button>\n                <button class="thumb-slider-next-btn" @click="next()"><i class="fa fa-angle-right"></i></button>\n            </div>\n        </div>\n    ', data: function data() {
@@ -7930,7 +7930,7 @@ function launchSlider() {
       this.flickity.once(e, t);
     }
   } }), new Vue({ el: "#video-widget", data: function data() {
-    return { apiPath: null, feed: null, feedLoading: !0, date: { timeStamp: Date.now() }, selectedDateIndex: null, selectedVideo: null };
+    return { apiPath: null, feed: null, feedType: null, feedLoading: !0, date: { timeStamp: Date.now() }, selectedDateIndex: null, selectedVideo: null };
   }, computed: {
     apiRequest: function apiRequest() {
       return this.apiPath + moment(this.date.timeStamp).format("YYYY/MM/DD");
@@ -7949,15 +7949,19 @@ function launchSlider() {
   methods: {
     loadData: function loadData() {
       var e = this;this.feedLoading = !0, axios.get(e.apiRequest, "", { headers: { Accept: "*/*" } }).then(function (t) {
-        if (t.data.length) e.feed = t.data, e.feedLoading = !1, e.selectedDateIndex = 0;else {
-          var n = new Date(),
-              i = n.setDate(n.getDate() - 1);e.date = { timeStamp: i };
-        }
+        t.data.length && (e.feed = t.data, e.feedLoading = !1, e.selectedDateIndex = 0);
       }).catch(function (e) {
         console.log(e);
       });
     },
     selectVideo: function selectVideo(e) {
-      this.selectedVideo = e.obj, this.selectedDateIndex = e.index;
+      this.selectedVideo = e.obj, this.selectedDateIndex = e.index;var t = this.selectedVideo.video_url.split("/");t = t[3] + " - " + t[4], window.ga("send", "event", "Replays", "Surfcam replay thumbnail clicked", t, { nonInteraction: !0 });
+    },
+    setFeedType: function setFeedType(e) {
+      var _this3 = this;
+
+      this.feedType = e, "live" == e && setTimeout(function () {
+        _this3.selectedVideo = null;
+      }, 500);
     }
   } });
