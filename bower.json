@@ -12,12 +12,12 @@
     "magnific-popup": "https://github.com/dimsemenov/Magnific-Popup.git#master",
     "slick-carousel": "^1.6.0",
     "social-feed": "^0.1.2",
-    "isotope": "^3.0.1",
-    "flickity": "^2.0.10"
+    "isotope": "^3.0.1"
   },
   "devDependencies": {
-    "vue": "^2.5.3",
+    "vue": "^2.5.13",
     "axios": "^0.17.0",
-    "flickity": "^2.0.10"
+    "flickity": "^2.0.10",
+    "flickity-bg-lazyload": "^1.0.0"
   }
 }

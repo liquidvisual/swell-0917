@@ -4,6 +4,8 @@ layout: base__page_sidebar
 
 {% include video.html %}
 
+{% comment %}
+
 {% unless page.user_type == 'paid' %}
     Remove video ads with <a href='http://swellnet.com/pro/subscribe/index.html'>Swellnet Pro</a> for $8.95/month (first month $1.00)
 {% endunless %}
@@ -61,3 +63,4 @@ layout: base__page_sidebar
         {% include sections/social_feed.html %}
     </div>
 {% endcontentfor %}
+{% endcomment %}

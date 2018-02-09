@@ -24,14 +24,18 @@ layout: base
 
     </div> <!-- /.layout-sixthree -->
 
-    <!-- PANEL RIGHT -->
-    <div class="layout-sixthree section panel-right col-sm-3 col-smmd-2andhalf col-md-2">
-        {% contentblock sidebar no-convert %}
-    </div>
+    {% unless page.focus_video_widget %}
 
-    <!-- ADDITIONAL CONTENT -->
-    <div class="col-sm-6">
-        {% contentblock content_additional no-convert %}
-    </div>
+        <!-- PANEL RIGHT -->
+        <div class="layout-sixthree section panel-right col-sm-3 col-smmd-2andhalf col-md-2">
+            {% contentblock sidebar no-convert %}
+        </div>
+
+        <!-- ADDITIONAL CONTENT -->
+        <div class="col-sm-6">
+            {% contentblock content_additional no-convert %}
+        </div>
+
+    {% endunless %}
 
 </section> <!-- /#block-system-main -->

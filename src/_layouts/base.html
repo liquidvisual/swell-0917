@@ -101,7 +101,9 @@
         <!-- PAGE BEGINS -->
         <div id="page">
 
-            {% include header.html %}
+            {% unless page.focus_video_widget %}
+                {% include header.html %}
+            {% endunless %}
 
             <!-- MAIN SECTION WRAPPER -->
             <div class="main-section-wrapper">
@@ -123,7 +125,9 @@
 
     </div><!-- /#wrapper -->
 
-    {% include footer.html %}
+    {% unless page.focus_video_widget %}
+        {% include footer.html %}
+    {% endunless %}
 
     <!-- SCRIPT -->
     <script>
@@ -233,8 +237,9 @@
 
     <script src="/_bower_components/axios/dist/axios.js"></script>
     <script src="/_bower_components/flickity/dist/flickity.pkgd.js"></script>
+    <script src="/_bower_components/flickity-bg-lazyload/bg-lazyload.js"></script>
     <script src="/assets/scripts/flickity.js"></script>
-    <script src="/assets/scripts/vue-video.js"></script>
+    <script src="/assets/scripts/vue-surfcam-widget.js"></script>
     <script src="/assets/scripts/main.js"></script>
     <!-- endbuild -->
 

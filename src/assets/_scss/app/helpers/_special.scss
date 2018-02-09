@@ -1,26 +1,36 @@
 /*
     SPECIAL.CSS
 
-    - Last updated: 00.00.00
+    - Last updated: 09.02.17
     - liquidvisual.com
 */
 //-----------------------------------------------------------------
-// Hack to display video placeholder on a delay to be overridden
-// by slow feed
+// LITTLE LOADER INDICATOR INSIDE DATE SELECT
 //-----------------------------------------------------------------
 
-.no-video-placeholder {
+.special-fade-enter-active,
+.special-fade-leave-active {
+	transition: opacity 300ms 100ms;
+}
+.special-fade-enter,
+.special-fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
 	opacity: 0;
+}
 
-	animation: delay-visibility 0.8s ease 0.5s alternate 1 forwards;
+//-----------------------------------------------------------------
+// THUMB SLIDER ENTRANCE
+//-----------------------------------------------------------------
 
-	@keyframes delay-visibility {
-	    from {
-	        opacity: 0;
-	    } to {
-	        opacity: 1;
-	    }
-	}
+.special-thumb-slider-entrance-enter-active,
+.special-thumb-slider-entrance-leave-active {
+	transition: visibility 0.5s 1s;
+	// transition: transform 0.8s 1s ease;
+
+}
+.special-thumb-slider-entrance-enter,
+.special-thumb-slider-entrance-leave-to /* .fade-leave-active below version 2.1.8 */ {
+	visibility: hidden;
+	// transform: translateY(-100%);
 }
 
 //-----------------------------------------------------------------
@@ -43,9 +53,9 @@
 // VIDEO
 //-----------------------------------------------------------------
 
-#video-widget .jwplayer {
-	margin-bottom: 0 !important;
-}
+// #video-widget .jwplayer {
+// 	margin-bottom: 0 !important;
+// }
 
 //-----------------------------------------------------------------
 // ADVERT

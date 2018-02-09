@@ -15,14 +15,46 @@
 	outline: none;
 }
 
+//-----------------------------------------------------------------
+// CUSTOM SELECT WRAPPER - has preloader for widget
+//-----------------------------------------------------------------
+
 .custom-select-wrapper {
+	position: relative;
 	background: #e4e2e3;
 	margin-top: -10px;
+	// z-index: 1;
+
+	// .fa-spinner {
+	// 	position: absolute;
+	// 	top: -20px;
+	// 	right: 0;
+	// 	left: auto;
+	// 	font-size: rem-calc(40);
+	// }
+
+	// &:after {
+	// 	content: "";
+	// 	position: absolute;
+	// 	top: 0;
+	// 	left: 0;
+	// 	width: 70%;
+	// 	height: 2px;
+	// 	background: rgba($brand-primary, 0.4);
+	// 	// transform: scaleX(0);
+	// 	transform-origin: left;
+	// 	transition: transform 1s ease-out;
+	// 	z-index: -1;
+	// }
 
 	@include media-breakpoint-up(lg) {
 	    display: flex;
 	}
 }
+
+//-----------------------------------------------------------------
+// CUSTOM SELECT
+//-----------------------------------------------------------------
 
 .custom-select {
 	display: block;
@@ -80,8 +112,16 @@
 		left: auto;
 		right: 20px;
 		// padding-right: 20px;
-		font-size: rem-calc(60);
+		font-size: rem-calc(48);
 		background: #d6d6d6;
+	}
+
+	.fa-refresh {
+		top: rem-calc(34);
+		left: auto;
+		right: 34px;
+		font-size: rem-calc(27);
+		color: white;
 	}
 }
 
