@@ -309,11 +309,11 @@ Vue.component('thumb-slider', {
         currentIndex: Number, // only the time select can change this
     },
     template: `
-        <div class="thumb-slider-wrapper collapse-row-sm-only">
+        <div class="thumb-slider-wrapper collapse-row-sm-only" :style="isLoading ? {opacity: 0.2} : {}">
             <div class="thumb-slider-track">
 
                 <!-- VUE FLICKITY -->
-                <vue-flickity class="thumb-slider" ref="flickity" :options="flickityOptions" :style="isLoading ? {opacity: 0.2} : {}">
+                <vue-flickity class="thumb-slider" ref="flickity" :options="flickityOptions">
                     <div v-for="(item, index) in feed" :key="index" :title="'#'+index + ' '+item.start_local" class="thumb-slider-item btn-tile">
 
                         <img src="/assets/img/layout/placeholder-thumbnail.png">
@@ -641,6 +641,8 @@ Vue.component('surfcam-widget', {
             log('[watch] - widget - selectedTimeIndex changed');
             this.getVideoIdFromHash();
             this.selectVideo();
+
+            window.location.hash = this.feed[this.selectedTimeIndex].id; // add id to hash, allows link sharing
         }
     },
     //==================================================
