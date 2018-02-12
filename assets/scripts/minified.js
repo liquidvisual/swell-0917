@@ -7799,7 +7799,7 @@ function launchSlider() {
   }, i.prototype.complete = function (e, t) {
     this.img.removeEventListener("load", this), this.img.removeEventListener("error", this), this.element.classList.add(t), this.flickity.dispatchEvent("bgLazyLoad", e, this.element);
   }, e.BgLazyLoader = i, e;
-}), launchSlider();var LOGGING_ENABLED = !1;function log(e) {
+}), launchSlider();var LOGGING_ENABLED = !0;function log(e) {
   LOGGING_ENABLED && console.log(e);
 }Vue.config.productionTip = !1;var bus = new Vue();var utilities = { methods: { formatTime: function formatTime(e) {
       return moment(e).format("hh:mma");
@@ -7988,13 +7988,13 @@ function launchSlider() {
       this.flickity.once(e, t);
     }
   } }), Vue.component("surfcam-widget", { props: { liveStream: String, liveStreamImage: String, liveStreamPlaylist: String, dataPath: String, surfcamId: String }, data: function data() {
-    return { attempts: 0, date: null, feed: null, feedType: null, feedLoading: null, firstRun: null, rolledBack: null, selectedTimeIndex: null };
+    return { attempts: 0, date: null, feed: null, feedType: null, feedLoading: null, firstRun: null, replaysDisabled: null, rolledBack: null, selectedTimeIndex: null };
   }, created: function created() {
     var _this3 = this;
 
     log("[created] - updating date"), this.feedType = this.liveStream ? "live" : "replay", this.date = { timeStamp: Date.now() }, bus.$on("setTimeIndex", function (e) {
       _this3.selectedTimeIndex = e;
-    });
+    }), this.dataPath && this.surfcamId || (this.replaysDisabled = !0, this.feed = !1);
   },
   watch: {
     date: function date() {
@@ -8004,7 +8004,7 @@ function launchSlider() {
       this.selectedTimeIndex = 0;
     },
     selectedTimeIndex: function selectedTimeIndex() {
-      log("[watch] - widget - selectedTimeIndex changed"), this.getVideoIdFromHash(), this.selectVideo(), window.location.hash = this.feed[this.selectedTimeIndex].id;
+      log("[watch] - widget - selectedTimeIndex changed"), this.getVideoIdFromHash(), this.selectVideo();
     }
   }, methods: {
     getVideoIdFromHash: function getVideoIdFromHash() {
@@ -8024,7 +8024,7 @@ function launchSlider() {
         } catch (t) {
           e = { stream: ".mp4", image: ".jpg" };
         }
-      }this.firstRun = !0, bus.$emit("loadVideo", e), this.feed && this.firstRun && this.sendTracking(t);
+      }log(">> firstRun is true"), this.firstRun = !0, bus.$emit("loadVideo", e), this.feed && this.firstRun && this.sendTracking(t);
     },
     sendTracking: function sendTracking(e) {
       if (e.length) {
@@ -8035,7 +8035,7 @@ function launchSlider() {
       var _this5 = this;
 
       log(":: loadData() ::"), this.feedLoading = !0, axios.get(e, "", { headers: { Accept: "*/*" } }).then(function (e) {
-        _this5.feedLoading = !1, e.data.length ? (log("~~ Success. Data found ~~"), _this5.feed = !!e.data.length && e.data, _this5.attempts = 0) : (log("~~~~~~~~~~~~ response.data returned empty ~~~~~~~~~~~~"), _this5.feed = null, _this5.rolledBack || (_this5.rolledBack = !0, _this5.attempts < 6 ? (_this5.attempts++, bus.$emit("setDate", _this5.attempts)) : bus.$emit("setDate", 0)));
+        _this5.feedLoading = !1, log("response: " + _typeof(e.data)), e.data.length ? (log("~~ Success. Data found ~~"), _this5.feed = !!e.data.length && e.data, _this5.attempts = 0) : (log("~~~~~~~~~~~~ response.data returned empty - RETRYING ~~~~~~~~~~~~"), _this5.feed = null, _this5.rolledBack || (log("Hasn't rolled back, rolling back now."), _this5.attempts < 6 ? (_this5.attempts++, console.log("Attempt: " + _this5.attempts), bus.$emit("setDate", _this5.attempts)) : (log("Has stopped trying, no data"), _this5.rolledBack = !0, bus.$emit("setDate", 0))));
       }).catch(function (e) {
         console.log("Server Error: " + e);
       });
