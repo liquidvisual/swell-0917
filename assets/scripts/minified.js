@@ -165,10 +165,10 @@ function launchSlider() {
         C = se(),
         S = se(),
         T = se(),
-        E = function E(e, t) {
+        D = function D(e, t) {
       return e === t && (d = !0), 0;
     },
-        D = 1 << 31,
+        E = 1 << 31,
         A = {}.hasOwnProperty,
         L = [],
         M = L.pop,
@@ -254,7 +254,7 @@ function launchSlider() {
       }
     }function ce(e, t) {
       var n = t && e,
-          i = n && 1 === e.nodeType && 1 === t.nodeType && (~t.sourceIndex || D) - (~e.sourceIndex || D);if (i) return i;if (n) for (; n = n.nextSibling;) {
+          i = n && 1 === e.nodeType && 1 === t.nodeType && (~t.sourceIndex || E) - (~e.sourceIndex || E);if (i) return i;if (n) for (; n = n.nextSibling;) {
         if (n === t) return -1;
       }return e ? 1 : -1;
     }function de(e) {
@@ -324,7 +324,7 @@ function launchSlider() {
         if (t) for (; t = t.parentNode;) {
           if (t === e) return !0;
         }return !1;
-      }, E = t ? function (e, t) {
+      }, D = t ? function (e, t) {
         if (e === t) return d = !0, 0;var i = !e.compareDocumentPosition - !t.compareDocumentPosition;return i || (1 & (i = (e.ownerDocument || e) === (t.ownerDocument || t) ? e.compareDocumentPosition(t) : 1) || !n.sortDetached && t.compareDocumentPosition(e) === i ? e === s || e.ownerDocument === w && _(w, e) ? -1 : t === s || t.ownerDocument === w && _(w, t) ? 1 : c ? P(c, e) - P(c, t) : 0 : 4 & i ? -1 : 1);
       } : function (e, t) {
         if (e === t) return d = !0, 0;var n,
@@ -357,7 +357,7 @@ function launchSlider() {
       var t,
           i = [],
           r = 0,
-          o = 0;if (d = !n.detectDuplicates, c = !n.sortStable && e.slice(0), e.sort(E), d) {
+          o = 0;if (d = !n.detectDuplicates, c = !n.sortStable && e.slice(0), e.sort(D), d) {
         for (; t = e[o++];) {
           t === e[o] && (r = i.push(o));
         }for (; r--;) {
@@ -663,7 +663,7 @@ function launchSlider() {
           }
         }
       }return (h || a(e, p))(o, t, !m, r, ee.test(e) && pe(t.parentNode) || t), r;
-    }, n.sortStable = b.split("").sort(E).join("") === b, n.detectDuplicates = !!d, f(), n.sortDetached = ue(function (e) {
+    }, n.sortStable = b.split("").sort(D).join("") === b, n.detectDuplicates = !!d, f(), n.sortDetached = ue(function (e) {
       return 1 & e.compareDocumentPosition(h.createElement("div"));
     }), ue(function (e) {
       return e.innerHTML = "<a href='#'></a>", "#" === e.firstChild.getAttribute("href");
@@ -721,7 +721,7 @@ function launchSlider() {
       }return (i = d.getElementById(n[2])) && i.parentNode && (this.length = 1, this[0] = i), this.context = d, this.selector = e, this;
     }return e.nodeType ? (this.context = this[0] = e, this.length = 1, this) : h.isFunction(e) ? void 0 !== C.ready ? C.ready(e) : e(h) : (void 0 !== e.selector && (this.selector = e.selector, this.context = e.context), h.makeArray(e, this));
   }).prototype = h.fn, C = h(d);var T = /^(?:parents|prev(?:Until|All))/,
-      E = { children: !0, contents: !0, next: !0, prev: !0 };function D(e, t) {
+      D = { children: !0, contents: !0, next: !0, prev: !0 };function E(e, t) {
     for (; (e = e[t]) && 1 !== e.nodeType;) {}return e;
   }h.extend({ dir: function dir(e, t, n) {
       for (var i = [], r = void 0 !== n; (e = e[t]) && 9 !== e.nodeType;) {
@@ -761,9 +761,9 @@ function launchSlider() {
     }, parentsUntil: function parentsUntil(e, t, n) {
       return h.dir(e, "parentNode", n);
     }, next: function next(e) {
-      return D(e, "nextSibling");
+      return E(e, "nextSibling");
     }, prev: function prev(e) {
-      return D(e, "previousSibling");
+      return E(e, "previousSibling");
     }, nextAll: function nextAll(e) {
       return h.dir(e, "nextSibling");
     }, prevAll: function prevAll(e) {
@@ -780,7 +780,7 @@ function launchSlider() {
       return e.contentDocument || h.merge([], e.childNodes);
     } }, function (e, t) {
     h.fn[e] = function (n, i) {
-      var r = h.map(this, t, n);return "Until" !== e.slice(-5) && (i = n), i && "string" == typeof i && (r = h.filter(i, r)), this.length > 1 && (E[e] || h.unique(r), T.test(e) && r.reverse()), this.pushStack(r);
+      var r = h.map(this, t, n);return "Until" !== e.slice(-5) && (i = n), i && "string" == typeof i && (r = h.filter(i, r)), this.length > 1 && (D[e] || h.unique(r), T.test(e) && r.reverse()), this.pushStack(r);
     };
   });var A,
       L = /\S+/g,
@@ -1396,8 +1396,8 @@ function launchSlider() {
   };var Ce = /^(none|table(?!-c[ea]).+)/,
       Se = new RegExp("^(" + R + ")(.*)$", "i"),
       Te = new RegExp("^([+-])=(" + R + ")", "i"),
-      Ee = { position: "absolute", visibility: "hidden", display: "block" },
-      De = { letterSpacing: "0", fontWeight: "400" },
+      De = { position: "absolute", visibility: "hidden", display: "block" },
+      Ee = { letterSpacing: "0", fontWeight: "400" },
       Ae = ["Webkit", "O", "Moz", "ms"];function Le(e, t) {
     if (t in e) return t;for (var n = t[0].toUpperCase() + t.slice(1), i = t, r = Ae.length; r--;) {
       if ((t = Ae[r] + n) in e) return t;
@@ -1439,10 +1439,10 @@ function launchSlider() {
       var r,
           o,
           s,
-          a = h.camelCase(t);return t = h.cssProps[a] || (h.cssProps[a] = Le(e.style, a)), (s = h.cssHooks[t] || h.cssHooks[a]) && "get" in s && (r = s.get(e, !0, n)), void 0 === r && (r = xe(e, t, i)), "normal" === r && t in De && (r = De[t]), "" === n || n ? (o = parseFloat(r), !0 === n || h.isNumeric(o) ? o || 0 : r) : r;
+          a = h.camelCase(t);return t = h.cssProps[a] || (h.cssProps[a] = Le(e.style, a)), (s = h.cssHooks[t] || h.cssHooks[a]) && "get" in s && (r = s.get(e, !0, n)), void 0 === r && (r = xe(e, t, i)), "normal" === r && t in Ee && (r = Ee[t]), "" === n || n ? (o = parseFloat(r), !0 === n || h.isNumeric(o) ? o || 0 : r) : r;
     } }), h.each(["height", "width"], function (e, t) {
     h.cssHooks[t] = { get: function get(e, n, i) {
-        if (n) return Ce.test(h.css(e, "display")) && 0 === e.offsetWidth ? h.swap(e, Ee, function () {
+        if (n) return Ce.test(h.css(e, "display")) && 0 === e.offsetWidth ? h.swap(e, De, function () {
           return Oe(e, t, i);
         }) : Oe(e, t, i);
       }, set: function set(e, n, i) {
@@ -2048,19 +2048,19 @@ function launchSlider() {
       }, abort: function abort() {
         _n2 && _n2();
       } };
-  });var Et = [],
-      Dt = /(=)\?(?=&|$)|\?\?/;h.ajaxSetup({ jsonp: "callback", jsonpCallback: function jsonpCallback() {
-      var e = Et.pop() || h.expando + "_" + tt++;return this[e] = !0, e;
+  });var Dt = [],
+      Et = /(=)\?(?=&|$)|\?\?/;h.ajaxSetup({ jsonp: "callback", jsonpCallback: function jsonpCallback() {
+      var e = Dt.pop() || h.expando + "_" + tt++;return this[e] = !0, e;
     } }), h.ajaxPrefilter("json jsonp", function (t, n, i) {
     var r,
         o,
         s,
-        a = !1 !== t.jsonp && (Dt.test(t.url) ? "url" : "string" == typeof t.data && !(t.contentType || "").indexOf("application/x-www-form-urlencoded") && Dt.test(t.data) && "data");if (a || "jsonp" === t.dataTypes[0]) return r = t.jsonpCallback = h.isFunction(t.jsonpCallback) ? t.jsonpCallback() : t.jsonpCallback, a ? t[a] = t[a].replace(Dt, "$1" + r) : !1 !== t.jsonp && (t.url += (nt.test(t.url) ? "&" : "?") + t.jsonp + "=" + r), t.converters["script json"] = function () {
+        a = !1 !== t.jsonp && (Et.test(t.url) ? "url" : "string" == typeof t.data && !(t.contentType || "").indexOf("application/x-www-form-urlencoded") && Et.test(t.data) && "data");if (a || "jsonp" === t.dataTypes[0]) return r = t.jsonpCallback = h.isFunction(t.jsonpCallback) ? t.jsonpCallback() : t.jsonpCallback, a ? t[a] = t[a].replace(Et, "$1" + r) : !1 !== t.jsonp && (t.url += (nt.test(t.url) ? "&" : "?") + t.jsonp + "=" + r), t.converters["script json"] = function () {
       return s || h.error(r + " was not called"), s[0];
     }, t.dataTypes[0] = "json", o = e[r], e[r] = function () {
       s = arguments;
     }, i.always(function () {
-      e[r] = o, t[r] && (t.jsonpCallback = n.jsonpCallback, Et.push(r)), s && h.isFunction(o) && o(s[0]), s = o = void 0;
+      e[r] = o, t[r] && (t.jsonpCallback = n.jsonpCallback, Dt.push(r)), s && h.isFunction(o) && o(s[0]), s = o = void 0;
     }), "script";
   }), h.parseHTML = function (e, t, n) {
     if (!e || "string" != typeof e) return null;"boolean" == typeof t && (n = t, t = !1), t = t || d;var i = w.exec(e),
@@ -2505,7 +2505,7 @@ function launchSlider() {
       return this.localeData().ordinal(e.call(this, n), t);
     };
   }function a() {}function u(e, t) {
-    !1 !== t && D(e), d(this, e), this._d = new Date(+e._d);
+    !1 !== t && E(e), d(this, e), this._d = new Date(+e._d);
   }function l(e) {
     var t = w(e),
         n = t.year || 0,
@@ -2583,10 +2583,10 @@ function launchSlider() {
   }function S(e, t, n) {
     return Y(te([e, 11, 31 + t - n]), t, n).week;
   }function T(e) {
-    return E(e) ? 366 : 365;
-  }function E(e) {
-    return e % 4 == 0 && e % 100 != 0 || e % 400 == 0;
+    return D(e) ? 366 : 365;
   }function D(e) {
+    return e % 4 == 0 && e % 100 != 0 || e % 400 == 0;
+  }function E(e) {
     var t;e._a && -2 === e._pf.overflow && (t = e._a[ue] < 0 || e._a[ue] > 11 ? ue : e._a[le] < 1 || e._a[le] > C(e._a[ae], e._a[ue]) ? le : e._a[ce] < 0 || e._a[ce] > 24 || 24 === e._a[ce] && (0 !== e._a[de] || 0 !== e._a[fe] || 0 !== e._a[he]) ? ce : e._a[de] < 0 || e._a[de] > 59 ? de : e._a[fe] < 0 || e._a[fe] > 59 ? fe : e._a[he] < 0 || e._a[he] > 999 ? he : -1, e._pf._overflowDayOfYear && (ae > t || t > le) && (t = le), e._pf.overflow = t);
   }function A(t) {
     return null == t._isValid && (t._isValid = !isNaN(t._d.getTime()) && t._pf.overflow < 0 && !t._pf.empty && !t._pf.invalidMonth && !t._pf.nullInput && !t._pf.invalidFormat && !t._pf.userInvalidated, t._strict && (t._isValid = t._isValid && 0 === t._pf.charsLeftOver && 0 === t._pf.unusedTokens.length && t._pf.bigHour === e)), t._isValid;
@@ -2629,11 +2629,11 @@ function launchSlider() {
         if (i) return Oe;case "SSS":
         if (i) return je;case "DDD":
         return ke;case "MMM":case "MMMM":case "dd":case "ddd":case "dddd":
-        return Ee;case "a":case "A":
+        return De;case "a":case "A":
         return t._locale._meridiemParse;case "x":
         return Le;case "X":
         return Me;case "Z":case "ZZ":
-        return De;case "T":
+        return Ee;case "T":
         return Ae;case "SSSS":
         return Te;case "MM":case "DD":case "YY":case "GG":case "gg":case "HH":case "hh":case "mm":case "ss":case "ww":case "WW":
         return i ? Oe : xe;case "M":case "D":case "d":case "H":case "h":case "m":case "s":case "w":case "W":case "e":case "E":
@@ -2643,7 +2643,7 @@ function launchSlider() {
           return t || n || i || r;
         }).replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&")));}
   }function z(e) {
-    var t = (e = e || "").match(De) || [],
+    var t = (e = e || "").match(Ee) || [],
         n = ((t[t.length - 1] || []) + "").match(He) || ["-", 0, 0],
         i = 60 * n[1] + k(n[2]);return "+" === n[0] ? -i : i;
   }function N(e, t, n) {
@@ -2699,7 +2699,7 @@ function launchSlider() {
           u = a.length,
           l = 0;for (r = j(t._f, t._locale).match(be) || [], n = 0; n < r.length; n++) {
         o = r[n], i = (a.match(P(o, t)) || [])[0], i && (s = a.substr(0, a.indexOf(i)), s.length > 0 && t._pf.unusedInput.push(s), a = a.slice(a.indexOf(i) + i.length), l += i.length), Xe[o] ? (i ? t._pf.empty = !1 : t._pf.unusedTokens.push(o), N(o, i, t)) : t._strict && !i && t._pf.unusedTokens.push(o);
-      }t._pf.charsLeftOver = u - l, a.length > 0 && t._pf.unusedInput.push(a), !0 === t._pf.bigHour && t._a[ce] <= 12 && (t._pf.bigHour = e), t._isPm && t._a[ce] < 12 && (t._a[ce] += 12), !1 === t._isPm && 12 === t._a[ce] && (t._a[ce] = 0), F(t), D(t);
+      }t._pf.charsLeftOver = u - l, a.length > 0 && t._pf.unusedInput.push(a), !0 === t._pf.bigHour && t._a[ce] <= 12 && (t._pf.bigHour = e), t._isPm && t._a[ce] < 12 && (t._a[ce] += 12), !1 === t._isPm && 12 === t._a[ce] && (t._a[ce] = 0), F(t), E(t);
     } else H(t);
   }function H(e) {
     var t,
@@ -2714,7 +2714,7 @@ function launchSlider() {
         if (qe[t][1].exec(i)) {
           e._f += qe[t][0];break;
         }
-      }i.match(De) && (e._f += "Z"), q(e);
+      }i.match(Ee) && (e._f += "Z"), q(e);
     } else e._isValid = !1;
   }function R(t) {
     var n,
@@ -2767,7 +2767,7 @@ function launchSlider() {
     };
   }function ee(e) {
     "undefined" == typeof ender && (ne = re.moment, re.moment = e ? r("Accessing Moment through the global scope is deprecated, and will be removed in an upcoming release.", te) : te);
-  }for (var te, ne, ie, re = "undefined" != typeof global ? global : this, oe = Math.round, se = Object.prototype.hasOwnProperty, ae = 0, ue = 1, le = 2, ce = 3, de = 4, fe = 5, he = 6, pe = {}, me = [], ve = "undefined" != typeof module && module && module.exports, ge = /^\/?Date\((\-?\d+)/i, ye = /(\-)?(?:(\d*)\.)?(\d+)\:(\d+)(?:\:(\d+)\.?(\d{3})?)?/, _e = /^(-)?P(?:(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?|([0-9,.]*)W)$/, be = /(\[[^\[]*\])|(\\)?(Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Q|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|S{1,4}|x|X|zz?|ZZ?|.)/g, we = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g, xe = /\d\d?/, ke = /\d{1,3}/, Ce = /\d{1,4}/, Se = /[+\-]?\d{1,6}/, Te = /\d+/, Ee = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i, De = /Z|[\+\-]\d\d:?\d\d/gi, Ae = /T/i, Le = /[\+\-]?\d+/, Me = /[\+\-]?\d+(\.\d{1,3})?/, Ie = /\d/, Oe = /\d\d/, je = /\d{3}/, Pe = /\d{4}/, ze = /[+-]?\d{6}/, Ne = /[+-]?\d+/, $e = /^\s*(?:[+-]\d{6}|\d{4})-(?:(\d\d-\d\d)|(W\d\d$)|(W\d\d-\d)|(\d\d\d))((T| )(\d\d(:\d\d(:\d\d(\.\d+)?)?)?)?([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/, Fe = [["YYYYYY-MM-DD", /[+-]\d{6}-\d{2}-\d{2}/], ["YYYY-MM-DD", /\d{4}-\d{2}-\d{2}/], ["GGGG-[W]WW-E", /\d{4}-W\d{2}-\d/], ["GGGG-[W]WW", /\d{4}-W\d{2}/], ["YYYY-DDD", /\d{4}-\d{3}/]], qe = [["HH:mm:ss.SSSS", /(T| )\d\d:\d\d:\d\d\.\d+/], ["HH:mm:ss", /(T| )\d\d:\d\d:\d\d/], ["HH:mm", /(T| )\d\d:\d\d/], ["HH", /(T| )\d\d/]], He = /([\+\-]|\d\d)/gi, Re = ("Date|Hours|Minutes|Seconds|Milliseconds".split("|"), { Milliseconds: 1, Seconds: 1e3, Minutes: 6e4, Hours: 36e5, Days: 864e5, Months: 2592e6, Years: 31536e6 }), We = { ms: "millisecond", s: "second", m: "minute", h: "hour", d: "day", D: "date", w: "week", W: "isoWeek", M: "month", Q: "quarter", y: "year", DDD: "dayOfYear", e: "weekday", E: "isoWeekday", gg: "weekYear", GG: "isoWeekYear" }, Ye = { dayofyear: "dayOfYear", isoweekday: "isoWeekday", isoweek: "isoWeek", weekyear: "weekYear", isoweekyear: "isoWeekYear" }, Ue = {}, Be = { s: 45, m: 45, h: 22, d: 26, M: 11 }, Ge = "DDD w W M D d".split(" "), Ve = "M D H h m s w W".split(" "), Xe = { M: function M() {
+  }for (var te, ne, ie, re = "undefined" != typeof global ? global : this, oe = Math.round, se = Object.prototype.hasOwnProperty, ae = 0, ue = 1, le = 2, ce = 3, de = 4, fe = 5, he = 6, pe = {}, me = [], ve = "undefined" != typeof module && module && module.exports, ge = /^\/?Date\((\-?\d+)/i, ye = /(\-)?(?:(\d*)\.)?(\d+)\:(\d+)(?:\:(\d+)\.?(\d{3})?)?/, _e = /^(-)?P(?:(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?|([0-9,.]*)W)$/, be = /(\[[^\[]*\])|(\\)?(Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Q|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|S{1,4}|x|X|zz?|ZZ?|.)/g, we = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g, xe = /\d\d?/, ke = /\d{1,3}/, Ce = /\d{1,4}/, Se = /[+\-]?\d{1,6}/, Te = /\d+/, De = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i, Ee = /Z|[\+\-]\d\d:?\d\d/gi, Ae = /T/i, Le = /[\+\-]?\d+/, Me = /[\+\-]?\d+(\.\d{1,3})?/, Ie = /\d/, Oe = /\d\d/, je = /\d{3}/, Pe = /\d{4}/, ze = /[+-]?\d{6}/, Ne = /[+-]?\d+/, $e = /^\s*(?:[+-]\d{6}|\d{4})-(?:(\d\d-\d\d)|(W\d\d$)|(W\d\d-\d)|(\d\d\d))((T| )(\d\d(:\d\d(:\d\d(\.\d+)?)?)?)?([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/, Fe = [["YYYYYY-MM-DD", /[+-]\d{6}-\d{2}-\d{2}/], ["YYYY-MM-DD", /\d{4}-\d{2}-\d{2}/], ["GGGG-[W]WW-E", /\d{4}-W\d{2}-\d/], ["GGGG-[W]WW", /\d{4}-W\d{2}/], ["YYYY-DDD", /\d{4}-\d{3}/]], qe = [["HH:mm:ss.SSSS", /(T| )\d\d:\d\d:\d\d\.\d+/], ["HH:mm:ss", /(T| )\d\d:\d\d:\d\d/], ["HH:mm", /(T| )\d\d:\d\d/], ["HH", /(T| )\d\d/]], He = /([\+\-]|\d\d)/gi, Re = ("Date|Hours|Minutes|Seconds|Milliseconds".split("|"), { Milliseconds: 1, Seconds: 1e3, Minutes: 6e4, Hours: 36e5, Days: 864e5, Months: 2592e6, Years: 31536e6 }), We = { ms: "millisecond", s: "second", m: "minute", h: "hour", d: "day", D: "date", w: "week", W: "isoWeek", M: "month", Q: "quarter", y: "year", DDD: "dayOfYear", e: "weekday", E: "isoWeekday", gg: "weekYear", GG: "isoWeekYear" }, Ye = { dayofyear: "dayOfYear", isoweekday: "isoWeekday", isoweek: "isoWeek", weekyear: "weekYear", isoweekyear: "isoWeekYear" }, Ue = {}, Be = { s: 45, m: 45, h: 22, d: 26, M: 11 }, Ge = "DDD w W M D d".split(" "), Ve = "M D H h m s w W".split(" "), Xe = { M: function M() {
       return this.month() + 1;
     }, MMM: function MMM(e) {
       return this.localeData().monthsShort(this, e);
@@ -3001,7 +3001,7 @@ function launchSlider() {
           i = this.diff(n, "days", !0),
           r = -6 > i ? "sameElse" : -1 > i ? "lastWeek" : 0 > i ? "lastDay" : 1 > i ? "sameDay" : 2 > i ? "nextDay" : 7 > i ? "nextWeek" : "sameElse";return this.format(this.localeData().calendar(r, this, te(t)));
     }, isLeapYear: function isLeapYear() {
-      return E(this.year());
+      return D(this.year());
     }, isDST: function isDST() {
       return this.zone() < this.clone().month(0).zone() || this.zone() < this.clone().month(5).zone();
     }, day: function day(e) {
@@ -4240,7 +4240,7 @@ function launchSlider() {
     }return i;
   }function T(e, t) {
     var n;if (r(e) && !(e instanceof Zn)) return d(e, "__ob__") && e.__ob__ instanceof oi ? n = e.__ob__ : ri.shouldConvert && !Un() && (Array.isArray(e) || o(e)) && Object.isExtensible(e) && !e._isVue && (n = new oi(e)), t && n && n.vmCount++, n;
-  }function E(e, t, n, i, r) {
+  }function D(e, t, n, i, r) {
     var o = new Jn(),
         s = Object.getOwnPropertyDescriptor(e, t);if (!s || !1 !== s.configurable) {
       var a = s && s.get,
@@ -4255,15 +4255,15 @@ function launchSlider() {
           var i = a ? a.call(e) : n;t === i || t != t && i != i || (u ? u.call(e, t) : n = t, l = !r && T(t), o.notify());
         } });
     }
-  }function D(e, t, n) {
-    if (Array.isArray(e) && s(t)) return e.length = Math.max(e.length, t), e.splice(t, 1, n), n;if (t in e && !(t in Object.prototype)) return e[t] = n, n;var i = e.__ob__;return e._isVue || i && i.vmCount ? n : i ? (E(i.value, t, n), i.dep.notify(), n) : (e[t] = n, n);
+  }function E(e, t, n) {
+    if (Array.isArray(e) && s(t)) return e.length = Math.max(e.length, t), e.splice(t, 1, n), n;if (t in e && !(t in Object.prototype)) return e[t] = n, n;var i = e.__ob__;return e._isVue || i && i.vmCount ? n : i ? (D(i.value, t, n), i.dep.notify(), n) : (e[t] = n, n);
   }function A(e, t) {
     if (Array.isArray(e) && s(t)) e.splice(t, 1);else {
       var n = e.__ob__;e._isVue || n && n.vmCount || d(e, t) && (delete e[t], n && n.dep.notify());
     }
   }function L(e, t) {
     if (!t) return e;for (var n, i, r, s = Object.keys(t), a = 0; a < s.length; a++) {
-      i = e[n = s[a]], r = t[n], d(e, n) ? o(i) && o(r) && L(i, r) : D(e, n, r);
+      i = e[n = s[a]], r = t[n], d(e, n) ? o(i) && o(r) && L(i, r) : E(e, n, r);
     }return e;
   }function M(e, t, n) {
     return n ? function () {
@@ -4340,8 +4340,8 @@ function launchSlider() {
       }
     }q(e, t, n);
   }function q(e, t, n) {
-    if (Dn.errorHandler) try {
-      return Dn.errorHandler.call(null, e, t, n);
+    if (En.errorHandler) try {
+      return En.errorHandler.call(null, e, t, n);
     } catch (e) {
       H(e, null, "config.errorHandler");
     }H(e, t, n);
@@ -4464,15 +4464,15 @@ function launchSlider() {
         var n = e[t],
             i = n.vm;i._watcher === n && i._isMounted && ae(i, "updated");
       }
-    }(i), Bn && Dn.devtools && Bn.emit("flush");
+    }(i), Bn && En.devtools && Bn.emit("flush");
   }function le(e, t, n) {
-    Di.get = function () {
+    Ei.get = function () {
       return this[t][n];
-    }, Di.set = function (e) {
+    }, Ei.set = function (e) {
       this[t][n] = e;
-    }, Object.defineProperty(e, n, Di);
+    }, Object.defineProperty(e, n, Ei);
   }function ce(e, t, n) {
-    var i = !Un();"function" == typeof n ? (Di.get = i ? de(t) : n, Di.set = g) : (Di.get = n.get ? i && !1 !== n.cache ? de(t) : n.get : g, Di.set = n.set ? n.set : g), Object.defineProperty(e, t, Di);
+    var i = !Un();"function" == typeof n ? (Ei.get = i ? de(t) : n, Ei.set = g) : (Ei.get = n.get ? i && !1 !== n.cache ? de(t) : n.get : g, Ei.set = n.set ? n.set : g), Object.defineProperty(e, t, Ei);
   }function de(e) {
     return function () {
       var t = this._computedWatchers && this._computedWatchers[e];if (t) return t.dirty && t.evaluate(), Jn.target && t.depend(), t.value;
@@ -4509,13 +4509,13 @@ function launchSlider() {
   }function ve(e) {
     return P(this.$options, "filters", e) || Cn;
   }function ge(e, t, n, i) {
-    var r = Dn.keyCodes[t] || n;return r ? Array.isArray(r) ? -1 === r.indexOf(e) : r !== e : i ? xn(i) !== t : void 0;
+    var r = En.keyCodes[t] || n;return r ? Array.isArray(r) ? -1 === r.indexOf(e) : r !== e : i ? xn(i) !== t : void 0;
   }function ye(e, t, n, i, o) {
     if (n && r(n)) {
       Array.isArray(n) && (n = v(n));var s,
           a = function a(r) {
         if ("class" === r || "style" === r || vn(r)) s = e;else {
-          var a = e.attrs && e.attrs.type;s = i || Dn.mustUseProp(t, a, r) ? e.domProps || (e.domProps = {}) : e.attrs || (e.attrs = {});
+          var a = e.attrs && e.attrs.type;s = i || En.mustUseProp(t, a, r) ? e.domProps || (e.domProps = {}) : e.attrs || (e.attrs = {});
         }r in s || (s[r] = n[r], !o) || ((e.on || (e.on = {}))["update:" + r] = function (e) {
           n[r] = e;
         });
@@ -4549,15 +4549,15 @@ function launchSlider() {
     };var a = Object.create(r),
         u = n(s._compiled),
         l = !u;u && (this.$options = s, this.$slots = this.slots(), this.$scopedSlots = e.scopedSlots || hn), s._scopeId ? this._c = function (e, t, n, i) {
-      var o = De(a, e, t, n, i, l);return o && (o.fnScopeId = s._scopeId, o.fnContext = r), o;
+      var o = Ee(a, e, t, n, i, l);return o && (o.fnScopeId = s._scopeId, o.fnContext = r), o;
     } : this._c = function (e, t, n, i) {
-      return De(a, e, t, n, i, l);
+      return Ee(a, e, t, n, i, l);
     };
   }function Te(e, t) {
     for (var n in t) {
       e[_n(n)] = t[n];
     }
-  }function Ee(i, o, s, a, u) {
+  }function De(i, o, s, a, u) {
     if (!e(i)) {
       var l = s.$options._base;if (r(i) && (i = l.extend(i)), "function" == typeof i) {
         var c;if (e(i.cid) && void 0 === (i = function (i, o, s) {
@@ -4614,7 +4614,7 @@ function launchSlider() {
         }(o);var p = i.options.name || u;return new Zn("vue-component-" + i.cid + (p ? "-" + p : ""), o, void 0, void 0, void 0, s, { Ctor: i, propsData: d, listeners: f, tag: u, children: a }, c);
       }
     }var m, v, g, y, _, w;
-  }function De(r, o, s, a, u, l) {
+  }function Ee(r, o, s, a, u, l) {
     return (Array.isArray(s) || i(s)) && (u = a, a = s, s = void 0), n(l) && (u = qi), function (r, o, s, a, u) {
       if (t(s) && t(s.__ob__)) return ei();if (t(s) && t(s.is) && (o = s.is), !o) return ei();var l, c, d, f;(Array.isArray(a) && "function" == typeof a[0] && ((s = s || {}).scopedSlots = { default: a[0] }, a.length = 0), u === qi ? a = i(l = a) ? [k(l)] : Array.isArray(l) ? function r(o, s) {
         var a,
@@ -4628,7 +4628,7 @@ function launchSlider() {
         for (var t = 0; t < e.length; t++) {
           if (Array.isArray(e[t])) return Array.prototype.concat.apply([], e);
         }return e;
-      }(a)), "string" == typeof o) ? (d = r.$vnode && r.$vnode.ns || Dn.getTagNamespace(o), c = Dn.isReservedTag(o) ? new Zn(Dn.parsePlatformTagName(o), s, a, void 0, void 0, r) : t(f = P(r.$options, "components", o)) ? Ee(f, s, r, a, o) : new Zn(o, s, a, void 0, void 0, r)) : c = Ee(o, s, r, a);return t(c) ? (d && function i(r, o, s) {
+      }(a)), "string" == typeof o) ? (d = r.$vnode && r.$vnode.ns || En.getTagNamespace(o), c = En.isReservedTag(o) ? new Zn(En.parsePlatformTagName(o), s, a, void 0, void 0, r) : t(f = P(r.$options, "components", o)) ? De(f, s, r, a, o) : new Zn(o, s, a, void 0, void 0, r)) : c = De(o, s, r, a);return t(c) ? (d && function i(r, o, s) {
         if (r.ns = o, "foreignObject" === r.tag && (o = void 0, s = !0), t(r.children)) for (var a = 0, u = r.children.length; a < u; a++) {
           var l = r.children[a];t(l.tag) && (e(l.ns) || n(s)) && i(l, o, s);
         }
@@ -4876,7 +4876,7 @@ function launchSlider() {
           o = n.data.on || {};Ki = i.elm, function (e) {
         if (t(e[Tr])) {
           var n = Pn ? "change" : "input";e[n] = [].concat(e[Tr], e[n] || []), delete e[Tr];
-        }t(e[Er]) && (e.change = [].concat(e[Er], e.change || []), delete e[Er]);
+        }t(e[Dr]) && (e.change = [].concat(e[Dr], e.change || []), delete e[Dr]);
       }(r), B(r, o, ct, dt, i.context), Ki = void 0;
     }
   }function ht(n, i) {
@@ -4990,18 +4990,18 @@ function launchSlider() {
     }));
   }function Tt(e) {
     return 1e3 * Number(e.slice(0, -1));
-  }function Et(n, i) {
+  }function Dt(n, i) {
     var o = n.elm;t(o._leaveCb) && (o._leaveCb.cancelled = !0, o._leaveCb());var s = _t(n.data.transition);if (!e(s) && !t(o._enterCb) && 1 === o.nodeType) {
-      for (var a = s.css, l = s.type, c = s.enterClass, d = s.enterToClass, f = s.enterActiveClass, h = s.appearClass, p = s.appearToClass, m = s.appearActiveClass, v = s.beforeEnter, g = s.enter, y = s.afterEnter, _ = s.enterCancelled, w = s.beforeAppear, x = s.appear, k = s.afterAppear, C = s.appearCancelled, S = s.duration, T = _i, E = _i.$vnode; E && E.parent;) {
-        T = (E = E.parent).context;
-      }var D = !T._isMounted || !n.isRootInsert;if (!D || x || "" === x) {
-        var A = D && h ? h : c,
-            L = D && m ? m : f,
-            M = D && p ? p : d,
-            I = D && w || v,
-            O = D && "function" == typeof x ? x : g,
-            j = D && k || y,
-            P = D && C || _,
+      for (var a = s.css, l = s.type, c = s.enterClass, d = s.enterToClass, f = s.enterActiveClass, h = s.appearClass, p = s.appearToClass, m = s.appearActiveClass, v = s.beforeEnter, g = s.enter, y = s.afterEnter, _ = s.enterCancelled, w = s.beforeAppear, x = s.appear, k = s.afterAppear, C = s.appearCancelled, S = s.duration, T = _i, D = _i.$vnode; D && D.parent;) {
+        T = (D = D.parent).context;
+      }var E = !T._isMounted || !n.isRootInsert;if (!E || x || "" === x) {
+        var A = E && h ? h : c,
+            L = E && m ? m : f,
+            M = E && p ? p : d,
+            I = E && w || v,
+            O = E && "function" == typeof x ? x : g,
+            j = E && k || y,
+            P = E && C || _,
             z = u(r(S) ? S.enter : S),
             N = !1 !== a && !zn,
             $ = Lt(O),
@@ -5015,7 +5015,7 @@ function launchSlider() {
         })), n.data.show && (i && i(), O && O(o, F)), N || $ || F();
       }
     }
-  }function Dt(n, i) {
+  }function Et(n, i) {
     function o() {
       C.cancelled || (n.data.show || ((s.parentNode._pending || (s.parentNode._pending = {}))[n.key] = n), p && p(s), w && (wt(s, d), wt(s, h), bt(function () {
         wt(s, f), xt(s, d), C.cancelled || x || (At(k) ? setTimeout(C, k) : kt(s, c, C));
@@ -5044,7 +5044,7 @@ function launchSlider() {
   }function Lt(n) {
     if (e(n)) return !1;var i = n.fns;return t(i) ? Lt(Array.isArray(i) ? i[0] : i) : (n._length || n.length) > 1;
   }function Mt(e, t) {
-    !0 !== t.data.show && Et(t);
+    !0 !== t.data.show && Dt(t);
   }function It(e, t, n) {
     Ot(e, t, n), (Pn || Nn) && setTimeout(function () {
       Ot(e, t, n);
@@ -5296,8 +5296,8 @@ function launchSlider() {
   },
       Sn = "data-server-rendered",
       Tn = ["component", "directive", "filter"],
-      En = ["beforeCreate", "created", "beforeMount", "mounted", "beforeUpdate", "updated", "beforeDestroy", "destroyed", "activated", "deactivated", "errorCaptured"],
-      Dn = { optionMergeStrategies: Object.create(null), silent: !1, productionTip: !1, devtools: !1, performance: !1, errorHandler: null, warnHandler: null, ignoredElements: [], keyCodes: Object.create(null), isReservedTag: kn, isReservedAttr: kn, isUnknownElement: kn, getTagNamespace: g, parsePlatformTagName: Cn, mustUseProp: kn, _lifecycleHooks: En },
+      Dn = ["beforeCreate", "created", "beforeMount", "mounted", "beforeUpdate", "updated", "beforeDestroy", "destroyed", "activated", "deactivated", "errorCaptured"],
+      En = { optionMergeStrategies: Object.create(null), silent: !1, productionTip: !1, devtools: !1, performance: !1, errorHandler: null, warnHandler: null, ignoredElements: [], keyCodes: Object.create(null), isReservedTag: kn, isReservedAttr: kn, isUnknownElement: kn, getTagNamespace: g, parsePlatformTagName: Cn, mustUseProp: kn, _lifecycleHooks: Dn },
       An = /[^\w.$]/,
       Ln = "__proto__" in {},
       Mn = "undefined" != typeof window,
@@ -5376,15 +5376,15 @@ function launchSlider() {
     })(e, ni, ii), this.observeArray(e)) : this.walk(e);
   };oi.prototype.walk = function (e) {
     for (var t = Object.keys(e), n = 0; n < t.length; n++) {
-      E(e, t[n], e[t[n]]);
+      D(e, t[n], e[t[n]]);
     }
   }, oi.prototype.observeArray = function (e) {
     for (var t = 0, n = e.length; t < n; t++) {
       T(e[t]);
     }
-  };var si = Dn.optionMergeStrategies;si.data = function (e, t, n) {
+  };var si = En.optionMergeStrategies;si.data = function (e, t, n) {
     return n ? M(e, t, n) : t && "function" != typeof t ? e : M(e, t);
-  }, En.forEach(function (e) {
+  }, Dn.forEach(function (e) {
     si[e] = I;
   }), Tn.forEach(function (e) {
     si[e + "s"] = O;
@@ -5430,7 +5430,7 @@ function launchSlider() {
       Ci = !1,
       Si = 0,
       Ti = 0,
-      Ei = function Ei(e, t, n, i, r) {
+      Di = function Di(e, t, n, i, r) {
     this.vm = e, r && (e._watcher = this), e._watchers.push(this), i ? (this.deep = !!i.deep, this.user = !!i.user, this.lazy = !!i.lazy, this.sync = !!i.sync) : this.deep = this.user = this.lazy = this.sync = !1, this.cb = n, this.id = ++Ti, this.active = !0, this.dirty = this.lazy, this.deps = [], this.newDeps = [], this.depIds = new Yn(), this.newDepIds = new Yn(), this.expression = "", "function" == typeof t ? this.getter = t : (this.getter = function (e) {
       if (!An.test(e)) {
         var t = e.split(".");return function (e) {
@@ -5440,7 +5440,7 @@ function launchSlider() {
         };
       }
     }(t), this.getter || (this.getter = function () {})), this.value = this.lazy ? void 0 : this.get();
-  };Ei.prototype.get = function () {
+  };Di.prototype.get = function () {
     var e;e = this, Jn.target && Qn.push(Jn.target), Jn.target = e;var t,
         n = this.vm;try {
       t = this.getter.call(n, n);
@@ -5449,13 +5449,13 @@ function launchSlider() {
     } finally {
       this.deep && Y(t), Jn.target = Qn.pop(), this.cleanupDeps();
     }return t;
-  }, Ei.prototype.addDep = function (e) {
+  }, Di.prototype.addDep = function (e) {
     var t = e.id;this.newDepIds.has(t) || (this.newDepIds.add(t), this.newDeps.push(e), this.depIds.has(t) || e.addSub(this));
-  }, Ei.prototype.cleanupDeps = function () {
+  }, Di.prototype.cleanupDeps = function () {
     for (var e = this.deps.length; e--;) {
       var t = this.deps[e];this.newDepIds.has(t.id) || t.removeSub(this);
     }var n = this.depIds;this.depIds = this.newDepIds, this.newDepIds = n, this.newDepIds.clear(), n = this.deps, this.deps = this.newDeps, this.newDeps = n, this.newDeps.length = 0;
-  }, Ei.prototype.update = function () {
+  }, Di.prototype.update = function () {
     this.lazy ? this.dirty = !0 : this.sync ? this.run() : function (e) {
       var t = e.id;if (null == xi[t]) {
         if (xi[t] = !0, Ci) {
@@ -5465,7 +5465,7 @@ function launchSlider() {
         } else bi.push(e);ki || (ki = !0, W(ue));
       }
     }(this);
-  }, Ei.prototype.run = function () {
+  }, Di.prototype.run = function () {
     if (this.active) {
       var e = this.get();if (e !== this.value || r(e) || this.deep) {
         var t = this.value;if (this.value = e, this.user) try {
@@ -5475,19 +5475,19 @@ function launchSlider() {
         } else this.cb.call(this.vm, e, t);
       }
     }
-  }, Ei.prototype.evaluate = function () {
+  }, Di.prototype.evaluate = function () {
     this.value = this.get(), this.dirty = !1;
-  }, Ei.prototype.depend = function () {
+  }, Di.prototype.depend = function () {
     for (var e = this.deps.length; e--;) {
       this.deps[e].depend();
     }
-  }, Ei.prototype.teardown = function () {
+  }, Di.prototype.teardown = function () {
     if (this.active) {
       this.vm._isBeingDestroyed || c(this.vm._watchers, this);for (var e = this.deps.length; e--;) {
         this.deps[e].removeSub(this);
       }this.active = !1;
     }
-  };var Di = { enumerable: !0, configurable: !0, get: g, set: g },
+  };var Ei = { enumerable: !0, configurable: !0, get: g, set: g },
       Ai = { lazy: !0 };Ce(Se.prototype);var Li,
       Mi,
       Ii,
@@ -5542,19 +5542,19 @@ function launchSlider() {
       e._vnode = null, e._staticTrees = null;var t = e.$options,
           n = e.$vnode = t._parentVnode,
           i = n && n.context;e.$slots = ne(t._renderChildren, i), e.$scopedSlots = hn, e._c = function (t, n, i, r) {
-        return De(e, t, n, i, r, !1);
+        return Ee(e, t, n, i, r, !1);
       }, e.$createElement = function (t, n, i, r) {
-        return De(e, t, n, i, r, !0);
-      };var r = n && n.data;E(e, "$attrs", r && r.attrs || hn, 0, !0), E(e, "$listeners", t._parentListeners || hn, 0, !0);
+        return Ee(e, t, n, i, r, !0);
+      };var r = n && n.data;D(e, "$attrs", r && r.attrs || hn, 0, !0), D(e, "$listeners", t._parentListeners || hn, 0, !0);
     }(this), ae(this, "beforeCreate"), (r = he((i = this).$options.inject, i)) && (ri.shouldConvert = !1, Object.keys(r).forEach(function (e) {
-      E(i, e, r[e]);
+      D(i, e, r[e]);
     }), ri.shouldConvert = !0), function (e) {
       e._watchers = [];var t = e.$options;t.props && function (e, t) {
         var n = e.$options.propsData || {},
             i = e._props = {},
             r = e.$options._propKeys = [],
             o = !e.$parent;ri.shouldConvert = o;var s = function s(o) {
-          r.push(o);var s = z(o, t, n, e);E(i, o, s), o in e || le(e, "_props", o);
+          r.push(o);var s = z(o, t, n, e);D(i, o, s), o in e || le(e, "_props", o);
         };for (var a in t) {
           s(a);
         }ri.shouldConvert = !0;
@@ -5576,7 +5576,7 @@ function launchSlider() {
         var n = e._computedWatchers = Object.create(null),
             i = Un();for (var r in t) {
           var o = t[r],
-              s = "function" == typeof o ? o : o.get;i || (n[r] = new Ei(e, s || g, g, Ai)), r in e || ce(e, r, o);
+              s = "function" == typeof o ? o : o.get;i || (n[r] = new Di(e, s || g, g, Ai)), r in e || ce(e, r, o);
         }
       }(e, t.computed), t.watch && t.watch !== qn && function (e, t) {
         for (var n in t) {
@@ -5590,8 +5590,8 @@ function launchSlider() {
       return this._data;
     } }, zi = { get: function get() {
       return this._props;
-    } }, Object.defineProperty(ji.prototype, "$data", Pi), Object.defineProperty(ji.prototype, "$props", zi), ji.prototype.$set = D, ji.prototype.$delete = A, ji.prototype.$watch = function (e, t, n) {
-    if (o(t)) return fe(this, e, t, n);(n = n || {}).user = !0;var i = new Ei(this, e, t, n);return n.immediate && t.call(this, i.value), function () {
+    } }, Object.defineProperty(ji.prototype, "$data", Pi), Object.defineProperty(ji.prototype, "$props", zi), ji.prototype.$set = E, ji.prototype.$delete = A, ji.prototype.$watch = function (e, t, n) {
+    if (o(t)) return fe(this, e, t, n);(n = n || {}).user = !0;var i = new Di(this, e, t, n);return n.immediate && t.call(this, i.value), function () {
       i.teardown();
     };
   }, Oi = /^hook:/, (Ii = Le).prototype.$on = function (e, t) {
@@ -5677,8 +5677,8 @@ function launchSlider() {
               u = null == t.key ? n.Ctor.cid + (n.tag ? "::" + n.tag : "") : t.key;s[u] ? (t.componentInstance = s[u].componentInstance, c(a, u), a.push(u)) : (s[u] = t, a.push(u), this.max && a.length > parseInt(this.max) && je(s, a[0], a, this._vnode)), t.data.keepAlive = !0;
         }return t || e && e[0];
       } } };Ri = Le, (Yi = {}).get = function () {
-    return Dn;
-  }, Object.defineProperty(Ri, "config", Yi), Ri.util = { warn: Vn, extend: m, mergeOptions: j, defineReactive: E }, Ri.set = D, Ri.delete = A, Ri.nextTick = W, Ri.options = Object.create(null), Tn.forEach(function (e) {
+    return En;
+  }, Object.defineProperty(Ri, "config", Yi), Ri.util = { warn: Vn, extend: m, mergeOptions: j, defineReactive: D }, Ri.set = E, Ri.delete = A, Ri.nextTick = W, Ri.options = Object.create(null), Tn.forEach(function (e) {
     Ri.options[e + "s"] = Object.create(null);
   }), Ri.options._base = Ri, m(Ri.options.components, Bi), Ri.use = function (e) {
     var t = this._installedPlugins || (this._installedPlugins = []);if (t.indexOf(e) > -1) return this;var n = p(arguments, 1);return n.unshift(this), "function" == typeof e.install ? e.install.apply(e, n) : "function" == typeof e && e.apply(null, n), t.push(e), this;
@@ -5785,8 +5785,8 @@ function launchSlider() {
       Cr = { create: Ve, update: Ve },
       Sr = /[\w).+\-_$\]]/,
       Tr = "__r",
-      Er = "__c",
-      Dr = { create: ft, update: ft },
+      Dr = "__c",
+      Er = { create: ft, update: ft },
       Ar = { create: ht, update: ht },
       Lr = f(function (e) {
     var t = {},
@@ -5962,8 +5962,8 @@ function launchSlider() {
               }if (w.elm = r.elm, x) {
                 for (var T = 0; T < k.create.length; ++T) {
                   k.create[T](yr, w);
-                }var E = w.data.hook.insert;if (E.merged) for (var D = 1; D < E.fns.length; D++) {
-                  E.fns[D]();
+                }var D = w.data.hook.insert;if (D.merged) for (var E = 1; E < D.fns.length; E++) {
+                  D.fns[E]();
                 }
               } else qe(w);w = w.parent;
             }t(g) ? v(0, [i], 0, 0) : t(i.tag) && m(i);
@@ -5971,8 +5971,8 @@ function launchSlider() {
         }return _(r, f, c), r.elm;
       }var A;t(i) && m(i);
     };
-  }({ nodeOps: vr, modules: [kr, Cr, Dr, Ar, zr, Mn ? { create: Mt, activate: Mt, remove: function remove(e, t) {
-        !0 !== e.data.show ? Dt(e, t) : t();
+  }({ nodeOps: vr, modules: [kr, Cr, Er, Ar, zr, Mn ? { create: Mt, activate: Mt, remove: function remove(e, t) {
+        !0 !== e.data.show ? Et(e, t) : t();
       } } : {}].concat(xr) });zn && document.addEventListener("selectionchange", function () {
     var e = document.activeElement;e && e.vmodel && $t(e, "input");
   });var Vr = { inserted: function inserted(e, t, n, i) {
@@ -5992,13 +5992,13 @@ function launchSlider() {
       Xr = { model: Vr, show: { bind: function bind(e, t, n) {
         var i = t.value,
             r = (n = Ft(n)).data && n.data.transition,
-            o = e.__vOriginalDisplay = "none" === e.style.display ? "" : e.style.display;i && r ? (n.data.show = !0, Et(n, function () {
+            o = e.__vOriginalDisplay = "none" === e.style.display ? "" : e.style.display;i && r ? (n.data.show = !0, Dt(n, function () {
           e.style.display = o;
         })) : e.style.display = i ? o : "none";
       }, update: function update(e, t, n) {
-        var i = t.value;i !== t.oldValue && ((n = Ft(n)).data && n.data.transition ? (n.data.show = !0, i ? Et(n, function () {
+        var i = t.value;i !== t.oldValue && ((n = Ft(n)).data && n.data.transition ? (n.data.show = !0, i ? Dt(n, function () {
           e.style.display = e.__vOriginalDisplay;
-        }) : Dt(n, function () {
+        }) : Et(n, function () {
           e.style.display = "none";
         })) : e.style.display = i ? e.__vOriginalDisplay : "none");
       }, unbind: function unbind(e, t, n, i, r) {
@@ -6062,11 +6062,11 @@ function launchSlider() {
         } } } };Le.config.mustUseProp = ir, Le.config.isReservedTag = hr, Le.config.isReservedAttr = tr, Le.config.getTagNamespace = $e, Le.config.isUnknownElement = function (e) {
     if (!Mn) return !0;if (hr(e)) return !1;if (e = e.toLowerCase(), null != pr[e]) return pr[e];var t = document.createElement(e);return e.indexOf("-") > -1 ? pr[e] = t.constructor === window.HTMLUnknownElement || t.constructor === window.HTMLElement : pr[e] = /HTMLUnknownElement/.test(t.toString());
   }, m(Le.options.directives, Xr), m(Le.options.components, Kr), Le.prototype.__patch__ = Mn ? Gr : g, Le.prototype.$mount = function (e, t) {
-    return e = e && Mn ? Fe(e) : void 0, i = e, r = t, (n = this).$el = i, n.$options.render || (n.$options.render = ei), ae(n, "beforeMount"), new Ei(n, function () {
+    return e = e && Mn ? Fe(e) : void 0, i = e, r = t, (n = this).$el = i, n.$options.render || (n.$options.render = ei), ae(n, "beforeMount"), new Di(n, function () {
       n._update(n._render(), r);
     }, g, null, !0), r = !1, null == n.$vnode && (n._isMounted = !0, ae(n, "mounted")), n;var n, i, r;
   }, Le.nextTick(function () {
-    Dn.devtools && Bn && Bn.emit("init", Le);
+    En.devtools && Bn && Bn.emit("init", Le);
   }, 0);var eo,
       to = /\{\{((?:.|\n)+?)\}\}/g,
       no = /[-.*+?^${}()|[\]\/\\]/g,
@@ -6105,8 +6105,8 @@ function launchSlider() {
       Co,
       So,
       To,
-      Eo,
       Do,
+      Eo,
       Ao,
       Lo,
       Mo,
@@ -6170,7 +6170,7 @@ function launchSlider() {
               u = !o && "range" !== i,
               l = o ? "change" : "range" === i ? Tr : "input",
               c = "$event.target.value";a && (c = "$event.target.value.trim()"), s && (c = "_n(" + c + ")");var d = ot(t, c);u && (d = "if($event.target.composing)return;" + d), Ze(e, "value", "(" + t + ")"), tt(e, l, d, null, !0), (a || s) && tt(e, "blur", "$forceUpdate()");
-        }(e, v, g);else if (!Dn.isReservedTag(y)) return rt(e, v, g), !1;return !0;
+        }(e, v, g);else if (!En.isReservedTag(y)) return rt(e, v, g), !1;return !0;
       }, text: function text(e, t) {
         t.value && Ze(e, "textContent", "_s(" + t.value + ")");
       }, html: function html(e, t) {
@@ -6212,7 +6212,7 @@ function launchSlider() {
         e.pre && (a = !1), So(e.tag) && (u = !1);for (var n = 0; n < Co.length; n++) {
           Co[n](e, t);
         }
-      }bo = t.warn || Je, So = t.isPreTag || kn, To = t.mustUseProp || kn, Eo = t.getTagNamespace || kn, xo = Qe(t.modules, "transformNode"), ko = Qe(t.modules, "preTransformNode"), Co = Qe(t.modules, "postTransformNode"), wo = t.delimiters;var i,
+      }bo = t.warn || Je, So = t.isPreTag || kn, To = t.mustUseProp || kn, Do = t.getTagNamespace || kn, xo = Qe(t.modules, "transformNode"), ko = Qe(t.modules, "preTransformNode"), Co = Qe(t.modules, "postTransformNode"), wo = t.delimiters;var i,
           r,
           o = [],
           s = !1 !== t.preserveWhitespace,
@@ -6282,7 +6282,7 @@ function launchSlider() {
           }
         }i();
       }(e, { warn: bo, expectHTML: t.expectHTML, isUnaryTag: t.isUnaryTag, canBeLeftOpenTag: t.canBeLeftOpenTag, shouldDecodeNewlines: t.shouldDecodeNewlines, shouldDecodeNewlinesForHref: t.shouldDecodeNewlinesForHref, shouldKeepComment: t.comments, start: function start(e, s, l) {
-          var c = r && r.ns || Eo(e);Pn && "svg" === c && (s = function (e) {
+          var c = r && r.ns || Do(e);Pn && "svg" === c && (s = function (e) {
             for (var t = [], n = 0; n < e.length; n++) {
               var i = e[n];Vo.test(i.name) || (i.name = i.name.replace(Xo, ""), t.push(i));
             }return t;
@@ -6325,12 +6325,12 @@ function launchSlider() {
         }, comment: function comment(e) {
           r.children.push({ type: 3, text: e, isComment: !0 });
         } }), i;
-    }(e.trim(), t);!1 !== t.optimize && (i = t, (n = r) && (Do = Zo(i.staticKeys || ""), Ao = i.isReservedTag || kn, function e(t) {
+    }(e.trim(), t);!1 !== t.optimize && (i = t, (n = r) && (Eo = Zo(i.staticKeys || ""), Ao = i.isReservedTag || kn, function e(t) {
       if (t.static = 2 !== (u = t).type && (3 === u.type || !(!u.pre && (u.hasBindings || u.if || u.for || mn(u.tag) || !Ao(u.tag) || function (e) {
         for (; e.parent;) {
           if ("template" !== (e = e.parent).tag) return !1;if (e.for) return !0;
         }return !1;
-      }(u) || !Object.keys(u).every(Do)))), 1 === t.type) {
+      }(u) || !Object.keys(u).every(Eo)))), 1 === t.type) {
         if (!Ao(t.tag) && "slot" !== t.tag && null == t.attrsMap["inline-template"]) return;for (var n = 0, i = t.children.length; n < i; n++) {
           var r = t.children[n];e(r), r.static || (t.static = !1);
         }if (t.ifConditions) for (var o = 1, s = t.ifConditions.length; o < s; o++) {
@@ -7806,7 +7806,7 @@ function launchSlider() {
     } } };Vue.component("date-select", { props: ["is-Loading"], template: '\n        <div class="custom-select">\n            <select v-model="date" @change="broadcast">\n                <option v-for="(item, index) in lastSevenDays" :key="index" :value="item" v-text="item.title"></option>\n            </select>\n\n            <i class="fa fa-caret-down"></i>\n            <i class="fa fa-calendar-o"></i>\n\n            \x3c!-- LOADER --\x3e\n            <transition name="special-fade-in">\n                <i v-if="isLoading" class="fa-li fa fa-refresh fa-spin"></i>\n            </transition>\n        </div>\n    ', data: function data() {
     return { lastSevenDays: [] };
   }, created: function created() {
-    var e = new Date();this.lastSevenDays = this.getDates(e, 6), this.date = this.getDateObject(), bus.$on("setDate", this.setDate);
+    var e = new Date();this.lastSevenDays = this.getDates(e, 6), this.date = this.getDateObject(), this.broadcast(), bus.$on("setDate", this.setDate);
   },
   methods: {
     broadcast: function broadcast() {
@@ -7995,22 +7995,31 @@ function launchSlider() {
   watch: {
     date: function date() {
       if (!this.replaysDisabled) {
-        var e = this.dataPath + this.surfcamId + "/" + moment(this.date.timeStamp).format("YYYY/MM/DD");log("[computed] Preparing New apiRequest: " + e), this.loadData(e);
+        var e = this.dataPath + this.surfcamId + "/" + moment(this.date.timeStamp).format("YYYY/MM/DD");log("[computed:date] Preparing New apiRequest: " + e), this.loadData(e);
       }
     },
     feed: function feed() {
-      log("[watch] feed changed. Updating selectedTimeIndex = 0"), this.selectedTimeIndex = 0;
+      log("[watch:feed] feed changed"), 0 === this.selectedTimeIndex ? (log("[watch:feed] feed changed - selectedTime is zero, skip 3rd watcher and invoke selectVideo"), this.selectVideo()) : (log("[watch:feed] selectedTime needs to return to start, invoke 3rd watcher"), this.selectedTimeIndex = 0), this.firstRun && this.setHash();
     },
     selectedTimeIndex: function selectedTimeIndex() {
-      log("----------------------------------------------"), log("[watch] - widget - selectedTimeIndex changed to: " + this.selectedTimeIndex), log("----------------------------------------------"), this.getVideoIdFromHash(), this.selectVideo();
+      log("----------------------------------------------"), log("[watch:selectedTimeIndex] - selectedTimeIndex changed to: " + this.selectedTimeIndex), log("----------------------------------------------"), this.selectVideo();
     }
   }, methods: {
-    getVideoIdFromHash: function getVideoIdFromHash() {},
-    setHash: function setHash() {},
+    getVideoIdFromHash: function getVideoIdFromHash() {
+      var _this4 = this;
+
+      if (!this.firstRun) for (var e = window.location.hash.split("/")[2], t = this.feed, n = 0; n < t.length; n++) {
+        t[n].id == e && (this.selectedTimeIndex = n, log("HASH CHANGE selectedTimeIndex: " + this.selectedTimeIndex), setTimeout(function () {
+          bus.$emit("selectThumbnail", _this4.selectedTimeIndex);
+        }, 1e3));
+      }
+    },
+    setHash: function setHash() {
+      log(":: setHash() :: - Adding Hash on user input"), window.location.hash = "/" + moment(this.date.timeStamp).format("YYYY-MM-DD") + "/" + this.feed[this.selectedTimeIndex].id;
+    },
     selectVideo: function selectVideo() {
-      var e,
-          t = this.feed[this.selectedTimeIndex];if ("live" == this.feedType && !this.firstRun) log("IS LIVE ON INIT"), bus.$emit("initPlayer", "limitDuration"), e = { stream: this.liveStreamPlaylist, image: this.liveStreamImage };else {
-        this.feedType = "replay", this.firstRun || bus.$emit("initPlayer"), log("IS THERE A VIDEO OBJ?: " + t);try {
+      var e;this.getVideoIdFromHash();var t = this.feed[this.selectedTimeIndex];if ("live" == this.feedType && !this.firstRun) log("IS LIVE ON INIT"), bus.$emit("initPlayer", "limitDuration"), e = { stream: this.liveStreamPlaylist, image: this.liveStreamImage };else {
+        this.feedType = "replay", this.firstRun || bus.$emit("initPlayer");try {
           e = { stream: t.video_url, image: t.video_url };
         } catch (t) {
           e = { stream: ".mp4", image: ".jpg" };
@@ -8023,12 +8032,12 @@ function launchSlider() {
       }
     },
     loadData: function loadData(e) {
-      var _this4 = this;
+      var _this5 = this;
 
       log(":: loadData() ::"), this.feedLoading = !0, axios.get(e, "", { headers: { Accept: "*/*" } }).then(function (e) {
-        _this4.feedLoading = !1, log("~~~~~~~~~~~~ Server Response: (" + _typeof(e.data) + ", length: " + e.data.length + ") ~~~~~~~~~~~~"), e.data.length ? (log("~~~~~~~~~~~~ Success. Data found ~~~~~~~~~~~~"), _this4.feed = e.data, _this4.attempts = 0) : (log("~~~~~~~~~~~~ response.data returned empty or unusable ~~~~~~~~~~~~"), _this4.feed = !1, _this4.rolledBack || (log("~~~~~~~~~~~~ RETRYING: rolling back now. ~~~~~~~~~~~~"), _this4.rolledBack = !0, _this4.attempts < 6 ? (_this4.attempts++, log("Attempt: " + _this4.attempts), bus.$emit("setDate", _this4.attempts), _this4.feed = null) : (log("~~~~~~~~~~~~ STOPPED: no data to find ~~~~~~~~~~~~"), bus.$emit("setDate", 0))));
+        _this5.feedLoading = !1, log("~~~~~~~~~~~~ Server Response: (" + _typeof(e.data) + ", length: " + e.data.length + ") ~~~~~~~~~~~~"), e.data.length ? (log("~~~~~~~~~~~~ Success. Data found ~~~~~~~~~~~~"), _this5.feed = e.data, _this5.attempts = 0) : (log("~~~~~~~~~~~~ response.data returned empty or unusable ~~~~~~~~~~~~"), _this5.feed = !1, _this5.rolledBack || (log("~~~~~~~~~~~~ RETRYING: rolling back now. ~~~~~~~~~~~~"), _this5.attempts < 2 ? (_this5.attempts++, log("Attempt: " + _this5.attempts), bus.$emit("setDate", _this5.attempts), _this5.feed = null) : (log("~~~~~~~~~~~~ STOPPED: no data to find ~~~~~~~~~~~~"), bus.$emit("setDate", 0), _this5.rolledBack = !0)));
       }).catch(function (e) {
-        console.log("~~~~~~~~~~~~ Server Error: " + e + " ~~~~~~~~~~~~"), _this4.feed = !1;
+        console.log("~~~~~~~~~~~~ Server Error: " + e + " ~~~~~~~~~~~~"), _this5.feed = !1;
       });
     }
   } }), new Vue({ el: "#vue-app" });
