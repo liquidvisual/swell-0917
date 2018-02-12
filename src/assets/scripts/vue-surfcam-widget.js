@@ -12,7 +12,7 @@
 // DATE LOGGING
 //-----------------------------------------------------------------
 
-const LOGGING_ENABLED = false; // disable on prod
+const LOGGING_ENABLED = true; // disable on prod
 
 function log(item){
     if (LOGGING_ENABLED) {
@@ -582,6 +582,7 @@ Vue.component('surfcam-widget', {
             feedType:          null,
             feedLoading:       null,
             firstRun:          null,
+            replaysDisabled:   null,
             rolledBack:        null, // use this to rollback dates if server fails on page load (not on user input)
             selectedTimeIndex: null, // changed by 'time-select' - used to move through thumbs via Flickity
         }
@@ -605,6 +606,15 @@ Vue.component('surfcam-widget', {
         bus.$on('setTimeIndex', (index) => {
             this.selectedTimeIndex = index;
         });
+
+        //==============================
+        // WHEN NO REPLAYS EXIST (EXPLICITLY SET ON TEMPLATE)
+        //==============================
+
+        if (!this.dataPath || !this.surfcamId) {
+            this.replaysDisabled = true;
+            this.feed = false; // invoke the 2nd watcher
+        }
     },
     //==================================================
     // WATCH - ORDER MATTERS
@@ -639,10 +649,16 @@ Vue.component('surfcam-widget', {
 
         selectedTimeIndex(){
             log('[watch] - widget - selectedTimeIndex changed');
+
+
+            // switched off for now - needs more testing
+            // if (this.firstRun) {
+            //     log('Adding Hash after firstRun');
+            //     window.location.hash = this.feed[this.selectedTimeIndex].id; // add id to hash, allows link sharing
+            // }
+
             this.getVideoIdFromHash();
             this.selectVideo();
-
-            window.location.hash = this.feed[this.selectedTimeIndex].id; // add id to hash, allows link sharing
         }
     },
     //==================================================
@@ -721,6 +737,7 @@ Vue.component('surfcam-widget', {
             // LOAD VIDEO AFTER INIT
             //==================================================
 
+            log('>> firstRun is true');
             this.firstRun = true;
             bus.$emit('loadVideo', payload);
 
@@ -761,6 +778,8 @@ Vue.component('surfcam-widget', {
             .then((response) => {
                 this.feedLoading = false; // stop loading
 
+                log('response: '+typeof(response.data));
+
                 //**************************************************
                 // SUCCESS / FAILURE
                 //**************************************************
@@ -788,7 +807,7 @@ Vue.component('surfcam-widget', {
                     //++++++++++++++++++++++++++++++++++++++++++++++++
 
                 } else {
-                    log('~~~~~~~~~~~~ response.data returned empty ~~~~~~~~~~~~');
+                    log('~~~~~~~~~~~~ response.data returned empty - RETRYING ~~~~~~~~~~~~');
                     this.feed = null; // explicitly clear existing feed
 
                     //==================================================
@@ -796,12 +815,16 @@ Vue.component('surfcam-widget', {
                     //==================================================
 
                     if (!this.rolledBack) {
-                        this.rolledBack = true; // only runs on init - not user input
+                        log("Hasn't rolled back, rolling back now.");
+
                         if (this.attempts < 6) {
                             this.attempts++;
+                            console.log('Attempt: '+this.attempts);
                             bus.$emit('setDate', this.attempts);
                         } else {
                             // stop trying
+                            log('Has stopped trying, no data');
+                            this.rolledBack = true; // only runs on init - not user input
                             bus.$emit('setDate', 0); // reset to top date
                         }
                     }
