@@ -12,7 +12,7 @@
 // DATE LOGGING
 //-----------------------------------------------------------------
 
-const LOGGING_ENABLED = true; // disable on prod
+const LOGGING_ENABLED = false; // disable on prod
 
 function log(item){
     if (LOGGING_ENABLED) {
