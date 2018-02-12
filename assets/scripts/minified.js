@@ -7992,9 +7992,9 @@ function launchSlider() {
   }, created: function created() {
     var _this3 = this;
 
-    log("[created] - updating date"), this.feedType = this.liveStream ? "live" : "replay", this.date = { timeStamp: Date.now() }, bus.$on("setTimeIndex", function (e) {
+    log("[created] - updating date"), this.feedType = this.liveStream ? "live" : "replay", this.dataPath && this.surfcamId ? this.date = { timeStamp: Date.now() } : (this.replaysDisabled = !0, this.feed = !1), bus.$on("setTimeIndex", function (e) {
       _this3.selectedTimeIndex = e;
-    }), this.dataPath && this.surfcamId || (this.replaysDisabled = !0, this.feed = !1);
+    });
   },
   watch: {
     date: function date() {
