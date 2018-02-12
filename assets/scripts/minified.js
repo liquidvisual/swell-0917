@@ -7799,7 +7799,7 @@ function launchSlider() {
   }, i.prototype.complete = function (e, t) {
     this.img.removeEventListener("load", this), this.img.removeEventListener("error", this), this.element.classList.add(t), this.flickity.dispatchEvent("bgLazyLoad", e, this.element);
   }, e.BgLazyLoader = i, e;
-}), launchSlider();var LOGGING_ENABLED = !0;function log(e) {
+}), launchSlider();var LOGGING_ENABLED = !1;function log(e) {
   LOGGING_ENABLED && console.log(e);
 }Vue.config.productionTip = !1;var bus = new Vue();var utilities = { methods: { formatTime: function formatTime(e) {
       return moment(e).format("hh:mma");
