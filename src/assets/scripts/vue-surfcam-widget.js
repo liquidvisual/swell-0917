@@ -1,11 +1,20 @@
 /*
     VUE-SURFCAM-WIDGET.JS
-    updated: 09.02.18
+    updated: 13.02.18
 
     DEPENDENCIES
         https://unpkg.com/vue/dist/vue.js
         https://unpkg.com/axios/dist/axios.min.js
         https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js
+
+        empty array for cams
+        empty object for no replays at all ?
+
+        // KEEP FOR REFERENCE
+        // var d = new Date();
+        // var yesterday = d.setDate(d.getDate()-1);
+        // this.date = { timeStamp: yesterday };
+        // this.date = this.lastSevenDays[1]; // set initial option as selected
 */
 
 //-----------------------------------------------------------------
@@ -71,9 +80,8 @@ Vue.component('date-select', {
     created() {
         var today = new Date();
         this.lastSevenDays = this.getDates(today, 6);
-        this.date = this.lastSevenDays[0]; // set initial option as selected
-    },
-    mounted(){
+        this.date = this.getDateObject(); // this ultimately sets the date on init of the app - default zero if empty
+        this.broadcast(); // this is now necessary to invoke the widget watchers
         bus.$on('setDate', this.setDate);
     },
     methods: {
@@ -85,62 +93,48 @@ Vue.component('date-select', {
             this.$emit('input', this.date);
         },
         //==================================================
-        // SET SET (ROLLBACK)
+        // GET DATE OBJECT (FROM HASH)
         //==================================================
 
-        setDate(index){
-            // var d = new Date();
-            // var yesterday = d.setDate(d.getDate()-1);
-            // this.date = { timeStamp: yesterday };
-            // this.date = this.lastSevenDays[1]; // set initial option as selected
+        getDateObject(){
+            log('[created] date-select: Getting date from hash fragment...');
+            var hashBang_arr = window.location.hash.split('/'); // ['#', '2018-02-12', '40367']
+            var date = hashBang_arr[1]; // '2018-02-12'
+            var dateTitle = moment(date).format('dddd, D MMMM YYYY'); // EG. 'Monday, 12 February 2018' - match title in select - easier than timestamp
 
-            // allow manual roll back of day without user input
-            this.date = this.lastSevenDays[index];
-            this.$emit('input', this.date);
+            // Search for matching date title in date-select
+            for (var i = 0; i < this.lastSevenDays.length; i++) {
+
+                // Success! There was a match - date is available to load into date-select component
+                if (this.lastSevenDays[i].title === dateTitle) {
+                    return this.lastSevenDays[i];
+                }
+            }
+            return this.lastSevenDays[0]; // set initial option as selected
         },
         //==================================================
-        // getDates
+        // GET DATES
         //==================================================
 
         getDates(startDate, totalDays){
-
             var dates_arr = [];
 
             for (var i = 0; i <= totalDays; i++) {
-
-                var date_obj = {};
                 var currentDate = new Date();
                 var timeStamp = currentDate.setDate(startDate.getDate() - i);
-                var dateStr = this.dayAsString(currentDate.getDay());
-                    dateStr += ", ";
-                    dateStr += currentDate.getDate();
-                    dateStr += " ";
-                    dateStr += this.monthAsString(currentDate.getMonth());
-                    dateStr += " ";
-                    dateStr += currentDate.getFullYear();
-
-                date_obj.title = dateStr;
-                date_obj.timeStamp = timeStamp;
-
-                dates_arr.push(date_obj);
+                var dateStr = moment(timeStamp).format('dddd, D MMMM YYYY');
+                dates_arr.push({ title: dateStr, timeStamp: timeStamp });
             }
             return dates_arr;
         },
         //==================================================
-        // UTILITY: monthAsString
+        // SET DATE
+        // Used for rollback if feed turns up empty
         //==================================================
 
-        monthAsString(monthIndex) {
-            var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            return month[monthIndex];
-        },
-        //==================================================
-        // UTILITY: dayAsString
-        //==================================================
-
-        dayAsString(dayIndex) {
-            var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            return weekdays[dayIndex];
+        setDate(index){
+            this.date = this.lastSevenDays[index];
+            this.broadcast();
         }
     }
 });
@@ -186,7 +180,9 @@ Vue.component('time-select', {
 
     methods: {
         broadcast(){
+            log('[time-select] is broadcasting - selectedTimeIndex');
             this.$emit('input', this.selectedTimeIndex); // INSIDE > OUT: send value back out to widget
+            bus.$emit('setHash'); // call it explicitly so doesn't run on init
         }
     }
 });
@@ -417,6 +413,7 @@ Vue.component('thumb-slider', {
                 }
                 // log('Flickity StaticClick triggered')
                 this.selectTimeIndex(cellIndex);
+                bus.$emit('setHash'); // call it explicitly so doesn't run on init
             });
         },
         //==================================================
@@ -595,26 +592,34 @@ Vue.component('surfcam-widget', {
 
     created(){
         log('[created] - updating date');
-
         this.feedType = this.liveStream ? 'live' : 'replay'; // set the type for video-player and tabs
-        this.date = { timeStamp: Date.now() } // spins up the app
 
         //==============================
-        // BUS: SET TIME INDEX
+        // FOR REPLAYS TO WORK
+        // ATTRS MUST BE SPECIFIED ON THE NODE
+        //==============================
+
+        if (this.dataPath && this.surfcamId) {
+            this.date = { timeStamp: Date.now() } // spins up the app - goes to server
+        } else {
+            this.replaysDisabled = true;
+            this.feed = false; // invoke the 2nd watcher
+        }
+
+        //==============================
+        // BUS: ON SET TIME INDEX
         //==============================
 
         bus.$on('setTimeIndex', (index) => {
+            console.log('setTimeIndex emitted on widget');
             this.selectedTimeIndex = index;
         });
 
         //==============================
-        // WHEN NO REPLAYS EXIST (EXPLICITLY SET ON TEMPLATE)
+        // BUS: ON SET TIME INDEX (interaction calls this explicitly)
         //==============================
 
-        if (!this.dataPath || !this.surfcamId) {
-            this.replaysDisabled = true;
-            this.feed = false; // invoke the 2nd watcher
-        }
+        bus.$on('setHash', this.setHash);
     },
     //==================================================
     // WATCH - ORDER MATTERS
@@ -627,12 +632,13 @@ Vue.component('surfcam-widget', {
         //==============================
 
         date(){
-            var path = this.dataPath + this.surfcamId + '/' + moment(this.date.timeStamp).format('YYYY/MM/DD');
-            log('[computed] Preparing New apiRequest: '+path);
+            if (!this.replaysDisabled) {
+                var path = this.dataPath + this.surfcamId + '/' + moment(this.date.timeStamp).format('YYYY/MM/DD');
+                log('[computed:date] Preparing New apiRequest: '+path);
 
-            // :: loadData ::
-
-            this.loadData(path); // request data, just don't loadVideo unless replay
+                // :: loadData ::
+                this.loadData(path); // request data, just don't loadVideo unless replay
+            }
         },
         //==================================================
         // 02. RESET FEED POSITION
@@ -641,23 +647,28 @@ Vue.component('surfcam-widget', {
         //==================================================
 
         feed() {
-            this.selectedTimeIndex = 0; // reset time index when the feed reloads, back to beginning
+            log('[watch:feed] feed changed');
+
+            // emit a select time index to get video to change if on zero
+            if (this.selectedTimeIndex === 0) {
+                log('[watch:feed] feed changed - selectedTime is zero, skip 3rd watcher and invoke selectVideo');
+                this.selectVideo();
+
+            } else {
+                log('[watch:feed] selectedTime needs to return to start, invoke 3rd watcher');
+                this.selectedTimeIndex = 0; // reset time index when the feed reloads, back to beginning -> 3rd watcher will pick it up
+            }
+
+            if (this.firstRun) this.setHash();
         },
         //==============================
         // 03. WATCH: SELECTED TIME INDEX
         //==============================
 
         selectedTimeIndex(){
-            log('[watch] - widget - selectedTimeIndex changed');
-
-
-            // switched off for now - needs more testing
-            // if (this.firstRun) {
-            //     log('Adding Hash after firstRun');
-            //     window.location.hash = this.feed[this.selectedTimeIndex].id; // add id to hash, allows link sharing
-            // }
-
-            this.getVideoIdFromHash();
+            log('----------------------------------------------');
+            log('[watch:selectedTimeIndex] - selectedTimeIndex changed to: '+this.selectedTimeIndex);
+            log('----------------------------------------------');
             this.selectVideo();
         }
     },
@@ -674,8 +685,7 @@ Vue.component('surfcam-widget', {
         getVideoIdFromHash(){
             if (!this.firstRun) {
                 var hashBang_arr = window.location.hash.split('/');
-                var hashBang = hashBang_arr.slice(0, 1)[0];
-                var video_id = hashBang = hashBang.slice(1); // slide '#'
+                var video_id = hashBang_arr[2];
                 var feed = this.feed;
 
                 for (var i = 0; i < feed.length; i++) {
@@ -692,10 +702,27 @@ Vue.component('surfcam-widget', {
             }
         },
         //==================================================
+        // SET HASH
+        //==================================================
+
+        setHash() {
+            // the issue is date-select doesn't change with the id
+            // switched off for now - needs more testing
+            log(':: setHash() :: - Adding Hash on user input');
+            window.location.hash = '/' + moment(this.date.timeStamp).format('YYYY-MM-DD') + '/' + this.feed[this.selectedTimeIndex].id; // add id to hash, allows link sharing
+        },
+        //==================================================
         // SELECT VIDEO
         //==================================================
 
         selectVideo() {
+            // allow hash fragment to intercept on init
+            this.getVideoIdFromHash();
+
+            //==================================================
+            // VARS
+            //==================================================
+
             var payload;
             var video_obj = this.feed[this.selectedTimeIndex];
             var isLiveOnInit = this.feedType == 'live' && !this.firstRun;
@@ -705,6 +732,7 @@ Vue.component('surfcam-widget', {
             //==================================================
 
             if (isLiveOnInit) {
+                log('IS LIVE ON INIT');
                 bus.$emit('initPlayer', 'limitDuration');
 
                 payload = {
@@ -717,7 +745,6 @@ Vue.component('surfcam-widget', {
                 //==================================================
 
                 this.feedType = 'replay'; // set the tabs
-
                 if (!this.firstRun) bus.$emit('initPlayer');
 
                 try {
@@ -762,7 +789,11 @@ Vue.component('surfcam-widget', {
             }
         },
         //==================================================
-        // LOAD DATA - JUST STORES THE FEED
+        // LOAD DATA - ONLY STORES THE FEED - NOTHING ELSE
+        //
+        // feed = null  (Searching)
+        // feed = [...] (Done)
+        // feed = false (N/A)
         //==================================================
 
         loadData(path) {
@@ -778,61 +809,61 @@ Vue.component('surfcam-widget', {
             .then((response) => {
                 this.feedLoading = false; // stop loading
 
-                log('response: '+typeof(response.data));
+                log('~~~~~~~~~~~~ Server Response: ('+typeof(response.data)+', length: '+response.data.length+') ~~~~~~~~~~~~');
+
+                //++++++++++++++++++++++++++++++++++++++++++++++++
+                // TEST FOR EMPTY
+                //++++++++++++++++++++++++++++++++++++++++++++++++
+
+                // var random = Math.floor((Math.random() * 2) + 1);
+
+                // if (random == 2) {
+                //     response.data.length = 0;
+                //     log('X X X X X X X X X  FEED IS NULL  X X X X X X X X X X X X X X X');
+                // }
+                //++++++++++++++++++++++++++++++++++++++++++++++++
 
                 //**************************************************
                 // SUCCESS / FAILURE
                 //**************************************************
 
                 if (response.data.length){
-                    log('~~ Success. Data found ~~');
-
-                    this.feed = response.data.length ? response.data : false;
+                    log('~~~~~~~~~~~~ Success. Data found ~~~~~~~~~~~~');
+                    this.feed = response.data;
                     this.attempts = 0;
 
-                    //++++++++++++++++++++++++++++++++++++++++++++++++
-                    // TEST FOR EMPTY
-                    //++++++++++++++++++++++++++++++++++++++++++++++++
-
-                    // var random = Math.floor((Math.random() * 2) + 1);
-
-                    // if (random == 2) {
-                    //     var blah = [];
-                    //     // previously null, explicityly tell watcher to update
-                    //     if (!blah.length) this.feed = false;
-                    //     log('X X X X X X X X X  FEED IS NULL  X X X X X X X X X X X X X X X');
-                    // } else {
-                    //     this.feed = response.data; // store data
-                    // }
-                    //++++++++++++++++++++++++++++++++++++++++++++++++
-
                 } else {
-                    log('~~~~~~~~~~~~ response.data returned empty - RETRYING ~~~~~~~~~~~~');
-                    this.feed = null; // explicitly clear existing feed
+                    log('~~~~~~~~~~~~ response.data returned empty or unusable ~~~~~~~~~~~~');
+
+                    // explicitly clear existing feed | was: null - but now need to invoke 2nd watcher (cam 999 - no replays available) - feed needs to change to trigger selectedTime -> select video
+                    // need feed false to have the video player, even when blank and empty
+                    this.feed = false;
 
                     //==================================================
                     // If feed returns empty, set time for yesterday and try again
                     //==================================================
 
                     if (!this.rolledBack) {
-                        log("Hasn't rolled back, rolling back now.");
+                        log("~~~~~~~~~~~~ RETRYING: rolling back now. ~~~~~~~~~~~~");
 
-                        if (this.attempts < 6) {
+                        if (this.attempts < 2) { // change from 6 - attempt only twice
                             this.attempts++;
-                            console.log('Attempt: '+this.attempts);
+                            log('Attempt: '+this.attempts);
                             bus.$emit('setDate', this.attempts);
+                            this.feed = null; // allows video to play - watcher invoked
                         } else {
                             // stop trying
-                            log('Has stopped trying, no data');
-                            this.rolledBack = true; // only runs on init - not user input
+                            log("~~~~~~~~~~~~ STOPPED: no data to find ~~~~~~~~~~~~");
                             bus.$emit('setDate', 0); // reset to top date
+                            this.rolledBack = true; //
                         }
                     }
                     //==================================================
                 }
             })
             .catch((error) => {
-                console.log('Server Error: '+error);
+                console.log('~~~~~~~~~~~~ Server Error: '+error+' ~~~~~~~~~~~~');
+                this.feed = false; // black video
             });
         }
     }
@@ -847,7 +878,6 @@ Vue.component('surfcam-widget', {
 new Vue({
     el: '#vue-app',
 });
-
 //-----------------------------------------------------------------
 //
 //-----------------------------------------------------------------
