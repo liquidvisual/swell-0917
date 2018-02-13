@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="Generator" content="Drupal 7 (http://drupal.org)">
-    <title>Knights Surfcam</title>
+    <title>Knights Surfcam Replays</title>
     <link rel="profile" href="http://www.w3.org/1999/xhtml/vocab">
     <link rel="shortcut icon" href="http://www.swellnet.com/profiles/swellnet/themes/gold/favicon.ico" type="image/vnd.microsoft.icon">
     <link rel="canonical" href="index.html">
@@ -314,11 +314,11 @@
                                         <div class="panel-separator"></div>
 
                                         <!-- PAGE HEADER -->
-                                        <h1 class="special-page-header mb-5 mb-lg-4">Knights Surfcam</h1>
+                                        <h1 class="special-page-header mb-5 mb-lg-4">Knights Surfcam Replays</h1>
                                         <div id="vue-app" class="mb-4">
 
                                             <!-- SURFCAM WIDGET -->
-                                            <surfcam-widget live-stream="rtmp://streamer.swellnet.com.au/surfcams/cabarita.stream" live-stream-image="http://static.swellnet.com.au/images/surfcams/cabarita.jpg" live-stream-playlist="https://streamer.swellnet.com.au/surfcams/cabarita.stream/playlist.m3u8" data-path="http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/" surfcam-id="29" inline-template>
+                                            <surfcam-widget data-path="http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/" surfcam-id="29" inline-template>
                                                 <div>
 
                                                     <!-- LIVE / REPLAYS TABS -->
@@ -327,19 +327,12 @@
                                                             <a href="#" class="flag flag-action flag-link-normal" rel="nofollow">Set as favourite</a>
                                                             <span class="flag-throbber">&nbsp;</span>
                                                         </span>
-                                                        <a v-if="!replaysDisabled" class="btn-tab" :class="{active: feedType == 'replay'}" href="/surfcams/knights-replays/paid/">Replays</a>
-                                                        <a class="btn-tab" :class="{active: feedType == 'live'}" href="/surfcams/knights-live/paid/">Live</a>
+                                                        <a v-if="!replaysDisabled" class="btn-tab" :class="{active: feedType == 'replay'}" href="/surfcams/knights/paid/replays/">Replays</a>
+                                                        <a class="btn-tab" :class="{active: feedType == 'live'}" href="/surfcams/knights/paid/">Live</a>
                                                     </div>
 
-                                                    <!-- VIDEO COMPONENT -->
-                                                    <video-player></video-player>
-
-                                                    <!-- SURFCAM REPLAYS -->
-                                                    <h2 v-if="!replaysDisabled" class="d-flex mb-4 mt-5">
-                                                        <i class="fa fa-rotate-left pr-3"></i> Surfcam Replays</h2>
-
                                                     <!-- WRAPPER -->
-                                                    <div v-if="!replaysDisabled" class="custom-select-wrapper collapse-row-sm-only mt-0">
+                                                    <div v-if="!replaysDisabled" class="custom-select-wrapper collapse-row-sm-only">
 
                                                         <!-- DATE-SELECT COMPONENT -->
                                                         <date-select :is-loading="feedLoading" v-model="date"></date-select>
@@ -347,6 +340,9 @@
                                                         <!-- TIME-SELECT COMPONENT -->
                                                         <time-select :is-loading="feedLoading" v-model="selectedTimeIndex" :index="selectedTimeIndex" :feed="feed"></time-select>
                                                     </div>
+
+                                                    <!-- VIDEO COMPONENT -->
+                                                    <video-player></video-player>
 
                                                     <!-- THUMB-SLIDER COMPONENT -->
                                                     <transition name="special-thumb-slider-entrance">

@@ -185,15 +185,15 @@ function launchSlider() {
         $ = "(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+",
         F = $.replace("w", "w#"),
         q = "\\[" + N + "*(" + $ + ")(?:" + N + "*([*^$|!~]?=)" + N + "*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|(" + F + "))|)" + N + "*\\]",
-        H = ":(" + $ + ")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|" + q + ")*)|.*)\\)|)",
-        R = new RegExp(N + "+", "g"),
+        R = ":(" + $ + ")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|" + q + ")*)|.*)\\)|)",
+        H = new RegExp(N + "+", "g"),
         W = new RegExp("^" + N + "+|((?:^|[^\\\\])(?:\\\\.)*)" + N + "+$", "g"),
         Y = new RegExp("^" + N + "*," + N + "*"),
         U = new RegExp("^" + N + "*([>+~]|" + N + ")" + N + "*"),
         B = new RegExp("=" + N + "*([^\\]'\"]*?)" + N + "*\\]", "g"),
-        G = new RegExp(H),
+        G = new RegExp(R),
         V = new RegExp("^" + F + "$"),
-        X = { ID: new RegExp("^#(" + $ + ")"), CLASS: new RegExp("^\\.(" + $ + ")"), TAG: new RegExp("^(" + $.replace("w", "w*") + ")"), ATTR: new RegExp("^" + q), PSEUDO: new RegExp("^" + H), CHILD: new RegExp("^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\(" + N + "*(even|odd|(([+-]|)(\\d*)n|)" + N + "*(?:([+-]|)" + N + "*(\\d+)|))" + N + "*\\)|)", "i"), bool: new RegExp("^(?:" + z + ")$", "i"), needsContext: new RegExp("^" + N + "*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\(" + N + "*((?:-\\d)?\\d*)" + N + "*\\)|)(?=[^-]|$)", "i") },
+        X = { ID: new RegExp("^#(" + $ + ")"), CLASS: new RegExp("^\\.(" + $ + ")"), TAG: new RegExp("^(" + $.replace("w", "w*") + ")"), ATTR: new RegExp("^" + q), PSEUDO: new RegExp("^" + R), CHILD: new RegExp("^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\(" + N + "*(even|odd|(([+-]|)(\\d*)n|)" + N + "*(?:([+-]|)" + N + "*(\\d+)|))" + N + "*\\)|)", "i"), bool: new RegExp("^(?:" + z + ")$", "i"), needsContext: new RegExp("^" + N + "*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\(" + N + "*((?:-\\d)?\\d*)" + N + "*\\)|)(?=[^-]|$)", "i") },
         J = /^(?:input|select|textarea|button)$/i,
         Q = /^h\d$/i,
         Z = /^[^{]+\{\s*\[native \w/,
@@ -316,7 +316,7 @@ function launchSlider() {
       }), ue(function (e) {
         var t = s.createElement("input");t.setAttribute("type", "hidden"), e.appendChild(t).setAttribute("name", "D"), e.querySelectorAll("[name=d]").length && v.push("name" + N + "*[*^$|!~]?="), e.querySelectorAll(":enabled").length || v.push(":enabled", ":disabled"), e.querySelectorAll("*,:x"), v.push(",.*:");
       })), (n.matchesSelector = Z.test(y = p.matches || p.webkitMatchesSelector || p.mozMatchesSelector || p.oMatchesSelector || p.msMatchesSelector)) && ue(function (e) {
-        n.disconnectedMatch = y.call(e, "div"), y.call(e, "[s!='']:x"), g.push("!=", H);
+        n.disconnectedMatch = y.call(e, "div"), y.call(e, "[s!='']:x"), g.push("!=", R);
       }), v = v.length && new RegExp(v.join("|")), g = g.length && new RegExp(g.join("|")), t = Z.test(p.compareDocumentPosition), _ = t || Z.test(p.contains) ? function (e, t) {
         var n = 9 === e.nodeType ? e.documentElement : e,
             i = t && t.parentNode;return e === i || !(!i || 1 !== i.nodeType || !(n.contains ? n.contains(i) : e.compareDocumentPosition && 16 & e.compareDocumentPosition(i)));
@@ -396,7 +396,7 @@ function launchSlider() {
           });
         }, ATTR: function ATTR(e, t, n) {
           return function (i) {
-            var r = oe.attr(i, e);return null == r ? "!=" === t : !t || (r += "", "=" === t ? r === n : "!=" === t ? r !== n : "^=" === t ? n && 0 === r.indexOf(n) : "*=" === t ? n && r.indexOf(n) > -1 : "$=" === t ? n && r.slice(-n.length) === n : "~=" === t ? (" " + r.replace(R, " ") + " ").indexOf(n) > -1 : "|=" === t && (r === n || r.slice(0, n.length + 1) === n + "-"));
+            var r = oe.attr(i, e);return null == r ? "!=" === t : !t || (r += "", "=" === t ? r === n : "!=" === t ? r !== n : "^=" === t ? n && 0 === r.indexOf(n) : "*=" === t ? n && r.indexOf(n) > -1 : "$=" === t ? n && r.slice(-n.length) === n : "~=" === t ? (" " + r.replace(H, " ") + " ").indexOf(n) > -1 : "|=" === t && (r === n || r.slice(0, n.length + 1) === n + "-"));
           };
         }, CHILD: function CHILD(e, t, n, i, r) {
           var o = "nth" !== e.slice(0, 3),
@@ -1017,13 +1017,13 @@ function launchSlider() {
         (n = P.get(o[s], e + "queueHooks")) && n.empty && (i++, n.empty.add(a));
       }return a(), r.promise(t);
     } });var q,
-      H,
-      R = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
+      R,
+      H = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
       W = ["Top", "Right", "Bottom", "Left"],
       Y = function Y(e, t) {
     return e = t || e, "none" === h.css(e, "display") || !h.contains(e.ownerDocument, e);
   },
-      U = /^(?:checkbox|radio)$/i;q = d.createDocumentFragment().appendChild(d.createElement("div")), (H = d.createElement("input")).setAttribute("type", "radio"), H.setAttribute("checked", "checked"), H.setAttribute("name", "t"), q.appendChild(H), c.checkClone = q.cloneNode(!0).cloneNode(!0).lastChild.checked, q.innerHTML = "<textarea>x</textarea>", c.noCloneChecked = !!q.cloneNode(!0).lastChild.defaultValue;var B = "undefined";c.focusinBubbles = "onfocusin" in e;var G = /^key/,
+      U = /^(?:checkbox|radio)$/i;q = d.createDocumentFragment().appendChild(d.createElement("div")), (R = d.createElement("input")).setAttribute("type", "radio"), R.setAttribute("checked", "checked"), R.setAttribute("name", "t"), q.appendChild(R), c.checkClone = q.cloneNode(!0).cloneNode(!0).lastChild.checked, q.innerHTML = "<textarea>x</textarea>", c.noCloneChecked = !!q.cloneNode(!0).lastChild.defaultValue;var B = "undefined";c.focusinBubbles = "onfocusin" in e;var G = /^key/,
       V = /^(?:mouse|pointer|contextmenu)|click/,
       X = /^(?:focusinfocus|focusoutblur)$/,
       J = /^([^.]*)(?:\.(.+)|)$/;function Q() {
@@ -1357,7 +1357,7 @@ function launchSlider() {
     var t = d,
         n = ve[e];return n || ("none" !== (n = ge(e, t)) && n || ((t = (me = (me || h("<iframe frameborder='0' width='0' height='0'/>")).appendTo(t.documentElement))[0].contentDocument).write(), t.close(), n = ge(e, t), me.detach()), ve[e] = n), n;
   }var _e = /^margin/,
-      be = new RegExp("^(" + R + ")(?!px)[a-z%]+$", "i"),
+      be = new RegExp("^(" + H + ")(?!px)[a-z%]+$", "i"),
       we = function we(t) {
     return t.ownerDocument.defaultView.opener ? t.ownerDocument.defaultView.getComputedStyle(t, null) : e.getComputedStyle(t, null);
   };function xe(e, t, n) {
@@ -1394,8 +1394,8 @@ function launchSlider() {
       e.style[o] = s[o];
     }return r;
   };var Ce = /^(none|table(?!-c[ea]).+)/,
-      Se = new RegExp("^(" + R + ")(.*)$", "i"),
-      Te = new RegExp("^([+-])=(" + R + ")", "i"),
+      Se = new RegExp("^(" + H + ")(.*)$", "i"),
+      Te = new RegExp("^([+-])=(" + H + ")", "i"),
       De = { position: "absolute", visibility: "hidden", display: "block" },
       Ee = { letterSpacing: "0", fontWeight: "400" },
       Ae = ["Webkit", "O", "Moz", "ms"];function Le(e, t) {
@@ -1497,8 +1497,8 @@ function launchSlider() {
       $e,
       Fe,
       qe,
-      He = /^(?:toggle|show|hide)$/,
-      Re = new RegExp("^(?:([+-])=|)(" + R + ")([a-z%]*)$", "i"),
+      Re = /^(?:toggle|show|hide)$/,
+      He = new RegExp("^(?:([+-])=|)(" + H + ")([a-z%]*)$", "i"),
       We = /queueHooks$/,
       Ye = [function (e, t, n) {
     var i,
@@ -1521,7 +1521,7 @@ function launchSlider() {
     }));1 === e.nodeType && ("height" in t || "width" in t) && (n.overflow = [f.overflow, f.overflowX, f.overflowY], l = h.css(e, "display"), "inline" === ("none" === l ? P.get(e, "olddisplay") || ye(e.nodeName) : l) && "none" === h.css(e, "float") && (f.display = "inline-block"));n.overflow && (f.overflow = "hidden", c.always(function () {
       f.overflow = n.overflow[0], f.overflowX = n.overflow[1], f.overflowY = n.overflow[2];
     }));for (i in t) {
-      if (r = t[i], He.exec(r)) {
+      if (r = t[i], Re.exec(r)) {
         if (delete t[i], o = o || "toggle" === r, r === (p ? "hide" : "show")) {
           if ("show" !== r || !m || void 0 === m[i]) continue;p = !0;
         }d[i] = m && m[i] || h.style(e, i);
@@ -1541,9 +1541,9 @@ function launchSlider() {
       Ue = { "*": [function (e, t) {
       var n = this.createTween(e, t),
           i = n.cur(),
-          r = Re.exec(t),
+          r = He.exec(t),
           o = r && r[3] || (h.cssNumber[e] ? "" : "px"),
-          s = (h.cssNumber[e] || "px" !== o && +i) && Re.exec(h.css(n.elem, e)),
+          s = (h.cssNumber[e] || "px" !== o && +i) && He.exec(h.css(n.elem, e)),
           a = 1,
           u = 20;if (s && s[3] !== o) {
         o = o || s[3], r = r || [], s = +i || 1;do {
@@ -2644,7 +2644,7 @@ function launchSlider() {
         }).replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&")));}
   }function z(e) {
     var t = (e = e || "").match(Ee) || [],
-        n = ((t[t.length - 1] || []) + "").match(He) || ["-", 0, 0],
+        n = ((t[t.length - 1] || []) + "").match(Re) || ["-", 0, 0],
         i = 60 * n[1] + k(n[2]);return "+" === n[0] ? -i : i;
   }function N(e, t, n) {
     var i,
@@ -2700,8 +2700,8 @@ function launchSlider() {
           l = 0;for (r = j(t._f, t._locale).match(be) || [], n = 0; n < r.length; n++) {
         o = r[n], i = (a.match(P(o, t)) || [])[0], i && (s = a.substr(0, a.indexOf(i)), s.length > 0 && t._pf.unusedInput.push(s), a = a.slice(a.indexOf(i) + i.length), l += i.length), Xe[o] ? (i ? t._pf.empty = !1 : t._pf.unusedTokens.push(o), N(o, i, t)) : t._strict && !i && t._pf.unusedTokens.push(o);
       }t._pf.charsLeftOver = u - l, a.length > 0 && t._pf.unusedInput.push(a), !0 === t._pf.bigHour && t._a[ce] <= 12 && (t._pf.bigHour = e), t._isPm && t._a[ce] < 12 && (t._a[ce] += 12), !1 === t._isPm && 12 === t._a[ce] && (t._a[ce] = 0), F(t), E(t);
-    } else H(t);
-  }function H(e) {
+    } else R(t);
+  }function R(e) {
     var t,
         n,
         i = e._i,
@@ -2716,12 +2716,12 @@ function launchSlider() {
         }
       }i.match(Ee) && (e._f += "Z"), q(e);
     } else e._isValid = !1;
-  }function R(t) {
+  }function H(t) {
     var n,
         i,
         r,
         o,
-        s = t._i;s === e ? t._d = new Date() : y(s) ? t._d = new Date(+s) : null !== (n = ge.exec(s)) ? t._d = new Date(+n[1]) : "string" == typeof s ? (H(o = t), !1 === o._isValid && (delete o._isValid, te.createFromInputFallback(o))) : g(s) ? (t._a = function (e, t) {
+        s = t._i;s === e ? t._d = new Date() : y(s) ? t._d = new Date(+s) : null !== (n = ge.exec(s)) ? t._d = new Date(+n[1]) : "string" == typeof s ? (R(o = t), !1 === o._isValid && (delete o._isValid, te.createFromInputFallback(o))) : g(s) ? (t._a = function (e, t) {
       var n,
           i = [];for (n = 0; n < e.length; ++n) {
         i.push(t(e[n], n));
@@ -2742,7 +2742,7 @@ function launchSlider() {
       var t, n, i, r, o;if (0 === e._f.length) return e._pf.invalidFormat = !0, void (e._d = new Date(NaN));for (r = 0; r < e._f.length; r++) {
         o = 0, t = d({}, e), null != e._useUTC && (t._useUTC = e._useUTC), t._pf = { empty: !1, unusedTokens: [], unusedInput: [], overflow: -2, charsLeftOver: 0, nullInput: !1, invalidMonth: null, invalidFormat: !1, userInvalidated: !1, iso: !1 }, t._f = e._f[r], q(t), A(t) && (o += t._pf.charsLeftOver, o += 10 * t._pf.unusedTokens.length, t._pf.score = o, (null == i || i > o) && (i = o, n = t));
       }c(e, n || t);
-    }(t) : q(t) : R(t), (n = new u(t))._nextDay && (n.add(1, "d"), n._nextDay = e), n));
+    }(t) : q(t) : H(t), (n = new u(t))._nextDay && (n.add(1, "d"), n._nextDay = e), n));
   }function B(e, t) {
     var n, i;if (1 === t.length && g(t[0]) && (t = t[0]), !t.length) return te();for (n = t[0], i = 1; i < t.length; ++i) {
       t[i][e](n) && (n = t[i]);
@@ -2767,7 +2767,7 @@ function launchSlider() {
     };
   }function ee(e) {
     "undefined" == typeof ender && (ne = re.moment, re.moment = e ? r("Accessing Moment through the global scope is deprecated, and will be removed in an upcoming release.", te) : te);
-  }for (var te, ne, ie, re = "undefined" != typeof global ? global : this, oe = Math.round, se = Object.prototype.hasOwnProperty, ae = 0, ue = 1, le = 2, ce = 3, de = 4, fe = 5, he = 6, pe = {}, me = [], ve = "undefined" != typeof module && module && module.exports, ge = /^\/?Date\((\-?\d+)/i, ye = /(\-)?(?:(\d*)\.)?(\d+)\:(\d+)(?:\:(\d+)\.?(\d{3})?)?/, _e = /^(-)?P(?:(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?|([0-9,.]*)W)$/, be = /(\[[^\[]*\])|(\\)?(Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Q|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|S{1,4}|x|X|zz?|ZZ?|.)/g, we = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g, xe = /\d\d?/, ke = /\d{1,3}/, Ce = /\d{1,4}/, Se = /[+\-]?\d{1,6}/, Te = /\d+/, De = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i, Ee = /Z|[\+\-]\d\d:?\d\d/gi, Ae = /T/i, Le = /[\+\-]?\d+/, Me = /[\+\-]?\d+(\.\d{1,3})?/, Ie = /\d/, Oe = /\d\d/, je = /\d{3}/, Pe = /\d{4}/, ze = /[+-]?\d{6}/, Ne = /[+-]?\d+/, $e = /^\s*(?:[+-]\d{6}|\d{4})-(?:(\d\d-\d\d)|(W\d\d$)|(W\d\d-\d)|(\d\d\d))((T| )(\d\d(:\d\d(:\d\d(\.\d+)?)?)?)?([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/, Fe = [["YYYYYY-MM-DD", /[+-]\d{6}-\d{2}-\d{2}/], ["YYYY-MM-DD", /\d{4}-\d{2}-\d{2}/], ["GGGG-[W]WW-E", /\d{4}-W\d{2}-\d/], ["GGGG-[W]WW", /\d{4}-W\d{2}/], ["YYYY-DDD", /\d{4}-\d{3}/]], qe = [["HH:mm:ss.SSSS", /(T| )\d\d:\d\d:\d\d\.\d+/], ["HH:mm:ss", /(T| )\d\d:\d\d:\d\d/], ["HH:mm", /(T| )\d\d:\d\d/], ["HH", /(T| )\d\d/]], He = /([\+\-]|\d\d)/gi, Re = ("Date|Hours|Minutes|Seconds|Milliseconds".split("|"), { Milliseconds: 1, Seconds: 1e3, Minutes: 6e4, Hours: 36e5, Days: 864e5, Months: 2592e6, Years: 31536e6 }), We = { ms: "millisecond", s: "second", m: "minute", h: "hour", d: "day", D: "date", w: "week", W: "isoWeek", M: "month", Q: "quarter", y: "year", DDD: "dayOfYear", e: "weekday", E: "isoWeekday", gg: "weekYear", GG: "isoWeekYear" }, Ye = { dayofyear: "dayOfYear", isoweekday: "isoWeekday", isoweek: "isoWeek", weekyear: "weekYear", isoweekyear: "isoWeekYear" }, Ue = {}, Be = { s: 45, m: 45, h: 22, d: 26, M: 11 }, Ge = "DDD w W M D d".split(" "), Ve = "M D H h m s w W".split(" "), Xe = { M: function M() {
+  }for (var te, ne, ie, re = "undefined" != typeof global ? global : this, oe = Math.round, se = Object.prototype.hasOwnProperty, ae = 0, ue = 1, le = 2, ce = 3, de = 4, fe = 5, he = 6, pe = {}, me = [], ve = "undefined" != typeof module && module && module.exports, ge = /^\/?Date\((\-?\d+)/i, ye = /(\-)?(?:(\d*)\.)?(\d+)\:(\d+)(?:\:(\d+)\.?(\d{3})?)?/, _e = /^(-)?P(?:(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?|([0-9,.]*)W)$/, be = /(\[[^\[]*\])|(\\)?(Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Q|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|S{1,4}|x|X|zz?|ZZ?|.)/g, we = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g, xe = /\d\d?/, ke = /\d{1,3}/, Ce = /\d{1,4}/, Se = /[+\-]?\d{1,6}/, Te = /\d+/, De = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i, Ee = /Z|[\+\-]\d\d:?\d\d/gi, Ae = /T/i, Le = /[\+\-]?\d+/, Me = /[\+\-]?\d+(\.\d{1,3})?/, Ie = /\d/, Oe = /\d\d/, je = /\d{3}/, Pe = /\d{4}/, ze = /[+-]?\d{6}/, Ne = /[+-]?\d+/, $e = /^\s*(?:[+-]\d{6}|\d{4})-(?:(\d\d-\d\d)|(W\d\d$)|(W\d\d-\d)|(\d\d\d))((T| )(\d\d(:\d\d(:\d\d(\.\d+)?)?)?)?([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/, Fe = [["YYYYYY-MM-DD", /[+-]\d{6}-\d{2}-\d{2}/], ["YYYY-MM-DD", /\d{4}-\d{2}-\d{2}/], ["GGGG-[W]WW-E", /\d{4}-W\d{2}-\d/], ["GGGG-[W]WW", /\d{4}-W\d{2}/], ["YYYY-DDD", /\d{4}-\d{3}/]], qe = [["HH:mm:ss.SSSS", /(T| )\d\d:\d\d:\d\d\.\d+/], ["HH:mm:ss", /(T| )\d\d:\d\d:\d\d/], ["HH:mm", /(T| )\d\d:\d\d/], ["HH", /(T| )\d\d/]], Re = /([\+\-]|\d\d)/gi, He = ("Date|Hours|Minutes|Seconds|Milliseconds".split("|"), { Milliseconds: 1, Seconds: 1e3, Minutes: 6e4, Hours: 36e5, Days: 864e5, Months: 2592e6, Years: 31536e6 }), We = { ms: "millisecond", s: "second", m: "minute", h: "hour", d: "day", D: "date", w: "week", W: "isoWeek", M: "month", Q: "quarter", y: "year", DDD: "dayOfYear", e: "weekday", E: "isoWeekday", gg: "weekYear", GG: "isoWeekYear" }, Ye = { dayofyear: "dayOfYear", isoweekday: "isoWeekday", isoweek: "isoWeek", weekyear: "weekYear", isoweekyear: "isoWeekYear" }, Ue = {}, Be = { s: 45, m: 45, h: 22, d: 26, M: 11 }, Ge = "DDD w W M D d".split(" "), Ve = "M D H h m s w W".split(" "), Xe = { M: function M() {
       return this.month() + 1;
     }, MMM: function MMM(e) {
       return this.localeData().monthsShort(this, e);
@@ -3131,8 +3131,8 @@ function launchSlider() {
           o = Math.abs(this.seconds() + this.milliseconds() / 1e3);return this.asSeconds() ? (this.asSeconds() < 0 ? "-" : "") + "P" + (e ? e + "Y" : "") + (t ? t + "M" : "") + (n ? n + "D" : "") + (i || r || o ? "T" : "") + (i ? i + "H" : "") + (r ? r + "M" : "") + (o ? o + "S" : "") : "P0D";
     }, localeData: function localeData() {
       return this._locale;
-    } }), te.duration.fn.toString = te.duration.fn.toISOString;for (ie in Re) {
-    n(Re, ie) && K(ie.toLowerCase());
+    } }), te.duration.fn.toString = te.duration.fn.toISOString;for (ie in He) {
+    n(He, ie) && K(ie.toLowerCase());
   }te.duration.fn.asMilliseconds = function () {
     return this.as("ms");
   }, te.duration.fn.asSeconds = function () {
@@ -4343,11 +4343,11 @@ function launchSlider() {
     if (En.errorHandler) try {
       return En.errorHandler.call(null, e, t, n);
     } catch (e) {
-      H(e, null, "config.errorHandler");
-    }H(e, t, n);
-  }function H(e, t, n) {
+      R(e, null, "config.errorHandler");
+    }R(e, t, n);
+  }function R(e, t, n) {
     if (!Mn && !In || "undefined" == typeof console) throw e;console.error(e);
-  }function R() {
+  }function H() {
     di = !1;var e = ci.slice(0);ci.length = 0;for (var t = 0; t < e.length; t++) {
       e[t]();
     }
@@ -4693,13 +4693,13 @@ function launchSlider() {
           r = e.componentInstance || e.elm,
           o = i.$refs;t ? Array.isArray(o[n]) ? c(o[n], r) : o[n] === r && (o[n] = void 0) : e.data.refInFor ? Array.isArray(o[n]) ? o[n].indexOf(r) < 0 && o[n].push(r) : o[n] = [r] : o[n] = r;
     }
-  }function He(i, r) {
+  }function Re(i, r) {
     return i.key === r.key && (i.tag === r.tag && i.isComment === r.isComment && t(i.data) === t(r.data) && function (e, n) {
       if ("input" !== e.tag) return !0;var i,
           r = t(i = e.data) && t(i = i.attrs) && i.type,
           o = t(i = n.data) && t(i = i.attrs) && i.type;return r === o || mr(r) && mr(o);
     }(i, r) || n(i.isAsyncPlaceholder) && i.asyncFactory === r.asyncFactory && e(r.asyncFactory.error));
-  }function Re(e, n, i) {
+  }function He(e, n, i) {
     var r,
         o,
         s = {};for (r = n; r <= i; ++r) {
@@ -4867,7 +4867,7 @@ function launchSlider() {
       fi = !0;var e = l.apply(null, arguments);return fi = !1, e;
     }), n && (o = t, s = e, a = i, u = Ki, t = function e() {
       null !== o.apply(null, arguments) && dt(s, e, a, u);
-    }), Ki.addEventListener(e, t, Hn ? { capture: i, passive: r } : i);
+    }), Ki.addEventListener(e, t, Rn ? { capture: i, passive: r } : i);
   }function dt(e, t, n, i) {
     (i || Ki).removeEventListener(e, t._withTask || t, n);
   }function ft(n, i) {
@@ -4961,7 +4961,7 @@ function launchSlider() {
     var i = Ct(e, t),
         r = i.type,
         o = i.timeout,
-        s = i.propCount;if (!r) return n();var a = r === Fr ? Rr : Yr,
+        s = i.propCount;if (!r) return n();var a = r === Fr ? Hr : Yr,
         u = 0,
         l = function l() {
       e.removeEventListener(a, c), n();
@@ -4974,14 +4974,14 @@ function launchSlider() {
   }function Ct(e, t) {
     var n,
         i = window.getComputedStyle(e),
-        r = i[Hr + "Delay"].split(", "),
-        o = i[Hr + "Duration"].split(", "),
+        r = i[Rr + "Delay"].split(", "),
+        o = i[Rr + "Duration"].split(", "),
         s = St(r, o),
         a = i[Wr + "Delay"].split(", "),
         u = i[Wr + "Duration"].split(", "),
         l = St(a, u),
         c = 0,
-        d = 0;return t === Fr ? s > 0 && (n = Fr, c = s, d = o.length) : t === qr ? l > 0 && (n = qr, c = l, d = u.length) : d = (n = (c = Math.max(s, l)) > 0 ? s > l ? Fr : qr : null) ? n === Fr ? o.length : u.length : 0, { type: n, timeout: c, propCount: d, hasTransform: n === Fr && Br.test(i[Hr + "Property"]) };
+        d = 0;return t === Fr ? s > 0 && (n = Fr, c = s, d = o.length) : t === qr ? l > 0 && (n = qr, c = l, d = u.length) : d = (n = (c = Math.max(s, l)) > 0 ? s > l ? Fr : qr : null) ? n === Fr ? o.length : u.length : 0, { type: n, timeout: c, propCount: d, hasTransform: n === Fr && Br.test(i[Rr + "Property"]) };
   }function St(e, t) {
     for (; e.length < t.length;) {
       e = e.concat(e);
@@ -5072,14 +5072,14 @@ function launchSlider() {
     return !e.componentInstance || e.data && e.data.transition ? e : Ft(e.componentInstance._vnode);
   }function qt(e) {
     var t = e && e.componentOptions;return t && t.Ctor.options.abstract ? qt(Z(t.children)) : e;
-  }function Ht(e) {
+  }function Rt(e) {
     var t = {},
         n = e.$options;for (var i in n.propsData) {
       t[i] = e[i];
     }var r = n._parentListeners;for (var o in r) {
       t[_n(o)] = r[o];
     }return t;
-  }function Rt(e, t) {
+  }function Ht(e, t) {
     if (/\d-keep-alive$/.test(t.tag)) return e("keep-alive", { props: t.componentOptions.propsData });
   }function Wt(e) {
     e.elm._moveCb && e.elm._moveCb(), e.elm._enterCb && e.elm._enterCb();
@@ -5141,9 +5141,9 @@ function launchSlider() {
   }function Vt(e) {
     var t;if (t = it(e, "v-for")) {
       var n = function (e) {
-        var n = t.match(Ho);if (n) {
+        var n = t.match(Ro);if (n) {
           var i = {};i.for = n[2].trim();var r = n[1].trim().replace(Wo, ""),
-              o = r.match(Ro);return o ? (i.alias = r.replace(Ro, ""), i.iterator1 = o[1].trim(), o[2] && (i.iterator2 = o[2].trim())) : i.alias = r, i;
+              o = r.match(Ho);return o ? (i.alias = r.replace(Ho, ""), i.iterator1 = o[1].trim(), o[2] && (i.iterator2 = o[2].trim())) : i.alias = r, i;
         }
       }();n && m(e, n);
     }
@@ -5310,10 +5310,10 @@ function launchSlider() {
       $n = jn && jn.indexOf("android") > 0 || "android" === On,
       Fn = jn && /iphone|ipad|ipod|ios/.test(jn) || "ios" === On,
       qn = (jn && /chrome\/\d+/.test(jn), {}.watch),
-      Hn = !1;if (Mn) try {
-    var Rn = {};Object.defineProperty(Rn, "passive", { get: function get() {
-        Hn = !0;
-      } }), window.addEventListener("test-passive", null, Rn);
+      Rn = !1;if (Mn) try {
+    var Hn = {};Object.defineProperty(Hn, "passive", { get: function get() {
+        Rn = !0;
+      } }), window.addEventListener("test-passive", null, Hn);
   } catch (e) {}var Wn,
       Yn,
       Un = function Un() {
@@ -5403,17 +5403,17 @@ function launchSlider() {
       ci = [],
       di = !1,
       fi = !1;if ("undefined" != typeof setImmediate && x(setImmediate)) ui = function ui() {
-    setImmediate(R);
+    setImmediate(H);
   };else if ("undefined" == typeof MessageChannel || !x(MessageChannel) && "[object MessageChannelConstructor]" !== MessageChannel.toString()) ui = function ui() {
-    setTimeout(R, 0);
+    setTimeout(H, 0);
   };else {
     var hi = new MessageChannel(),
-        pi = hi.port2;hi.port1.onmessage = R, ui = function ui() {
+        pi = hi.port2;hi.port1.onmessage = H, ui = function ui() {
       pi.postMessage(1);
     };
   }if ("undefined" != typeof Promise && x(Promise)) {
     var mi = Promise.resolve();ai = function ai() {
-      mi.then(R), Fn && setTimeout(g);
+      mi.then(H), Fn && setTimeout(g);
     };
   } else ai = ui;var vi,
       gi = new Yn(),
@@ -5525,8 +5525,8 @@ function launchSlider() {
       $i = Object.keys(Ni),
       Fi = 1,
       qi = 2,
-      Hi = 0;Le.prototype._init = function (e) {
-    var t, n, i, r;this._uid = Hi++, this._isVue = !0, e && e._isComponent ? function (e, t) {
+      Ri = 0;Le.prototype._init = function (e) {
+    var t, n, i, r;this._uid = Ri++, this._isVue = !0, e && e._isComponent ? function (e, t) {
       var n = e.$options = Object.create(e.constructor.options),
           i = t._parentVnode;n.parent = t.parent, n._parentVnode = i, n._parentElm = t._parentElm, n._refElm = t._refElm;var r = i.componentOptions;n.propsData = r.propsData, n._parentListeners = r.listeners, n._renderChildren = r.children, n._componentTag = r.tag, t.render && (n.render = t.render, n.staticRenderFns = t.staticRenderFns);
     }(this, e) : this.$options = j(Ae(this.constructor), e || {}, this), this._renderProxy = this, this._self = this, function (e) {
@@ -5648,7 +5648,7 @@ function launchSlider() {
     } catch (n) {
       F(n, t, "render"), e = t._vnode;
     }return e instanceof Zn || (e = ei()), e.parent = r, e;
-  };var Ri,
+  };var Hi,
       Wi,
       Yi,
       Ui = [String, RegExp, Array],
@@ -5676,13 +5676,13 @@ function launchSlider() {
               a = this.keys,
               u = null == t.key ? n.Ctor.cid + (n.tag ? "::" + n.tag : "") : t.key;s[u] ? (t.componentInstance = s[u].componentInstance, c(a, u), a.push(u)) : (s[u] = t, a.push(u), this.max && a.length > parseInt(this.max) && je(s, a[0], a, this._vnode)), t.data.keepAlive = !0;
         }return t || e && e[0];
-      } } };Ri = Le, (Yi = {}).get = function () {
+      } } };Hi = Le, (Yi = {}).get = function () {
     return En;
-  }, Object.defineProperty(Ri, "config", Yi), Ri.util = { warn: Vn, extend: m, mergeOptions: j, defineReactive: D }, Ri.set = E, Ri.delete = A, Ri.nextTick = W, Ri.options = Object.create(null), Tn.forEach(function (e) {
-    Ri.options[e + "s"] = Object.create(null);
-  }), Ri.options._base = Ri, m(Ri.options.components, Bi), Ri.use = function (e) {
+  }, Object.defineProperty(Hi, "config", Yi), Hi.util = { warn: Vn, extend: m, mergeOptions: j, defineReactive: D }, Hi.set = E, Hi.delete = A, Hi.nextTick = W, Hi.options = Object.create(null), Tn.forEach(function (e) {
+    Hi.options[e + "s"] = Object.create(null);
+  }), Hi.options._base = Hi, m(Hi.options.components, Bi), Hi.use = function (e) {
     var t = this._installedPlugins || (this._installedPlugins = []);if (t.indexOf(e) > -1) return this;var n = p(arguments, 1);return n.unshift(this), "function" == typeof e.install ? e.install.apply(e, n) : "function" == typeof e && e.apply(null, n), t.push(e), this;
-  }, Ri.mixin = function (e) {
+  }, Hi.mixin = function (e) {
     return this.options = j(this.options, e), this;
   }, function (e) {
     e.cid = 0;var t = 1;e.extend = function (e) {
@@ -5703,7 +5703,7 @@ function launchSlider() {
         s[e] = n[e];
       }), o && (s.options.components[o] = s), s.superOptions = n.options, s.extendOptions = e, s.sealedOptions = m({}, s.options), r[i] = s, s;
     };
-  }(Ri), Wi = Ri, Tn.forEach(function (e) {
+  }(Hi), Wi = Hi, Tn.forEach(function (e) {
     Wi[e] = function (t, n) {
       return n ? ("component" === e && o(n) && (n.name = n.name || t, n = this.options._base.extend(n)), "directive" === e && "function" == typeof n && (n = { bind: n, update: n }), this.options[e + "s"][t] = n, n) : this.options[e + "s"][t];
     };
@@ -5818,10 +5818,10 @@ function launchSlider() {
       $r = Mn && !zn,
       Fr = "transition",
       qr = "animation",
-      Hr = "transition",
-      Rr = "transitionend",
+      Rr = "transition",
+      Hr = "transitionend",
       Wr = "animation",
-      Yr = "animationend";$r && (void 0 === window.ontransitionend && void 0 !== window.onwebkittransitionend && (Hr = "WebkitTransition", Rr = "webkitTransitionEnd"), void 0 === window.onanimationend && void 0 !== window.onwebkitanimationend && (Wr = "WebkitAnimation", Yr = "webkitAnimationEnd"));var Ur = Mn ? window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : setTimeout : function (e) {
+      Yr = "animationend";$r && (void 0 === window.ontransitionend && void 0 !== window.onwebkittransitionend && (Rr = "WebkitTransition", Hr = "webkitTransitionEnd"), void 0 === window.onanimationend && void 0 !== window.onwebkitanimationend && (Wr = "WebkitAnimation", Yr = "webkitAnimationEnd"));var Ur = Mn ? window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : setTimeout : function (e) {
     return e();
   },
       Br = /\b(transform|all)(,|$)/,
@@ -5904,11 +5904,11 @@ function launchSlider() {
             }t(l = c.hook) && t(l = l.update) && l(i, r);
           }e(r.text) ? t(f) && t(h) ? f !== h && function (n, i, r, o, a) {
             for (var u, l, c, d = 0, f = 0, h = i.length - 1, m = i[0], g = i[h], _ = r.length - 1, b = r[0], w = r[_], x = !a; d <= h && f <= _;) {
-              e(m) ? m = i[++d] : e(g) ? g = i[--h] : He(m, b) ? (y(m, b, o), m = i[++d], b = r[++f]) : He(g, w) ? (y(g, w, o), g = i[--h], w = r[--_]) : He(m, w) ? (y(m, w, o), x && S.insertBefore(n, m.elm, S.nextSibling(g.elm)), m = i[++d], w = r[--_]) : He(g, b) ? (y(g, b, o), x && S.insertBefore(n, g.elm, m.elm), g = i[--h], b = r[++f]) : (e(u) && (u = Re(i, d, h)), e(l = t(b.key) ? u[b.key] : function (e, n, i, r) {
+              e(m) ? m = i[++d] : e(g) ? g = i[--h] : Re(m, b) ? (y(m, b, o), m = i[++d], b = r[++f]) : Re(g, w) ? (y(g, w, o), g = i[--h], w = r[--_]) : Re(m, w) ? (y(m, w, o), x && S.insertBefore(n, m.elm, S.nextSibling(g.elm)), m = i[++d], w = r[--_]) : Re(g, b) ? (y(g, b, o), x && S.insertBefore(n, g.elm, m.elm), g = i[--h], b = r[++f]) : (e(u) && (u = He(i, d, h)), e(l = t(b.key) ? u[b.key] : function (e, n, i, r) {
                 for (var o = d; o < r; o++) {
-                  var s = n[o];if (t(s) && He(e, s)) return o;
+                  var s = n[o];if (t(s) && Re(e, s)) return o;
                 }
-              }(b, i, 0, h)) ? s(b, o, n, m.elm) : He(c = i[l], b) ? (y(c, b, o), i[l] = void 0, x && S.insertBefore(n, c.elm, m.elm)) : s(b, o, n, m.elm), b = r[++f]);
+              }(b, i, 0, h)) ? s(b, o, n, m.elm) : Re(c = i[l], b) ? (y(c, b, o), i[l] = void 0, x && S.insertBefore(n, c.elm, m.elm)) : s(b, o, n, m.elm), b = r[++f]);
             }d > h ? p(n, e(r[_ + 1]) ? null : r[_ + 1].elm, r, f, _, o) : f > _ && v(0, i, d, h);
           }(u, f, h, o, a) : t(h) ? (t(i.text) && S.setTextContent(u, ""), p(u, null, h, 0, h.length - 1, o)) : t(f) ? v(0, f, 0, f.length - 1) : t(i.text) && S.setTextContent(u, "") : i.text !== r.text && S.setTextContent(u, r.text), t(c) && t(l = c.hook) && t(l = l.postpatch) && l(i, r);
         }
@@ -5952,7 +5952,7 @@ function launchSlider() {
       if (!e(r)) {
         var c = !1,
             f = [];if (e(i)) c = !0, s(r, f, u, l);else {
-          var h = t(i.nodeType);if (!h && He(i, r)) y(i, r, f, a);else {
+          var h = t(i.nodeType);if (!h && Re(i, r)) y(i, r, f, a);else {
             if (h) {
               if (1 === i.nodeType && i.hasAttribute(Sn) && (i.removeAttribute(Sn), o = !0), n(o) && b(i, r, f)) return _(r, f, !0), i;A = i, i = new Zn(S.tagName(A).toLowerCase(), {}, [], void 0, A);
             }var p = i.elm,
@@ -6017,14 +6017,14 @@ function launchSlider() {
           for (; e = e.parent;) {
             if (e.data.transition) return !0;
           }
-        }(this.$vnode)) return a;var u = qt(a);if (!u) return a;if (this._leaving) return Rt(e, a);var l = "__transition-" + this._uid + "-";u.key = null == u.key ? u.isComment ? l + "comment" : l + u.tag : i(u.key) ? 0 === String(u.key).indexOf(l) ? u.key : l + u.key : u.key;var c = (u.data || (u.data = {})).transition = Ht(this),
+        }(this.$vnode)) return a;var u = qt(a);if (!u) return a;if (this._leaving) return Ht(e, a);var l = "__transition-" + this._uid + "-";u.key = null == u.key ? u.isComment ? l + "comment" : l + u.tag : i(u.key) ? 0 === String(u.key).indexOf(l) ? u.key : l + u.key : u.key;var c = (u.data || (u.data = {})).transition = Rt(this),
             d = this._vnode,
             f = qt(d);if (u.data.directives && u.data.directives.some(function (e) {
           return "show" === e.name;
         }) && (u.data.show = !0), f && f.data && (t = u, (n = f).key !== t.key || n.tag !== t.tag) && !Q(f) && (!f.componentInstance || !f.componentInstance._vnode.isComment)) {
           var h = f.data.transition = m({}, c);if ("out-in" === s) return this._leaving = !0, G(h, "afterLeave", function () {
             r._leaving = !1, r.$forceUpdate();
-          }), Rt(e, a);if ("in-out" === s) {
+          }), Ht(e, a);if ("in-out" === s) {
             if (Q(u)) return d;var p,
                 v = function v() {
               p();
@@ -6036,7 +6036,7 @@ function launchSlider() {
       }
     } },
       Zr = m({ tag: String, moveClass: String }, Jr);delete Zr.mode;var Kr = { Transition: Qr, TransitionGroup: { props: Zr, render: function render(e) {
-        for (var t = this.tag || this.$vnode.data.tag || "span", n = Object.create(null), i = this.prevChildren = this.children, r = this.$slots.default || [], o = this.children = [], s = Ht(this), a = 0; a < r.length; a++) {
+        for (var t = this.tag || this.$vnode.data.tag || "span", n = Object.create(null), i = this.prevChildren = this.children, r = this.$slots.default || [], o = this.children = [], s = Rt(this), a = 0; a < r.length; a++) {
           var u = r[a];u.tag && null != u.key && 0 !== String(u.key).indexOf("__vlist") && (o.push(u), n[u.key] = u, (u.data || (u.data = {})).transition = s);
         }if (i) {
           for (var l = [], c = [], d = 0; d < i.length; d++) {
@@ -6050,8 +6050,8 @@ function launchSlider() {
             t = this.moveClass || (this.name || "v") + "-move";e.length && this.hasMove(e[0].elm, t) && (e.forEach(Wt), e.forEach(Yt), e.forEach(Ut), this._reflow = document.body.offsetHeight, e.forEach(function (e) {
           if (e.data.moved) {
             var n = e.elm,
-                i = n.style;wt(n, t), i.transform = i.WebkitTransform = i.transitionDuration = "", n.addEventListener(Rr, n._moveCb = function e(i) {
-              i && !/transform$/.test(i.propertyName) || (n.removeEventListener(Rr, e), n._moveCb = null, xt(n, t));
+                i = n.style;wt(n, t), i.transform = i.WebkitTransform = i.transitionDuration = "", n.addEventListener(Hr, n._moveCb = function e(i) {
+              i && !/transform$/.test(i.propertyName) || (n.removeEventListener(Hr, e), n._moveCb = null, xt(n, t));
             });
           }
         }));
@@ -6121,8 +6121,8 @@ function launchSlider() {
   },
       Fo = /^@|^v-on:/,
       qo = /^v-|^@|^:/,
-      Ho = /(.*?)\s+(?:in|of)\s+(.*)/,
-      Ro = /,([^,\}\]]*)(?:,([^,\}\]]*))?$/,
+      Ro = /(.*?)\s+(?:in|of)\s+(.*)/,
+      Ho = /,([^,\}\]]*)(?:,([^,\}\]]*))?$/,
       Wo = /^\(|\)$/g,
       Yo = /:(.*)$/,
       Uo = /^:|^v-bind:/,
@@ -7834,7 +7834,7 @@ function launchSlider() {
     }
   }, mixins: [utilities], methods: {
     broadcast: function broadcast() {
-      log("[time-select] is broadcasting - selectedTimeIndex"), this.$emit("input", this.selectedTimeIndex), bus.$emit("setHash");
+      log("[time-select] is broadcasting - selectedTimeIndex"), this.$emit("input", this.selectedTimeIndex), bus.$emit("setURL");
     }
   } }), Vue.component("video-player", { template: '\n        <div id="video"></div>\n    ', data: function data() {
     return { playerInstance: null };
@@ -7888,7 +7888,7 @@ function launchSlider() {
       var _this2 = this;
 
       this.$refs.flickity.on("staticClick", function (e, t, n, i) {
-        n && (_this2.selectTimeIndex(i), bus.$emit("setHash"));
+        n && (_this2.selectTimeIndex(i), bus.$emit("setURL"));
       });
     },
     selectTimeIndex: function selectTimeIndex(e) {
@@ -7989,8 +7989,8 @@ function launchSlider() {
     var _this3 = this;
 
     log("[created] - updating date"), this.feedType = this.liveStream ? "live" : "replay", this.dataPath && this.surfcamId ? this.date = { timeStamp: Date.now() } : (this.replaysDisabled = !0, this.feed = !1), bus.$on("setTimeIndex", function (e) {
-      console.log("setTimeIndex emitted on widget"), _this3.selectedTimeIndex = e;
-    }), bus.$on("setHash", this.setHash);
+      log("setTimeIndex emitted on widget"), _this3.selectedTimeIndex = e;
+    }), bus.$on("setURL", this.setURL);
   },
   watch: {
     date: function date() {
@@ -7999,7 +7999,7 @@ function launchSlider() {
       }
     },
     feed: function feed() {
-      log("[watch:feed] feed changed"), 0 === this.selectedTimeIndex ? (log("[watch:feed] feed changed - selectedTime is zero, skip 3rd watcher and invoke selectVideo"), this.selectVideo()) : (log("[watch:feed] selectedTime needs to return to start, invoke 3rd watcher"), this.selectedTimeIndex = 0), this.firstRun && this.setHash();
+      log("[watch:feed] feed changed"), 0 === this.selectedTimeIndex ? (log("[watch:feed] feed changed - selectedTime is zero, skip 3rd watcher and invoke selectVideo"), this.selectVideo()) : (log("[watch:feed] selectedTime needs to return to start, invoke 3rd watcher"), this.selectedTimeIndex = 0), this.firstRun && "replay" == this.feedType && this.setURL();
     },
     selectedTimeIndex: function selectedTimeIndex() {
       log("----------------------------------------------"), log("[watch:selectedTimeIndex] - selectedTimeIndex changed to: " + this.selectedTimeIndex), log("----------------------------------------------"), this.selectVideo();
@@ -8014,12 +8014,14 @@ function launchSlider() {
         }, 1e3));
       }
     },
-    setHash: function setHash() {
-      log(":: setHash() :: - Adding Hash on user input"), window.location.hash = "/" + moment(this.date.timeStamp).format("YYYY-MM-DD") + "/" + this.feed[this.selectedTimeIndex].id;
+    setURL: function setURL() {
+      log(":: setURL() :: - Adding Hash on user input");var e = moment(this.date.timeStamp).format("YYYY-MM-DD") + "/" + this.feed[this.selectedTimeIndex].id;if ("live" == this.feedType) {
+        var t = window.location.pathname;t += "/" == t.substr(t.length - 1) ? "" : "/", window.location = t + "replays/#/" + e;
+      } else window.location.hash = "/" + e;
     },
     selectVideo: function selectVideo() {
       var e;this.getVideoIdFromHash();var t = this.feed[this.selectedTimeIndex];if ("live" == this.feedType && !this.firstRun) log("IS LIVE ON INIT"), bus.$emit("initPlayer", "limitDuration"), e = { stream: this.liveStreamPlaylist, image: this.liveStreamImage };else {
-        this.feedType = "replay", this.firstRun || bus.$emit("initPlayer");try {
+        if ("live" == this.feedType) return;this.firstRun || bus.$emit("initPlayer");try {
           e = { stream: t.video_url, image: t.video_url };
         } catch (t) {
           e = { stream: ".mp4", image: ".jpg" };
