@@ -166,7 +166,7 @@
         }
     }
 
-    &.is-selected .btn-tile-overlay .btn-tile-header:before {
+    &.active .btn-tile-overlay .btn-tile-header:before {
         content: "";
         position: relative;
         top: -3px;

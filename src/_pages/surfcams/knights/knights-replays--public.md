@@ -1,7 +1,7 @@
 ---
 layout: child_layout/surfcams_item
 title: Knights Surfcam Replays
-permalink: /surfcams/knights-replays/public/
+permalink: /surfcams/knights/public/replays/
 user_type: public
 theme: theme-public
 ---

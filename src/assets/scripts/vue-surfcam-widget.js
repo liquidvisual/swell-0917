@@ -182,7 +182,7 @@ Vue.component('time-select', {
         broadcast(){
             log('[time-select] is broadcasting - selectedTimeIndex');
             this.$emit('input', this.selectedTimeIndex); // INSIDE > OUT: send value back out to widget
-            bus.$emit('setHash'); // call it explicitly so doesn't run on init
+            bus.$emit('setURL'); // call it explicitly so doesn't run on init
         }
     }
 });
@@ -310,7 +310,7 @@ Vue.component('thumb-slider', {
 
                 <!-- VUE FLICKITY -->
                 <vue-flickity class="thumb-slider" ref="flickity" :options="flickityOptions">
-                    <div v-for="(item, index) in feed" :key="index" :title="'#'+index + ' '+item.start_local" class="thumb-slider-item btn-tile">
+                    <div v-for="(item, index) in feed" :key="index" :title="'#'+index + ' '+item.start_local" :class="{active: index == currentIndex}" class="thumb-slider-item btn-tile">
 
                         <img src="/assets/img/layout/placeholder-thumbnail.png">
                         <span class="btn-tile-bg" :data-flickity-bg-lazyload="item.image_url"></span>
@@ -413,7 +413,7 @@ Vue.component('thumb-slider', {
                 }
                 // log('Flickity StaticClick triggered')
                 this.selectTimeIndex(cellIndex);
-                bus.$emit('setHash'); // call it explicitly so doesn't run on init
+                bus.$emit('setURL'); // call it explicitly so doesn't run on init
             });
         },
         //==================================================
@@ -611,7 +611,7 @@ Vue.component('surfcam-widget', {
         //==============================
 
         bus.$on('setTimeIndex', (index) => {
-            console.log('setTimeIndex emitted on widget');
+            log('setTimeIndex emitted on widget');
             this.selectedTimeIndex = index;
         });
 
@@ -619,7 +619,7 @@ Vue.component('surfcam-widget', {
         // BUS: ON SET TIME INDEX (interaction calls this explicitly)
         //==============================
 
-        bus.$on('setHash', this.setHash);
+        bus.$on('setURL', this.setURL);
     },
     //==================================================
     // WATCH - ORDER MATTERS
@@ -659,7 +659,7 @@ Vue.component('surfcam-widget', {
                 this.selectedTimeIndex = 0; // reset time index when the feed reloads, back to beginning -> 3rd watcher will pick it up
             }
 
-            if (this.firstRun) this.setHash();
+        if (this.firstRun && this.feedType == 'replay') this.setURL(); // has to be firstRun - first link is unsharable by design, too complex otherwise
         },
         //==============================
         // 03. WATCH: SELECTED TIME INDEX
@@ -702,20 +702,33 @@ Vue.component('surfcam-widget', {
             }
         },
         //==================================================
-        // SET HASH
+        // SET URL FOR LIVE PAGES (OR HASH FOR REPLAY PAGES)
         //==================================================
 
-        setHash() {
-            // the issue is date-select doesn't change with the id
-            // switched off for now - needs more testing
-            log(':: setHash() :: - Adding Hash on user input');
-            window.location.hash = '/' + moment(this.date.timeStamp).format('YYYY-MM-DD') + '/' + this.feed[this.selectedTimeIndex].id; // add id to hash, allows link sharing
+        setURL() {
+            log(':: setURL() :: - Adding Hash on user input');
+
+            var hash = moment(this.date.timeStamp).format('YYYY-MM-DD') + '/' + this.feed[this.selectedTimeIndex].id;
+
+            if (this.feedType == 'live') {
+                var pathName = window.location.pathname;
+                var lastChar = pathName.substr(pathName.length - 1);
+                var slash = lastChar == '/' ? '' : '/';
+
+                pathName += slash; // add a trailing slash if there isn't one
+
+                // surfcams/knights/paid  +
+                window.location = pathName + 'replays/#/' + hash;
+            } else {
+                window.location.hash = '/' + hash; // add id to hash, allows link sharing
+            }
         },
         //==================================================
         // SELECT VIDEO
         //==================================================
 
         selectVideo() {
+
             // allow hash fragment to intercept on init
             this.getVideoIdFromHash();
 
@@ -744,7 +757,11 @@ Vue.component('surfcam-widget', {
                 // WHEN REPLAY
                 //==================================================
 
-                this.feedType = 'replay'; // set the tabs
+                if (this.feedType == 'live') {
+                    return; // live no longer switches video
+                }
+
+                // this.feedType = 'replay'; // set the tabs
                 if (!this.firstRun) bus.$emit('initPlayer');
 
                 try {
