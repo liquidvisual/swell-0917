@@ -8031,7 +8031,7 @@ function launchSlider() {
     },
     sendTracking: function sendTracking(e) {
       if (e) {
-        var t = e.video_url.split("/");t = t[3] + " - " + e.start_local, console.log(t), setTimeout(function () {
+        var t = e.video_url.split("/");t = t[3] + " - " + e.start_local, setTimeout(function () {
           window.ga("send", "event", "Replays", "Surfcam replay thumbnail clicked", t, { nonInteraction: !0 });
         }, 10);
       }
