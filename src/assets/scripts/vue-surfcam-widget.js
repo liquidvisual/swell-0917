@@ -1,6 +1,6 @@
 /*
     VUE-SURFCAM-WIDGET.JS
-    updated: 13.02.18
+    updated: 14.02.18
 
     DEPENDENCIES
         https://unpkg.com/vue/dist/vue.js
@@ -21,7 +21,7 @@
 // DATE LOGGING
 //-----------------------------------------------------------------
 
-const LOGGING_ENABLED = true; // disable on prod
+const LOGGING_ENABLED = false; // disable on prod
 
 function log(item){
     if (LOGGING_ENABLED) {
@@ -310,7 +310,7 @@ Vue.component('thumb-slider', {
 
                 <!-- VUE FLICKITY -->
                 <vue-flickity class="thumb-slider" ref="flickity" :options="flickityOptions">
-                    <div v-for="(item, index) in feed" :key="index" :title="'#'+index + ' '+item.start_local" :class="{active: index == currentIndex}" class="thumb-slider-item btn-tile">
+                    <div v-for="(item, index) in feed" :key="index" :title="'#'+index + ' '+item.start_local" :class="getActive(index)" class="thumb-slider-item btn-tile">
 
                         <img src="/assets/img/layout/placeholder-thumbnail.png">
                         <span class="btn-tile-bg" :data-flickity-bg-lazyload="item.image_url"></span>
@@ -388,6 +388,18 @@ Vue.component('thumb-slider', {
     mixins: [utilities],
     methods: {
         //==================================================
+        // GET ACTIVE
+        // Bit hacky - but simplest
+        //==================================================
+
+        getActive(index) {
+            if (index == this.currentIndex) {
+                if (window.location.href.indexOf('replays') > -1) {
+                    return 'active';
+                }
+            }
+        },
+        //==================================================
         // SELECT
         //==================================================
 
@@ -424,17 +436,19 @@ Vue.component('thumb-slider', {
             log('[thumb-slider] - Emit Index: '+index);
             bus.$emit('setTimeIndex', index); // send back to the widget
 
+            // Thankfully I don't need this anymore: live pages now direct to URLs so below is uneeded
+
             // Super Hack - flick time as null and back to index, so first thumbnail can be selected..
             // IN THE EVENT THAT the feed is overriding the player but the data is queued up to be zero
             // TLDR: trigger watcher on widget
             // Downside, first thumbnail will always trigger again, regardless of live or replay mode
 
-            if (index == 0) {
-                bus.$emit('setTimeIndex', 1);
-                setTimeout(() => {
-                    bus.$emit('setTimeIndex', index);
-                }, 4); // 4ms browser standard?
-            }
+            // if (index == 0) {
+            //     bus.$emit('setTimeIndex', 1);
+            //     setTimeout(() => {
+            //         bus.$emit('setTimeIndex', index);
+            //     }, 4); // 4ms browser standard?
+            // }
         },
         //==================================================
         // NEXT + PREVIOUS
