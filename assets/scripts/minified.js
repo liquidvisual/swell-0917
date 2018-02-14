@@ -8027,11 +8027,13 @@ function launchSlider() {
         } catch (t) {
           e = { stream: ".mp4", image: ".jpg" };
         }
-      }log(">> firstRun is true"), this.firstRun = !0, bus.$emit("loadVideo", e), this.feed && this.firstRun && this.sendTracking(t);
+      }this.feed && this.firstRun && this.sendTracking(t), log(">> firstRun is true"), this.firstRun = !0, bus.$emit("loadVideo", e);
     },
     sendTracking: function sendTracking(e) {
-      if (e.length) {
-        var t = e.video_url.split("/");t = t[3] + " - " + t[4], window.ga("send", "event", "Replays", "Surfcam replay thumbnail clicked", t, { nonInteraction: !0 });
+      if (e) {
+        var t = e.video_url.split("/");t = t[3] + " - " + e.start_local, console.log(t), setTimeout(function () {
+          window.ga("send", "event", "Replays", "Surfcam replay thumbnail clicked", t, { nonInteraction: !0 });
+        }, 10);
       }
     },
     loadData: function loadData(e) {
