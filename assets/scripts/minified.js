@@ -7799,7 +7799,7 @@ function launchSlider() {
   }, i.prototype.complete = function (e, t) {
     this.img.removeEventListener("load", this), this.img.removeEventListener("error", this), this.element.classList.add(t), this.flickity.dispatchEvent("bgLazyLoad", e, this.element);
   }, e.BgLazyLoader = i, e;
-}), launchSlider();var LOGGING_ENABLED = !0;function log(e) {
+}), launchSlider();var LOGGING_ENABLED = !1;function log(e) {
   LOGGING_ENABLED && console.log(e);
 }Vue.config.productionTip = !1;var bus = new Vue();var utilities = { methods: { formatTime: function formatTime(e) {
       return moment(e).format("hh:mma");
@@ -7861,7 +7861,7 @@ function launchSlider() {
     loadVideo: function loadVideo(e) {
       log(":: loadVideo() ::"), this.playerInstance.load([{ file: e.stream, image: e.image }]).play();
     }
-  } }), Vue.component("thumb-slider", { props: { feed: { required: !0, default: [] }, isLoading: Boolean, currentIndex: Number }, template: '\n        <div class="thumb-slider-wrapper collapse-row-sm-only" :style="isLoading ? {opacity: 0.2} : {}">\n            <div class="thumb-slider-track">\n\n                \x3c!-- VUE FLICKITY --\x3e\n                <vue-flickity class="thumb-slider" ref="flickity" :options="flickityOptions">\n                    <div v-for="(item, index) in feed" :key="index" :title="\'#\'+index + \' \'+item.start_local" :class="{active: index == currentIndex}" class="thumb-slider-item btn-tile">\n\n                        <img src="/assets/img/layout/placeholder-thumbnail.png">\n                        <span class="btn-tile-bg" :data-flickity-bg-lazyload="item.image_url"></span>\n\n                        <div class="btn-tile-overlay">\n                            <h3 class="btn-tile-header" v-text="formatTime(item.start_local)"></h3>\n                        </div>\n                    </div>\n                </vue-flickity>\n\n                \x3c!-- SLIDER CONTROLS --\x3e\n                <button class="thumb-slider-prev-btn" @click="previous()"><i class="fa fa-angle-left"></i></button>\n                <button class="thumb-slider-next-btn" @click="next()"><i class="fa fa-angle-right"></i></button>\n            </div>\n        </div>\n    ', data: function data() {
+  } }), Vue.component("thumb-slider", { props: { feed: { required: !0, default: [] }, isLoading: Boolean, currentIndex: Number }, template: '\n        <div class="thumb-slider-wrapper collapse-row-sm-only" :style="isLoading ? {opacity: 0.2} : {}">\n            <div class="thumb-slider-track">\n\n                \x3c!-- VUE FLICKITY --\x3e\n                <vue-flickity class="thumb-slider" ref="flickity" :options="flickityOptions">\n                    <div v-for="(item, index) in feed" :key="index" :title="\'#\'+index + \' \'+item.start_local" :class="getActive(index)" class="thumb-slider-item btn-tile">\n\n                        <img src="/assets/img/layout/placeholder-thumbnail.png">\n                        <span class="btn-tile-bg" :data-flickity-bg-lazyload="item.image_url"></span>\n\n                        <div class="btn-tile-overlay">\n                            <h3 class="btn-tile-header" v-text="formatTime(item.start_local)"></h3>\n                        </div>\n                    </div>\n                </vue-flickity>\n\n                \x3c!-- SLIDER CONTROLS --\x3e\n                <button class="thumb-slider-prev-btn" @click="previous()"><i class="fa fa-angle-left"></i></button>\n                <button class="thumb-slider-next-btn" @click="next()"><i class="fa fa-angle-right"></i></button>\n            </div>\n        </div>\n    ', data: function data() {
     return { flickityOptions: { adaptiveHeight: !0, autoPlay: !1, cellAlign: "left", contain: !0, draggable: !0, bgLazyLoad: 10, dragThreshold: 3, freeScroll: !0, freeScrollFriction: .075, friction: .28, imagesLoaded: !0, pageDots: !1, prevNextButtons: !1, pauseAutoPlayOnHover: !1, selectedAttraction: .025, watchCSS: !0, wrapAround: !1 } };
   }, created: function created() {
     bus.$on("selectThumbnail", this.selectThumbnail);
@@ -7881,6 +7881,9 @@ function launchSlider() {
       this.selectThumbnail(this.currentIndex);
     }
   }, mixins: [utilities], methods: {
+    getActive: function getActive(e) {
+      if (e == this.currentIndex && window.location.href.indexOf("replays") > -1) return "active";
+    },
     selectThumbnail: function selectThumbnail(e) {
       this.$refs.flickity.select(e);
     },
@@ -7892,9 +7895,7 @@ function launchSlider() {
       });
     },
     selectTimeIndex: function selectTimeIndex(e) {
-      log("[thumb-slider] - Emit Index: " + e), bus.$emit("setTimeIndex", e), 0 == e && (bus.$emit("setTimeIndex", 1), setTimeout(function () {
-        bus.$emit("setTimeIndex", e);
-      }, 4));
+      log("[thumb-slider] - Emit Index: " + e), bus.$emit("setTimeIndex", e);
     },
     next: function next() {
       this.$refs.flickity.next();
