@@ -234,7 +234,7 @@
                                         <div id="vue-app" class="mb-4">
 
                                             <!-- SURFCAM WIDGET -->
-                                            <surfcam-widget data-path="http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/" surfcam-id="29" inline-template>
+                                            <surfcam-widget class="jeep-dashboard" data-path="http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/" surfcam-id="29" inline-template>
                                                 <div>
 
                                                     <!-- LIVE / REPLAYS TABS -->
@@ -259,6 +259,11 @@
 
                                                     <!-- VIDEO COMPONENT -->
                                                     <video-player></video-player>
+
+                                                    <!-- JEEP OVERLAY (UNPAID / PUBLIC) -->
+                                                    <div class="video-jeep-overlay">
+                                                        <img class="image" src="/assets/img/layout/jeep-surfcam-dashboard.png" alt="Jeep Dashboard">
+                                                    </div>
 
                                                     <!-- THUMB-SLIDER COMPONENT -->
                                                     <transition name="special-thumb-slider-entrance">

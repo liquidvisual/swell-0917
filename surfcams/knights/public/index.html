@@ -308,7 +308,7 @@
                                         <div id="vue-app" class="mb-4">
 
                                             <!-- SURFCAM WIDGET -->
-                                            <surfcam-widget live-stream="rtmp://streamer.swellnet.com.au/surfcams/cabarita.stream" live-stream-image="http://static.swellnet.com.au/images/surfcams/cabarita.jpg" live-stream-playlist="https://streamer.swellnet.com.au/surfcams/cabarita.stream/playlist.m3u8" data-path="http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/" surfcam-id="29" inline-template>
+                                            <surfcam-widget class="jeep-dashboard" live-stream="rtmp://streamer.swellnet.com.au/surfcams/cabarita.stream" live-stream-image="http://static.swellnet.com.au/images/surfcams/cabarita.jpg" live-stream-playlist="https://streamer.swellnet.com.au/surfcams/cabarita.stream/playlist.m3u8" data-path="http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/" surfcam-id="29" inline-template>
                                                 <div>
 
                                                     <!-- LIVE / REPLAYS TABS -->
@@ -319,6 +319,11 @@
 
                                                     <!-- VIDEO COMPONENT -->
                                                     <video-player></video-player>
+
+                                                    <!-- JEEP OVERLAY (UNPAID / PUBLIC) -->
+                                                    <div class="video-jeep-overlay">
+                                                        <img class="image" src="/assets/img/layout/jeep-surfcam-dashboard.png" alt="Jeep Dashboard">
+                                                    </div>
 
                                                     <!-- SURFCAM REPLAYS -->
                                                     <h2 v-if="!replaysDisabled" class="d-flex mb-4 mt-5">
@@ -348,27 +353,6 @@
                                                 <img width="100%" src="/assets/img/content/sponsor-perfect-wave.png" alt="">
                                             </a>
                                         </p>
-                                        <style>
-                                        .jw-flag-live:not(.jw-flag-ads) .jw-controls {
-                                            background: url(/assets/img/layout/jeep-surfcam-dashboard.png) center bottom no-repeat;
-                                            background-size: contain;
-                                            opacity: 0;
-                                            animation: enter-jeep-overlay 1.5s ease 1.5s alternate 1 forwards;
-                                        }
-                                        
-                                        .jw-flag-live:not(.jw-flag-ads) .jw-controls .jw-controlbar {
-                                            background: rgba(0, 0, 0, 0.4) !important;
-                                        }
-                                        
-                                        @keyframes enter-jeep-overlay {
-                                            from {
-                                                opacity: 0;
-                                            }
-                                            to {
-                                                opacity: 1;
-                                            }
-                                        }
-                                        </style>
                                     </div>
 
                                     <!-- /.layout-sixthree -->
