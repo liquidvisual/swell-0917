@@ -792,31 +792,36 @@ Vue.component('surfcam-widget', {
                 }
             }
             //==================================================
+            // GOOGLE TRACKING
+            //==================================================
+
+            if (this.feed && this.firstRun) this.sendTracking(video_obj); // can't report on video_url if LIVE init, or no feed
+
+            //==================================================
             // LOAD VIDEO AFTER INIT
             //==================================================
 
             log('>> firstRun is true');
             this.firstRun = true;
             bus.$emit('loadVideo', payload);
-
-            //==================================================
-            // GOOGLE TRACKING
-            //==================================================
-
-            if (this.feed && this.firstRun) this.sendTracking(video_obj); // can't report on video_url if LIVE init, or no feed
         },
         //==================================================
         // SEND TRACKING
         //==================================================
 
         sendTracking(video_obj){
-            if (video_obj.length) {
-                var eventLabel = video_obj.video_url.split('/');
-                    eventLabel = eventLabel[3] + ' - ' + eventLabel[4]; // EG. snapper-rocks - 2018-02-04
+            if (video_obj) {
 
-                window.ga('send', 'event', 'Replays', 'Surfcam replay thumbnail clicked', eventLabel, {
-                    nonInteraction: true
-                });
+                var eventLabel = video_obj.video_url.split('/');
+                    eventLabel = eventLabel[3] + ' - ' + video_obj.start_local; //+ eventLabel[4]; // EG. snapper-rocks - 2018-02-04
+
+                // console.log(eventLabel);
+
+                setTimeout(() => {
+                    window.ga('send', 'event', 'Replays', 'Surfcam replay thumbnail clicked', eventLabel, {
+                        nonInteraction: true
+                    });
+                }, 10);
             }
         },
         //==================================================

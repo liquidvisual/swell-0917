@@ -4,6 +4,31 @@ layout: base__page_sidebar
 
 {% include video.html %}
 
+{% unless page.user_type == 'paid' %}
+    {% unless page.url contains 'replays' %}
+        <style>
+            .jw-flag-live:not(.jw-flag-ads) .jw-controls {
+                background: url(/assets/img/layout/jeep-surfcam-dashboard.png) center bottom no-repeat;
+                background-size: contain;
+                opacity: 0;
+                animation: enter-jeep-overlay 1.5s ease 1.5s alternate 1 forwards;
+            }
+
+            .jw-flag-live:not(.jw-flag-ads) .jw-controls .jw-controlbar {
+                background: rgba(0, 0, 0, 0.4) !important;
+            }
+
+            @keyframes enter-jeep-overlay {
+                from {
+                    opacity: 0;
+                } to {
+                    opacity: 1;
+                }
+            }
+        </style>
+    {% endunless %}
+{% endunless %}
+
 {% comment %}
 
 {% unless page.user_type == 'paid' %}
