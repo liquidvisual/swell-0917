@@ -7,6 +7,14 @@
     <transition name="special-thumb-slider-entrance"></transition>
 {% endcomment %}
 
+{% capture show_jeep_dashboard %}
+    {% unless page.user_type == 'paid' %}
+        {% unless page.url contains 'replays' %}
+            jeep-dashboard
+        {% endunless %}
+    {% endunless %}
+{% endcapture %}
+
 <div id="vue-app" class="mb-4">
 
     {% capture live_stream %}
@@ -18,7 +26,7 @@
     {% endcapture %}
 
     <!-- SURFCAM WIDGET -->
-    <surfcam-widget {{ live_stream }} data-path="http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/" surfcam-id="29" inline-template>
+    <surfcam-widget class="{{ show_jeep_dashboard }}" {{ live_stream }} data-path="http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/" surfcam-id="29" inline-template>
         <div>
 
             <!-- LIVE / REPLAYS TABS -->
@@ -47,6 +55,11 @@
 
             <!-- VIDEO COMPONENT -->
             <video-player></video-player>
+
+            <!-- JEEP OVERLAY (UNPAID / PUBLIC) -->
+            <div class="video-jeep-overlay">
+                <img class="image" src="/assets/img/layout/jeep-surfcam-dashboard.png" alt="Jeep Dashboard">
+            </div>
 
             {% unless page.url contains 'replays' or page.url == '/' %}
 
