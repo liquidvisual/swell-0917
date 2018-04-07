@@ -1,6 +1,6 @@
 /*
     VUE-SURFCAM-WIDGET.JS
-    updated: 14.02.18
+    updated: 08.03.18, 14.02.18
 
     DEPENDENCIES
         https://unpkg.com/vue/dist/vue.js
@@ -197,12 +197,17 @@ Vue.component('video-player', {
     template: `
         <div id="video"></div>
     `,
+    props: {
+        videoTimeout: {
+            type: [String, Number],
+            default: 300
+        }
+    },
     data() {
         return {
             playerInstance: null,
         }
     },
-
     mounted() {
 
         // WIDGET CALLS THIS
@@ -224,10 +229,10 @@ Vue.component('video-player', {
         initPlayer(command) {
 
             log(':: initPlayer() ::');
-
             log('LIMITED DURATION: '+(command == 'limitDuration'));
 
             var self = this; // used for onTime
+            var videoTimeout = this.videoTimeout ? this.videoTimeout : 300; // used to limit video duration through pausing on account types
 
             this.playerInstance = jwplayer('video');
 
@@ -253,8 +258,9 @@ Vue.component('video-player', {
                     },
                     onTime(e) {
                         if (command == 'limitDuration') {
-                            // log('LIVE Video Timer Started - ends vid at 300s');
-                            if ((window.swellnetElapsedTime + e.position) >= '300') {
+
+                            // log('LIVE Video Timer Started - ends vid at '+videoTimeout+'s');
+                            if ((window.swellnetElapsedTime + e.position) >= videoTimeout) {
                                 this.stop();
                             }
                         }
