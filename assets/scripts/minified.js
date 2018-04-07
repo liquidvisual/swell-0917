@@ -7836,7 +7836,7 @@ function launchSlider() {
     broadcast: function broadcast() {
       log("[time-select] is broadcasting - selectedTimeIndex"), this.$emit("input", this.selectedTimeIndex), bus.$emit("setURL");
     }
-  } }), Vue.component("video-player", { template: '\n        <div id="video"></div>\n    ', data: function data() {
+  } }), Vue.component("video-player", { template: '\n        <div id="video"></div>\n    ', props: { videoTimeout: { type: [String, Number], default: 300 } }, data: function data() {
     return { playerInstance: null };
   }, mounted: function mounted() {
     bus.$on("loadVideo", this.loadVideo), bus.$on("initPlayer", this.initPlayer);
@@ -7846,17 +7846,17 @@ function launchSlider() {
   },
   methods: {
     initPlayer: function initPlayer(e) {
-      log(":: initPlayer() ::"), log("LIMITED DURATION: " + ("limitDuration" == e));this.playerInstance = jwplayer("video");var t = { autostart: !0, primary: "html5", fallback: !0, file: ".mp4", image: ".jpg", androidhls: !0, width: "100%", height: 421, repeat: !0, stagevideo: !1, events: {
+      log(":: initPlayer() ::"), log("LIMITED DURATION: " + ("limitDuration" == e));var t = this.videoTimeout ? this.videoTimeout : 300;this.playerInstance = jwplayer("video");var n = { autostart: !0, primary: "html5", fallback: !0, file: ".mp4", image: ".jpg", androidhls: !0, width: "100%", height: 421, repeat: !0, stagevideo: !1, events: {
           onReady: function onReady(e) {
             window.swellnetElapsedTime = 0;
           },
-          onTime: function onTime(t) {
-            "limitDuration" == e && window.swellnetElapsedTime + t.position >= "300" && this.stop();
+          onTime: function onTime(n) {
+            "limitDuration" == e && window.swellnetElapsedTime + n.position >= t && this.stop();
           },
           onPause: function onPause(e) {
             window.swellnetElapsedTime += this.getPosition();
           }
-        } };log("Video Player finished setting up"), this.playerInstance.setup(t);
+        } };log("Video Player finished setting up"), this.playerInstance.setup(n);
     },
     loadVideo: function loadVideo(e) {
       log(":: loadVideo() ::"), this.playerInstance.load([{ file: e.stream, image: e.image }]).play();
