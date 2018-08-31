@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="Generator" content="Drupal 7 (http://drupal.org)">
-    <title>Homepage</title>
+    <title>Multi-cam</title>
     <link rel="profile" href="http://www.w3.org/1999/xhtml/vocab">
     <link rel="shortcut icon" href="http://www.swellnet.com/profiles/swellnet/themes/gold/favicon.ico" type="image/vnd.microsoft.icon">
     <link rel="canonical" href="index.html">
@@ -194,7 +194,7 @@
 
     <!-- End Google Tag Manager -->
     </head>
-<body class="page-knights html not-front not-logged-in no-sidebars page-node page-node- page-node-816 node-type-surfcam panels-driven-layout main-colspan-9 main-nested-container role-anonymous-user">
+<body class="page-knights html not-front not-logged-in no-sidebars page-node page-node- page-node-816 node-type-surfcam panels-driven-layout main-colspan-9 main-nested-container role-anonymous-user theme-paid">
 
     <!-- Google Tag Manager (noscript) -->
     <noscript>
@@ -284,396 +284,55 @@
                     <div class="row">
                         <div id="main-section" class="main-section">
                             <div id="main" role="main" class="main">
-                                <div class="col-sm-6">
-                                    <p class="text-center">Last updated:
-                                        <b>Friday August 31 -- 05:15:44 PM</b>
-                                    </p>
-                                    <h2 class="mb-5">Preview a Template</h2>
-                                    <ul class="list-unstyled">
-                                        <li class="mb-4">
-                                            <a href="/multi-cam/">Multi-cam</a>&nbsp;
-                                            <span class="badge badge-secondary">paid</span>
-                                        </li>
-                                        <li class="mb-4">
-                                            <a href="/surfcams/knights/paid/">Knights Surfcam</a>&nbsp;
-                                            <span class="badge badge-secondary">paid</span>
-                                        </li>
-                                        <li class="mb-4">
-                                            <a href="/surfcams/knights/public/">Knights Surfcam</a>&nbsp;
-                                            <span class="badge badge-secondary">public</span>
-                                        </li>
-                                        <li class="mb-4">
-                                            <a href="/surfcams/knights/unpaid/">Knights Surfcam</a>&nbsp;
-                                            <span class="badge badge-secondary">unpaid</span>
-                                        </li>
-                                        <li class="mb-4">
-                                            <a href="/surfcams/knights/paid/replays/">Knights Surfcam Replays</a>&nbsp;
-                                            <span class="badge badge-secondary">paid</span>
-                                        </li>
-                                        <li class="mb-4">
-                                            <a href="/surfcams/knights/public/replays/">Knights Surfcam Replays</a>&nbsp;
-                                            <span class="badge badge-secondary">public</span>
-                                        </li>
-                                        <li class="mb-4">
-                                            <a href="/surfcams/knights/unpaid/replays/">Knights Surfcam Replays</a>&nbsp;
-                                            <span class="badge badge-secondary">unpaid</span>
-                                        </li>
-                                    </ul>
-                                    <hr class="my-5">
-                                    <style>
-                                    pre {
-                                        height: 250px;
-                                        overflow: auto;
-                                        resize: vertical;
-                                        font-size: 12px;
-                                    }
-                                    </style>
-                                    <h2 id="installation-instructions">Installation Instructions</h2>
-                                    <p>The source for this codebase can be found at:
-                                        <a href="https://github.com/liquidvisual/swell-0917">https://github.com/liquidvisual/swell-0917</a>
-                                    </p>
-                                    <p>The compiled source which serves this page is found on the
-                                        <a href="https://github.com/liquidvisual/swell-0917/tree/gh-pages">gh-pages</a> branch.</p>
-                                    <p>This static website is built to simulate the existing environment of Swellnet, using external links and resources from the current site. Integration of new features should be relatively straight forward, since the assets (JS, CSS) are bundled and minified - and can be easily dropped in.
+
+                                <!-- BLOCK SYSTEM MAIN -->
+                                <section id="block-system-main" class="block block-system block- block-system-main clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="panel-separator"></div>
+
+                                        <!-- PAGE HEADER -->
+                                        <h1 class="special-page-header mb-5 mb-lg-4">Multi-cam</h1>
+
+                                        <!-- VUE MULTICAM -->
+                                        <div id="vue-multicam" class="vue-multicam">
+                                            <ul class="block-grid-xs-1 block-grid-md-2 block-grid-condensed">
+                                                <li>
+                                                    <multicam-widget name="Surfcam 1" surfcam-id="">
+                                                </li>
+                                                <li>
+                                                    <multicam-widget name="Surfcam 2" surfcam-id="">
+                                                </li>
+                                                <li>
+                                                    <multicam-widget name="Surfcam 3" surfcam-id="250746">
+                                                </li>
+                                                <li>
+                                                    <multicam-widget name="Surfcam 4" surfcam-id="851">
+                                                </li>
+                                            </ul>
+                                        </div>
                                         <br>
-                                        <br>
-                                    </p>
-                                    <h3 id="01-bring-assets-into-your-project">01. Bring /assets into Your Project</h3>
-                                    <p>This codebase generates bundled CSS &amp; JavaScript and places it into a distributable
-                                        <a href="https://github.com/liquidvisual/swell-0917/tree/gh-pages/assets">assets</a> folder. For everything to work properly, first copy this folder into the root of your project.
-                                        <br>
-                                        <br>
-                                    </p>
-                                    <h3 id="02-add-new-css-last">02. Add New CSS Last</h3>
-                                    <ul>
-                                        <li>This codebase generates a
-                                            <a href="https://github.com/liquidvisual/swell-0917/tree/gh-pages/assets/css">minified.css</a>.</li>
-                                        <li>
-                                            <strong>minified.css</strong> is to be placed after all previous styles in the <code class="highlighter-rouge">&lt;head&gt;</code>.</li>
-                                        <li>You can link out to it directly for testing
-                                            <a href="https://raw.githubusercontent.com/liquidvisual/swell-0917/gh-pages/assets/css/minified.css">here</a> if you wish.
-                                            <br>
-                                            <br>
-                                        </li>
-                                    </ul>
-                                    <h3 id="03-add-new-javascript-last">03. Add New JavaScript Last</h3>
-                                    <ul>
-                                        <li>Copy the following block and paste it after all other scripts, before the closing <code class="highlighter-rouge">&lt;/body&gt;</code>.</li>
-                                        <li>This block includes a
-                                            <a href="https://github.com/liquidvisual/swell-0917/tree/gh-pages/assets/scripts">minified.js</a> which can also be linked out to
-                                            <a href="https://raw.githubusercontent.com/liquidvisual/swell-0917/gh-pages/assets/scripts/minified.js">here</a>.
-                                            <br>
-                                            <br>
-                                        </li>
-                                    </ul>
-                                    <div class="highlighter-rouge">
-                                        <div class="highlight"><pre class="highlight"><code>&lt;!-- *************************** LIQUIDVISUAL ADDED: 08.11.17 *************************** --&gt;
-&lt;!--[if lte IE 9]&gt;
-&lt;div class="lv-alert-bar"&gt;
-    &lt;p&gt;You're using an outdated browser. Please &lt;a href="http://outdatedbrowser.com"&gt;upgrade your browser&lt;/a&gt; to improve your experience.&lt;/p&gt;
-    &lt;span class="lv-alert-bar-close-btn"&gt;&amp;times;&lt;/span&gt;
-    &lt;div class="lv-blackout"&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;![endif]--&gt;
-&lt;!-- **** JAVASCRIPT **** --&gt;
-&lt;script type="/assets/scripts/minified.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-    $(window).on('load', function (){
-        // FACEBOOK
-        $('.social-feed-facebook-container').each(function(){
-            var $this = $(this);
-            $this.socialfeed({
-                facebook: {
-                    accounts: ['@swellnet'],
-                    limit: 3,
-                    access_token: '1142564202455221|3a2db052ca1e71a576329b99b7d55a5b'
-                },
-                // GENERAL SETTINGS
-                length: 200,
-                show_media: true,
-                template: "/social-feed-facebook/",
-                // When all the posts are collected and displayed - this function is evoked
-                callback: function () {
-                    setTimeout(function(){
-                      $('.social-feed-facebook-container').masonry();
-                        setTimeout(function(){
-                            $('.social-feed-facebook-container').masonry();
-                        }, 800);
-                    }, 800);
-                }
-            });
-        });
-        // INSTAGRAM
-        $('.social-feed-instagram-container').each(function(){
-            var $this = $(this);
-            $this.socialfeed({
-                instagram: {
-                    accounts: ['@swellnet'],
-                    limit: 4,
-                    //client_id: '88b4730e0e2c4b2f8a09a6184af2e218',
-                    //access_token: ''
-                    client_id: 'aa2ef3e8118541c0b7c372cfd81e752b',
-                    access_token: '3178942332.e029fea.ab1887d8d8024dd69d8b1dafbbfa773b'
-                },
-                // GENERAL SETTINGS
-                length: 200,
-                show_media: true,
-                template: "/social-feed-instagram/",
-            });
-        });
-    });
-&lt;/script&gt;
-&lt;!-- NO JAVASCRIPT WARNING --&gt;
-&lt;noscript&gt;
-    &lt;div class="lv-alert-bar"&gt;
-        &lt;p&gt;Your browser has Javascript disabled. Some features may be limited.&lt;/p&gt;
+
+                                        <!-- COPY CODE -->
+                                        <div class="highlighter-rouge">
+                                            <div class="highlight"><pre class="highlight">
+            <code>
+    &lt;!-- VUE MULTICAM --&gt;
+    &lt;div id=&quot;vue-multicam&quot; class=&quot;vue-multicam&quot;&gt;
+        &lt;ul class=&quot;block-grid-xs-1 block-grid-md-2 block-grid-condensed&quot;&gt;
+            &lt;li&gt;&lt;multicam-widget name=&quot;Surfcam 1&quot; surfcam-id=&quot;&quot;/&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;multicam-widget name=&quot;Surfcam 2&quot; surfcam-id=&quot;&quot;/&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;multicam-widget name=&quot;Surfcam 3&quot; surfcam-id=&quot;250746&quot;/&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;multicam-widget name=&quot;Surfcam 4&quot; surfcam-id=&quot;851&quot;/&gt;&lt;/li&gt;
+        &lt;/ul&gt;
     &lt;/div&gt;
-&lt;/noscript&gt;
-&lt;!-- *************************** / LIQUIDVISUAL ADDED: 08.11.17 *************************** --&gt;
-</code></pre></div>
+</code>
+        </pre></div>
+                                        </div>
                                     </div>
-                                    <p>
-                                        <br>
-                                    </p>
-                                    <h3 id="04-install-the-video-widget">04. Install the Video Widget</h3>
-                                    <ul>
-                                        <li>The most current code for this widget can be found
-                                            <a href="https://github.com/liquidvisual/swell-0917/blob/master/src/_includes/video.html">here</a>.</li>
-                                        <li>You’ll notice there are some templating conditionals wrapping certain parts. This is to change the appearance and order of the widget depending on whether it’s a Feed or a Replay.</li>
-                                        <li>Substitute this syntax with your own templating language.</li>
-                                        <li>Here is an example of the code for reference, though make sure to always use the first link - as things may change.
-                                            <br>
-                                            <br>
-                                        </li>
-                                    </ul>
-                                    <div class="highlighter-rouge">
-                                        <div class="highlight"><pre class="highlight"><code>
-&lt;!-- VIDEO WIDGET --&gt;
-&lt;section id="video-widget" class="mb-4"&gt;
-    {% if page.url contains 'replays' or page.url == '/' %}
-        &lt;!-- DATE DROPDOWN --&gt;
-        &lt;div class="custom-select-wrapper collapse-row-sm-only" v-if="feed"&gt;
-            &lt;date-select v-model="date"&gt;&lt;/date-select&gt;
-            &lt;time-select v-model="selectedDateIndex" :index="selectedDateIndex" :feed="feed"&gt;&lt;/time-select&gt;
-        &lt;/div&gt;
-    {% endif %}
-    &lt;!-- VIDEO PLAYER --&gt;
-    &lt;video-player :selected-video="selectedVideo"
-                  live-stream="rtmp://streamer.swellnet.com.au/surfcams/knights.stream"
-                  live-stream-image="http://static.swellnet.com.au/images/surfcams/knights.jpg"
-                  live-stream-playlist="https://streamer.swellnet.com.au/surfcams/knights.stream/playlist.m3u8"&gt;
-    &lt;/video-player&gt;
-    {% if page.url contains 'live' %}
-        &lt;!-- SURFCAM REPLAYS --&gt;
-        &lt;h2 class="d-flex mb-4 mt-5"&gt;&lt;i class="fa fa-rotate-left pr-3"&gt;&lt;/i&gt; Surfcam Replays&lt;/h2&gt;
-        &lt;!-- DATE DROPDOWN --&gt;
-        &lt;div class="custom-select-wrapper collapse-row-sm-only mt-0"&gt;
-            &lt;date-select v-model="date"&gt;&lt;/date-select&gt;
-            &lt;time-select v-model="selectedDateIndex" :index="selectedDateIndex" :feed="feed"&gt;&lt;/time-select&gt;
-        &lt;/div&gt;
-    {% endif %}
-    &lt;!-- THUMB SLIDER --&gt;
-    &lt;thumb-slider :feed="feed" :current-index="selectedDateIndex" @select-video="selectVideo" v-if="feed" :class="{'thumbs-loading': feedLoading}"&gt;&lt;/thumb-slider&gt;
-    {% unless page.user_type == 'paid' %}
-        {% include ads.html type=2 %}
-    {% endunless %}
-&lt;/section&gt;
-</code></pre></div>
-                                    </div>
-                                    <p>
-                                        <br>
-                                    </p>
-                                    <h3 id="05-install-the-social-widgets">05. Install the Social Widgets</h3>
-                                    <ul>
-                                        <li>Copy the block below and add it to the page.</li>
-                                        <li>This widget uses a third-party library that has it’s own templating. For things to work, it relies on two folders containing HTML to be in the root of your project.</li>
-                                        <li>
-                                            <a href="https://github.com/liquidvisual/swell-0917/tree/gh-pages/social-feed-facebook">social-feed-facebook/</a>
-                                        </li>
-                                        <li>
-                                            <a href="https://github.com/liquidvisual/swell-0917/tree/gh-pages/social-feed-instagram">social-feed-instagram/</a>
-                                            <br>
-                                            <br>
-                                        </li>
-                                    </ul>
-                                    <div class="highlighter-rouge">
-                                        <div class="highlight"><pre class="highlight"><code>
-&lt;!-- SOCIAL FEED --&gt;
-&lt;section class="mb-5"&gt;
-	&lt;!-- FACEBOOK --&gt;
-	&lt;div class="d-flex align-items-end mb-4"&gt;
-		&lt;h2 class="d-flex align-items-center m-0"&gt;&lt;i class="fa fa-facebook"&gt;&lt;/i&gt;&amp;nbsp; Facebook&lt;/h2&gt;
-		&lt;a target="_blank" href="https://facebook.com/swellnet/" class="anchor-link ml-auto hidden-sm-down"&gt;facebook.com/swellnet &lt;i class="fa fa-angle-right"&gt;&lt;/i&gt;&lt;/a&gt;
-		&lt;a target="_blank" href="https://facebook.com/swellnet/" class="anchor-link ml-auto hidden-md-up"&gt;View more &lt;i class="fa fa-angle-right"&gt;&lt;/i&gt;&lt;/a&gt;
-	&lt;/div&gt;
-	&lt;!-- FACEBOOK FEED --&gt;
-	&lt;div class="social-feed-facebook-container block-grid-xs-1 block-grid-md-3"&gt;&lt;/div&gt;
-	&lt;hr class="my-5"&gt;
-	&lt;!-- INSTAGRAM --&gt;
-	&lt;div class="d-flex align-items-center mb-5"&gt;
-		&lt;h2 class="d-flex align-items-center m-0"&gt;&lt;i class="fa fa-instagram"&gt;&lt;/i&gt;&amp;nbsp; Instagram&lt;/h2&gt;
-		&lt;a target="_blank" href="https://instagram.com/swellnet/" class="anchor-link ml-auto hidden-sm-down"&gt;instagram.com/swellnet &lt;i class="fa fa-angle-right"&gt;&lt;/i&gt;&lt;/a&gt;
-		&lt;a target="_blank" href="https://instagram.com/swellnet/" class="anchor-link ml-auto hidden-md-up"&gt;View more &lt;i class="fa fa-angle-right"&gt;&lt;/i&gt;&lt;/a&gt;
-	&lt;/div&gt;
-	&lt;!-- INSTAGRAM FEED --&gt;
-	&lt;div class="social-feed-instagram-container block-grid-xs-2 block-grid-md-4 block-grid-condensed-sm-down mb-4"&gt;&lt;/div&gt;
-&lt;/section&gt;
-</code></pre></div>
-                                    </div>
-                                    <p>
-                                        <br>
-                                    </p>
-                                    <h3 id="06-install-the-header">06. Install the Header</h3>
-                                    <ul>
-                                        <li>The header has some new components but everything can be left mostly in tact (such as the menus). Just follow the templating syntax as a guide for where everything goes.</li>
-                                        <li>The header will appear differently depending on the user type (public, paid, unpaid etc)</li>
-                                        <li>The source for this file is
-                                            <a href="https://github.com/liquidvisual/swell-0917/blob/master/src/_includes/header.html">here</a>
-                                            <br>
-                                            <br>
-                                        </li>
-                                    </ul>
-                                    <div class="highlighter-rouge">
-                                        <div class="highlight"><pre class="highlight"><code>
-{% assign settings = site.data.settings %}
-{% assign logo = page.logo | default: "http://swellnet.com/profiles/swellnet/themes/gold/logo.png" %}
-&lt;!-- GLOBAL HEADER --&gt;
-&lt;header id="header" class="global-header header mb-4" role="banner"&gt;
-    &lt;div class="header-container container-smooth container-fluid"&gt;
-        &lt;!-- NAVBAR TOGGLE --&gt;
-        &lt;button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#site-main-menu"&gt;
-            &lt;span class="sr-only"&gt;Toggle navigation&lt;/span&gt;
-            &lt;span class="icon-bar"&gt;&lt;/span&gt;
-            &lt;span class="icon-bar"&gt;&lt;/span&gt;
-            &lt;span class="icon-bar"&gt;&lt;/span&gt;
-        &lt;/button&gt;
-        &lt;!-- SITE LOGO --&gt;
-        &lt;span class="site-logo"&gt;
-            &lt;a href="/" id="logo" rel="home" title="Return to the Swellnet home page"&gt;
-                &lt;img class="img-responsive" src="{{ logo }}" alt="Swellnet logo"&gt;
-            &lt;/a&gt;
-        &lt;/span&gt;
-        &lt;!-- SITE MAIN MENU --&gt;
-        &lt;div id="site-main-menu" class="yamm site-main-menu navbar navbar-default navbar-collapse collapse"&gt;
-            &lt;ul class="menu navbar-nav nav"&gt;
-                &lt;li class="first leaf nav-home" id="nav-home-3"&gt;&lt;a href="/" title="Home" class="leaf-link"&gt;Home&lt;/a&gt;&lt;/li&gt;
-                &lt;li class="leaf nav-surf-reports-and-forecasts" id="nav-surf-reports-and-forecasts-4"&gt;&lt;a href="#" class="leaf-link"&gt;Surf Reports &amp;amp; Forecasts&lt;/a&gt;&lt;/li&gt;
-                &lt;li class="leaf nav-surfcams active active-trail" id="nav-surfcams-5"&gt;&lt;a href="#" class="leaf-link active-trail"&gt;Surfcams&lt;/a&gt;&lt;/li&gt;
-                &lt;li class="leaf nav-news" id="nav-news-6"&gt;&lt;a href="#" class="leaf-link"&gt;News&lt;/a&gt;&lt;/li&gt;
-                &lt;li class="leaf nav-photos" id="nav-photos-7"&gt;&lt;a href="#" class="leaf-link"&gt;Photos&lt;/a&gt;&lt;/li&gt;
-                &lt;li class="last leaf nav-forum" id="nav-forum-8"&gt;&lt;a href="#" title="" class="leaf-link"&gt;Forum&lt;/a&gt;&lt;/li&gt;
-                {% if page.user_type == 'public' %}
-                    &lt;!-- PUBLIC USERS --&gt;
-                    &lt;li class="nav-login"&gt;&lt;a href="#"&gt;Login&lt;/a&gt;&lt;/li&gt;
-                    &lt;li class="nav-register"&gt;&lt;a href="#"&gt;Register&lt;/a&gt;&lt;/li&gt;
-                {% endif %}
-                {% unless page.user_type == 'public' %}
-                    &lt;!-- PAID MEMBERS --&gt;
-                    &lt;li class="nav-paid-member"&gt;
-                        &lt;ul&gt;
-                            &lt;li&gt;&lt;a href="#"&gt;My Report&lt;/a&gt;&lt;/li&gt;
-                            &lt;li&gt;&lt;a href="#"&gt;My Surfcam&lt;/a&gt;&lt;/li&gt;
-                            &lt;li&gt;&lt;a href="#"&gt;My Account&lt;/a&gt;&lt;/li&gt;
-                            &lt;li&gt;&lt;a href="#"&gt;Log Out&lt;/a&gt;&lt;/li&gt;
-                        &lt;/ul&gt;
-                    &lt;/li&gt;
-                {% endunless %}
-            &lt;/ul&gt;
-        &lt;/div&gt;
-        {% unless page.user_type == 'paid' %}
-            {% include ads.html type=1 %}
-        {% endunless %}
-    &lt;/div&gt; &lt;!-- /.header-container --&gt;
-    &lt;!-- SCREEN READER ONLY --&gt;
-    &lt;div class="sr-only lead"&gt;Australian Surf Cams, Surf Reports and Surf Forecasts&lt;/div&gt;
-&lt;/header&gt;
-</code></pre></div>
-                                    </div>
-                                    <p>
-                                        <br>
-                                    </p>
-                                    <h3 id="07-install-the-footer">07. Install the Footer</h3>
-                                    <p>The footer has a new appearance for mobile. Copy the following block and place it immediately after the footer.
-                                        <br>
-                                        <br>
-                                    </p>
-                                    <div class="highlighter-rouge">
-                                        <div class="highlight"><pre class="highlight"><code>
-&lt;!-- OVERRIDING FOOTER (FOR MOBILE) --&gt;
-&lt;footer class="footer footer-mobile" role="contentinfo"&gt;
-    &lt;div class="row"&gt;
-        &lt;div class="col-hack-6"&gt;
-            &lt;ul&gt;
-                &lt;li&gt;&lt;a href="http://swellnet.com/contact/"&gt;Contact us&lt;/a&gt;&lt;/li&gt;
-                &lt;li&gt;&lt;a href="http://swellnet.com/about/"&gt;About Swellnet&lt;/a&gt;&lt;/li&gt;
-                &lt;li&gt;&lt;a href="http://swellnet.com/privacy/"&gt;Privacy policy&lt;/a&gt;&lt;/li&gt;
-                &lt;li&gt;&lt;a href="http://swellnet.com/terms/"&gt;Terms and Conditions&lt;/a&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-        &lt;/div&gt;
-        &lt;div class="col-hack-6"&gt;
-            &lt;ul class="text-right"&gt;
-                &lt;li&gt;&lt;a href="http://swellnet.com/user/"&gt;My account&lt;/a&gt;&lt;/li&gt;
-                &lt;li&gt;&lt;a href="http://swellnet.com/user/register/"&gt;Register&lt;/a&gt;&lt;/li&gt;
-                &lt;li&gt;&lt;a href="http://swellnet.com/user/password/"&gt;Forgot password&lt;/a&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="text-right"&gt;
-        &lt;img width="144" src="/assets/img/content/swellnet-logo-white.png" title="Swellnet"&gt;
-        &lt;p&gt;&amp;copy; Swellnet 2017. All rights reserved.&lt;/p&gt;
-    &lt;/div&gt;
-&lt;/footer&gt;
-</code></pre></div>
-                                    </div>
-                                    <p>
-                                        <br>
-                                    </p>
-                                    <h3 id="08-install-the-nearest-surfcams">08. Install the Nearest Surfcams</h3>
-                                    <ul>
-                                        <li>On the right hand side, there are surfcam thumbnails rendered by the server.</li>
-                                        <li>JQuery will pick this up, as long as the markup is the same as below.</li>
-                                        <li>Make sure to substitute the templating syntax (loop) for your own and fill in the necessary image locations and location labels.
-                                            <br>
-                                            <br>
-                                        </li>
-                                    </ul>
-                                    <div class="highlighter-rouge">
-                                        <div class="highlight"><pre class="highlight"><code>
-&lt;!-- NEAREST REPORTS / SURFCAMS --&gt;
-&lt;section class="mb-5 mb-md-4"&gt;
-    &lt;h2 class="sidebar-header d-flex mb-4"&gt;&lt;i class="fa fa-bar-chart pr-3"&gt;&lt;/i&gt; Nearest Report / Forecast&lt;/h2&gt;
-    &lt;a href="#" class="btn btn-cta"&gt;Middleton &lt;i class="fa fa-angle-right"&gt;&lt;/i&gt;&lt;/a&gt;
-    &lt;hr class="my-5"&gt;
-    &lt;!-- NEAREST SURFCAMS --&gt;
-    &lt;h2 class="sidebar-header h3 d-flex mb-4"&gt;&lt;i class="fa fa-video-camera pr-3"&gt;&lt;/i&gt; Nearest Surfcams&lt;/h2&gt;
-    &lt;!-- THUMB SLIDER --&gt;
-    &lt;div class="thumb-slider-wrapper collapse-row-sm-only"&gt;
-        &lt;div class="thumb-slider-track"&gt;
-            &lt;div class="thumb-slider special-nearest-surfcams is-stacked-for-desktop" data-thumb-slider&gt;
-                {% for i in (1..6) %}
-                    &lt;div class="thumb-slider-item btn-tile"&gt;
-                        &lt;span class="field-content"&gt;
-                            &lt;a href="/surfcams/middleton"&gt;
-                                &lt;img class="img-responsive" src="http://static.swellnet.com.au/images/surfcams/middleton-thumb.jpg" alt="Middleton" title="Middleton"&gt;
-                            &lt;/a&gt;
-                        &lt;/span&gt;
-                        &lt;span class="field-content"&gt;
-                            &lt;a href="/surfcams/middleton"&gt;Middleton&lt;/a&gt;
-                        &lt;/span&gt;
-                        &lt;span class="field-content"&gt;4.949165415382&lt;/span&gt;
-                    &lt;/div&gt;
-                {% endfor %}
-            &lt;/div&gt;
-            &lt;!-- SLIDER CONTROLS --&gt;
-            &lt;button class="thumb-slider-prev-btn"&gt;&lt;i class="fa fa-angle-left"&gt;&lt;/i&gt;&lt;/button&gt;
-            &lt;button class="thumb-slider-next-btn"&gt;&lt;i class="fa fa-angle-right"&gt;&lt;/i&gt;&lt;/button&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/section&gt;
-</code></pre></div>
-                                    </div>
+                                </section>
+
+                                <!-- /#block-system-main -->
                                 </div>
-                            </div>
 
                             <!-- /#main -->
                             </div>
