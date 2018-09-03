@@ -32,9 +32,8 @@
     <link rel="stylesheet" href="http://www.swellnet.com/profiles/swellnet/themes/gold/css/style.min.css?oueqgx">
     <link rel="stylesheet" href="/assets/css/minified.css">
 
-    <!-- <link rel="stylesheet" href="/node_modules/vue-multiselect/dist/vue-multiselect.min.css"> -->
-    
-<!-- PRIORITY SCRIPTS --><script>
+    <!-- PRIORITY SCRIPTS -->
+    <script>
     var _sf_startpt = (new Date()).getTime();
     </script>
     <script src="http://www.swellnet.com/profiles/swellnet/modules/contrib/jquery_update/replace/jquery/1.10/jquery.min.js?v=1.10.2"></script>
@@ -300,7 +299,7 @@
                                                 <div>
 
                                                     <!-- PREMIUM -->
-                                                    <div class="vue-multicam-premium" :style="{ display: paywallActive ? 'block' : 'none' }">
+                                                    <div v-if="paywallActive" class="vue-multicam-premium">
                                                         <div class="vue-multicam-premium-outer">
                                                             <div class="vue-multicam-premium-inner">
                                                                 <h3>This is a premium feature for Swellnet Pro subscribers</h3>
@@ -320,16 +319,16 @@
                                                     <!-- SURFCAMS -->
                                                     <ul class="block-grid-xs-1 block-grid-md-2 block-grid-condensed-more">
                                                         <li>
-                                                            <multicam multicam-id="1" surfcam-id="" placeholder="/assets/img/layout/multi-cam-1.jpg" :paywall-enabled="paywallEnabled">
+                                                            <multicam multicam-id="1" surfcam-id="" placeholder="/assets/img/layout/multi-cam-1.jpg" :paywall-enabled="paywallEnabled"></multicam>
                                                         </li>
                                                         <li>
-                                                            <multicam multicam-id="2" surfcam-id="" placeholder="/assets/img/layout/multi-cam-2.jpg" :paywall-enabled="paywallEnabled">
+                                                            <multicam multicam-id="2" surfcam-id="" placeholder="/assets/img/layout/multi-cam-2.jpg" :paywall-enabled="paywallEnabled"></multicam>
                                                         </li>
                                                         <li>
-                                                            <multicam multicam-id="3" surfcam-id="" placeholder="/assets/img/layout/multi-cam-3.jpg" :paywall-enabled="paywallEnabled">
+                                                            <multicam multicam-id="3" surfcam-id="" placeholder="/assets/img/layout/multi-cam-3.jpg" :paywall-enabled="paywallEnabled"></multicam>
                                                         </li>
                                                         <li>
-                                                            <multicam multicam-id="4" surfcam-id="" placeholder="/assets/img/layout/multi-cam-4.jpg" :paywall-enabled="paywallEnabled">
+                                                            <multicam multicam-id="4" surfcam-id="" placeholder="/assets/img/layout/multi-cam-4.jpg" :paywall-enabled="paywallEnabled"></multicam>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -343,10 +342,14 @@
             <code>
     &lt;!-- VUE MULTICAM --&gt;
     &lt;div id=&quot;vue-multicam&quot;&gt;
-        &lt;multicam-widget class=&quot;vue-multicam&quot; :paywall-enabled=&quot;false&quot; inline-template&gt;
+        &lt;multicam-widget
+            class=&quot;vue-multicam&quot;
+            :paywall-enabled=&quot;false&quot;
+            inline-template&gt;
             &lt;div&gt;
                 &lt;!-- PREMIUM --&gt;
-                &lt;div class=&quot;vue-multicam-premium&quot; :style=&quot;{ display: paywallActive ? 'block' : 'none' }&quot;&gt;
+                &lt;div v-if=&quot;paywallActive&quot;
+                    class=&quot;vue-multicam-premium&quot;&gt;
                     &lt;div class=&quot;vue-multicam-premium-outer&quot;&gt;
                         &lt;div class=&quot;vue-multicam-premium-inner&quot;&gt;
                             &lt;h3&gt;This is a premium feature for Swellnet Pro subscribers&lt;/h3&gt;
@@ -360,10 +363,10 @@
                 &lt;/div&gt;
                 &lt;!-- SURFCAMS --&gt;
                 &lt;ul class=&quot;block-grid-xs-1 block-grid-md-2 block-grid-condensed-more&quot;&gt;
-                    &lt;li&gt;&lt;multicam multicam-id=&quot;1&quot; surfcam-id=&quot;&quot; placeholder=&quot;/assets/img/layout/multi-cam-1.jpg&quot; :paywall-enabled=&quot;paywallEnabled&quot; /&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;multicam multicam-id=&quot;2&quot; surfcam-id=&quot;&quot; placeholder=&quot;/assets/img/layout/multi-cam-2.jpg&quot; :paywall-enabled=&quot;paywallEnabled&quot; /&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;multicam multicam-id=&quot;3&quot; surfcam-id=&quot;&quot; placeholder=&quot;/assets/img/layout/multi-cam-3.jpg&quot; :paywall-enabled=&quot;paywallEnabled&quot; /&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;multicam multicam-id=&quot;4&quot; surfcam-id=&quot;&quot; placeholder=&quot;/assets/img/layout/multi-cam-4.jpg&quot; :paywall-enabled=&quot;paywallEnabled&quot; /&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;multicam multicam-id=&quot;1&quot; surfcam-id=&quot;&quot; placeholder=&quot;/assets/img/layout/multi-cam-1.jpg&quot; :paywall-enabled=&quot;paywallEnabled&quot;&gt;&lt;/multicam&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;multicam multicam-id=&quot;2&quot; surfcam-id=&quot;&quot; placeholder=&quot;/assets/img/layout/multi-cam-2.jpg&quot; :paywall-enabled=&quot;paywallEnabled&quot;&gt;&lt;/multicam&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;multicam multicam-id=&quot;3&quot; surfcam-id=&quot;&quot; placeholder=&quot;/assets/img/layout/multi-cam-3.jpg&quot; :paywall-enabled=&quot;paywallEnabled&quot;&gt;&lt;/multicam&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;multicam multicam-id=&quot;4&quot; surfcam-id=&quot;&quot; placeholder=&quot;/assets/img/layout/multi-cam-4.jpg&quot; :paywall-enabled=&quot;paywallEnabled&quot;&gt;&lt;/multicam&gt;&lt;/li&gt;
                 &lt;/ul&gt;
             &lt;/div&gt;
         &lt;/multicam-widget&gt;
@@ -617,6 +620,7 @@
     <![endif]-->
 
     <!-- **** JAVASCRIPT **** -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script src="/assets/scripts/minified.js"></script>
     <script>
     $(window).on('load', function() {
