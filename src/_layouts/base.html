@@ -33,7 +33,8 @@
     <link rel="stylesheet" href="http://www.swellnet.com/profiles/swellnet/modules/contrib/quote/quote.css?oueqgx">
     <link rel="stylesheet" href="http://www.swellnet.com/profiles/swellnet/themes/gold/css/style.min.css?oueqgx">
 
-    <!-- build:css({src,.tmp}) /assets/css/minified.css -->
+    <!-- build:css({src,.tmp,.}) /assets/css/minified.css -->
+    <link rel="stylesheet" href="/node_modules/social-feed/css/jquery.socialfeed.css">
     <link rel="stylesheet" href="/css/main.css">
     <!-- endbuild -->
 
@@ -219,28 +220,33 @@
     <![endif]-->
 
     <!-- **** JAVASCRIPT **** -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
-    <!-- build:js(src) /assets/scripts/minified.js -->
-    <script src="/_bower_components/jquery/dist/jquery.js"></script>
-    <script src="/_bower_components/codebird-js/codebird.js"></script>
-    <script src="/_bower_components/doT/doT.js"></script>
-    <script src="/_bower_components/moment/min/moment.min.js"></script>
-    <script src="/_bower_components/moment/locale/en-au.js"></script>
+    <!-- build:js({src,.}) /assets/scripts/minified.js -->
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
+    <script src="/node_modules/codebird/codebird.js"></script>
+    <script src="/node_modules/doT/doT.js"></script>
+    <script src="/node_modules/moment/min/moment.min.js"></script>
+    <script src="/node_modules/moment/locale/en-au.js"></script>
     <script src="/assets/scripts/vendor/jquery.socialfeed.js"></script>
-    <script src="/_bower_components/isotope/dist/isotope.pkgd.js"></script>
+    <script src="/node_modules/isotope-layout/dist/isotope.pkgd.js"></script>
 
     {% if site.environment == 'data-dev-mode' %}
-        <script src="/_bower_components/vue/dist/vue.js"></script>
+        <script src="/node_modules/vue/dist/vue.js"></script>
     {% else %}
-        <script src="/_bower_components/vue/dist/vue.min.js"></script>
+        <script src="/node_modules/vue/dist/vue.min.js"></script>
     {% endif %}
 
-    <script src="/_bower_components/axios/dist/axios.js"></script>
-    <script src="/_bower_components/flickity/dist/flickity.pkgd.js"></script>
-    <script src="/_bower_components/flickity-bg-lazyload/bg-lazyload.js"></script>
+    <script src="/node_modules/axios/dist/axios.js"></script>
+    <script src="/node_modules/flickity/dist/flickity.pkgd.js"></script>
+    <script src="/node_modules/flickity-bg-lazyload/bg-lazyload.js"></script>
+
+    <script src="/node_modules/plyr/dist/plyr.polyfilled.js"></script>
+    <script src="/node_modules/vue-multiselect/dist/vue-multiselect.min.js"></script>
     <script src="/assets/scripts/flickity.js"></script>
     <script src="/assets/scripts/vue-surfcam-widget.js"></script>
-    <script src="/assets/scripts/main.js"></script>
+    <script src="/assets/scripts/vue-multicam-widget.js"></script>
+    <script src="/assets/scripts/vue-app.js"></script>
     <!-- endbuild -->
 
     <script>

@@ -18,19 +18,19 @@ module.exports = function (grunt) {
   //-----------------------------------------------------
   // LOAD TASKS FASTER
   // https://medium.com/@lmartins/faster-grunt-workflow-ced193c2900b
+  // Uncomment if plugins can't be resolved in automatic mapping
   //-----------------------------------------------------
 
   require('jit-grunt')(grunt, {
-    // Uncomment if plugins can't be resolved in automatic mapping
     babel: 'grunt-babel',
     browsersync: 'grunt-browser-sync',
     buildcontrol: 'grunt-build-control',
     prettify: 'grunt-prettify',
     sass: 'grunt-sass',
-    sass_globbing: 'grunt-sass-globbing', // does this speed this up?
+    sass_globbing: 'grunt-sass-globbing', // [LOCKED]
     shell: 'grunt-shell',
     uglify: 'grunt-contrib-uglify-es',
-    useminPrepare: 'grunt-usemin'
+    useminPrepare: 'grunt-usemin',
   });
 
   grunt.initConfig({
@@ -39,6 +39,7 @@ module.exports = function (grunt) {
     //-----------------------------------------------------
 
     yeoman: {
+      node_modules: './node_modules', // NEW
       app: 'src',
       dist: 'dist',
       assets: 'dist/assets',
@@ -61,7 +62,7 @@ module.exports = function (grunt) {
       jekyll: {
         files: [
           '<%= yeoman.app %>/**/*.{html,yml,md,mkd,markdown}',
-          '!<%= yeoman.app %>/_bower_components/**/*'
+          '!<%= yeoman.app %>/node_modules/**/*'
         ],
         tasks: ['jekyll:server']
       }
@@ -98,6 +99,7 @@ module.exports = function (grunt) {
             baseDir: [
               ".jekyll",
               ".tmp",
+              ".", // fuck yeah!!
               "<%= yeoman.app %>"
             ]
           },
@@ -118,7 +120,8 @@ module.exports = function (grunt) {
             '.tmp/css/**/*.css',
             '{.tmp,<%= yeoman.app %>}/assets/scripts/**/*.js',
             '{.tmp,<%= yeoman.app %>}/assets/webvisual/assets/scripts/**/*.js',
-            '{<%= yeoman.app %>}/_bower_components/**/*.js',
+            '{<%= yeoman.app %>}/_node_modules/**/*.js',
+            '<%= yeoman.node_modules %>}',
             '<%= yeoman.app %>/assets/img/**/*.{gif,jpg,jpeg,png,svg,webp}'
           ]
         },
@@ -177,7 +180,11 @@ module.exports = function (grunt) {
       options: {
         sourceMap: true,
         //imagePath: '',
-        includePaths: ['<%= yeoman.app %>/_bower_components/bootstrap/scss']
+        includePaths: [
+                        //'<%= yeoman.app %>/_bower_components/bootstrap/scss',
+                        '<%= yeoman.node_modules %>/bootstrap/scss',
+                        '<%= yeoman.node_modules %>'
+                      ]
       },
       dist: {
         files: [{
@@ -235,7 +242,7 @@ module.exports = function (grunt) {
           ]
         },
         files: {
-          '<%= yeoman.dist %>/assets/css/minified.css': '<%= yeoman.dist %>/assets/css/minified.css',
+          '<%= yeoman.dist %>/assets/css/minified.css': '<%= yeoman.dist %>/assets/css/minified.css'
           //'<%= yeoman.dist %>/assets/webvisual/assets/css/minified.css': '<%= yeoman.dist %>/assets/webvisual/assets/css/minified.css'
         }
       }
@@ -286,26 +293,24 @@ module.exports = function (grunt) {
     // USEMIN
     //-----------------------------------------------------
     useminPrepare: {
-      html: [
-        '<%= yeoman.dist %>/index.html',
-        '<%= yeoman.dist %>/manage/index.html'
-      ],
       options: {
         dest: '<%= yeoman.dist %>'
       },
-      // flow: {
-        // steps: {
-          // js: ['concat']
-        // }
-      // }
+      html: [
+        '<%= yeoman.dist %>/index.html',
+        '<%= yeoman.dist %>/manage/index.html'
+      ]
     },
-
     usemin: {
-      html: ['<%= yeoman.dist %>/**/*.html'],
-      css: ['<%= yeoman.assets %>/css/**/*.css'], // img paths revved inside CSS
       options: {
-        assetsDirs: ['<%= yeoman.assets %>', '<%= yeoman.dist %>'],
-      }
+        assetsDirs: [
+          '<%= yeoman.assets %>',
+          '<%= yeoman.dist %>'
+        ],
+      },
+      html: ['<%= yeoman.dist %>/**/*.html'],
+      // Ensures image paths are revved inside CSS files
+      css: ['<%= yeoman.assets %>/css/**/*.css']
     },
     //-----------------------------------------------------
     // BABEL
@@ -320,13 +325,12 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          // dist : app
-          'dist/assets/scripts/minified.js': 'dist/assets/scripts/minified.js'
+          '<%= yeoman.assets %>/scripts/minified.js': '<%= yeoman.assets %>/scripts/minified.js'
         },
       }
     },
     //-----------------------------------------------------
-    // HTML MINIFY (Disabled)
+    // HTML MINIFY
     //-----------------------------------------------------
     htmlmin: {
        dist: {
@@ -371,6 +375,9 @@ module.exports = function (grunt) {
     },
     //-----------------------------------------------------
     // Concat, Uglify, CSS Min
+    // TROUBLES? Check this out, savior:
+    // https://github.com/parcel-bundler/parcel/issues/1128
+    // https://jamie.build/last-2-versions
     //-----------------------------------------------------
     // Usemin adds files to concat
     concat: {},

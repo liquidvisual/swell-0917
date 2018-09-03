@@ -3,7 +3,7 @@
 # 2. config.build.yml
 # 3. config.yml
 
-name: liquidvisual-boilerplate
+name: default
 
 # Grunt handles images and assets.
 #exclude: ['img', 'css', 'scripts', 'builder-app/scripts', 'fonts',
@@ -32,7 +32,7 @@ collections:
 defaults:
   -
     scope:
-      path: "assets/webvisual" # an empty string here means all files in the project
+      path: "_posts"
     values:
       sitemap: false
 

@@ -2,7 +2,7 @@
 /*
     MAIN.CSS
 
-    - Last updated: 18.05.17
+    - Last updated: 30.08.18, 18.05.17
     - liquidvisual.com
 */
 //-----------------------------------------------------------------
@@ -18,18 +18,6 @@
 
 @import "bootstrap/settings";
 @import "bootstrap/bootstrap";
-
-//-----------------------------------------------------------------
-// LIQUIDVISUAL
-//-----------------------------------------------------------------
-
-@import "liquidvisual/components/alert-bar";
-@import "liquidvisual/components/block-grid";
-// @import "liquidvisual/components/breadcrumb";
-@import "liquidvisual/components/custom";
-@import "liquidvisual/components/toolbox";
-// @import "liquidvisual/vendor/magnific-popup/main";
-// @import "liquidvisual/vendor/syntax-highlighting";
 
 //-----------------------------------------------------------------
 // APPLICATION
@@ -50,7 +38,6 @@
 
 @import "app/layout/footer";
 @import "app/layout/header";
-// @import "app/layout/topbar";
 
 //=========================================
 // HELPERS
@@ -58,14 +45,35 @@
 
 @import "app/helpers/special";
 // @import "app/helpers/text-editor";
-// @import "app/helpers/themes";
 
 //-----------------------------------------------------------------
-// BOWER DEPENDENCIES
+// LOCAL DEPENDENCIES
 //-----------------------------------------------------------------
 
-// @import "/_bower_components/animate.css/animate.min.css";
-// @import "../../_bower_components/flickity/dist/flickity.css"; // CSS doesn't work on build
-@import "../../_bower_components/font-awesome/scss/font-awesome";
-@import "../../_bower_components/social-feed/css/jquery.socialfeed";
-// @import "../../_bower_components/slick-carousel/slick/slick.scss";
+@import "liquidvisual/components/alert-bar";
+@import "liquidvisual/components/block-grid";
+@import "liquidvisual/components/custom";
+@import "liquidvisual/components/toolbox";
+// @import "liquidvisual/vendor/magnific-popup/main";
+// @import "liquidvisual/vendor/syntax-highlighting";
+
+//-----------------------------------------------------------------
+// NODE DEPENDENCIES
+//-----------------------------------------------------------------
+
+@import "font-awesome/scss/font-awesome";
+// @import "animate.css/animate"; // CSS is deprecated in Sass
+// @import "flickity/dist/flickity.css"; // CSS is deprecated in Sass
+// @import "social-feed/css/jquery.socialfeed"; // CSS is deprecated in Sass
+
+//-----------------------------------------------------------------
+// PLYR SETTINGS
+//-----------------------------------------------------------------
+
+$plyr-color-main: #333; //lighten($brand-primary, 20%);
+// $plyr-color-gunmetal: #2f343d;
+// $plyr-color-fiord: #4f5b5f;
+// $plyr-color-lynch: #6b7d85;
+// $plyr-color-heather: #b7c5cd;
+
+@import "plyr/src/sass/plyr";

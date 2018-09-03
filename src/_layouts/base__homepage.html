@@ -11,7 +11,7 @@ layout: base
 	<h2 class="mb-5">Preview a Template</h2>
 	<ul class="list-unstyled">
 		{% for item in site.pages %}
-			{% if item.url contains 'knights' %}
+			{% if item.url contains 'knights' or item.url contains 'multi-cam' %}
 				<li class="mb-4">
 					<a href="{{ item.url }}">{{ item.title }}</a>&nbsp;
 					<span class="badge badge-secondary">{{ item.user_type }}</span>

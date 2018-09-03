@@ -1,36 +1,33 @@
 /*
     VUE-SURFCAM-WIDGET.JS
-    updated: 08.03.18, 14.02.18
+    updated: 29.08.18, 14.02.18
 
     DEPENDENCIES
         https://unpkg.com/vue/dist/vue.js
         https://unpkg.com/axios/dist/axios.min.js
         https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js
 
+    NOTES
         empty array for cams
         empty object for no replays at all ?
 
-        // KEEP FOR REFERENCE
+    KEEP FOR REFERENCE
         // var d = new Date();
         // var yesterday = d.setDate(d.getDate()-1);
         // this.date = { timeStamp: yesterday };
         // this.date = this.lastSevenDays[1]; // set initial option as selected
 */
-
 //-----------------------------------------------------------------
 // DATE LOGGING
 //-----------------------------------------------------------------
 
 const LOGGING_ENABLED = false; // disable on prod
 
-function log(item){
+function log(item) {
     if (LOGGING_ENABLED) {
         console.log(item);
     }
 }
-
-Vue.config.productionTip = false;
-
 //-----------------------------------------------------------------
 // EVENT BUS
 //-----------------------------------------------------------------
@@ -917,9 +914,11 @@ Vue.component('surfcam-widget', {
 // VUE INSTANCE
 //-----------------------------------------------------------------
 
-new Vue({
-    el: '#vue-app',
-});
+if (document.getElementById('vue-app')) {
+    new Vue({
+        el: '#vue-app',
+    });
+}
 //-----------------------------------------------------------------
 //
 //-----------------------------------------------------------------

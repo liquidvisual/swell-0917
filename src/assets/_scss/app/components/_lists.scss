@@ -33,9 +33,22 @@
 .block-grid-condensed {
     margin: rem-calc(-20);
 
-    li,
-    .block-grid-item {
+    > li,
+    > .block-grid-item {
         padding: rem-calc(20);
+    }
+}
+
+//-----------------------------------------------------------------
+// BLOCK GRID CONDENSED
+//-----------------------------------------------------------------
+
+.block-grid-condensed-more {
+    margin: rem-calc(-15) !important;
+
+    > li,
+    > .block-grid-item {
+        padding: rem-calc(15) !important;
     }
 }
 
@@ -47,8 +60,8 @@
 	@include media-breakpoint-down(sm) {
 	    margin: rem-calc(-15);
 
-	    li,
-	    .block-grid-item {
+	    > li,
+	    > .block-grid-item {
 	        padding: rem-calc(15);
 	    }
 	}
