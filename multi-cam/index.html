@@ -294,21 +294,45 @@
                                         <h1 class="special-page-header mb-5 mb-lg-4">Multi-cam</h1>
 
                                         <!-- VUE MULTICAM -->
-                                        <div id="vue-multicam" class="vue-multicam">
-                                            <ul class="block-grid-xs-1 block-grid-md-2 block-grid-condensed">
-                                                <li>
-                                                    <multicam-widget name="Surfcam 1" surfcam-id="">
-                                                </li>
-                                                <li>
-                                                    <multicam-widget name="Surfcam 2" surfcam-id="">
-                                                </li>
-                                                <li>
-                                                    <multicam-widget name="Surfcam 3" surfcam-id="250746">
-                                                </li>
-                                                <li>
-                                                    <multicam-widget name="Surfcam 4" surfcam-id="851">
-                                                </li>
-                                            </ul>
+                                        <div id="vue-multicam">
+                                            <multicam-widget class="vue-multicam" :paywall-enabled="false" inline-template>
+                                                <div>
+
+                                                    <!-- PREMIUM -->
+                                                    <div class="vue-multicam-premium" :style="{ display: paywallActive ? 'block' : 'none' }">
+                                                        <div class="vue-multicam-premium-outer">
+                                                            <div class="vue-multicam-premium-inner">
+                                                                <h3>This is a premium feature for Swellnet Pro subscribers</h3>
+                                                                <p>Become a subscriber and receive access to detailed surf forecaster notes, dawn surf reports, premium surfcams and replays, add-free surfcams and 16 day surf forecasts.</p>
+                                                                <a href="#PRO-LINK-HERE" class="vue-multicam-premium-btn">Get Swellnet Pro
+                                                                    <i class="fa fa-angle-right"></i>
+                                                                </a>
+                                                                <p class="premium-message-login-link">
+                                                                    <a href="#LOGIN-HERE">Already a subscriber? Login here&nbsp;
+                                                                        <i class="fa fa-angle-right"></i>
+                                                                    </a>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- SURFCAMS -->
+                                                    <ul class="block-grid-xs-1 block-grid-md-2 block-grid-condensed-more">
+                                                        <li>
+                                                            <multicam name="Surfcam 1" :paywall-enabled="paywallEnabled" surfcam-id="">
+                                                        </li>
+                                                        <li>
+                                                            <multicam name="Surfcam 2" :paywall-enabled="paywallEnabled" surfcam-id="826">
+                                                        </li>
+                                                        <li>
+                                                            <multicam name="Surfcam 3" :paywall-enabled="paywallEnabled" surfcam-id="816">
+                                                        </li>
+                                                        <li>
+                                                            <multicam name="Surfcam 4" :paywall-enabled="paywallEnabled" surfcam-id="846">
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </multicam-widget>
                                         </div>
                                         <br>
 
@@ -317,13 +341,31 @@
                                             <div class="highlight"><pre class="highlight">
             <code>
     &lt;!-- VUE MULTICAM --&gt;
-    &lt;div id=&quot;vue-multicam&quot; class=&quot;vue-multicam&quot;&gt;
-        &lt;ul class=&quot;block-grid-xs-1 block-grid-md-2 block-grid-condensed&quot;&gt;
-            &lt;li&gt;&lt;multicam-widget name=&quot;Surfcam 1&quot; surfcam-id=&quot;&quot;/&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;multicam-widget name=&quot;Surfcam 2&quot; surfcam-id=&quot;&quot;/&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;multicam-widget name=&quot;Surfcam 3&quot; surfcam-id=&quot;250746&quot;/&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;multicam-widget name=&quot;Surfcam 4&quot; surfcam-id=&quot;851&quot;/&gt;&lt;/li&gt;
-        &lt;/ul&gt;
+    &lt;div id=&quot;vue-multicam&quot;&gt;
+        &lt;multicam-widget class=&quot;vue-multicam&quot; :paywall-enabled=&quot;false&quot; inline-template&gt;
+            &lt;div&gt;
+                &lt;!-- PREMIUM --&gt;
+                &lt;div class=&quot;vue-multicam-premium&quot; :style=&quot;{ display: paywallActive ? 'block' : 'none' }&quot;&gt;
+                    &lt;div class=&quot;vue-multicam-premium-outer&quot;&gt;
+                        &lt;div class=&quot;vue-multicam-premium-inner&quot;&gt;
+                            &lt;h3&gt;This is a premium feature for Swellnet Pro subscribers&lt;/h3&gt;
+                            &lt;p&gt;Become a subscriber and receive access to detailed surf forecaster notes, dawn surf reports, premium surfcams and replays, add-free surfcams and 16 day surf forecasts.&lt;/p&gt;
+                            &lt;a href=&quot;#PRO-LINK-HERE&quot; class=&quot;vue-multicam-premium-btn&quot;&gt;Get Swellnet Pro &lt;i class=&quot;fa fa-angle-right&quot;&gt;&lt;/i&gt;&lt;/a&gt;
+                            &lt;p class=&quot;premium-message-login-link&quot;&gt;
+                                &lt;a href=&quot;#LOGIN-HERE&quot;&gt;Already a subscriber? Login here&amp;nbsp;&lt;i class=&quot;fa fa-angle-right&quot;&gt;&lt;/i&gt;&lt;/a&gt;
+                            &lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;!-- SURFCAMS --&gt;
+                &lt;ul class=&quot;block-grid-xs-1 block-grid-md-2 block-grid-condensed-more&quot;&gt;
+                    &lt;li&gt;&lt;multicam name=&quot;Surfcam 1&quot; :paywall-enabled=&quot;paywallEnabled&quot; surfcam-id=&quot;&quot; /&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;multicam name=&quot;Surfcam 2&quot; :paywall-enabled=&quot;paywallEnabled&quot; surfcam-id=&quot;826&quot; /&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;multicam name=&quot;Surfcam 3&quot; :paywall-enabled=&quot;paywallEnabled&quot; surfcam-id=&quot;816&quot; /&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;multicam name=&quot;Surfcam 4&quot; :paywall-enabled=&quot;paywallEnabled&quot; surfcam-id=&quot;846&quot; /&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/multicam-widget&gt;
     &lt;/div&gt;
 </code>
         </pre></div>
