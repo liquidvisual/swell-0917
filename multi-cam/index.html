@@ -295,11 +295,11 @@
 
                                         <!-- VUE MULTICAM -->
                                         <div id="vue-multicam">
-                                            <multicam-widget v-cloak class="vue-multicam" :paywall-enabled="false" inline-template>
+                                            <multicam-widget class="vue-multicam" :paywall-enabled="false" inline-template>
                                                 <div>
 
                                                     <!-- PREMIUM -->
-                                                    <div v-if="paywallActive" class="vue-multicam-premium">
+                                                    <div v-if="paywallActive" v-cloak class="vue-multicam-premium">
                                                         <div class="vue-multicam-premium-outer">
                                                             <div class="vue-multicam-premium-inner">
                                                                 <h3>This is a premium feature for Swellnet Pro subscribers</h3>
@@ -343,13 +343,14 @@
     &lt;!-- VUE MULTICAM --&gt;
     &lt;div id=&quot;vue-multicam&quot;&gt;
         &lt;multicam-widget
-            v-cloak
             class=&quot;vue-multicam&quot;
             :paywall-enabled=&quot;false&quot;
             inline-template&gt;
             &lt;div&gt;
                 &lt;!-- PREMIUM --&gt;
-                &lt;div v-if=&quot;paywallActive&quot;
+                &lt;div
+                    v-if=&quot;paywallActive&quot;
+                    v-cloak
                     class=&quot;vue-multicam-premium&quot;&gt;
                     &lt;div class=&quot;vue-multicam-premium-outer&quot;&gt;
                         &lt;div class=&quot;vue-multicam-premium-inner&quot;&gt;
