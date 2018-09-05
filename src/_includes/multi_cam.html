@@ -2,6 +2,7 @@
     <!-- VUE MULTICAM -->
     <div id="vue-multicam">
         <multicam-widget
+            v-cloak
             class="vue-multicam"
             :paywall-enabled="false"
             inline-template>
@@ -9,7 +10,8 @@
             <div>
 
                 <!-- PREMIUM -->
-                <div v-if="paywallActive"
+                <div
+                    v-if="paywallActive"
                     class="vue-multicam-premium">
 
                     <div class="vue-multicam-premium-outer">
@@ -26,10 +28,10 @@
 
                 <!-- SURFCAMS -->
                 <ul class="block-grid-xs-1 block-grid-md-2 block-grid-condensed-more">
-                    <li><multicam multicam-id="1" surfcam-id="" placeholder="/assets/img/layout/multi-cam-1.jpg" :paywall-enabled="paywallEnabled"></multicam></li>
-                    <li><multicam multicam-id="2" surfcam-id="" placeholder="/assets/img/layout/multi-cam-2.jpg" :paywall-enabled="paywallEnabled"></multicam></li>
-                    <li><multicam multicam-id="3" surfcam-id="" placeholder="/assets/img/layout/multi-cam-3.jpg" :paywall-enabled="paywallEnabled"></multicam></li>
-                    <li><multicam multicam-id="4" surfcam-id="" placeholder="/assets/img/layout/multi-cam-4.jpg" :paywall-enabled="paywallEnabled"></multicam></li>
+                    <li><multicam multicam-id="1" surfcam-id="" poster="/assets/img/layout/multi-cam-1.jpg" :paywall-enabled="paywallEnabled"/></li>
+                    <li><multicam multicam-id="2" surfcam-id="" poster="/assets/img/layout/multi-cam-2.jpg" :paywall-enabled="paywallEnabled"/></li>
+                    <li><multicam multicam-id="3" surfcam-id="" poster="/assets/img/layout/multi-cam-3.jpg" :paywall-enabled="paywallEnabled"/></li>
+                    <li><multicam multicam-id="4" surfcam-id="" poster="/assets/img/layout/multi-cam-4.jpg" :paywall-enabled="paywallEnabled"/></li>
                 </ul>
 
             </div>

@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------
 
 $plyr-color-main: lighten($brand-primary, 5%);
+$danger: transparent;
 
 //-----------------------------------------------------------------
 // LV OVERRIDES
@@ -404,12 +405,12 @@ fieldset[disabled] .multiselect {
 }
 
 .multiselect__option--selected.multiselect__option--highlight {
-  background: #FF6A6A;
+  background: $danger;
   color: #fff;
 }
 
 .multiselect__option--selected.multiselect__option--highlight:after {
-  background: #FF6A6A;
+  background: $danger;
   content: attr(data-deselect);
   color: #fff;
 }
@@ -451,12 +452,12 @@ fieldset[disabled] .multiselect {
 }
 
 .multiselect__option--group-selected.multiselect__option--highlight {
-  background: #FF6A6A;
+  background: $danger;
   color: #fff;
 }
 
 .multiselect__option--group-selected.multiselect__option--highlight:after {
-  background: #FF6A6A;
+  background: $danger;
   content: attr(data-deselect);
   color: #fff;
 }

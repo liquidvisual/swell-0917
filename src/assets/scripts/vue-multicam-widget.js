@@ -1,6 +1,6 @@
 /*
     VUE-MULTICAM-WIDGET.JS
-    updated: 03.08.18
+    updated: 05.08.18
 
     DEPENDENCIES
         https://unpkg.com/vue/dist/vue.js
@@ -29,14 +29,15 @@ Vue.component('multicam-select', {
             <!-- MULTISELECT -->
             <multiselect
                 v-model="value"
-                :options="options"
-                :multiple="false"
-                :group-select="true"
-                :placeholder="'Select Surfcam ' + multicamId"
                 label="name"
                 group-values="locations"
                 group-label="state"
                 track-by="name"
+                :group-select="true"
+                :max-height="250"
+                :multiple="false"
+                :options="options"
+                :placeholder="'Select Surfcam ' + multicamId"
                 @open="$emit('open', true)"
                 @close="$emit('open', false)"
                 @input="broadcast()">
@@ -47,6 +48,7 @@ Vue.component('multicam-select', {
     props: {
         multicamId: [String, Number],
         surfcamId: [String, Number],
+        editing: Boolean
     },
     data() {
         return {
@@ -122,6 +124,13 @@ Vue.component('multicam-select', {
             ]
         }
     },
+    watch: {
+        editing() {
+            if (this.editing) {
+                this.value = null; // clear for new selection
+            }
+        }
+    },
     created() {
         // serve up stream from external id on INIT
         var stream = this.getStreamFromId(this.surfcamId);
@@ -131,6 +140,10 @@ Vue.component('multicam-select', {
         }
     },
     methods: {
+        //==================================================
+        // BROADCAST
+        //==================================================
+
         broadcast() {
             this.$emit('select-stream', this.value); // INSIDE > OUT: send value back out to widget
         },
@@ -159,27 +172,54 @@ Vue.component('multicam-select', {
 
 Vue.component('multicam-player', {
     template: `
-        <video
-            autoplay
-            controls
-            crossorigin
-            muted
-            playsinline
-            poster="/assets/img/layout/placeholder-video-1280x720.svg"
-            width="100%">
-        </video>
+        <div class="multicam-player">
+
+            <!-- ERRORS -->
+            <div
+                v-if="errors"
+                class="multicam-player-error">
+
+                <div>
+                    <i class="fa fa-warning"></i>
+                    <p>Sorry! We're experiencing technical difficulties with this surfcam. We'll have it back up ASAP.</p>
+                </div>
+            </div>
+
+            <!-- WATERMARK -->
+            <div class="multicam-player-watermark"></div>
+
+            <!-- VIDEO -->
+            <video
+                autoplay
+                controls
+                crossorigin
+                muted
+                playsinline
+                ref="video"
+                :poster="poster"
+                width="100%">
+            </video>
+        </div>
     `,
     props: {
-        source: String
+        errors: Boolean,
+        source: String,
+        poster: {
+            type: String,
+            default: '/assets/img/layout/placeholder-video-1280x720.svg'
+        }
     },
     data() {
         return {
             playerInstance: null,
             hlsInstance: null,
+            showControls: null,
+            videoEl: null,
             videoTimeout: null
         }
     },
     mounted() {
+        this.videoEl = this.$refs.video;
         this.initPlayer();
     },
     beforeDestroy() {
@@ -197,7 +237,7 @@ Vue.component('multicam-player', {
     },
     methods: {
         initPlayer() {
-            this.playerInstance = new Plyr(this.$el, {
+            this.playerInstance = new Plyr(this.videoEl, {
 
                 // https://github.com/sampotts/plyr/blob/master/controls.md
                 controls: [
@@ -209,15 +249,15 @@ Vue.component('multicam-player', {
                     // 'progress', // The progress bar and scrubber for playback and buffering
                     // 'current-time', // The current time of playback
                     // 'duration', // The full duration of the media
-                    'mute', // Toggle mute
-                    'volume', // Volume control
+                    //'mute', // Toggle mute
+                    //'volume', // Volume control
                     // 'captions', // Toggle captions
-                    'settings', // Settings menu
-                    'pip', // Picture-in-picture (currently Safari only)
-                    'airplay', // Airplay (currently Safari only)
+                    // 'settings', // Settings menu
+                    // 'pip', // Picture-in-picture (currently Safari only)
+                    // 'airplay', // Airplay (currently Safari only)
                     //'fullscreen', // Toggle fullscreen
                 ],
-                clickToPlay: false,
+                clickToPlay: true,
                 displayDuration: false
             });
 
@@ -225,38 +265,74 @@ Vue.component('multicam-player', {
             this.playerInstance.on('play', () => {
                 this.startTimeout();
             });
-        },
-        loadVideo(path) {
-            // this.$el.src = path; // iOS
 
-            if (Hls.isSupported()) {
-                // For more Hls.js options, see https://github.com/dailymotion/hls.js
+            // TODO: show loader on stall (for non hls which has a delay)
+            // this.playerInstance.on('stalled', (event) => {
+                // console.log('stalled! '+event);
+            // });
+
+            // CONTROLS SHOWN
+            this.playerInstance.on('controlsshown', (event) => {
+                this.$emit('show-controls', true);
+                this.showControls = true;
+            });
+
+            // CONTROLS HIDDEN
+            this.playerInstance.on('controlshidden', (event) => {
+                this.$emit('show-controls', false);
+                this.showControls = false;
+            });
+        },
+        //==================================================
+        // LOAD VIDEO
+        //==================================================
+
+        loadVideo(path) {
+            // For more Hls.js options, see https://github.com/dailymotion/hls.js
+            if (!Hls.isSupported()) {
+                this.videoEl.src = path; // eg. iOS
+
+                // Errors for non hls only (iOS)
+                this.playerInstance.on('error', (event) => {
+                    this.$emit('log-errors');
+                });
+            }
+            else {
                 this.hlsInstance = new Hls();
                 this.hlsInstance.loadSource(path);
-                this.hlsInstance.attachMedia(this.$el);
-                // this.hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
-                //     this.hlsInstance.play();
-                // });
+                this.hlsInstance.attachMedia(this.videoEl);
 
-            } else {
-                this.$el.src = path; // iOS
-                // console.log('Hls not supported');
+                // Errors for hls only
+                this.hlsInstance.on(Hls.Events.ERROR, (event, data) => {
+                    if (data.fatal) this.$emit('log-errors');
+                });
             }
-            this.startTimeout();
+            this.startTimeout(); // start timer until pause
         },
+        //==================================================
+        // UNLOAD VIDEO
+        //==================================================
 
         unloadVideo() {
             this.resetTimeout();
             this.hlsInstance = null;
-            this.$el.src = '';
+            this.videoEl.src = '';
         },
+        //==================================================
+        // START TIMEOUT
+        //==================================================
+
         startTimeout() {
             this.resetTimeout();
             this.videoTimeout = setTimeout(() => {
-                this.playerInstance.stop();
+                this.playerInstance.pause();
                 this.resetTimeout();
             }, 300000); // 300000ms = 5 minute timeout
         },
+        //==================================================
+        // RESET TIMEOUT
+        //==================================================
+
         resetTimeout() {
             clearTimeout(this.videoTimeout);
             this.videoTimeout = null;
@@ -273,26 +349,30 @@ Vue.component('multicam', {
         <div
             class="multicam-widget"
             :class="{ 'is-editing': editing }"
-            :style="{ zIndex: open ? 2002 : 1 }">
+            :style="{ zIndex: open ? 2002 : 1 }"
+            @mouseleave="hovering = false">
 
             <!-- EDIT BTN -->
-            <button
-                v-if="liveStreamPath"
-                class="multicam-edit-btn"
-                @click="editing = !editing">
+            <transition name="multicam-select-entrance">
+                <button
+                    v-if="liveStreamPath && (showEditBtn || hovering)"
+                    class="multicam-edit-btn"
+                    @click="edit"
+                    @mouseover="hovering = true">
 
-                <div class="icon">
-                    <i v-if="!editing" class="fa fa-edit"></i>
-                    <i v-if="editing" class="fa fa-close"></i>
-                </div>
-            </button>
+                    <div class="icon">
+                        <i v-if="!editing" class="fa fa-edit"></i>
+                    </div>
+                </button>
+            </transition>
 
             <!-- MULTICAM SELECT -->
             <transition name="multicam-select-entrance">
                 <multicam-select
                     v-show="editing"
                     :multicam-id="multicamId"
-                    :style="{ background: liveStreamObj ? 'none' : '#b6b6b6 url(' + placeholder + ')'}"
+                    :editing="editing"
+                    :style="{ backgroundImage: 'url(' + poster + ')'}"
                     :surfcam-id="surfcamId"
                     @open="open = $event"
                     @select-stream="storeStreamObj">
@@ -302,7 +382,10 @@ Vue.component('multicam', {
             <!-- MULTICAM PLAYER -->
             <multicam-player
                 :source="liveStreamPath"
-                :placeholder="placeholder">
+                :poster="poster"
+                :errors="errors"
+                @log-errors="errors = editing ? false : true"
+                @show-controls="showEditBtn = hovering ? true : $event">
             </multicam-player>
 
         </div>
@@ -314,15 +397,19 @@ Vue.component('multicam', {
             default: 'https://streamer.swellnet.com.au/surfcams/' // can be overriden
         },
         paywallEnabled: Boolean,
-        placeholder: String,
+        poster: String,
         surfcamId: [String, Number]
     },
     data() {
         return {
             editing: null,
+            errors: null,
+            hovering: false,
+            firstRun: true,
             liveStreamObj: null,
             liveStreamPath: null,
             open: false, // will trigger z-index on open select panels
+            showEditBtn: false
         }
     },
     created() {
@@ -330,9 +417,24 @@ Vue.component('multicam', {
         this.editing = this.surfcamId ? false : true;
     },
     methods: {
+
+        //==================================================
+        // EDIT MODE
+        //==================================================
+
+        edit() {
+            this.editing = true;
+            this.errors = null; // reset errors
+            this.removeStreamObj();
+        },
+        //==================================================
+        // STORE STREAM OBJ
+        //==================================================
+
         storeStreamObj(event) {
 
             this.liveStreamObj = event; // store obj
+            this.hovering = false;
 
             // Hault everything if paywall is enabled
             // trigger the overlay
@@ -340,16 +442,34 @@ Vue.component('multicam', {
                 multicamBus.$emit('invoke-paywall');
                 return;
             }
-
-            else if (event != null) {
-                this.liveStreamPath = this.path + event.path + '/playlist.m3u8'; // create path
+            else if (event == null) {
+                this.removeStreamObj();
+            }
+            else {
                 this.editing = false;
+                this.liveStreamPath = this.path + event.path + '/playlist.m3u8'; // create path
+
+                // If firstRun and surfcam is provided, assume was saved
+                if (this.firstRun) {
+                    this.firstRun = false;
+                    if (this.surfcamId) return;
+                }
+
                 this.updateServer('/multi-cam/save/' + event.id + '/' + this.multicamId); // multi-cam/save/[surfcam-id]/[position]
-            } else {
-                this.liveStreamPath = null; // for removal in select
-                this.updateServer('/multi-cam/delete/' + this.multicamId); // multi-cam/delete/[position]
             }
         },
+        //==================================================
+        // REMOVE STREAM OBJ
+        //==================================================
+
+        removeStreamObj() {
+            this.liveStreamObj = null;
+            this.liveStreamPath = null; // for removal in select & edit
+            this.updateServer('/multi-cam/delete/' + this.multicamId); // multi-cam/delete/[position]
+        },
+        //==================================================
+        // UPDATE SERVER
+        //==================================================
 
         updateServer(path) {
             axios.get(path, '', {
@@ -386,7 +506,7 @@ Vue.component('multicam-widget', {
     created() {
         multicamBus.$on('invoke-paywall', () => {
             this.paywallActive = true; // for styles
-        })
+        });
     }
 });
 
