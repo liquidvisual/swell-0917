@@ -26,7 +26,13 @@
     {% endcapture %}
 
     <!-- SURFCAM WIDGET -->
-    <surfcam-widget class="{{ show_jeep_dashboard }}" {{ live_stream }} data-path="http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/" surfcam-id="29" inline-template>
+    <surfcam-widget
+        class="{{ show_jeep_dashboard }}"
+        {{ live_stream }}
+        data-path="http://staging.swellnet.com.fe2.stg.swellnet.anchor.net.au/surfcam-replays/data/"
+        surfcam-id="29"
+        inline-template>
+
         <div>
 
             <!-- LIVE / REPLAYS TABS -->
@@ -53,8 +59,9 @@
                 </div>
             {% endif %}
 
-            <!-- VIDEO COMPONENT -->
-            <video-player video-timeout="300"></video-player>
+            <!-- PLAYER COMPONENT -->
+            <surfcam-player-plyr video-timeout="300"></surfcam-player-plyr>
+            <surfcam-player-jw video-timeout="300"></surfcam-player-jw>
 
             <!-- JEEP OVERLAY (UNPAID / PUBLIC) -->
             <div class="video-jeep-overlay">

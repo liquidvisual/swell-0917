@@ -114,14 +114,15 @@
 }
 
 //-----------------------------------------------------------------
-// MULTICAM VIDEO
+// (WAS) MULTICAM VIDEO
+// ** REFACTORED **
 //-----------------------------------------------------------------
 
-.multicam-player {
+.video-player-plyr {
 	position: relative;
 }
 
-.multicam-player-watermark {
+.video-player-plyr-watermark {
 	position: absolute;
 	bottom: 6px;
 	right: 6px;
@@ -133,7 +134,7 @@
 	z-index: 1;
 }
 
-.multicam-player-error {
+.video-player-plyr-error {
 	display: flex;
 	align-items: center;
 	justify-content: center;

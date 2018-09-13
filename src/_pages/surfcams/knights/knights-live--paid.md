@@ -1,5 +1,5 @@
 ---
-layout: child_layout/surfcams_item
+layout: child_layout/surfcams
 title: Knights Surfcam
 permalink: /surfcams/knights/paid/
 user_type: paid

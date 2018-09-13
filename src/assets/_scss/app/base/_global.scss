@@ -42,14 +42,11 @@
 // SUPER HACKY
 //=========================================
 
-// .node-surfcam.view-mode-full #video,
-// .node-surfcam.view-mode-full .jwplayer,
-// .node-surfcam.view-mode-widescreen #video,
-// .node-surfcam.view-mode-widescreen .jwplayer
-
-#video {
+.video-player-plyr.is-wide,
+.video-player-jw.is-wide, // ideal
+.jwplayer { // jw removes classes
 	@include media-breakpoint-down(sm) {
-	    margin-left: -15px;
+	    margin-left: -15px !important; // ugh for jw
 	    width: calc(100% + 30px);
 	    min-width: calc(100% + 30px);
 	}

@@ -1,5 +1,5 @@
 ---
-layout: child_layout/multi_cam
+layout: child_layout/multicam
 title: Multi-cam
 permalink: /multi-cam/
 user_type: paid
