@@ -257,8 +257,9 @@
                                                         <time-select :is-loading="feedLoading" v-model="selectedTimeIndex" :index="selectedTimeIndex" :feed="feed"></time-select>
                                                     </div>
 
-                                                    <!-- VIDEO COMPONENT -->
-                                                    <video-player video-timeout="300"></video-player>
+                                                    <!-- PLAYER COMPONENT -->
+                                                    <surfcam-player-plyr video-timeout="300"></surfcam-player-plyr>
+                                                    <surfcam-player-jw video-timeout="300"></surfcam-player-jw>
 
                                                     <!-- JEEP OVERLAY (UNPAID / PUBLIC) -->
                                                     <div class="video-jeep-overlay">
