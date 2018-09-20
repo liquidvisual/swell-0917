@@ -108,7 +108,7 @@ Vue.component('surfcam-player-plyr', {
                     // 'settings', // Settings menu
                     // 'pip', // Picture-in-picture (currently Safari only)
                     // 'airplay', // Airplay (currently Safari only)
-                    //'fullscreen', // Toggle fullscreen
+                    'fullscreen', // Toggle fullscreen
                 ],
                 clickToPlay: true,
                 displayDuration: false
@@ -127,7 +127,8 @@ Vue.component('surfcam-player-plyr', {
         loadVideo(video_obj) {
             var isMp4 = video_obj.format == 'mp4';
 
-            this.poster = video_obj.image; // set poster
+            // this.poster = video_obj.image; // set poster - can't set until https on images - Safari doesn't like it
+            this.poster = '/assets/img/layout/placeholder-video-1280x720.svg'; // fix for short term
 
             // For more Hls.js options, see https://github.com/dailymotion/hls.js
             if (!Hls.isSupported() || isMp4) { // hls can only handle streams, not mp4s
