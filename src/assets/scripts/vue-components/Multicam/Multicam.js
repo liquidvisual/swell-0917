@@ -1,6 +1,6 @@
 /*
     MULTICAM SELECT
-    updated: 10.09.18
+    updated: 03.10.18
 */
 //-----------------------------------------------------------------
 // MULTICAM
@@ -17,7 +17,7 @@ Vue.component('multicam', {
             <!-- EDIT BTN -->
             <transition name="multicam-select-entrance">
                 <button
-                    v-if="liveStreamPath && (showEditBtn || hovering)"
+                    v-if="errors || liveStreamPath && (showEditBtn || hovering)"
                     class="multicam-edit-btn"
                     @click="edit"
                     @mouseover="hovering = true">
