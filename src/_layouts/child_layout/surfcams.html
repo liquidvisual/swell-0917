@@ -3,3 +3,43 @@ layout: base__page_sidebar
 ---
 
 {% include surfcam.html %}
+
+<!-- SIDEBAR -->
+{% contentfor sidebar %}
+
+	{% include sections/nearest_surfcams.html %}
+
+    <!-- LATEST NEWS / SOCIAL (MOBILE) -->
+    <div class="hidden-md-up mb-4">
+        {% include sections/latest_news.html %}
+        {% include sections/social_feed.html %}
+    </div>
+
+	{% include sections/latest_comments.html %}
+
+    {% include sections/in_the_forums.html %}
+
+    {% comment %}
+	<div class="panel-pane pane-block pane-boxes-swellnet-adblock-mrec block-boxes-simple">
+	    <div class="pane-content">
+	        <div id='boxes-box-swellnet_adblock_mrec' class='boxes-box'>
+	            <div class="boxes-box-content">
+	                <span class="mcnamf" title="300x250"></span>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="panel-separator"></div>
+
+	<div class="panel-pane pane-block pane-boxes-swellnet-adblock-halfisland block-boxes-simple">
+	    <div class="pane-content">
+	        <div id='boxes-box-swellnet_adblock_halfisland' class='boxes-box'>
+	            <div class="boxes-box-content">
+	                <span class="mcnamf" title="300x125"></span>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+    {% endcomment %}
+{% endcontentfor %}
