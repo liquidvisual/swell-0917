@@ -55,7 +55,7 @@
     "jquery-validation": "^1.17.0",
     "jquery.scrollto": "^2.1.2",
     "magnific-popup": "^1.1.0",
-    "moment": "^2.22.2",
+    "moment": "^2.29.2",
     "plyr": "^3.4.3",
     "popper.js": "^1.12.9",
     "social-feed": "github:pavelk2/social-feed#gh-pages",
